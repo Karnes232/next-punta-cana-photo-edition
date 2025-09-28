@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
 import React from "react"
@@ -8,6 +9,7 @@ const coromantGaramond = Cormorant_Garamond({
 })
 
 const Sitemap = () => {
+  const t = useTranslations("Footer")
   return (
     <div className="flex flex-row space-x-4">
       <Link href="/" className={`${coromantGaramond.className} no-underline`}>
@@ -15,7 +17,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Home
+          {t("Home")}
         </button>
       </Link>
       <Link
@@ -26,7 +28,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Photoshoots
+          {t("Photoshoots")}
         </button>
       </Link>
       <Link
@@ -37,7 +39,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Weddings
+          {t("Weddings")}
         </button>
       </Link>
       <Link
@@ -48,7 +50,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Wedding Planning
+          {t("Wedding Planning")}
         </button>
       </Link>
       <Link
@@ -59,7 +61,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Proposals
+          {t("Proposals")}
         </button>
       </Link>
       <Link
@@ -70,7 +72,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Corporate Events
+          {t("Corporate Events")}
         </button>
       </Link>
       <Link
@@ -81,7 +83,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Stories & Blog
+          {t("Stories & Blog")}
         </button>
       </Link>
       <Link
@@ -92,7 +94,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          About
+          {t("About")}
         </button>
       </Link>
       <Link
@@ -103,7 +105,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Contact
+          {t("Contact")}
         </button>
       </Link>
       <Link
@@ -114,7 +116,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer  `}
           translate="no"
         >
-          FAQ
+          {t("FAQ")}
         </button>
       </Link>
       <Link
@@ -125,7 +127,7 @@ const Sitemap = () => {
           className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
           translate="no"
         >
-          Policies
+          {t("Policies")}
         </button>
       </Link>
     </div>

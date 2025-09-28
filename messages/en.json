@@ -5,8 +5,17 @@
     "contact": "Contact"
   },
   "Footer": {
-    "copyright": "Copyright 2025 Punta Cana Photo Edition",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "Home": "Home",
+    "Photoshoots": "Photoshoots",
+    "Weddings": "Weddings",
+    "Wedding Planning": "Wedding Planning",
+    "Proposals": "Proposals",
+    "Corporate Events": "Corporate Events",
+    "Stories & Blog": "Stories & Blog",
+    "About": "About",
+    "Contact": "Contact",
+    "FAQ": "FAQ",
+    "Policies": "Policies",
+    "Copyright": "Copyright 2025"
   }
 }

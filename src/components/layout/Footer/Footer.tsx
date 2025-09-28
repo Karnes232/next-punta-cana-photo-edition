@@ -1,14 +1,14 @@
 import { getSocialLinks } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import React from "react"
 import { FaInstagram } from "react-icons/fa"
-import SideBarInside from "../Navbar/SideBarInside"
 import FooterMenu from "./FooterMenu"
 import Sitemap from "./Sitemap"
 import SocialMedia from "./SocialMedia"
+import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
 const Footer = async () => {
   const socialLinks = await getSocialLinks()
   return (
-    <div className="flex flex-col h-screen md:h-auto lg:h-[50vh] xl:max-w-6xl xl:w-full xl:mx-auto justify-between py-10 mx-8 md:mx-10">
+    <div className="flex flex-col h-screen md:h-auto lg:h-[50vh] xl:max-w-7xl xl:w-full xl:mx-auto justify-between py-10 mx-8 md:mx-10">
       <div className="flex justify-center items-center">
         {socialLinks?.socialLinks.instagram && (
           <a
@@ -33,8 +33,8 @@ const Footer = async () => {
           <Sitemap />
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:mt-5 md:w-full md:mx-auto md:px-10">
-        {/* <LanguageSwitcher currentLanguage={language} />*/}
+      <div className="flex flex-col md:flex-row justify-between items-center space-y-10 md:space-y-0 md:mt-5 md:w-full md:mx-auto md:px-10">
+        <LanguageSwitcher color="gray-400" />
         {socialLinks && <SocialMedia socialLinks={socialLinks} />}
       </div>
     </div>

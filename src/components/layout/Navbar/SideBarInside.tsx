@@ -1,3 +1,4 @@
+import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
 import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
 import React from "react"
@@ -183,6 +184,9 @@ const SideBarInside = ({
             Policies
           </p>
         </MenuItem>
+        <div className="w-full flex justify-center items-center">
+          <LanguageSwitcher color="darkGray" />
+        </div>
       </Menu>
     </>
   )

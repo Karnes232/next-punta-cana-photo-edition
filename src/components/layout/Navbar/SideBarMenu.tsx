@@ -12,15 +12,23 @@ const SideBarMenu = ({
 }) => {
   return (
     <>
-      {isOpen && (
+      <div
+        className={`fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
+          isOpen 
+            ? 'opacity-100 visible' 
+            : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
         <Sidebar
           backgroundColor="rgb(255, 255, 255, 1)"
           onBackdropClick={() => setIsOpen(false)}
           toggled={isOpen}
           breakPoint="all"
-          rtl
           width="100%"
-          //className={`${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          rtl
+          className={`h-full transition-transform duration-300 ease-in-out ${
+            isOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
         >
           <div className="flex flex-col h-full items-center text-center justify-between">
             <div className="fixed top-5 right-5">
@@ -35,7 +43,7 @@ const SideBarMenu = ({
             <SideBarInside setIsOpen={setIsOpen} footer={false} />
           </div>
         </Sidebar>
-      )}
+      </div>
     </>
   )
 }
