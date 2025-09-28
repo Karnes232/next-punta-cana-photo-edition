@@ -1,0 +1,43 @@
+import React from "react"
+import { Sidebar } from "react-pro-sidebar"
+import { X } from "lucide-react"
+import SideBarInside from "./SideBarInside"
+
+const SideBarMenu = ({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
+}) => {
+  return (
+    <>
+      {isOpen && (
+        <Sidebar
+          backgroundColor="rgb(255, 255, 255, 1)"
+          onBackdropClick={() => setIsOpen(false)}
+          toggled={isOpen}
+          breakPoint="all"
+          rtl
+          width="100%"
+          //className={`${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        >
+          <div className="flex flex-col h-full items-center text-center justify-between">
+            <div className="fixed top-5 right-5">
+              <button
+                className="p-2 text-2xl text-gray-500"
+                onClick={() => setIsOpen(false)}
+              >
+                <X />
+              </button>
+            </div>
+
+            <SideBarInside setIsOpen={setIsOpen} footer={false} />
+          </div>
+        </Sidebar>
+      )}
+    </>
+  )
+}
+
+export default SideBarMenu

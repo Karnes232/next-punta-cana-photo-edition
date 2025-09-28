@@ -1,6 +1,7 @@
-import { Logo } from '@/sanity/queries/GeneralLayout/GeneralLayout'
-import LogoComponent from './LogoComponent'
-import React from 'react'
+import { Logo } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import LogoComponent from "./LogoComponent"
+import React from "react"
+import HamburgerMenu from "./HamburgerMenu"
 
 const Navbar = ({ logo }: { logo: Logo }) => {
   return (
@@ -8,8 +9,7 @@ const Navbar = ({ logo }: { logo: Logo }) => {
       <div className="flex items-center justify-between bg-transparent max-w-6xl mx-5 md:mx-10 lg:mx-8 xl:mx-auto">
         <div className="hidden lg:block"></div>
         <LogoComponent logo={logo} />
-        <div className="hidden lg:block"></div>
-        {/* <HamburgerMenu /> */}
+        <HamburgerMenu />
       </div>
     </nav>
   )

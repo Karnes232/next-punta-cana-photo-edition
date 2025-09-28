@@ -1,19 +1,19 @@
 import { client } from "@/sanity/lib/client"
 
 export interface Logo {
-    companyLogo: {
-      asset: {
-        url: string
-        metadata: {
-            dimensions: {
-              width: number
-              height: number
-            }
-          }
+  companyLogo: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
       }
-      alt: string
     }
+    alt: string
   }
+}
 
 export const logoQuery = `*[_type == "generalLayout"][0] {
     companyLogo {
@@ -29,4 +29,34 @@ export const logoQuery = `*[_type == "generalLayout"][0] {
 
 export async function getLogo(): Promise<Logo | null> {
   return await client.fetch(logoQuery)
+}
+
+export const socialLinksQuery = `*[_type == "generalLayout"][0] {
+    companyName,
+    telephone,
+    email,
+    socialLinks {
+        facebook,
+        instagram,
+        xURL,
+        instagramTag,
+        MessengerURL
+    }
+}`
+
+export interface SocialLinks {
+  companyName: string
+  telephone: string
+  email: string
+  socialLinks: {
+    facebook: string
+    instagram: string
+    xURL: string
+    instagramTag: string
+    MessengerURL: string
+  }
+}
+
+export async function getSocialLinks(): Promise<SocialLinks | null> {
+  return await client.fetch(socialLinksQuery)
 }

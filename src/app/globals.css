@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-elegantSilver: #C0C0C0;
-  --color-darkGray: #2C2C2C;
-  --color-luxuryGold: #D4AF37;
-  --color-caribbeanTurquoise: #40E0D0;
-  --color-pureWhite: #FFFFFF;
+  --color-elegantSilver: #c0c0c0;
+  --color-darkGray: #2c2c2c;
+  --color-luxuryGold: #d4af37;
+  --color-caribbeanTurquoise: #40e0d0;
+  --color-pureWhite: #ffffff;
 }
 
 :root {

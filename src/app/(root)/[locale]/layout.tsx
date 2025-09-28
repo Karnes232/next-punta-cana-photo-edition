@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing"
 import { notFound } from "next/navigation"
 import { getLogo } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import Navbar from "@/components/layout/Navbar/Navbar"
+import Footer from "@/components/layout/Footer/Footer"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,7 +42,7 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params
   const logo = await getLogo()
-  
+
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
             {logo && <Navbar logo={logo} />}
             <main className="flex-1">{children}</main>
           </div>
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>
