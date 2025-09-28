@@ -1,0 +1,12 @@
+{
+  "Navbar": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "Footer": {
+    "copyright": "Copyright 2025 Punta Cana Photo Edition",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
+  }
+}
