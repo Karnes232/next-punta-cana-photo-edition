@@ -65,7 +65,7 @@ export default async function LocaleLayout({
           messages={messages}
           key={locale}
         >
-          <div className="min-h-screen bg-black/50 flex flex-col">
+          <div className="min-h-screen flex flex-col">
             {logo && <Navbar logo={logo} />}
             <main className="flex-1">{children}</main>
           </div>

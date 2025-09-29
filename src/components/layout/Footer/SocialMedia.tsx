@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 const SocialMedia = ({ socialLinks }: { socialLinks: SocialLinks }) => {
-  console.log(socialLinks)
   return (
     <div className="flex flex-row space-x-5 md:space-x-7 py-4 text-slate-400">
       {socialLinks.socialLinks.facebook && (
