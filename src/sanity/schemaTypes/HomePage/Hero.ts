@@ -36,4 +36,11 @@ export default defineType({
         description: "Upload Videos to Cloudinary, then paste video ID here",
       }),
   ],
+  preview: {
+    select: {
+      title: "title.en",
+      subtitle: "subtitle.en",
+      media: "heroImage[0].asset.url",
+    },
+  },
 })

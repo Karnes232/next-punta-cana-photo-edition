@@ -9,6 +9,10 @@ import GeneralLayout from "./GeneralLayout/GeneralLayout"
 //HomePage
 import Hero from "./HomePage/Hero"
 
+
+//ServicesOffered
+import ServicesOffered from "./ServicesOffered/ServicesOffered"
+
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     //Localized
@@ -20,6 +24,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     GeneralLayout,
 
     //HomePage
-    Hero
+    Hero,
+
+    //ServicesOffered
+    ServicesOffered,
   ],
 }

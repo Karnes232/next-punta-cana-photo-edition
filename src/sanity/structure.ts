@@ -16,9 +16,25 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("Home Page")
         .child(
-          S.document()
-            .schemaType("hero")
-            .title("Hero")
-            .documentId("hero"),
+          S.list()
+            .title("Home Page")
+            .items([
+              S.listItem()
+                .title("Hero")
+                .child(
+                  S.document()
+                    .schemaType("hero")
+                    .title("Hero")
+                    .documentId("hero"),
+                ),
+            ]),
+        ),
+      S.listItem()
+        .title("Services Offered")
+        .child(
+          S.documentList()
+            .title("Services Offered")
+            .filter("_type == 'servicesOffered'")
+            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
         ),
     ])
