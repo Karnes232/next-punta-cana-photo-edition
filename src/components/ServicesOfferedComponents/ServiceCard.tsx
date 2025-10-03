@@ -14,6 +14,13 @@ interface ServiceCardProps {
   service: ServiceCardType
 }
 
+interface Photo {
+  src: string
+  width: number
+  height: number
+  alt: string
+}
+
 const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const locale = useLocale()
 
