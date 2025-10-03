@@ -57,7 +57,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
       
       {/* Content */}
       <div className="p-6 text-center">
-        <h3 className={`${coromantGaramond.className} text-xl font-semibold text-gray-900 mb-3`}>
+        <h3 className={`${coromantGaramond.className} text-2xl font-semibold text-gray-900 mb-3`}>
           {service.title[locale as 'en' | 'es']}
         </h3>
         <p className={`${coromantGaramond.className} text-gray-600 text-sm leading-relaxed mb-4`}>
