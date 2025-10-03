@@ -15,7 +15,7 @@ const ServicesOffered = async () => {
       
       {serviceCards.length > 0 ? (
         <div className="max-w-7xl mx-auto">
-          {/* Custom Masonry Layout */}
+          {/* CSS Masonry Layout - Clean and performant */}
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {serviceCards
               .filter(service => service.heroImage && service.heroImage.length > 0)

@@ -11,11 +11,13 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "localizedString",
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "subtitle",
       title: "Subtitle",
       type: "localizedString",
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -24,6 +26,7 @@ export default defineType({
       options: {
         source: "title.en",
       },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "heroImage",
@@ -35,6 +38,7 @@ export default defineType({
         type: "string",
       })] }],
       description: "Add images",
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {
