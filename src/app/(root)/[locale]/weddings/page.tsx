@@ -1,4 +1,4 @@
-import { getPageSeo } from "@/sanity/queries/SEO/seo"
+import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function Weddings({
   params,
@@ -6,11 +6,21 @@ export default async function Weddings({
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-
+  const structuredData = await getStructuredData("weddings")
   return (
-    <div>
-      <h1>Weddings</h1>
-    </div>
+    <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
+      <div>
+        <h1>Weddings</h1>
+      </div>
+    </>
   )
 }
 
@@ -57,4 +67,3 @@ export async function generateMetadata({
     },
   }
 }
-

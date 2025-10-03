@@ -1,4 +1,4 @@
-import { getPageSeo } from "@/sanity/queries/SEO/seo"
+import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function Policies({
   params,
@@ -6,11 +6,22 @@ export default async function Policies({
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
+  const structuredData = await getStructuredData("policies")
 
   return (
-    <div>
-      <h1>Policies</h1>
-    </div>
+    <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
+      <div>
+        <h1>Policies</h1>
+      </div>
+    </>
   )
 }
 
