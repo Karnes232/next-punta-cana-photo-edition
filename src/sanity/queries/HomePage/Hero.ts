@@ -1,29 +1,28 @@
 import { client } from "@/sanity/lib/client"
 
 export interface Hero {
-    title: {
-        en: string
-        es: string
-    }
-    subtitle: {
-        en: string
-        es: string
-    }
-    heroImage: {
-        asset: {
-            url: string
-            metadata: {
-                dimensions: {
-                    width: number
-                    height: number
-                }
-            }
+  title: {
+    en: string
+    es: string
+  }
+  subtitle: {
+    en: string
+    es: string
+  }
+  heroImage: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
         }
-        alt: string
-    }[]
-    heroVideo: string
+      }
+    }
+    alt: string
+  }[]
+  heroVideo: string
 }
-
 
 export const heroQuery = `*[_type == "hero"][0] {
     title {
@@ -50,5 +49,5 @@ export const heroQuery = `*[_type == "hero"][0] {
 }`
 
 export async function getHero(): Promise<Hero | null> {
-    return await client.fetch(heroQuery)
+  return await client.fetch(heroQuery)
 }

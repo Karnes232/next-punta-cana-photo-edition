@@ -14,9 +14,9 @@ const SideBarMenu = ({
     <>
       <div
         className={`fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
-          isOpen 
-            ? 'opacity-100 visible' 
-            : 'opacity-0 invisible pointer-events-none'
+          isOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
         }`}
       >
         <Sidebar
@@ -27,7 +27,7 @@ const SideBarMenu = ({
           width="100%"
           rtl
           className={`h-full transition-transform duration-300 ease-in-out ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
+            isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex flex-col h-full items-center text-center justify-between">

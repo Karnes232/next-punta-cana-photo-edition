@@ -14,6 +14,14 @@ export const structure: StructureResolver = S =>
             .documentId("generalLayout"),
         ),
       S.listItem()
+        .title("Page SEO")
+        .child(
+          S.documentList()
+            .schemaType("pageSeo")
+            .title("Page SEO")
+            .filter("_type == 'pageSeo'"),
+        ),
+      S.listItem()
         .title("Home Page")
         .child(
           S.list()
@@ -35,6 +43,6 @@ export const structure: StructureResolver = S =>
           S.documentList()
             .title("Services Offered")
             .filter("_type == 'servicesOffered'")
-            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+            .defaultOrdering([{ field: "_createdAt", direction: "desc" }]),
         ),
     ])

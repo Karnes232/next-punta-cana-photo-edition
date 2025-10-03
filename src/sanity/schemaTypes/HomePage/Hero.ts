@@ -14,27 +14,36 @@ export default defineType({
       type: "localizedString",
     }),
     defineField({
-        name: "subtitle",
-        title: "Subtitle",
-        type: "localizedString",
-      }),
+      name: "subtitle",
+      title: "Subtitle",
+      type: "localizedString",
+    }),
     defineField({
-        name: "heroImage",
-        title: "Hero Image",
-        type: "array",
-        of: [{ type: "image", options: { hotspot: true }, fields: [defineField({
-          name: "alt",
-          title: "Alternative Text",
-          type: "string",
-        })] }],
-        description: "If video is used, no need to add images, but if not, add images",
-      }),
-      defineField({
-        name: "heroVideo",
-        title: "Hero Video",
-        type: "string",
-        description: "Upload Videos to Cloudinary, then paste video ID here",
-      }),
+      name: "heroImage",
+      title: "Hero Image",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
+      description:
+        "If video is used, no need to add images, but if not, add images",
+    }),
+    defineField({
+      name: "heroVideo",
+      title: "Hero Video",
+      type: "string",
+      description: "Upload Videos to Cloudinary, then paste video ID here",
+    }),
   ],
   preview: {
     select: {

@@ -1,29 +1,29 @@
 import { client } from "@/sanity/lib/client"
 
 export interface ServiceCard {
-    title: {
-        en: string
-        es: string
-    }
-    subtitle: {
-        en: string
-        es: string
-    }
-    slug: {
-        current: string
-    }
-    heroImage: {
-        asset: {
-            url: string
-            metadata: {
-                dimensions: {
-                    width: number
-                    height: number
-                }
-            }
+  title: {
+    en: string
+    es: string
+  }
+  subtitle: {
+    en: string
+    es: string
+  }
+  slug: {
+    current: string
+  }
+  heroImage: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
         }
-        alt: string
-    }[]
+      }
+    }
+    alt: string
+  }[]
 }
 
 export const serviceCardQuery = `*[_type == "servicesOffered"] {
@@ -53,5 +53,5 @@ export const serviceCardQuery = `*[_type == "servicesOffered"] {
 }`
 
 export async function getServiceCard(): Promise<ServiceCard[]> {
-    return await client.fetch(serviceCardQuery)
+  return await client.fetch(serviceCardQuery)
 }

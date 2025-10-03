@@ -32,11 +32,19 @@ export default defineType({
       name: "heroImage",
       title: "Hero Image",
       type: "array",
-      of: [{ type: "image", options: { hotspot: true }, fields: [defineField({
-        name: "alt",
-        title: "Alternative Text",
-        type: "string",
-      })] }],
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
       description: "Add images",
       validation: Rule => Rule.required(),
     }),
@@ -47,4 +55,3 @@ export default defineType({
     },
   },
 })
-

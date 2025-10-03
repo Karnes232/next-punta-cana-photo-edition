@@ -12,8 +12,9 @@ const Navbar = ({ logo }: { logo: Logo }) => {
         <LogoComponent logo={logo} />
         <div className="flex space-x-2 items-center">
           <div className="hidden mb-2 xl:block">
-          <LanguageSwitcher color="white" /></div>
-        <HamburgerMenu />
+            <LanguageSwitcher color="white" />
+          </div>
+          <HamburgerMenu />
         </div>
       </div>
     </nav>

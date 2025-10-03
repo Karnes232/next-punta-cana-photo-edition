@@ -49,12 +49,12 @@ export default function LanguageSwitcher({
     try {
       // For Netlify hosting, we need to use a different approach
       // since middleware doesn't work on static hosting
-      const currentPath = pathname.replace(`/${safeLocale}`, '') || '/'
-      const cleanPath = currentPath === '/' ? '' : currentPath
-      
+      const currentPath = pathname.replace(`/${safeLocale}`, "") || "/"
+      const cleanPath = currentPath === "/" ? "" : currentPath
+
       // Store the language preference in localStorage
-      localStorage.setItem('preferredLanguage', newLocale)
-      
+      localStorage.setItem("preferredLanguage", newLocale)
+
       // Use window.location for Netlify compatibility
       window.location.href = `/${newLocale}${cleanPath}`
     } catch (error) {
@@ -90,10 +90,14 @@ export default function LanguageSwitcher({
 
   // Check for preferred language in localStorage on mount
   useEffect(() => {
-    const preferredLanguage = localStorage.getItem('preferredLanguage')
-    if (preferredLanguage && preferredLanguage !== safeLocale && languages.includes(preferredLanguage)) {
-      const currentPath = pathname.replace(`/${safeLocale}`, '') || '/'
-      const cleanPath = currentPath === '/' ? '' : currentPath
+    const preferredLanguage = localStorage.getItem("preferredLanguage")
+    if (
+      preferredLanguage &&
+      preferredLanguage !== safeLocale &&
+      languages.includes(preferredLanguage)
+    ) {
+      const currentPath = pathname.replace(`/${safeLocale}`, "") || "/"
+      const cleanPath = currentPath === "/" ? "" : currentPath
       window.location.href = `/${preferredLanguage}${cleanPath}`
     }
   }, [safeLocale, pathname])
