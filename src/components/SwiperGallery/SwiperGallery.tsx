@@ -14,6 +14,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Cormorant_Garamond, Montserrat } from 'next/font/google'
+import { useImageProtection } from '@/hooks/useImageProtection'
 
 interface GalleryImage {
   asset: {
@@ -42,7 +43,7 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
   const swiperRef = useRef<SwiperType | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
-
+    useImageProtection()
   // Prepare lightbox slides
   const lightboxSlides = images.map((image) => ({
     src: urlFor(image.asset).quality(90).url(),
@@ -171,6 +172,7 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
         }}
         render={{
           slide: ({ slide }) => {
+            useImageProtection()
             return (
               <div className="flex items-center justify-center h-full w-full relative">
                 <Image
