@@ -7,6 +7,7 @@ import { notFound } from "next/navigation"
 import { getLogo } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import Navbar from "@/components/layout/Navbar/Navbar"
 import Footer from "@/components/layout/Footer/Footer"
+import ImageProtectionScript from "@/components/ImageProtection/ImageProtectionScript"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,6 +71,7 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
           </div>
           <Footer />
+          <ImageProtectionScript />
         </NextIntlClientProvider>
       </body>
     </html>
