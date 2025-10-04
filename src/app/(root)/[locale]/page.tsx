@@ -60,8 +60,9 @@ export default async function Home({ params }: PageProps) {
             title={gallery.title[locale]}
             images={gallery.galleryImages}
           />
-          <TestimonialsComponent locale={locale} />
+         
         </div>
+        <TestimonialsComponent locale={locale} />
       </main>
     </>
   )

@@ -10,7 +10,8 @@ const TestimonialComponent = async ({ locale }: { locale: "en" | "es" }) => {
   const sectionTitles = await getSectionTitles()
   
   return (
-    <section className="py-16 px-5 md:px-10">
+    <section className="py-16 px-5 md:px-10 bg-elegantSilver/20">
+        <div className="max-w-7xl mx-auto">
       <TextComponent
         title={sectionTitles.titleTestimonials[locale]}
         className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
@@ -19,9 +20,10 @@ const TestimonialComponent = async ({ locale }: { locale: "en" | "es" }) => {
       {testimonials && testimonials.length > 0 && (
         <TestimonialsWithLightbox 
           testimonials={testimonials} 
-          locale={locale} 
-        />
-      )}
+            locale={locale} 
+          />
+        )}
+      </div>
     </section>
   )
 }

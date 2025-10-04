@@ -20,7 +20,7 @@ const TestimonialCard = ({ testimonial, locale, onImageClick, index }: Testimoni
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden group flex flex-col h-full"
+      className="bg-white rounded-2xl shadow-lg mb-4 hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden group flex flex-col "
     >
       {/* Quote Icon */}
       <div className="absolute top-4 right-4 text-gray-200 group-hover:text-gray-300 transition-colors">
