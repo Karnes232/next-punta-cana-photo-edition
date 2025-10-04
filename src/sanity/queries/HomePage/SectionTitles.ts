@@ -5,10 +5,18 @@ export interface SectionTitles {
     en: string
     es: string
   }
+  titleTestimonials: {
+    en: string
+    es: string
+  }
 }
 
 export const sectionTitlesQuery = `*[_type == "sectionTitles"][0] {
   titleServicesOffered {
+    en,
+    es
+  },
+  titleTestimonials {
     en,
     es
   }

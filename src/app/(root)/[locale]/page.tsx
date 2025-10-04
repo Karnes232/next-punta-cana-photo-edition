@@ -5,6 +5,7 @@ import SwiperGallery from "@/components/SwiperGallery/SwiperGallery"
 import { getHomePageGallery } from "@/sanity/queries/HomePage/Gallery"
 import { getHero } from "@/sanity/queries/HomePage/Hero"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 
 interface PageProps {
   params: Promise<{
@@ -59,6 +60,7 @@ export default async function Home({ params }: PageProps) {
             title={gallery.title[locale]}
             images={gallery.galleryImages}
           />
+          <TestimonialsComponent locale={locale} />
         </div>
       </main>
     </>

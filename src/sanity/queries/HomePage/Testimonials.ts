@@ -54,6 +54,6 @@ export const testimonialsQuery = `*[_type == "testimonial"] {
   }
 }`
 
-export async function getTestimonials(): Promise<Testimonials> {
+export async function getTestimonials(): Promise<Testimonial[]> {
   return await client.fetch(testimonialsQuery)
 }
