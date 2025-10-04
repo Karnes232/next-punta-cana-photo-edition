@@ -1,10 +1,10 @@
 "use client"
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Star, Quote, ZoomIn } from 'lucide-react'
-import Image from 'next/image'
-import { Testimonial } from '@/sanity/queries/HomePage/Testimonials'
-import { urlFor } from '@/sanity/lib/image'
+import React from "react"
+import { motion } from "framer-motion"
+import { Star, Quote, ZoomIn } from "lucide-react"
+import Image from "next/image"
+import { Testimonial } from "@/sanity/queries/HomePage/Testimonials"
+import { urlFor } from "@/sanity/lib/image"
 
 interface TestimonialCardProps {
   testimonial: Testimonial
@@ -13,7 +13,12 @@ interface TestimonialCardProps {
   index: number
 }
 
-const TestimonialCard = ({ testimonial, locale, onImageClick, index }: TestimonialCardProps) => {
+const TestimonialCard = ({
+  testimonial,
+  locale,
+  onImageClick,
+  index,
+}: TestimonialCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -30,11 +35,7 @@ const TestimonialCard = ({ testimonial, locale, onImageClick, index }: Testimoni
       {/* Stars */}
       <div className="flex items-center mb-4">
         {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={16}
-            className="text-yellow-400 fill-current"
-          />
+          <Star key={i} size={16} className="text-yellow-400 fill-current" />
         ))}
       </div>
 
@@ -47,29 +48,39 @@ const TestimonialCard = ({ testimonial, locale, onImageClick, index }: Testimoni
       <div className="mt-auto">
         {/* Work Example Image */}
         {testimonial.photo?.asset?.url && (
-          <div className="mb-4 relative group cursor-pointer" onClick={() => onImageClick(testimonial, index)}>
+          <div
+            className="mb-4 relative group cursor-pointer"
+            onClick={() => onImageClick(testimonial, index)}
+          >
             <Image
-              src={urlFor(testimonial.photo).width(600).height(400).quality(90).url()}
-              alt={testimonial.photo.alt || `Work example for ${testimonial.name}`}
+              src={urlFor(testimonial.photo)
+                .width(600)
+                .height(400)
+                .quality(90)
+                .url()}
+              alt={
+                testimonial.photo.alt || `Work example for ${testimonial.name}`
+              }
               width={600}
               height={400}
               className="w-full h-32 object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
             />
             {/* Overlay with zoom icon */}
             <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 rounded-lg flex items-center justify-center">
-              <ZoomIn className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
+              <ZoomIn
+                className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                size={32}
+              />
             </div>
           </div>
         )}
-        
+
         {/* Client Info */}
         <div className="text-center">
           <h4 className="font-semibold text-gray-900 text-sm">
             {testimonial.name}
           </h4>
-          <p className="text-gray-600 text-xs">
-            {testimonial.role[locale]}
-          </p>
+          <p className="text-gray-600 text-xs">{testimonial.role[locale]}</p>
         </div>
       </div>
 

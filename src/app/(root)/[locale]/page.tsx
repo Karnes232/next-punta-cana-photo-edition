@@ -6,6 +6,8 @@ import { getHomePageGallery } from "@/sanity/queries/HomePage/Gallery"
 import { getHero } from "@/sanity/queries/HomePage/Hero"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
+import ContentBlock from "@/components/ContentBlockComponents/ContentBlock"
+import { getContentBlock } from "@/sanity/queries/HomePage/ContentBlock"
 
 interface PageProps {
   params: Promise<{
@@ -18,7 +20,7 @@ export default async function Home({ params }: PageProps) {
   const hero = await getHero()
   const structuredData = await getStructuredData("home")
   const gallery = await getHomePageGallery()
-
+  const contentBlock = await getContentBlock()
 
   return (
     <>
@@ -56,11 +58,22 @@ export default async function Home({ params }: PageProps) {
         )}
         <div className="max-w-7xl mx-auto flex flex-col gap-4">
           <ServicesOffered locale={locale} />
+        </div>
+        <ContentBlock
+          title={contentBlock.title[locale]}
+          subTitle={contentBlock.subTitle[locale]}
+          content={contentBlock.content[locale]}
+          image={contentBlock.image}
+          buttonText={contentBlock.buttonText[locale]}
+          buttonLink={contentBlock.buttonLink}
+          locale={locale}
+          page="home"
+        />{" "}
+        <div className="max-w-7xl mx-auto flex flex-col gap-4">
           <SwiperGallery
             title={gallery.title[locale]}
             images={gallery.galleryImages}
           />
-         
         </div>
         <TestimonialsComponent locale={locale} />
       </main>

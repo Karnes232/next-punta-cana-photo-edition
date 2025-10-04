@@ -18,6 +18,7 @@ import Hero from "./HomePage/Hero"
 import SectionTitles from "./HomePage/SectionTitles"
 import HomePageGallery from "./HomePage/Gallery"
 import Testimonials from "./HomePage/Testimonials"
+import ContentBlock from "./HomePage/ContentBlock"
 
 //ServicesOffered
 import ServicesOffered from "./ServicesOffered/ServicesOffered"
@@ -41,6 +42,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     SectionTitles,
     HomePageGallery,
     Testimonials,
+    ContentBlock,
 
     //ServicesOffered
     ServicesOffered,

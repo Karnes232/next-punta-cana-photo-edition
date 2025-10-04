@@ -69,7 +69,7 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
   }
 
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 xl:py-32 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <h2
@@ -102,8 +102,12 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
                 spaceBetween: 30,
               },
               1024: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+              },
+              1280: {
                 slidesPerView: 3,
-                spaceBetween: 30,
+                spaceBetween: 40,
               },
             }}
             loop={images.length > 4}
@@ -247,6 +251,31 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
 
         .lightbox-image-container img {
           border-radius: 12px !important;
+        }
+
+        /* Enhanced image protection for lightbox */
+        .yarl__slide img,
+        .yarl__slide__image,
+        .lightbox-image-container img {
+          user-select: none !important;
+          -webkit-user-select: none !important;
+          -webkit-touch-callout: none !important;
+          -webkit-user-drag: none !important;
+          -moz-user-select: none !important;
+          -ms-user-select: none !important;
+          pointer-events: none !important;
+        }
+
+        /* Prevent lightbox image selection and dragging */
+        .yarl__slide,
+        .yarl__slide__content,
+        .lightbox-image-container {
+          user-select: none !important;
+          -webkit-user-select: none !important;
+          -webkit-touch-callout: none !important;
+          -webkit-user-drag: none !important;
+          -moz-user-select: none !important;
+          -ms-user-select: none !important;
         }
       `}</style>
     </section>
