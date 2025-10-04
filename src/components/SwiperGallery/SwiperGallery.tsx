@@ -172,7 +172,6 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
         }}
         render={{
           slide: ({ slide }) => {
-            useImageProtection()
             return (
               <div className="flex items-center justify-center h-full w-full relative">
                 <Image
