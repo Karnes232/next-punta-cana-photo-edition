@@ -19,11 +19,10 @@ export default defineType({
       type: "localizedString",
     }),
     defineField({
-        name: "titleTestimonials",
-        title: "Title Testimonials",
-        type: "localizedString",
-      }),
-    
+      name: "titleTestimonials",
+      title: "Title Testimonials",
+      type: "localizedString",
+    }),
   ],
   preview: {
     select: {

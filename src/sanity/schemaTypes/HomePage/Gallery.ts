@@ -16,11 +16,19 @@ export default defineType({
       name: "galleryImages",
       title: "Gallery Images",
       type: "array",
-      of: [{ type: "image", options: { hotspot: true }, fields: [defineField({
-        name: "alt",
-        title: "Alternative Text",
-        type: "string",
-      })] }],
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
     }),
   ],
   preview: {

@@ -17,7 +17,7 @@ export default async function Home({ params }: PageProps) {
   const hero = await getHero()
   const structuredData = await getStructuredData("home")
   const gallery = await getHomePageGallery()
-  console.log(gallery)
+
 
   return (
     <>
@@ -55,7 +55,10 @@ export default async function Home({ params }: PageProps) {
         )}
         <div className="max-w-7xl mx-auto flex flex-col gap-4">
           <ServicesOffered locale={locale} />
-          <SwiperGallery title={gallery.title[locale]} images={gallery.galleryImages} />
+          <SwiperGallery
+            title={gallery.title[locale]}
+            images={gallery.galleryImages}
+          />
         </div>
       </main>
     </>

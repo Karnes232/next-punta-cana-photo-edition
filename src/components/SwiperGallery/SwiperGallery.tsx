@@ -1,19 +1,19 @@
-'use client'
+"use client"
 
-import React, { useRef, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-import type { Swiper as SwiperType } from 'swiper'
-import Image from 'next/image'
-import { urlFor } from '@/sanity/lib/image'
-import Lightbox from 'yet-another-react-lightbox'
-import 'yet-another-react-lightbox/styles.css'
+import React, { useRef, useState } from "react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination, Autoplay } from "swiper/modules"
+import type { Swiper as SwiperType } from "swiper"
+import Image from "next/image"
+import { urlFor } from "@/sanity/lib/image"
+import Lightbox from "yet-another-react-lightbox"
+import "yet-another-react-lightbox/styles.css"
 
 // Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import { Cormorant_Garamond, Montserrat } from 'next/font/google'
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
 
 interface GalleryImage {
   asset: {
@@ -29,23 +29,23 @@ interface SwiperGalleryProps {
 }
 
 const coromantGaramond = Cormorant_Garamond({
-    subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-  })
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const MontserratFont = Montserrat({
-    subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-  })
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
   const swiperRef = useRef<SwiperType | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
   // Prepare lightbox slides
-  const lightboxSlides = images.map((image) => ({
+  const lightboxSlides = images.map(image => ({
     src: urlFor(image.asset).quality(90).url(),
-    alt: image.alt || 'Gallery image',
+    alt: image.alt || "Gallery image",
   }))
 
   const openLightbox = (index: number) => {
@@ -56,10 +56,14 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
   if (!images || images.length === 0) {
     return (
       <div className="py-16 px-4">
-        <h2 className={`${coromantGaramond.className} tracking-wide text-3xl lg:text-4xl text-center mb-8`}>
+        <h2
+          className={`${coromantGaramond.className} tracking-wide text-3xl lg:text-4xl text-center mb-8`}
+        >
           {title}
         </h2>
-        <p className={`${MontserratFont.className} text-center text-gray-600`}>No images available</p>
+        <p className={`${MontserratFont.className} text-center text-gray-600`}>
+          No images available
+        </p>
       </div>
     )
   }
@@ -68,7 +72,9 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
     <section className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
-        <h2 className={`${coromantGaramond.className} tracking-wide text-3xl lg:text-4xl text-center mb-12`}>
+        <h2
+          className={`${coromantGaramond.className} tracking-wide text-3xl lg:text-4xl text-center mb-12`}
+        >
           {title}
         </h2>
 
@@ -98,24 +104,31 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
               1024: {
                 slidesPerView: 3,
                 spaceBetween: 30,
-              }
+              },
             }}
             loop={images.length > 4}
             className="gallery-swiper"
-            onSwiper={(swiper) => {
+            onSwiper={swiper => {
               swiperRef.current = swiper
             }}
           >
             {images.map((image, index) => {
-              const imageUrl = urlFor(image.asset).width(800).height(600).quality(85).url()
-              
+              const imageUrl = urlFor(image.asset)
+                .width(800)
+                .height(600)
+                .quality(85)
+                .url()
+
               return (
                 <SwiperSlide key={index}>
-                  <div 
+                  <div
                     className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
                     onClick={() => openLightbox(index)}
                   >
-                    <div className="relative w-full" style={{ aspectRatio: '4/3' }}>
+                    <div
+                      className="relative w-full"
+                      style={{ aspectRatio: "4/3" }}
+                    >
                       <Image
                         src={imageUrl}
                         alt={image.alt || `Gallery image ${index + 1}`}
@@ -124,21 +137,21 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         priority={index < 4}
                       />
-                      
+
                       {/* Click overlay - only show icon, no background */}
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <svg 
-                            className="w-12 h-12 text-white drop-shadow-lg" 
-                            fill="none" 
-                            stroke="currentColor" 
+                          <svg
+                            className="w-12 h-12 text-white drop-shadow-lg"
+                            fill="none"
+                            stroke="currentColor"
                             viewBox="0 0 24 24"
                           >
-                            <path 
-                              strokeLinecap="round" 
-                              strokeLinejoin="round" 
-                              strokeWidth={2} 
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" 
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
                             />
                           </svg>
                         </div>
@@ -174,7 +187,7 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
               <div className="flex items-center justify-center h-full w-full relative">
                 <Image
                   src={slide.src}
-                  alt={slide.alt || 'Gallery image'}
+                  alt={slide.alt || "Gallery image"}
                   fill
                   className="object-contain"
                   sizes="100vw"
@@ -183,7 +196,7 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
                 />
               </div>
             )
-          }
+          },
         }}
       />
 
@@ -192,22 +205,22 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
           position: relative;
           margin-top: 2rem;
         }
-        
+
         .gallery-swiper .swiper-pagination-bullet {
           background: #d1d5db;
           opacity: 1;
           width: 12px;
           height: 12px;
         }
-        
+
         .gallery-swiper .swiper-pagination-bullet-active {
           background: #3b82f6;
         }
-        
+
         .gallery-swiper .swiper-pagination-bullet-active-main {
           background: #3b82f6;
         }
-        
+
         .gallery-swiper .swiper-pagination-bullet-active-prev,
         .gallery-swiper .swiper-pagination-bullet-active-next {
           background: #60a5fa;
@@ -217,21 +230,21 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
         .yarl__slide img {
           border-radius: 12px !important;
         }
-        
+
         .yarl__slide__content {
           border-radius: 12px !important;
           overflow: hidden !important;
         }
-        
+
         .yarl__slide__image {
           border-radius: 12px !important;
         }
-        
+
         .lightbox-image-container {
           border-radius: 12px !important;
           overflow: hidden !important;
         }
-        
+
         .lightbox-image-container img {
           border-radius: 12px !important;
         }
