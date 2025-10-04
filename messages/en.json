@@ -17,5 +17,8 @@
     "FAQ": "FAQ",
     "Policies": "Policies",
     "Copyright": "Copyright 2025"
+  },
+  "homePage": {
+    "noServicesAvailable": "No services available at the moment."
   }
 }

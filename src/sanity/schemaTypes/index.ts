@@ -15,6 +15,8 @@ import GeneralLayout from "./GeneralLayout/GeneralLayout"
 
 //HomePage
 import Hero from "./HomePage/Hero"
+import SectionTitles from "./HomePage/SectionTitles"
+import HomePageGallery from "./HomePage/Gallery"
 
 //ServicesOffered
 import ServicesOffered from "./ServicesOffered/ServicesOffered"
@@ -35,6 +37,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //HomePage
     Hero,
+    SectionTitles,
+    HomePageGallery,
 
     //ServicesOffered
     ServicesOffered,

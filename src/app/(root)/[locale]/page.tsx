@@ -1,6 +1,8 @@
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import ServicesOffered from "@/components/ServicesOfferedComponents/ServicesOffered"
+import SwiperGallery from "@/components/SwiperGallery/SwiperGallery"
+import { getHomePageGallery } from "@/sanity/queries/HomePage/Gallery"
 import { getHero } from "@/sanity/queries/HomePage/Hero"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
@@ -14,7 +16,8 @@ export default async function Home({ params }: PageProps) {
   const { locale } = await params
   const hero = await getHero()
   const structuredData = await getStructuredData("home")
-  console.log(structuredData)
+  const gallery = await getHomePageGallery()
+  console.log(gallery)
 
   return (
     <>
@@ -51,7 +54,8 @@ export default async function Home({ params }: PageProps) {
           />
         )}
         <div className="max-w-7xl mx-auto flex flex-col gap-4">
-          <ServicesOffered />
+          <ServicesOffered locale={locale} />
+          <SwiperGallery title={gallery.title[locale]} images={gallery.galleryImages} />
         </div>
       </main>
     </>

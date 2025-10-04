@@ -2,14 +2,23 @@ import React from "react"
 import TextComponent from "../TextComponent/TextComponent"
 import { getServiceCard } from "@/sanity/queries/ServicesOffered/ServicesOffered"
 import ServiceCard from "./ServiceCard"
+import { getSectionTitles } from "@/sanity/queries/HomePage/SectionTitles"
+import { getTranslations } from "next-intl/server"
+import { Montserrat } from "next/font/google"
 
-const ServicesOffered = async () => {
+const MontserratFont = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const ServicesOffered = async ({ locale }: { locale: "en" | "es" }) => {
   const serviceCards = await getServiceCard()
-
+  const sectionTitles = await getSectionTitles()
+  const t = await getTranslations("homePage")
   return (
     <section className="py-16 px-5 md:px-10">
       <TextComponent
-        title="Services Offered"
+        title={sectionTitles.titleServicesOffered[locale]}
         className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
       />
 
@@ -32,8 +41,8 @@ const ServicesOffered = async () => {
           </div>
         </div>
       ) : (
-        <p className="text-center text-gray-500">
-          No services available at the moment.
+        <p className={`${MontserratFont.className} text-center text-gray-500`}>
+          {t("noServicesAvailable")}
         </p>
       )}
     </section>

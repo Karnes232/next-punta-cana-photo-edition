@@ -17,5 +17,8 @@
     "FAQ": "Preguntas Frecuentes",
     "Policies": "Políticas",
     "Copyright": "Copyright 2025"
+  },
+  "homePage": {
+    "noServicesAvailable": "No hay servicios disponibles en este momento."
   }
 }
