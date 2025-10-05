@@ -22,6 +22,7 @@ import ContentBlock from "./HomePage/ContentBlock"
 
 //Photoshoots
 import Photoshoots from "./Photoshoots/Photoshoots"
+import PhotoshootsPackages from "./Photoshoots/PhotoshootsPackages"
 
 //Weddings
 import Weddings from "./Weddings/Wedding"
@@ -78,6 +79,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //Photoshoots
     Photoshoots,
+    PhotoshootsPackages,
 
     //Weddings
     Weddings,

@@ -80,11 +80,28 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("Photoshoots")
         .child(
-          S.document()
-            .schemaType("photoshoots")
+          S.list()
             .title("Photoshoots")
-            .documentId("photoshoots"),
+            .items([
+              S.listItem()
+                .title("Photoshoots")
+                .child(
+                  S.document()
+                    .schemaType("photoshoots")
+                    .title("Photoshoots")
+                    .documentId("photoshoots"),
+                ),
+              S.listItem()
+                .title("Photoshoots Packages")
+                .child(
+                  S.documentList()  
+                    .schemaType("photoshootsPackages")
+                    .title("Photoshoots Packages")
+                    .filter("_type == 'photoshootsPackages'"),
+                ),
+            ]),
         ),
+
       S.listItem()
         .title("Weddings")
         .child(
