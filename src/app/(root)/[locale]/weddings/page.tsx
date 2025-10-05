@@ -11,7 +11,7 @@ export default async function Weddings({
   const { locale } = await params
   const structuredData = await getStructuredData("weddings")
   const servicesPage = await getServicesPage("weddings")
-  console.log(servicesPage?.hero)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -22,8 +22,8 @@ export default async function Weddings({
           }}
         />
       )}
-   <main> 
-   {servicesPage?.hero?.heroVideo ? (
+      <main>
+        {servicesPage?.hero?.heroVideo ? (
           <BackgroundVideo
             heroVideo={servicesPage?.hero?.heroVideo}
             fullSize={servicesPage?.hero?.fullSize}
@@ -38,7 +38,7 @@ export default async function Weddings({
             subtitle={servicesPage?.hero?.subtitle?.[locale]}
           />
         )}
-   </main>
+      </main>
     </>
   )
 }

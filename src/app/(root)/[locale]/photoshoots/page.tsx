@@ -13,7 +13,6 @@ export default async function Photoshoots({
   const structuredData = await getStructuredData("photoshoots")
   const servicesPage = await getServicesPage("photoshoots")
 
-  console.log(servicesPage?.hero)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
