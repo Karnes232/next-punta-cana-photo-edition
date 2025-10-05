@@ -1,3 +1,4 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import { getPolicies } from "@/sanity/queries/Policies/Policies"
@@ -11,6 +12,7 @@ export default async function Policies({
   const { locale } = await params
   const structuredData = await getStructuredData("policies")
   const policies = await getPolicies()
+  console.log(policies)
 
   return (
     <>
@@ -39,8 +41,14 @@ export default async function Policies({
           />
         )}
       </main>
-      <div>
-        <h1>Policies</h1>
+      <div className="max-w-5xl mx-5 lg:p-2 xl:mx-auto">
+        {policies?.termsAndConditions && (
+          <BlockContent content={policies.termsAndConditions} locale={locale} />
+        )}
+        <hr className="my-10" />
+        {policies?.privacyPolicy && (
+          <BlockContent content={policies.privacyPolicy} locale={locale} />
+        )}
       </div>
     </>
   )

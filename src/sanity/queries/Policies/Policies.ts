@@ -3,6 +3,14 @@ import { Hero } from "../HomePage/Hero"
 
 export interface Policies {
   hero: Hero
+  termsAndConditions: {
+    en: any[]
+    es: any[]
+  }
+  privacyPolicy: {
+    en: any[]
+    es: any[]
+  }
 }
 
 export const policiesQuery = `*[_type == "policies"][0]  {
@@ -30,7 +38,15 @@ export const policiesQuery = `*[_type == "policies"][0]  {
     },
     heroVideo,
     fullSize
-  }
+  },
+  termsAndConditions {
+    en,
+    es
+  },
+  privacyPolicy {
+    en,
+    es
+  } 
 }`
 
 export async function getPolicies(): Promise<Policies | null> {
