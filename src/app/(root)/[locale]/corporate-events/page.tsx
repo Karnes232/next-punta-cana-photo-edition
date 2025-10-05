@@ -1,7 +1,7 @@
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
-import { getServicesPage } from "@/sanity/queries/ServicesOffered/ServicesPage"
+import { getCorporateEvents } from "@/sanity/queries/CorporateEvents/CorporateEvents"
 
 export default async function CorporateEvents({
   params,
@@ -10,7 +10,7 @@ export default async function CorporateEvents({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("corporate-events")
-  const servicesPage = await getServicesPage("corporate-events")
+  const corporateEvents = await getCorporateEvents()
 
   return (
     <>
@@ -23,19 +23,19 @@ export default async function CorporateEvents({
         />
       )}
       <main>
-        {servicesPage?.hero?.heroVideo ? (
+        {corporateEvents?.hero?.heroVideo ? (
           <BackgroundVideo
-            heroVideo={servicesPage?.hero?.heroVideo}
-            fullSize={servicesPage?.hero?.fullSize}
-            title={servicesPage?.hero?.title?.[locale]}
-            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+            heroVideo={corporateEvents?.hero?.heroVideo}
+            fullSize={corporateEvents?.hero?.fullSize}
+            title={corporateEvents?.hero?.title?.[locale]}
+            subtitle={corporateEvents?.hero?.subtitle?.[locale]}
           />
         ) : (
           <BackgroundImage
-            heroImages={servicesPage?.hero?.heroImage || []}
-            fullSize={servicesPage?.hero?.fullSize}
-            title={servicesPage?.hero?.title?.[locale]}
-            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+            heroImages={corporateEvents?.hero?.heroImage || []}
+            fullSize={corporateEvents?.hero?.fullSize}
+            title={corporateEvents?.hero?.title?.[locale]}
+            subtitle={corporateEvents?.hero?.subtitle?.[locale]}
           />
         )}
       </main>

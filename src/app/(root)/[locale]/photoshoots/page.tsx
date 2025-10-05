@@ -1,5 +1,6 @@
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import { getPhotoshoot } from "@/sanity/queries/Photoshoot/Photoshoot"
 
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getServicesPage } from "@/sanity/queries/ServicesOffered/ServicesPage"
@@ -11,7 +12,7 @@ export default async function Photoshoots({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("photoshoots")
-  const servicesPage = await getServicesPage("photoshoots")
+  const photoshoot = await getPhotoshoot()
 
   return (
     <>
@@ -24,19 +25,19 @@ export default async function Photoshoots({
         />
       )}
       <main>
-        {servicesPage?.hero?.heroVideo ? (
+        {photoshoot?.hero?.heroVideo ? (
           <BackgroundVideo
-            heroVideo={servicesPage?.hero?.heroVideo}
-            fullSize={servicesPage?.hero?.fullSize}
-            title={servicesPage?.hero?.title?.[locale]}
-            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+            heroVideo={photoshoot?.hero?.heroVideo}
+            fullSize={photoshoot?.hero?.fullSize}
+            title={photoshoot?.hero?.title?.[locale]}
+            subtitle={photoshoot?.hero?.subtitle?.[locale]}
           />
         ) : (
           <BackgroundImage
-            heroImages={servicesPage?.hero?.heroImage || []}
-            fullSize={servicesPage?.hero?.fullSize}
-            title={servicesPage?.hero?.title?.[locale]}
-            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+            heroImages={photoshoot?.hero?.heroImage || []}
+            fullSize={photoshoot?.hero?.fullSize}
+            title={photoshoot?.hero?.title?.[locale]}
+            subtitle={photoshoot?.hero?.subtitle?.[locale]}
           />
         )}
       </main>

@@ -1,7 +1,7 @@
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import { getProposal } from "@/sanity/queries/Proposal/Proposal"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
-import { getServicesPage } from "@/sanity/queries/ServicesOffered/ServicesPage"
 
 export default async function Proposals({
   params,
@@ -10,7 +10,7 @@ export default async function Proposals({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("proposals")
-  const servicesPage = await getServicesPage("proposals")
+  const proposal = await getProposal()
 
   return (
     <>
@@ -23,19 +23,19 @@ export default async function Proposals({
         />
       )}
       <main>
-        {servicesPage?.hero?.heroVideo ? (
+        {proposal?.hero?.heroVideo ? (
           <BackgroundVideo
-            heroVideo={servicesPage?.hero?.heroVideo}
-            fullSize={servicesPage?.hero?.fullSize}
-            title={servicesPage?.hero?.title?.[locale]}
-            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+            heroVideo={proposal?.hero?.heroVideo}
+            fullSize={proposal?.hero?.fullSize}
+            title={proposal?.hero?.title?.[locale]}
+            subtitle={proposal?.hero?.subtitle?.[locale]}
           />
         ) : (
           <BackgroundImage
-            heroImages={servicesPage?.hero?.heroImage || []}
-            fullSize={servicesPage?.hero?.fullSize}
-            title={servicesPage?.hero?.title?.[locale]}
-            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+            heroImages={proposal?.hero?.heroImage || []}
+            fullSize={proposal?.hero?.fullSize}
+            title={proposal?.hero?.title?.[locale]}
+            subtitle={proposal?.hero?.subtitle?.[locale]}
           />
         )}
       </main>

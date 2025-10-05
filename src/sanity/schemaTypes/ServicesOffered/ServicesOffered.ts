@@ -62,12 +62,12 @@ export default defineType({
       validation: Rule => Rule.required(),
       group: "Home Page Card",
     }),
-    defineField({
-      name: "hero",
-      title: "Hero",
-      type: "hero",
-      group: "Page Content",
-    }),
+    // defineField({
+    //   name: "hero",
+    //   title: "Hero",
+    //   type: "hero",
+    //   group: "Page Content",
+    // }),
   ],
   preview: {
     select: {

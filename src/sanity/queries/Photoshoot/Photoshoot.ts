@@ -1,12 +1,12 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
 
-export interface ServicesPage {
+export interface Photoshoot {
   hero: Hero
 }
 
-export const servicesPageQuery = `*[_type == "servicesOffered" && hero.pageName == $pageName][0] {
-    hero {
+export const photoshootQuery = `*[_type == "photoshoots"][0] {
+  hero {
         pageName,
         title {
             en,
@@ -33,8 +33,6 @@ export const servicesPageQuery = `*[_type == "servicesOffered" && hero.pageName 
     }
 }`
 
-export async function getServicesPage(
-  pageName: string,
-): Promise<ServicesPage | null> {
-  return await client.fetch(servicesPageQuery, { pageName })
+export async function getPhotoshoot(): Promise<Photoshoot | null> {
+  return await client.fetch(photoshootQuery)
 }

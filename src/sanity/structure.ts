@@ -22,6 +22,14 @@ export const structure: StructureResolver = S =>
             .filter("_type == 'pageSeo'"),
         ),
       S.listItem()
+        .title("Services Offered")
+        .child(
+          S.documentList()
+            .title("Services Offered")
+            .filter("_type == 'servicesOffered'")
+            .defaultOrdering([{ field: "_createdAt", direction: "desc" }]),
+        ),
+      S.listItem()
         .title("Home Page")
         .child(
           S.list()
@@ -70,11 +78,43 @@ export const structure: StructureResolver = S =>
             ]),
         ),
       S.listItem()
-        .title("Services Offered")
+        .title("Photoshoots")
         .child(
-          S.documentList()
-            .title("Services Offered")
-            .filter("_type == 'servicesOffered'")
-            .defaultOrdering([{ field: "_createdAt", direction: "desc" }]),
+          S.document()
+            .schemaType("photoshoots")
+            .title("Photoshoots")
+            .documentId("photoshoots"),
+        ),
+      S.listItem()
+        .title("Weddings")
+        .child(
+          S.document()
+            .schemaType("weddings")
+            .title("Weddings")
+            .documentId("weddings"),
+        ),
+      S.listItem()
+        .title("Wedding Planning")
+        .child(
+          S.document()
+            .schemaType("wedding-planning")
+            .title("Wedding Planning")
+            .documentId("wedding-planning"),
+        ),
+      S.listItem()
+        .title("Proposal")
+        .child(
+          S.document()
+            .schemaType("proposal")
+            .title("Proposal")
+            .documentId("proposal"),
+        ),
+      S.listItem()
+        .title("Corporate Events")
+        .child(
+          S.document()
+            .schemaType("corporate-events")
+            .title("Corporate Events")
+            .documentId("corporate-events"),
         ),
     ])
