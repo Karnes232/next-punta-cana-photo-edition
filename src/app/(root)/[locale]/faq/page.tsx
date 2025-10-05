@@ -1,3 +1,6 @@
+import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import { getFaqs } from "@/sanity/queries/Faqs/Faqs"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function FAQ({
@@ -7,6 +10,7 @@ export default async function FAQ({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("faq")
+  const faq = await getFaqs()
 
   return (
     <>
@@ -18,6 +22,23 @@ export default async function FAQ({
           }}
         />
       )}
+      <main>
+        {faq?.hero?.heroVideo ? (
+          <BackgroundVideo
+            heroVideo={faq?.hero?.heroVideo}
+            fullSize={faq?.hero?.fullSize}
+            title={faq?.hero?.title?.[locale]}
+            subtitle={faq?.hero?.subtitle?.[locale]}
+          />
+        ) : (
+          <BackgroundImage
+            heroImages={faq?.hero?.heroImage || []}
+            fullSize={faq?.hero?.fullSize}
+            title={faq?.hero?.title?.[locale]}
+            subtitle={faq?.hero?.subtitle?.[locale]}
+          />
+        )}
+      </main>
       <div>
         <h1>FAQ</h1>
       </div>

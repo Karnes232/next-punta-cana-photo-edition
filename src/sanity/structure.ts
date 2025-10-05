@@ -117,4 +117,45 @@ export const structure: StructureResolver = S =>
             .title("Corporate Events")
             .documentId("corporate-events"),
         ),
+      S.listItem()
+        .title("Stories")
+        .child(
+          S.document()
+            .schemaType("stories")
+            .title("Stories")
+            .documentId("stories"),
+        ),
+      S.listItem()
+        .title("About")
+        .child(
+          S.document()
+            .schemaType("about")
+            .title("About")
+            .documentId("about"),
+        ),
+      S.listItem()
+        .title("Contact")
+        .child(
+          S.document()
+            .schemaType("contact")
+            .title("Contact")
+            .documentId("contact"),
+        ),
+      S.listItem()
+        .title("FAQs")
+        .child(
+          S.document()
+            .schemaType("faqs")
+            .title("FAQs")
+            .documentId("faqs"),
+        ),
+      S.listItem()
+        .title("Policies")
+        .child(
+          S.document()
+            .schemaType("policies")
+            .title("Policies")
+            .documentId("policies"),
+        ),
+        
     ])

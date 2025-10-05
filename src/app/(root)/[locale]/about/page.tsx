@@ -1,3 +1,6 @@
+import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import { getAbout } from "@/sanity/queries/About/About"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function About({
@@ -7,6 +10,7 @@ export default async function About({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("about")
+  const about = await getAbout()
 
   return (
     <>
@@ -18,6 +22,23 @@ export default async function About({
           }}
         />
       )}
+      <main>
+        {about?.hero?.heroVideo ? (
+          <BackgroundVideo
+            heroVideo={about?.hero?.heroVideo}
+            fullSize={about?.hero?.fullSize}
+            title={about?.hero?.title?.[locale]}
+            subtitle={about?.hero?.subtitle?.[locale]}
+          />
+        ) : (
+          <BackgroundImage
+            heroImages={about?.hero?.heroImage || []}
+            fullSize={about?.hero?.fullSize}
+            title={about?.hero?.title?.[locale]}
+            subtitle={about?.hero?.subtitle?.[locale]}
+          />
+        )}
+      </main>
       <div>
         <h1>About</h1>
       </div>

@@ -1,3 +1,6 @@
+import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import { getPolicies } from "@/sanity/queries/Policies/Policies"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function Policies({
@@ -7,6 +10,7 @@ export default async function Policies({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("policies")
+  const policies = await getPolicies()
 
   return (
     <>
@@ -18,6 +22,23 @@ export default async function Policies({
           }}
         />
       )}
+      <main>
+        {policies?.hero?.heroVideo ? (
+          <BackgroundVideo
+            heroVideo={policies?.hero?.heroVideo}
+            fullSize={policies?.hero?.fullSize}
+            title={policies?.hero?.title?.[locale]}
+            subtitle={policies?.hero?.subtitle?.[locale]}
+          />
+        ) : (
+          <BackgroundImage
+            heroImages={policies?.hero?.heroImage || []}
+            fullSize={policies?.hero?.fullSize}
+            title={policies?.hero?.title?.[locale]}
+            subtitle={policies?.hero?.subtitle?.[locale]}
+          />
+        )}
+      </main>
       <div>
         <h1>Policies</h1>
       </div>

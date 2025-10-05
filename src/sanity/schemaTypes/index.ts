@@ -38,6 +38,23 @@ import Proposal from "./Proposal/Proposal"
 //Corporate Events
 import CorporateEvents from "./CorporateEvents/CorporateEvents"
 
+//Stories
+import stories from "./stories/stories"
+
+//About
+import About from "./About/About"
+
+//Contact
+import Contact from "./contact/contact"
+
+//FAQs
+import FAQs from "./faqs/faqs"
+
+//Policies
+import Policies from "./policies/policies"
+
+
+
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     //Localized
@@ -73,6 +90,23 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //Corporate Events
     CorporateEvents,
+
+    //Stories
+    stories,
+
+    //About
+    About,
+
+    //Contact
+    Contact,
+
+    //FAQs
+    FAQs,
+
+    //Policies
+    Policies,
+
+    
 
     //ServicesOffered
     ServicesOffered,

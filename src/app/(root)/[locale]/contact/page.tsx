@@ -1,3 +1,6 @@
+import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import { getContact } from "@/sanity/queries/Contact/Contact"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function Contact({
@@ -7,6 +10,7 @@ export default async function Contact({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("contact")
+  const contact = await getContact()
 
   return (
     <>
@@ -18,6 +22,23 @@ export default async function Contact({
           }}
         />
       )}
+      <main>
+        {contact?.hero?.heroVideo ? (
+          <BackgroundVideo
+            heroVideo={contact?.hero?.heroVideo}
+            fullSize={contact?.hero?.fullSize}
+            title={contact?.hero?.title?.[locale]}
+            subtitle={contact?.hero?.subtitle?.[locale]}
+          />
+        ) : (
+          <BackgroundImage
+            heroImages={contact?.hero?.heroImage || []}
+            fullSize={contact?.hero?.fullSize}
+            title={contact?.hero?.title?.[locale]}
+            subtitle={contact?.hero?.subtitle?.[locale]}
+          />
+        )}
+      </main>
       <div>
         <h1>Contact</h1>
       </div>
