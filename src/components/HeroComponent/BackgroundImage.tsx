@@ -76,7 +76,7 @@ const BackgroundImage = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.3 }}
-              className={`${coromantGaramond.className} text-pureWhite text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-6 leading-tight tracking-wide`}
+              className={`${coromantGaramond.className} text-pureWhite ${fullSize ? "text-5xl md:text-7xl lg:text-8xl xl:text-9xl" : "text-3xl md:text-4xl lg:text-5xl xl:text-6xl"} font-bold mb-6 leading-tight tracking-wide`}
               style={{
                 textShadow:
                   "2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)",
@@ -92,7 +92,7 @@ const BackgroundImage = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.6 }}
-              className={`${MontserratFont.className} text-pureWhite text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium leading-relaxed max-w-4xl mx-auto`}
+              className={`${MontserratFont.className} text-pureWhite ${fullSize ? "text-lg md:text-xl lg:text-2xl xl:text-3xl" : "text-base md:text-lg lg:text-xl xl:text-2xl"} font-medium leading-relaxed max-w-4xl mx-auto`}
               style={{
                 textShadow:
                   "1px 1px 3px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.4)",
@@ -163,7 +163,7 @@ const BackgroundImage = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.3 }}
-                className={`${coromantGaramond.className} text-pureWhite text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-6 leading-tight tracking-wide`}
+                className={`${coromantGaramond.className} text-pureWhite ${fullSize ? "text-5xl md:text-7xl lg:text-8xl xl:text-9xl" : "text-3xl md:text-4xl lg:text-5xl xl:text-6xl"} font-bold mb-6 leading-tight tracking-wide`}
                 style={{
                   textShadow:
                     "2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)",
@@ -179,7 +179,7 @@ const BackgroundImage = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.6 }}
-                className={`${MontserratFont.className} text-pureWhite text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium leading-relaxed max-w-4xl mx-auto`}
+                className={`${MontserratFont.className} text-pureWhite ${fullSize ? "text-lg md:text-xl lg:text-2xl xl:text-3xl" : "text-base md:text-lg lg:text-xl xl:text-2xl"} font-medium leading-relaxed max-w-4xl mx-auto`}
                 style={{
                   textShadow:
                     "1px 1px 3px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.4)",

@@ -9,6 +9,27 @@ export default defineType({
   icon: DocumentIcon,
   fields: [
     defineField({
+      name: "pageName",
+      title: "Page Name",
+      type: "string",
+      options: {
+        list: [
+          "home",
+          "about",
+          "contact",
+          "corporate-events",
+          "faq",
+          "photoshoots",
+          "policies",
+          "proposals",
+          "stories",
+          "wedding-planning",
+          "weddings",
+        ],
+        layout: "dropdown",
+      },
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "localizedString",
@@ -43,6 +64,12 @@ export default defineType({
       title: "Hero Video",
       type: "string",
       description: "Upload Videos to Cloudinary, then paste video ID here",
+    }),
+    defineField({
+      name: "fullSize",
+      title: "Full Size",
+      type: "boolean",
+      initialValue: true,
     }),
   ],
   preview: {

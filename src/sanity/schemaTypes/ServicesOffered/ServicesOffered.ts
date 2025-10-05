@@ -6,18 +6,30 @@ export default defineType({
   title: "Services Offered",
   type: "document",
   icon: DocumentIcon,
+  groups: [
+    {
+      name: "Home Page Card",
+      title: "Home Page Card",
+    },
+    {
+      name: "Page Content",
+      title: "Page Content",
+    },
+  ],
   fields: [
     defineField({
       name: "title",
       title: "Title",
       type: "localizedString",
       validation: Rule => Rule.required(),
+      group: "Home Page Card",
     }),
     defineField({
       name: "subtitle",
       title: "Subtitle",
       type: "localizedString",
       validation: Rule => Rule.required(),
+      group: "Home Page Card",
     }),
     defineField({
       name: "slug",
@@ -27,6 +39,7 @@ export default defineType({
         source: "title.en",
       },
       validation: Rule => Rule.required(),
+      group: "Home Page Card",
     }),
     defineField({
       name: "heroImage",
@@ -47,6 +60,13 @@ export default defineType({
       ],
       description: "Add images",
       validation: Rule => Rule.required(),
+      group: "Home Page Card",
+    }),
+    defineField({
+      name: "hero",
+      title: "Hero",
+      type: "hero",
+      group: "Page Content",
     }),
   ],
   preview: {

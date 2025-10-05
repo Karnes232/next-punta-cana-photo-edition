@@ -17,11 +17,10 @@ interface PageProps {
 
 export default async function Home({ params }: PageProps) {
   const { locale } = await params
-  const hero = await getHero()
+  const hero = await getHero("home")
   const structuredData = await getStructuredData("home")
   const gallery = await getHomePageGallery()
   const contentBlock = await getContentBlock()
-
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -44,14 +43,14 @@ export default async function Home({ params }: PageProps) {
         {hero?.heroVideo ? (
           <BackgroundVideo
             heroVideo={hero.heroVideo}
-            fullSize={true}
+            fullSize={hero.fullSize}
             title={hero.title[locale]}
             subtitle={hero.subtitle[locale]}
           />
         ) : (
           <BackgroundImage
             heroImages={hero?.heroImage || []}
-            fullSize={true}
+            fullSize={hero?.fullSize}
             title={hero?.title?.[locale]}
             subtitle={hero?.subtitle?.[locale]}
           />

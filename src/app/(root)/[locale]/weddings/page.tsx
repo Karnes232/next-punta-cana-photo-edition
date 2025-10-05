@@ -1,4 +1,7 @@
+import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import { getServicesPage } from "@/sanity/queries/ServicesOffered/ServicesPage"
 
 export default async function Weddings({
   params,
@@ -7,6 +10,8 @@ export default async function Weddings({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("weddings")
+  const servicesPage = await getServicesPage("weddings")
+  console.log(servicesPage?.hero)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -17,9 +22,23 @@ export default async function Weddings({
           }}
         />
       )}
-      <div>
-        <h1>Weddings</h1>
-      </div>
+   <main> 
+   {servicesPage?.hero?.heroVideo ? (
+          <BackgroundVideo
+            heroVideo={servicesPage?.hero?.heroVideo}
+            fullSize={servicesPage?.hero?.fullSize}
+            title={servicesPage?.hero?.title?.[locale]}
+            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+          />
+        ) : (
+          <BackgroundImage
+            heroImages={servicesPage?.hero?.heroImage || []}
+            fullSize={servicesPage?.hero?.fullSize}
+            title={servicesPage?.hero?.title?.[locale]}
+            subtitle={servicesPage?.hero?.subtitle?.[locale]}
+          />
+        )}
+   </main>
     </>
   )
 }
