@@ -3,7 +3,6 @@ import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import { getPhotoshoot } from "@/sanity/queries/Photoshoot/Photoshoot"
 
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
-import { getServicesPage } from "@/sanity/queries/ServicesOffered/ServicesPage"
 
 export default async function Photoshoots({
   params,
