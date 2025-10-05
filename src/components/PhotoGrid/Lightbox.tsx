@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { useImageProtection } from '@/hooks/useImageProtection'
+
 interface SanityPhoto {
   asset: {
     url: string
@@ -34,7 +34,7 @@ const Lightbox: React.FC<LightboxProps> = ({
   onPrev
 }) => {
   if (selectedIndex === null) return null
-useImageProtection()
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') onClose()
     if (e.key === 'ArrowRight') onNext()

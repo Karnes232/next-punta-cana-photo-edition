@@ -3,7 +3,6 @@ import { PhotoshootsPackages } from '@/sanity/queries/Photoshoot/PhotoshootsPack
 import React from 'react'
 import Image from 'next/image'
 import { Cormorant_Garamond, Montserrat } from "next/font/google"
-import { useImageProtection } from "@/hooks/useImageProtection"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -21,7 +20,7 @@ interface PhotoshootPackageCardProps {
 }
 
 const PhotoshootPackageCard: React.FC<PhotoshootPackageCardProps> = ({ photoPackage, locale }) => {
-  useImageProtection()
+
 
   const title = photoPackage.title[locale as "en" | "es"] || photoPackage.title.en
   const description = photoPackage.description[locale as "en" | "es"] || photoPackage.description.en

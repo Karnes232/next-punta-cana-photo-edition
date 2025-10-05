@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Lightbox from './Lightbox'
-import { useImageProtection } from '@/hooks/useImageProtection'
+
 interface SanityPhoto {
   asset: {
     url: string
@@ -25,7 +25,7 @@ interface PhotoGridProps {
 
 const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
-  useImageProtection()
+
   // Don't render if no photos
   if (!photos || photos.length === 0) {
     return <div className="w-full px-2 sm:px-4 md:px-8">No photos available</div>

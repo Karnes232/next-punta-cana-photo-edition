@@ -5,7 +5,6 @@ import Link from "next/link"
 import { ServiceCard as ServiceCardType } from "@/sanity/queries/ServicesOffered/ServicesOffered"
 import { useLocale } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
-import { useImageProtection } from "@/hooks/useImageProtection"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -25,7 +24,7 @@ interface Photo {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const locale = useLocale()
-  useImageProtection()
+
 
   // Get the first image from heroImage array
   const image = service.heroImage[0]
