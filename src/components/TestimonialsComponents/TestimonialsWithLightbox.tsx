@@ -10,6 +10,7 @@ import Lightbox from "./Lightbox"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
+import { useImageProtection } from "@/hooks/useImageProtection"
 
 interface TestimonialsWithLightboxProps {
   testimonials: Testimonial[]
@@ -22,7 +23,7 @@ const TestimonialsWithLightbox = ({
 }: TestimonialsWithLightboxProps) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-
+  useImageProtection()
   const handleImageClick = (testimonial: Testimonial, index: number) => {
     setCurrentImageIndex(index)
     setIsLightboxOpen(true)

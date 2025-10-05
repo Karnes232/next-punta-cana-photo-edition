@@ -1,5 +1,8 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
+import TextComponent from "@/components/TextComponent/TextComponent"
 import { getPhotoshoot } from "@/sanity/queries/Photoshoot/Photoshoot"
 
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
@@ -12,7 +15,7 @@ export default async function Photoshoots({
   const { locale } = await params
   const structuredData = await getStructuredData("photoshoots")
   const photoshoot = await getPhotoshoot()
-
+  console.log(photoshoot)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -39,6 +42,19 @@ export default async function Photoshoots({
             subtitle={photoshoot?.hero?.subtitle?.[locale]}
           />
         )}
+        <section className="max-w-7xl mx-auto flex flex-col gap-4">
+          <TextComponent
+            title={photoshoot?.galleryTitle?.[locale]}
+            className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
+          />
+          <PhotoGrid photos={photoshoot?.gallery || []} />
+        </section>
+        <section className="max-w-7xl my-12 mx-auto flex flex-col gap-4">
+          <BlockContent
+            content={photoshoot?.paragraph1 || { en: [], es: [] }}
+            locale={locale}
+          />
+        </section>
       </main>
     </>
   )
