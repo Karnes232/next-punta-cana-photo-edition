@@ -11,8 +11,7 @@ export default async function Policies({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("policies")
-  const policies = await getPolicies()
-  console.log(policies)
+  const policies = await getPolicies().log(policies)
 
   return (
     <>

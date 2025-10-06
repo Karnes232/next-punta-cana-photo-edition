@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
+import { ContentBlock } from "../HomePage/ContentBlock"
 
 export interface Photoshoot {
   hero: Hero
@@ -22,6 +23,11 @@ export interface Photoshoot {
     alt: string
   }[]
   paragraph1: {
+    en: any[]
+    es: any[]
+  }
+  contentBlock: ContentBlock
+  paragraph2: {
     en: any[]
     es: any[]
   }
@@ -72,6 +78,42 @@ export const photoshootQuery = `*[_type == "photoshoots"][0] {
       alt
     },
     paragraph1 {
+      en,
+      es
+    },
+    contentBlock {
+      title {
+        en,
+        es
+      },
+      subTitle {
+        en,
+        es
+      },
+      content {
+        en,
+        es
+      },
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height
+            }
+          }
+        },
+        alt
+      },
+      buttonText {
+        en,
+        es
+      },
+      buttonLink
+    },
+    paragraph2 {
       en,
       es
     }

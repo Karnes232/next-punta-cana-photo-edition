@@ -94,7 +94,7 @@ export const structure: StructureResolver = S =>
               S.listItem()
                 .title("Photoshoots Packages")
                 .child(
-                  S.documentList()  
+                  S.documentList()
                     .schemaType("photoshootsPackages")
                     .title("Photoshoots Packages")
                     .filter("_type == 'photoshootsPackages'"),
@@ -145,10 +145,7 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("About")
         .child(
-          S.document()
-            .schemaType("about")
-            .title("About")
-            .documentId("about"),
+          S.document().schemaType("about").title("About").documentId("about"),
         ),
       S.listItem()
         .title("Contact")
@@ -161,10 +158,7 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("FAQs")
         .child(
-          S.document()
-            .schemaType("faqs")
-            .title("FAQs")
-            .documentId("faqs"),
+          S.document().schemaType("faqs").title("FAQs").documentId("faqs"),
         ),
       S.listItem()
         .title("Policies")
@@ -174,5 +168,4 @@ export const structure: StructureResolver = S =>
             .title("Policies")
             .documentId("policies"),
         ),
-        
     ])

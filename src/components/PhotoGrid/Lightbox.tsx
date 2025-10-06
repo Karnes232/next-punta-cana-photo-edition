@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import React from 'react'
-import Image from 'next/image'
+import React from "react"
+import Image from "next/image"
 
 interface SanityPhoto {
   asset: {
@@ -31,21 +31,22 @@ const Lightbox: React.FC<LightboxProps> = ({
   selectedIndex,
   onClose,
   onNext,
-  onPrev
+  onPrev,
 }) => {
   if (selectedIndex === null) return null
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') onClose()
-    if (e.key === 'ArrowRight') onNext()
-    if (e.key === 'ArrowLeft') onPrev()
+    if (e.key === "Escape") onClose()
+    if (e.key === "ArrowRight") onNext()
+    if (e.key === "ArrowLeft") onPrev()
   }
 
   const currentPhoto = photos[selectedIndex]
-  const optimizedUrl = currentPhoto.asset.url.split('?')[0] + '?q=100&fm=webp&fit=max&w=1200'
+  const optimizedUrl =
+    currentPhoto.asset.url.split("?")[0] + "?q=100&fm=webp&fit=max&w=1200"
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
       onClick={onClose}
       onKeyDown={handleKeyDown}
@@ -58,9 +59,9 @@ const Lightbox: React.FC<LightboxProps> = ({
         >
           ×
         </button>
-        
+
         <button
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation()
             onPrev()
           }}
@@ -68,9 +69,9 @@ const Lightbox: React.FC<LightboxProps> = ({
         >
           ‹
         </button>
-        
+
         <button
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation()
             onNext()
           }}
@@ -86,14 +87,18 @@ const Lightbox: React.FC<LightboxProps> = ({
             width={currentPhoto.asset.metadata?.dimensions?.width || 1200}
             height={currentPhoto.asset.metadata?.dimensions?.height || 800}
             className="max-w-full max-h-[90vh] object-contain"
-            quality={100}
+            quality={90}
             priority
           />
         </div>
-        
+
         <div className="text-white text-center mt-4">
-          <p className="text-lg">{currentPhoto.alt || `Photo ${selectedIndex + 1}`}</p>
-          <p className="text-sm text-gray-300">{selectedIndex + 1} of {photos.length}</p>
+          <p className="text-lg">
+            {currentPhoto.alt || `Photo ${selectedIndex + 1}`}
+          </p>
+          <p className="text-sm text-gray-300">
+            {selectedIndex + 1} of {photos.length}
+          </p>
         </div>
       </div>
     </div>

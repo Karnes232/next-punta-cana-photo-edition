@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import Image from 'next/image'
-import Lightbox from './Lightbox'
+import React, { useState } from "react"
+import Image from "next/image"
+import Lightbox from "./Lightbox"
 
 interface SanityPhoto {
   asset: {
@@ -28,7 +28,9 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
 
   // Don't render if no photos
   if (!photos || photos.length === 0) {
-    return <div className="w-full px-2 sm:px-4 md:px-8">No photos available</div>
+    return (
+      <div className="w-full px-2 sm:px-4 md:px-8">No photos available</div>
+    )
   }
 
   const openLightbox = (index: number) => {
@@ -47,10 +49,11 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
 
   const prevImage = () => {
     if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 0 ? photos.length - 1 : selectedImage - 1)
+      setSelectedImage(
+        selectedImage === 0 ? photos.length - 1 : selectedImage - 1,
+      )
     }
   }
-
 
   return (
     <div className="w-full px-2 sm:px-4 md:px-8">
@@ -61,16 +64,17 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
             console.error(`Photo ${index} missing asset or URL:`, photo)
             return null
           }
-          
+
           // Get the base URL without query parameters
-          const baseUrl = photo.asset.url.split('?')[0]
+          const baseUrl = photo.asset.url.split("?")[0]
           // Add quality and format parameters for better image quality
           const optimizedUrl = `${baseUrl}?q=100&fm=webp&fit=max&w=800`
-          
-          const aspectRatio = photo.asset.metadata?.dimensions?.height 
-            ? photo.asset.metadata.dimensions.width / photo.asset.metadata.dimensions.height 
+
+          const aspectRatio = photo.asset.metadata?.dimensions?.height
+            ? photo.asset.metadata.dimensions.width /
+              photo.asset.metadata.dimensions.height
             : 1
-          
+
           return (
             <div
               key={index}

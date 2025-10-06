@@ -19,6 +19,10 @@ export default defineType({
       name: "Text Block",
       title: "Text Block",
     },
+    {
+      name: "Content Block",
+      title: "Content Block",
+    },
   ],
   fields: [
     defineField({
@@ -39,19 +43,39 @@ export default defineType({
       name: "gallery",
       title: "Gallery",
       type: "array",
-      of: [{ type: "image", options: { hotspot: true }, fields: [
-        defineField({
-          name: "alt",
-          title: "Alternative Text",
-          type: "string",
-        }),
-      ] }],
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
       group: "Gallery",
       validation: Rule => Rule.required(),
     }),
     defineField({
       name: "paragraph1",
       title: "paragraph 1",
+      type: "localizedBlock",
+      group: "Text Block",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "contentBlock",
+      title: "Content Block",
+      type: "contentBlock",
+      group: "Content Block",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "paragraph2",
+      title: "paragraph 2",
       type: "localizedBlock",
       group: "Text Block",
       validation: Rule => Rule.required(),

@@ -61,7 +61,9 @@ const components = {
         </a>
       )
     },
-    strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
+    strong: ({ children }: any) => (
+      <strong className="font-bold">{children}</strong>
+    ),
     em: ({ children }: any) => <em className="italic">{children}</em>,
   },
   block: {

@@ -20,5 +20,10 @@
   },
   "homePage": {
     "noServicesAvailable": "No hay servicios disponibles en este momento."
+  },
+  "PhotoshootPackage": {
+    "includedItems": "Incluye",
+    "startingPrice": "Desde",
+    "priceNotAvailable": "Precio no disponible"
   }
 }

@@ -27,6 +27,11 @@ export interface PhotoshootsPackages {
     }
   }
   alt: string
+  includedItems: {
+    en: string
+    es: string
+  }[]
+  startingPrice: number
 }
 
 export const photoshootsPackagesQuery = `*[_type == "photoshootsPackages"] {
@@ -55,9 +60,16 @@ export const photoshootsPackagesQuery = `*[_type == "photoshootsPackages"] {
       }
     },
     alt
-  }
+  },
+  includedItems[] {
+    en,
+    es
+  },
+  startingPrice
 }`
 
-export async function getAllPhotoshootsPackages(): Promise<PhotoshootsPackages[] | null> {
-    return await client.fetch(photoshootsPackagesQuery)
+export async function getAllPhotoshootsPackages(): Promise<
+  PhotoshootsPackages[] | null
+> {
+  return await client.fetch(photoshootsPackagesQuery)
 }

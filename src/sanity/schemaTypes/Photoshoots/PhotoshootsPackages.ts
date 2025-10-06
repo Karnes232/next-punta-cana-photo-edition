@@ -22,6 +22,7 @@ export default defineType({
       title: "Title",
       type: "localizedString",
       group: "Card Info",
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -31,12 +32,14 @@ export default defineType({
         source: "title.en",
       },
       group: ["Card Info", "Page Info"],
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "localizedText",
       group: "Card Info",
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "cardImage",
@@ -51,10 +54,26 @@ export default defineType({
           name: "alt",
           title: "Alternative Text",
           type: "string",
+          validation: Rule => Rule.required(),
         }),
       ],
+      validation: Rule => Rule.required(),
     }),
-
+    defineField({
+      name: "includedItems",
+      title: "Included Items",
+      type: "array",
+      of: [{ type: "localizedString" }],
+      group: "Card Info",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "startingPrice",
+      title: "Starting Price",
+      type: "number",
+      group: "Card Info",
+      validation: Rule => Rule.required(),
+    }),
   ],
   preview: {
     select: {

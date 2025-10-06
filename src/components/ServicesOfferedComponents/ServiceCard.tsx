@@ -25,7 +25,6 @@ interface Photo {
 const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const locale = useLocale()
 
-
   // Get the first image from heroImage array
   const image = service.heroImage[0]
 

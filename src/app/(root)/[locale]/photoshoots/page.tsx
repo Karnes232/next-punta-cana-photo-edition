@@ -1,11 +1,15 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
+import ContentBlock from "@/components/ContentBlockComponents/ContentBlock"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import PhotoshootPackageCard from "@/components/PhotoshootPackageComponents/PhotoshootPackageCard"
 import TextComponent from "@/components/TextComponent/TextComponent"
 import { getPhotoshoot } from "@/sanity/queries/Photoshoot/Photoshoot"
-import { getAllPhotoshootsPackages, PhotoshootsPackages } from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
+import {
+  getAllPhotoshootsPackages,
+  PhotoshootsPackages,
+} from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
 
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
@@ -18,7 +22,7 @@ export default async function Photoshoots({
   const structuredData = await getStructuredData("photoshoots")
   const photoshoot = await getPhotoshoot()
   const photoshootsPackages = await getAllPhotoshootsPackages()
-  console.log(photoshootsPackages)
+console.log(photoshoot)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -52,7 +56,7 @@ export default async function Photoshoots({
           />
           <PhotoGrid photos={photoshoot?.gallery || []} />
         </section>
-        <section className="max-w-7xl my-12 mx-auto flex flex-col gap-4">
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <BlockContent
             content={photoshoot?.paragraph1 || { en: [], es: [] }}
             locale={locale}
@@ -60,10 +64,31 @@ export default async function Photoshoots({
         </section>
         <section className="max-w-7xl my-12 mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {photoshootsPackages?.map((photoPackage : PhotoshootsPackages) => (
-              <PhotoshootPackageCard key={photoPackage._id} photoPackage={photoPackage} locale={locale} />
+            {photoshootsPackages?.map((photoPackage: PhotoshootsPackages) => (
+              <PhotoshootPackageCard
+                key={photoPackage._id}
+                photoPackage={photoPackage}
+                locale={locale}
+              />
             ))}
           </div>
+        </section>
+        {photoshoot?.contentBlock && (
+          <ContentBlock
+            title={photoshoot.contentBlock.title?.[locale] || ""}
+            subTitle={photoshoot.contentBlock.subTitle?.[locale] || ""}
+            content={photoshoot.contentBlock.content?.[locale] || ""}
+            image={photoshoot.contentBlock.image}
+            buttonText={photoshoot.contentBlock.buttonText?.[locale] || ""}
+            buttonLink={photoshoot.contentBlock.buttonLink || ""}
+            locale={locale}
+            page="photoshoots"
+          />
+        )}<section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <BlockContent
+            content={photoshoot?.paragraph2 || { en: [], es: [] }}
+            locale={locale}
+          />
         </section>
       </main>
     </>

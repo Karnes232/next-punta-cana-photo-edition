@@ -54,8 +54,6 @@ import FAQs from "./faqs/faqs"
 //Policies
 import Policies from "./policies/policies"
 
-
-
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     //Localized
@@ -107,8 +105,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //Policies
     Policies,
-
-    
 
     //ServicesOffered
     ServicesOffered,

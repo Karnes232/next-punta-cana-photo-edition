@@ -90,7 +90,7 @@ const ContentBlock = async ({
                   <>
                     <Link
                       href={buttonLink}
-                      className={`${montserrat.className} no-underline border py-2 xl:py-3 px-6 xl:px-8 xl:text-lg rounded-3xl mt-10 text-gray-400 border-gray-500 transition duration-500 hover:bg-black hover:text-white`}
+                      className={`${montserrat.className} no-underline border py-2 xl:py-3 px-6 xl:px-8 xl:text-lg rounded-3xl mt-10 text-gray-400 border-gray-500 transition duration-500 hover:bg-black hover:text-white whitespace-nowrap text-center`}
                       aria-label="Home"
                     >
                       {buttonText}

@@ -11,7 +11,6 @@ import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 
-
 interface TestimonialsWithLightboxProps {
   testimonials: Testimonial[]
   locale: "en" | "es"
