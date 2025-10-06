@@ -1,10 +1,16 @@
 "use client"
-import { FaqComponent } from '@/sanity/queries/Photoshoot/Photoshoot'
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { FaqComponent } from "@/sanity/queries/Photoshoot/Photoshoot"
+import React, { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ChevronDown } from "lucide-react"
 
-const Faqs = ({ faqs, locale }: { faqs: FaqComponent[], locale: "en" | "es" }) => {
+const Faqs = ({
+  faqs,
+  locale,
+}: {
+  faqs: FaqComponent[]
+  locale: "en" | "es"
+}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
@@ -34,17 +40,17 @@ const Faqs = ({ faqs, locale }: { faqs: FaqComponent[], locale: "en" | "es" }) =
                 <ChevronDown className="h-5 w-5 text-luxuryGold" />
               </motion.div>
             </button>
-            
+
             <AnimatePresence>
               {openIndex === index && (
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ 
-                    duration: 0.3, 
+                  transition={{
+                    duration: 0.3,
                     ease: "easeInOut",
-                    opacity: { duration: 0.2 }
+                    opacity: { duration: 0.2 },
                   }}
                   className="overflow-hidden"
                 >

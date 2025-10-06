@@ -74,6 +74,45 @@ export default defineType({
       group: "Card Info",
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "heroImages",
+      title: "Hero Images",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
+      group: "Page Info",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "heroTitle",
+      title: "Hero Title",
+      type: "localizedString",
+      group: "Page Info",
+    }),
+    defineField({
+      name: "heroSubtitle",
+      title: "Hero Subtitle",
+      type: "localizedString",
+      group: "Page Info",
+    }),
+    defineField({
+      name: "paragraph1",
+      title: "Paragraph 1",
+      type: "localizedBlock",
+      group: "Page Info",
+      validation: Rule => Rule.required(),
+    }),
   ],
   preview: {
     select: {

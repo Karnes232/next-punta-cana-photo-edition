@@ -73,3 +73,69 @@ export async function getAllPhotoshootsPackages(): Promise<
 > {
   return await client.fetch(photoshootsPackagesQuery)
 }
+
+export interface IndividualPhotoshootsPackage {
+  slug: {
+    current: string
+  }
+  heroImages: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }[]
+  heroTitle: {
+    en: string
+    es: string
+  }
+  heroSubtitle: {
+    en: string
+    es: string
+  }
+  paragraph1: {
+    en: any[]
+    es: any[]
+  }
+}
+
+export const individualPhotoshootsPackageQuery = `*[_type == "photoshootsPackages" && slug.current == $slug][0] {
+  slug {
+    current
+  },
+  heroImages[] {
+    asset -> {
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
+  },
+  heroTitle {
+    en,
+    es
+  },
+  heroSubtitle {
+    en,
+    es
+  },
+  paragraph1 {
+    en,
+    es
+  }
+}`
+
+export async function getIndividualPhotoshootsPackage(
+  slug: string,
+): Promise<IndividualPhotoshootsPackage | null> {
+  return await client.fetch(individualPhotoshootsPackageQuery, { slug })
+}

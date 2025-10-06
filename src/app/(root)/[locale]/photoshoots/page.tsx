@@ -24,7 +24,7 @@ export default async function Photoshoots({
   const structuredData = await getStructuredData("photoshoots")
   const photoshoot = await getPhotoshoot()
   const photoshootsPackages = await getAllPhotoshootsPackages()
-console.log(photoshoot)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -86,14 +86,18 @@ console.log(photoshoot)
             locale={locale}
             page="photoshoots"
           />
-        )}<section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+        )}
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <BlockContent
             content={photoshoot?.paragraph2 || { en: [], es: [] }}
             locale={locale}
           />
         </section>
         <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-          <PhotoshootTestimonials testimonials={photoshoot?.testimonials || []} locale={locale} />
+          <PhotoshootTestimonials
+            testimonials={photoshoot?.testimonials || []}
+            locale={locale}
+          />
         </section>
         <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <Faqs faqs={photoshoot?.faqComponent || []} locale={locale} />
