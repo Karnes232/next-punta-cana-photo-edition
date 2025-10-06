@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
 import { ContentBlock } from "../HomePage/ContentBlock"
+import { Testimonial } from "../HomePage/Testimonials"
 
 export interface Photoshoot {
   hero: Hero
@@ -31,6 +32,7 @@ export interface Photoshoot {
     en: any[]
     es: any[]
   }
+  testimonials: Testimonial[]
 }
 
 export const photoshootQuery = `*[_type == "photoshoots"][0] {
@@ -116,6 +118,24 @@ export const photoshootQuery = `*[_type == "photoshoots"][0] {
     paragraph2 {
       en,
       es
+    },
+    testimonials[] {
+      _id,
+      name,
+      photo {
+        asset -> {
+          url,
+          metadata {
+            dimensions {
+              width,
+              height
+            }
+          }
+        },
+        alt
+      },
+      role,
+      shortQuote
     }
 }`
 

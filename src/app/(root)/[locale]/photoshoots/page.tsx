@@ -4,6 +4,7 @@ import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import PhotoshootPackageCard from "@/components/PhotoshootPackageComponents/PhotoshootPackageCard"
+import PhotoshootTestimonials from "@/components/TestimonialsComponents/PhotoshootTestimonials"
 import TextComponent from "@/components/TextComponent/TextComponent"
 import { getPhotoshoot } from "@/sanity/queries/Photoshoot/Photoshoot"
 import {
@@ -49,7 +50,7 @@ console.log(photoshoot)
             subtitle={photoshoot?.hero?.subtitle?.[locale]}
           />
         )}
-        <section className="max-w-7xl mx-auto flex flex-col gap-4">
+        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
           <TextComponent
             title={photoshoot?.galleryTitle?.[locale]}
             className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
@@ -89,6 +90,9 @@ console.log(photoshoot)
             content={photoshoot?.paragraph2 || { en: [], es: [] }}
             locale={locale}
           />
+        </section>
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <PhotoshootTestimonials testimonials={photoshoot?.testimonials || []} locale={locale} />
         </section>
       </main>
     </>

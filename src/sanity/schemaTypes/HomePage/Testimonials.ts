@@ -18,6 +18,7 @@ export default defineType({
       title: "Photo",
       type: "image",
       options: { hotspot: true },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "role",
@@ -29,6 +30,7 @@ export default defineType({
       name: "shortQuote",
       title: "Short Quote",
       type: "localizedText",
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {

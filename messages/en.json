@@ -24,6 +24,7 @@
   "PhotoshootPackage": {
     "includedItems": "Includes",
     "startingPrice": "Starting Price",
-    "priceNotAvailable": "Price not available"
+    "priceNotAvailable": "Price not available",
+    "testimonials": "Testimonials"
   }
 }

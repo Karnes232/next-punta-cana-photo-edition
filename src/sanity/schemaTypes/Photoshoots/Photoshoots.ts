@@ -23,6 +23,10 @@ export default defineType({
       name: "Content Block",
       title: "Content Block",
     },
+    {
+      name: "Testimonials",
+      title: "Testimonials",
+    },
   ],
   fields: [
     defineField({
@@ -79,6 +83,13 @@ export default defineType({
       type: "localizedBlock",
       group: "Text Block",
       validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "testimonials",
+      title: "Testimonials",
+      type: "array",
+      of: [{ type: "testimonial" }],
+      group: "Testimonials",
     }),
   ],
   preview: {
