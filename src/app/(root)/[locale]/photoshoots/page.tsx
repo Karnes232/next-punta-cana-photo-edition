@@ -1,5 +1,6 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import ContentBlock from "@/components/ContentBlockComponents/ContentBlock"
+import Faqs from "@/components/FaqsComponents/Faqs"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
@@ -93,6 +94,9 @@ console.log(photoshoot)
         </section>
         <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <PhotoshootTestimonials testimonials={photoshoot?.testimonials || []} locale={locale} />
+        </section>
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <Faqs faqs={photoshoot?.faqComponent || []} locale={locale} />
         </section>
       </main>
     </>

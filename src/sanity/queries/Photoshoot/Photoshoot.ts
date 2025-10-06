@@ -3,6 +3,17 @@ import { Hero } from "../HomePage/Hero"
 import { ContentBlock } from "../HomePage/ContentBlock"
 import { Testimonial } from "../HomePage/Testimonials"
 
+export interface FaqComponent {
+  title: {
+    en: string
+    es: string
+  }
+  content: {
+    en: string
+    es: string
+  }
+}
+
 export interface Photoshoot {
   hero: Hero
   galleryTitle: {
@@ -33,6 +44,7 @@ export interface Photoshoot {
     es: any[]
   }
   testimonials: Testimonial[]
+  faqComponent: FaqComponent[]
 }
 
 export const photoshootQuery = `*[_type == "photoshoots"][0] {
@@ -136,6 +148,16 @@ export const photoshootQuery = `*[_type == "photoshoots"][0] {
       },
       role,
       shortQuote
+    },
+    faqComponent[] {
+      title {
+        en,
+        es
+      },
+      content {
+        en,
+        es
+      }
     }
 }`
 

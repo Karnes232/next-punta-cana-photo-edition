@@ -7,6 +7,8 @@ import {
   localizedText,
 } from "./Localized/localized"
 
+import faqComponent from "./FaqComponent/FaqComponent"
+
 //SEO
 import seo from "./SEO/seo"
 import PageSeo from "./SEO/PageSeo"
@@ -60,6 +62,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     localizedString,
     localizedText,
     localizedBlock,
+    faqComponent,
 
     //SEO
     seo,
