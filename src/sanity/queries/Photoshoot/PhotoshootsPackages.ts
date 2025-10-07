@@ -239,3 +239,29 @@ export async function getIndividualPhotoshootsPackageSEO(
 ): Promise<IndividualPhotoshootsPackageSEO | null> {
   return await client.fetch(individualPhotoshootsPackageSEOQuery, { slug })
 }
+
+export interface IndividualPhotoshootsPackagesStructuredData {
+  seo: {
+    structuredData: {
+      en: string
+      es: string
+    }
+  }
+}
+
+export const individualPhotoshootsPackagesStructuredDataQuery = `*[_type == "photoshootsPackages" && slug.current == $slug][0] {
+  seo {
+    structuredData {
+      en,
+      es
+    }
+  }
+}`
+
+export async function getIndividualPhotoshootsPackagesStructuredData(
+  slug: string,
+): Promise<IndividualPhotoshootsPackagesStructuredData | null> {
+  return await client.fetch(individualPhotoshootsPackagesStructuredDataQuery, {
+    slug,
+  })
+}

@@ -4,6 +4,7 @@ import PackageSwiperGallery from "@/components/SwiperGallery/PackageSwiperGaller
 import {
   getIndividualPhotoshootsPackage,
   getIndividualPhotoshootsPackageSEO,
+  getIndividualPhotoshootsPackagesStructuredData,
 } from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
 
 interface PageProps {
@@ -15,11 +16,21 @@ interface PageProps {
 
 export default async function PhotoshootsPackage({ params }: PageProps) {
   const { locale, slug } = await params
-  console.log(slug)
+
   const photoshootsPackage = await getIndividualPhotoshootsPackage(slug)
-  console.log(photoshootsPackage)
+  const structuredData =
+    await getIndividualPhotoshootsPackagesStructuredData(slug)
+
   return (
     <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
       <main>
         <BackgroundImage
           heroImages={photoshootsPackage?.heroImages || []}
@@ -42,7 +53,7 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
 export async function generateMetadata({ params }: PageProps) {
   const { locale, slug } = await params
   const pageSeo = await getIndividualPhotoshootsPackageSEO(slug)
-  console.log(pageSeo)
+
   if (!pageSeo) {
     return {}
   }
