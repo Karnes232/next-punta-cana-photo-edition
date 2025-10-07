@@ -139,7 +139,7 @@ export default function LanguageSwitcher({
           className={`flex items-center space-x-1 text-${color} transition-colors duration-200 p-2 rounded-lg ${
             isLoading
               ? "opacity-50 cursor-not-allowed"
-              : "hover:text-caribbeanTurquoise hover:bg-orange-50"
+              : "hover:text-luxuryGold hover:bg-orange-50"
           }`}
         >
           {isLoading ? (
@@ -168,8 +168,8 @@ export default function LanguageSwitcher({
                   isLoading
                     ? "opacity-50 cursor-not-allowed"
                     : isActive
-                      ? "bg-orange-50 text-caribbeanTurquoise"
-                      : "text-slate-700 hover:bg-orange-50 hover:text-caribbeanTurquoise"
+                      ? "bg-orange-50 text-luxuryGold"
+                      : "text-slate-700 hover:bg-orange-50 hover:text-luxuryGold"
                 }`}
               >
                 <span className="text-lg">{lng.flag}</span>

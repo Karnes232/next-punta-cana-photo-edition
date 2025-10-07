@@ -8,7 +8,7 @@ const LogoComponent = ({ logo }: { logo: Logo }) => {
     <>
       <div className="flex justify-center items-center overflow-hidden">
         <Link href="/" className="no-underline" aria-label="Home">
-          <div className="cursor-pointer flex items-center w-20 md:w-20">
+          <div className="cursor-pointer flex items-center w-20 lg:w-32">
             <Image
               src={logo.companyLogo.asset.url}
               width={logo.companyLogo.asset.metadata.dimensions.width}
