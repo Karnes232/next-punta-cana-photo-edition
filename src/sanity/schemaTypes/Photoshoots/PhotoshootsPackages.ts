@@ -113,6 +113,27 @@ export default defineType({
       group: "Page Info",
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "photoGallery",
+      title: "Photo Gallery",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        }
+        
+      ],
+      group: "Page Info",
+      validation: Rule => Rule.required(),
+    }),
   ],
   preview: {
     select: {

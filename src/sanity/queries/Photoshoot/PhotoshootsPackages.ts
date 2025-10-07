@@ -102,6 +102,18 @@ export interface IndividualPhotoshootsPackage {
     en: any[]
     es: any[]
   }
+  photoGallery: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }[]
 }
 
 export const individualPhotoshootsPackageQuery = `*[_type == "photoshootsPackages" && slug.current == $slug][0] {
@@ -131,6 +143,18 @@ export const individualPhotoshootsPackageQuery = `*[_type == "photoshootsPackage
   paragraph1 {
     en,
     es
+  },
+  photoGallery[] {
+    asset -> {
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
   }
 }`
 

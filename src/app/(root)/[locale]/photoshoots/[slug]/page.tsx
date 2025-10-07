@@ -1,5 +1,6 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import PackageSwiperGallery from "@/components/SwiperGallery/PackageSwiperGallery"
 import { getIndividualPhotoshootsPackage } from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
 
 interface PageProps {
@@ -29,6 +30,9 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
             locale={locale}
           />
         </section>
+        <PackageSwiperGallery
+          images={photoshootsPackage?.photoGallery || []}
+        />
       </main>
     </>
   )
