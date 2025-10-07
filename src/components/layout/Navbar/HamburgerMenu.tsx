@@ -16,7 +16,7 @@ const HamburgerMenu = () => {
               className={`sb-button `}
               onClick={() => setIsOpen(!isOpen)}
             >
-              <Menu className={`h-7 w-7 md:h-9 text-white`} />
+              <Menu className={`h-7 w-7 md:h-9 text-luxuryGold`} />
             </button>
           </div>
         </main>
