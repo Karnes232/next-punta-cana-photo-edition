@@ -30,8 +30,8 @@ const PackageSwiperGallery = ({ images }: PackageSwiperGalleryProps) => {
       backgroundImage:
         "linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2))",
     };
-    const imageHeight = "h-[15rem] md:h-[29rem] lg:h-[41rem] xl:h-[45rem]";
-    const slideHeight = "h-[17.5rem] md:h-[32rem] lg:h-[45rem] xl:h-[48rem]";
+    const imageHeight = "h-[15rem] md:h-[29rem] lg:h-[35rem] xl:h-[26rem]";
+    const slideHeight = "h-[17.5rem] md:h-[32rem] lg:h-[38rem] xl:h-[28rem]";
 
     images.forEach(image => {
         photoListEdited.push({
@@ -59,7 +59,7 @@ const PackageSwiperGallery = ({ images }: PackageSwiperGalleryProps) => {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        navigation={true}
+        //navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         pagination={{
           type: "fraction",
