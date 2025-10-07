@@ -11,7 +11,6 @@ interface LanguageSwitcherProps {
   className?: string
   onDropdownToggle?: (isOpen: boolean) => void
 }
-
 export default function LanguageSwitcher({
   color = "white",
   className = "",
