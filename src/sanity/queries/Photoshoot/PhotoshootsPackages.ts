@@ -163,3 +163,79 @@ export async function getIndividualPhotoshootsPackage(
 ): Promise<IndividualPhotoshootsPackage | null> {
   return await client.fetch(individualPhotoshootsPackageQuery, { slug })
 }
+
+export interface IndividualPhotoshootsPackageSEO {
+  seo: {
+    meta: {
+      en: {
+        title: string
+        description: string
+        keywords: string[]
+      }
+      es: {
+        title: string
+        description: string
+        keywords: string[]
+      }
+    }
+    openGraph: {
+      en: {
+        title: string
+        description: string
+      }
+      es: {
+        title: string
+        description: string
+      }
+      image: {
+        url: string
+        alt?: string
+        width?: number
+        height?: number
+      }
+    }
+    noIndex: boolean
+    noFollow: boolean
+  }
+}
+
+export const individualPhotoshootsPackageSEOQuery = `*[_type == "photoshootsPackages" && slug.current == $slug][0] {
+  seo {
+    meta {
+      en {
+        title,
+        description,
+        keywords
+      },
+      es {
+        title,
+        description,
+        keywords
+      }
+    },  
+    openGraph {
+      en {
+        title,
+        description
+      },
+      es {
+        title,
+        description
+      },
+      "image": {
+      "url": image.asset->url,
+      "alt": image.alt,
+      "width": image.asset->metadata.dimensions.width,
+      "height": image.asset->metadata.dimensions.height
+    },
+      },
+      noIndex,
+      noFollow
+    }
+}`
+
+export async function getIndividualPhotoshootsPackageSEO(
+  slug: string,
+): Promise<IndividualPhotoshootsPackageSEO | null> {
+  return await client.fetch(individualPhotoshootsPackageSEOQuery, { slug })
+}

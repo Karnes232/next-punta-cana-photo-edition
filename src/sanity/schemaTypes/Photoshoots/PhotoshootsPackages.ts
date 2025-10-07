@@ -15,6 +15,10 @@ export default defineType({
       name: "Page Info",
       title: "Page Info",
     },
+    {
+      name: "SEO",
+      title: "SEO",
+    },
   ],
   fields: [
     defineField({
@@ -128,11 +132,17 @@ export default defineType({
               type: "string",
             }),
           ],
-        }
-        
+        },
       ],
       group: "Page Info",
       validation: Rule => Rule.required(),
+    }),
+
+    defineField({
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      group: "SEO",
     }),
   ],
   preview: {

@@ -1,7 +1,10 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import PackageSwiperGallery from "@/components/SwiperGallery/PackageSwiperGallery"
-import { getIndividualPhotoshootsPackage } from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
+import {
+  getIndividualPhotoshootsPackage,
+  getIndividualPhotoshootsPackageSEO,
+} from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
 
 interface PageProps {
   params: Promise<{
@@ -30,10 +33,46 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
             locale={locale}
           />
         </section>
-        <PackageSwiperGallery
-          images={photoshootsPackage?.photoGallery || []}
-        />
+        <PackageSwiperGallery images={photoshootsPackage?.photoGallery || []} />
       </main>
     </>
   )
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { locale, slug } = await params
+  const pageSeo = await getIndividualPhotoshootsPackageSEO(slug)
+  console.log(pageSeo)
+  if (!pageSeo) {
+    return {}
+  }
+
+  let canonicalUrl
+  if (locale === "en") {
+    canonicalUrl = `https://www.puntacanaphotoedition.com/photoshoots/${slug}`
+  } else {
+    canonicalUrl = `https://www.puntacanaphotoedition.com/es/photoshoots/${slug}`
+  }
+
+  return {
+    title: pageSeo.seo.meta[locale].title,
+    description: pageSeo.seo.meta[locale].description,
+    keywords: pageSeo.seo.meta[locale].keywords.join(", "),
+    url: canonicalUrl,
+    openGraph: {
+      title: pageSeo.seo.openGraph[locale].title,
+      description: pageSeo.seo.openGraph[locale].description,
+      images: pageSeo.seo.openGraph.image.url,
+      type: "website",
+      url: canonicalUrl,
+    },
+    robots: {
+      index: !pageSeo.seo.noIndex,
+      follow: !pageSeo.seo.noFollow,
+    },
+    ...(canonicalUrl && { canonical: canonicalUrl }),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+  }
 }
