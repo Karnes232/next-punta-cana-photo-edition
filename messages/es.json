@@ -26,5 +26,8 @@
     "startingPrice": "Desde",
     "priceNotAvailable": "Precio no disponible",
     "testimonials": "Testimonios"
+  },
+  "Faqs": {
+    "faq": "Preguntas Frecuentes"
   }
 }

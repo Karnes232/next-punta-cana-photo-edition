@@ -3,6 +3,13 @@ import { FaqComponent } from "@/sanity/queries/Photoshoot/Photoshoot"
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { Cormorant_Garamond } from "next/font/google"
+
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const Faqs = ({
   faqs,
@@ -12,13 +19,18 @@ const Faqs = ({
   locale: "en" | "es"
 }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-
+  const t = useTranslations("Faqs")
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
   return (
     <div className="lg:mx-10 xl:mx-auto xl:w-full max-w-5xl my-10">
+      <h2
+        className={`${coromantGaramond.className} text-2xl font-bold mb-10 ml-5`}
+      >
+        {t("faq")}
+      </h2>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div

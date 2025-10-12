@@ -16,6 +16,10 @@ export default defineType({
       title: "Page Info",
     },
     {
+      name: "FAQ Component",
+      title: "FAQ Component",
+    },
+    {
       name: "SEO",
       title: "SEO",
     },
@@ -137,7 +141,14 @@ export default defineType({
       group: "Page Info",
       validation: Rule => Rule.required(),
     }),
-
+    defineField({
+      name: "faqComponent",
+      title: "FAQ Component",
+      type: "array",
+      of: [{ type: "faqComponent" }],
+      group: "FAQ Component",
+      validation: Rule => Rule.required(),
+    }),
     defineField({
       name: "seo",
       title: "SEO",

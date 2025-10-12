@@ -26,5 +26,8 @@
     "startingPrice": "Starting Price",
     "priceNotAvailable": "Price not available",
     "testimonials": "Testimonials"
+  },
+  "Faqs": {
+    "faq": "FAQ"
   }
 }

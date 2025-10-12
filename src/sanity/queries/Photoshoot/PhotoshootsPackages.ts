@@ -1,4 +1,5 @@
 import { client } from "@/sanity/lib/client"
+import { FaqComponent } from "./Photoshoot"
 
 export interface PhotoshootsPackages {
   _id: string
@@ -114,6 +115,7 @@ export interface IndividualPhotoshootsPackage {
     }
     alt: string
   }[]
+  faqComponent: FaqComponent[]
 }
 
 export const individualPhotoshootsPackageQuery = `*[_type == "photoshootsPackages" && slug.current == $slug][0] {
@@ -155,6 +157,16 @@ export const individualPhotoshootsPackageQuery = `*[_type == "photoshootsPackage
       }
     },
     alt
+  },
+  faqComponent[] {
+    title {
+      en,
+      es
+    },
+    content {
+      en,
+      es
+    }
   }
 }`
 

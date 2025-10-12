@@ -99,7 +99,7 @@ export default async function Photoshoots({
             locale={locale}
           />
         </section>
-        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4">
           <Faqs faqs={photoshoot?.faqComponent || []} locale={locale} />
         </section>
       </main>

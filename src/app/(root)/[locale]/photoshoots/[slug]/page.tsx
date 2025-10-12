@@ -1,4 +1,5 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
+import Faqs from "@/components/FaqsComponents/Faqs"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import PackageSwiperGallery from "@/components/SwiperGallery/PackageSwiperGallery"
 import {
@@ -20,7 +21,7 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
   const photoshootsPackage = await getIndividualPhotoshootsPackage(slug)
   const structuredData =
     await getIndividualPhotoshootsPackagesStructuredData(slug)
-
+  console.log(photoshootsPackage)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -45,6 +46,9 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
           />
         </section>
         <PackageSwiperGallery images={photoshootsPackage?.photoGallery || []} />
+        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
+          <Faqs faqs={photoshootsPackage?.faqComponent || []} locale={locale} />
+        </section>
       </main>
     </>
   )
