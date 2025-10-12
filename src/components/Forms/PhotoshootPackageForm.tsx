@@ -78,7 +78,7 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
     if (!validateForm()) {
@@ -89,41 +89,32 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
     setSubmitStatus('idle')
 
     try {
-      // Encode form data for Netlify
-      const encode = (data: Record<string, string>) => {
-        return Object.keys(data)
-          .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-          .join('&')
-      }
-
+      // Create form body for Netlify
+      const myForm = e.currentTarget
+      const formData = new FormData(myForm)
+      
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({
-          'form-name': 'photoshoot-booking',
-          'name': formData.name,
-          'email': formData.email,
-          'telephone': formData.telephone,
-          'date': formData.date,
-          'message': formData.message,
-          'package': page,
-          'locale': locale,
-        }),
+        body: new URLSearchParams(formData as any).toString()
       })
       
-      if (!response.ok) {
-        throw new Error('Form submission failed')
+      console.log('Response status:', response.status)
+      console.log('Response ok:', response.ok)
+      
+      if (response.ok) {
+        setSubmitStatus('success')
+        // Reset form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          telephone: '',
+          date: '',
+          message: '',
+        })
+      } else {
+        throw new Error(`Form submission failed with status: ${response.status}`)
       }
-      
-      setSubmitStatus('success')
-      // Reset form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        telephone: '',
-        date: '',
-        message: '',
-      })
     } catch (error) {
       console.error('Error submitting form:', error)
       setSubmitStatus('error')
@@ -165,6 +156,7 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
         <form 
           name="photoshoot-booking"
           method="POST"
+          action="/"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit} 
@@ -176,11 +168,11 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
           <input type="hidden" name="locale" value={locale} />
           
           {/* Honeypot field for spam protection */}
-          <div style={{ display: 'none' }}>
+          <p style={{ display: 'none' }}>
             <label>
-              Don't fill this out if you're human: <input name="bot-field" />
+              Don't fill this out if you're human: <input name="bot-field" tabIndex={-1} autoComplete="off" />
             </label>
-          </div>
+          </p>
 
           {/* Name Field */}
           <div>
