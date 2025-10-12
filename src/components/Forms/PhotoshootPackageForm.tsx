@@ -89,14 +89,26 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
     setSubmitStatus('idle')
 
     try {
-      // Submit to Netlify Forms
-      const formElement = e.target as HTMLFormElement
-      const formDataToSend = new FormData(formElement)
-      
+      // Encode form data for Netlify
+      const encode = (data: Record<string, string>) => {
+        return Object.keys(data)
+          .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+          .join('&')
+      }
+
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataToSend as any).toString(),
+        body: encode({
+          'form-name': 'photoshoot-booking',
+          'name': formData.name,
+          'email': formData.email,
+          'telephone': formData.telephone,
+          'date': formData.date,
+          'message': formData.message,
+          'package': page,
+          'locale': locale,
+        }),
       })
       
       if (!response.ok) {
