@@ -90,18 +90,35 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
 
     try {
       // Create form body for Netlify
-      const myForm = e.currentTarget
-      const formData = new FormData(myForm)
+      // const myForm = e.currentTarget
+      // const formData = new FormData(myForm)
       
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString()
+      // const response = await fetch('/', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      //   body: new URLSearchParams(formData as any).toString()
+      // })
+      
+      // console.log('Response status:', response.status)
+      // console.log('Response ok:', response.ok)
+      const formDataToSend = new FormData()
+      formDataToSend.append('form-name', 'photoshoot-booking')
+      formDataToSend.append('name', formData.name)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('telephone', formData.telephone)
+      formDataToSend.append('date', formData.date)
+      formDataToSend.append('message', formData.message)
+      formDataToSend.append('package', page)
+      formDataToSend.append('locale', locale)
+
+      const response = await fetch("/__forms.html", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formDataToSend as any),
       })
-      
-      console.log('Response status:', response.status)
-      console.log('Response ok:', response.ok)
-      
+
       if (response.ok) {
         setSubmitStatus('success')
         // Reset form after successful submission
@@ -137,12 +154,7 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
         </div>
 
         {/* Success Message */}
-        {submitStatus === 'success' && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-300 rounded-lg flex items-start gap-3">
-            <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-            <p className="text-green-800">{t('successMessage')}</p>
-          </div>
-        )}
+       
 
         {/* Error Message */}
         {submitStatus === 'error' && (
@@ -152,7 +164,16 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
           </div>
         )}
 
-        {/* Form */}
+    {submitStatus === 'success'  ? (
+          <div className="mb-6 p-4 bg-green-50 border border-green-300 rounded-lg flex items-start gap-3">
+            <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+            <p className="text-green-800">{t('successMessage')}</p>
+          </div>
+        ) : ( 
+
+        
+
+     
         <form 
           name="photoshoot-booking"
           method="POST"
@@ -315,7 +336,8 @@ const PhotoshootPackageForm = ({ page, locale }: { page: string, locale: "en" | 
               </>
             )}
           </button>
-        </form>
+        </form>)}
+        
       </div>
     </div>
   )
