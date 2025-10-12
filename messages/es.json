@@ -29,5 +29,25 @@
   },
   "Faqs": {
     "faq": "Preguntas Frecuentes"
+  },
+  "BookingForm": {
+    "title": "Reserva tu Sesión Fotográfica",
+    "subtitle": "Completa el formulario y nos pondremos en contacto contigo lo antes posible",
+    "name": "Nombre Completo",
+    "namePlaceholder": "Ingresa tu nombre completo",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "tu.correo@ejemplo.com",
+    "telephone": "Número de Teléfono",
+    "telephonePlaceholder": "+1 (555) 123-4567",
+    "date": "Fecha Preferida",
+    "datePlaceholder": "Selecciona una fecha",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntanos sobre tus necesidades fotográficas...",
+    "submit": "Enviar Solicitud de Reserva",
+    "sending": "Enviando...",
+    "successMessage": "¡Gracias! Hemos recibido tu solicitud de reserva y te contactaremos pronto.",
+    "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
+    "requiredField": "Este campo es requerido",
+    "invalidEmail": "Por favor ingresa un correo electrónico válido"
   }
 }
