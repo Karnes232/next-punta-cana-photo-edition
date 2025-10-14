@@ -22,7 +22,7 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
   const photoshootsPackage = await getIndividualPhotoshootsPackage(slug)
   const structuredData =
     await getIndividualPhotoshootsPackagesStructuredData(slug)
-  
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -48,9 +48,12 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
         </section>
         <PackageSwiperGallery images={photoshootsPackage?.photoGallery || []} />
         <section className="max-w-7xl my-5 xl:mx-auto flex flex-col gap-4">
-          <PhotoshootPackageForm page={photoshootsPackage?.slug?.current || ""} locale={locale} />
-          </section>
-          <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
+          <PhotoshootPackageForm
+            page={photoshootsPackage?.slug?.current || ""}
+            locale={locale}
+          />
+        </section>
+        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
           <Faqs faqs={photoshootsPackage?.faqComponent || []} locale={locale} />
         </section>
       </main>

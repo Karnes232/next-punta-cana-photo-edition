@@ -27,6 +27,12 @@
     "priceNotAvailable": "Precio no disponible",
     "testimonials": "Testimonios"
   },
+  "weddings": {
+    "weddingNavigationCardTitle": "Fotografía y Video de Bodas",
+    "weddingNavigationCardParagraph": "Captura tu día especial con servicios profesionales de fotografía y videografía.",
+    "weddingPlanningCardTitle": "Planeación de Bodas",
+    "weddingPlanningCardParagraph": "Déjanos ayudarte a planear el día de boda perfecto con nuestros servicios integrales de planeación."
+  },
   "Faqs": {
     "faq": "Preguntas Frecuentes"
   },
