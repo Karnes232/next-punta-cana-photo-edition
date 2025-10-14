@@ -25,6 +25,7 @@ export default defineType({
           "stories",
           "wedding-planning",
           "weddings",
+          "photography-video",
         ],
         layout: "dropdown",
       },

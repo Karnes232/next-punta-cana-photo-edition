@@ -110,6 +110,15 @@ export const structure: StructureResolver = S =>
             .title("Weddings")
             .documentId("weddings"),
         ),
+
+      S.listItem()
+        .title("Photography Video")
+        .child(
+          S.document()
+            .schemaType("photography-video")
+            .title("Photography Video")
+            .documentId("photography-video"),
+        ),
       S.listItem()
         .title("Wedding Planning")
         .child(

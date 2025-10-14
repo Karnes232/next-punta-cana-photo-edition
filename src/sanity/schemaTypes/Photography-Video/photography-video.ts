@@ -2,8 +2,8 @@ import { defineField, defineType } from "sanity"
 import { DocumentIcon } from "@sanity/icons"
 
 export default defineType({
-  name: "weddings",
-  title: "Weddings",
+  name: "photography-video",
+  title: "Photography Video",
   type: "document",
   icon: DocumentIcon,
   groups: [
@@ -36,18 +36,9 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: "paragraph2",
-      title: "Paragraph 2",
-      type: "localizedBlock",
-      group: "Paragraphs",
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
       name: "gallery",
       title: "Gallery",
       type: "array",
-      group: "Gallery",
-      validation: Rule => Rule.required(),
       of: [
         {
           type: "image",
@@ -61,11 +52,8 @@ export default defineType({
           ],
         },
       ],
+      group: "Gallery",
+      validation: Rule => Rule.required(),
     }),
   ],
-  preview: {
-    select: {
-      title: "Wedding",
-    },
-  },
 })

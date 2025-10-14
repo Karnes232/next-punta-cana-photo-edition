@@ -23,6 +23,7 @@ export default defineType({
           { title: "Stories", value: "stories" },
           { title: "Wedding Planning", value: "wedding-planning" },
           { title: "Weddings", value: "weddings" },
+          { title: "Weddings/Photography Video", value: "photography-video" },
         ],
       },
       validation: Rule => Rule.required(),

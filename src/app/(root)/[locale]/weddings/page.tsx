@@ -6,18 +6,6 @@ import WeddingNavigationCard from "@/components/WeddingNavigatinCards/WeddingNav
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getWedding } from "@/sanity/queries/Weddings/Wedding"
 import { getTranslations } from "next-intl/server"
-import { Cormorant_Garamond, Montserrat } from "next/font/google"
-import Link from "next/link"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 export default async function Weddings({
   params,
@@ -28,7 +16,7 @@ export default async function Weddings({
   const { locale } = await params
   const structuredData = await getStructuredData("weddings")
   const wedding = await getWedding()
-  console.log(wedding)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -72,7 +60,7 @@ export default async function Weddings({
           <div className="my-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
               <WeddingNavigationCard
-                href="/weddings"
+                href="/weddings/photography-video"
                 title={t("weddingNavigationCardTitle")}
                 paragraph={t("weddingNavigationCardParagraph")}
                 locale={locale}
