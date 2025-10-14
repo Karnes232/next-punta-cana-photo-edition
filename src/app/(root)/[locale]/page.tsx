@@ -8,6 +8,7 @@ import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 import ContentBlock from "@/components/ContentBlockComponents/ContentBlock"
 import { getContentBlock } from "@/sanity/queries/HomePage/ContentBlock"
+import { getHomepage } from "@/sanity/queries/HomePage/Homepage"
 
 interface PageProps {
   params: Promise<{
@@ -17,10 +18,9 @@ interface PageProps {
 
 export default async function Home({ params }: PageProps) {
   const { locale } = await params
-  const hero = await getHero("home")
   const structuredData = await getStructuredData("home")
-  const gallery = await getHomePageGallery()
-  const contentBlock = await getContentBlock()
+  const homepage = await getHomepage()
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -40,41 +40,41 @@ export default async function Home({ params }: PageProps) {
             }}
           />
         )}
-        {hero?.heroVideo ? (
+        {homepage?.hero?.heroVideo ? (
           <BackgroundVideo
-            heroVideo={hero.heroVideo}
-            fullSize={hero.fullSize}
-            title={hero.title[locale]}
-            subtitle={hero.subtitle[locale]}
+            heroVideo={homepage?.hero?.heroVideo || ""}
+            fullSize={homepage?.hero?.fullSize || false}
+            title={homepage?.hero?.title?.[locale] || ""}
+            subtitle={homepage?.hero?.subtitle?.[locale] || ""}
           />
         ) : (
           <BackgroundImage
-            heroImages={hero?.heroImage || []}
-            fullSize={hero?.fullSize}
-            title={hero?.title?.[locale]}
-            subtitle={hero?.subtitle?.[locale]}
+            heroImages={homepage?.hero?.heroImage || []}
+            fullSize={homepage?.hero?.fullSize || false}
+            title={homepage?.hero?.title?.[locale] || ""}
+            subtitle={homepage?.hero?.subtitle?.[locale] || ""}
           />
         )}
         <div className="max-w-7xl mx-auto flex flex-col gap-4">
           <ServicesOffered locale={locale} />
         </div>
         <ContentBlock
-          title={contentBlock.title[locale]}
-          subTitle={contentBlock.subTitle[locale]}
-          content={contentBlock.content[locale]}
-          image={contentBlock.image}
-          buttonText={contentBlock.buttonText[locale]}
-          buttonLink={contentBlock.buttonLink}
+          title={homepage?.contentBlock?.title[locale] || ""}
+          subTitle={homepage?.contentBlock?.subTitle[locale] || ""}
+          content={(homepage?.contentBlock?.content[locale] as string) || ""}
+          image={homepage?.contentBlock?.image || ""}
+          buttonText={homepage?.contentBlock?.buttonText[locale] || ""}
+          buttonLink={homepage?.contentBlock?.buttonLink || ""}
           locale={locale}
           page="home"
         />{" "}
         <div className="max-w-7xl mx-auto flex flex-col gap-4">
           <SwiperGallery
-            title={gallery.title[locale]}
-            images={gallery.galleryImages}
+            title={(homepage?.titleGallery?.[locale as keyof typeof homepage.titleGallery] as string) || ""}
+            images={homepage?.galleryImages || []}
           />
         </div>
-        <TestimonialsComponent locale={locale} />
+        <TestimonialsComponent locale={locale} titleTestimonials={homepage?.titleTestimonials?.[locale as keyof typeof homepage.titleTestimonials] as string || ""} testimonials={homepage?.testimonials || []} />
       </main>
     </>
   )

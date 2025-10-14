@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client"
 
 export interface Hero {
-  pageName: string
+  // pageName: string
   title: {
     en: string
     es: string
@@ -27,7 +27,7 @@ export interface Hero {
 }
 
 export const heroQuery = `*[_type == "hero" && pageName == $pageName][0] {
-    pageName,
+   
     title {
         en,
         es

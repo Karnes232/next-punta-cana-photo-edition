@@ -16,6 +16,7 @@ import PageSeo from "./SEO/PageSeo"
 import GeneralLayout from "./GeneralLayout/GeneralLayout"
 
 //HomePage
+import Homepage from "./HomePage/Homepage"
 import Hero from "./HomePage/Hero"
 import SectionTitles from "./HomePage/SectionTitles"
 import HomePageGallery from "./HomePage/Gallery"
@@ -75,6 +76,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     GeneralLayout,
 
     //HomePage
+    Homepage,
     Hero,
     SectionTitles,
     HomePageGallery,
