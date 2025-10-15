@@ -23,13 +23,13 @@ const SideBarInside = ({
           component={
             <Link
               href="/"
-              className={`${coromantGaramond.className} hover:bg-transparent! ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+              className={`${coromantGaramond.className} hover:bg-transparent!  ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
               onClick={footer ? undefined : () => setIsOpen(false)}
             />
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Home
           </p>
@@ -44,7 +44,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Photoshoots
           </p>
@@ -59,7 +59,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Weddings
           </p>
@@ -74,7 +74,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Wedding Planning
           </p>
@@ -89,7 +89,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Proposals
           </p>
@@ -104,7 +104,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Corporate Events
           </p>
@@ -119,7 +119,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Stories & Blog
           </p>
@@ -134,7 +134,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             About
           </p>
@@ -149,7 +149,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Contact
           </p>
@@ -164,7 +164,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             FAQ
           </p>
@@ -179,7 +179,7 @@ const SideBarInside = ({
           }
         >
           <p
-            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
+            className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
             Policies
           </p>
