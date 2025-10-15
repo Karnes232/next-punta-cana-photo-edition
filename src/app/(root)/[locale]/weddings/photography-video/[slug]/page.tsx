@@ -91,12 +91,12 @@ export default async function PhotographyVideoPackagePage({
                 >
                   Get in Touch
                 </Link>
-                <a
+                <Link
                   href="/weddings/photography-video"
                   className={`${montserrat.className} border-2 border-luxuryGold text-luxuryGold hover:bg-luxuryGold hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300`}
                 >
                   View All Packages
-                </a>
+                </Link>
               </div>
             </div>
           </div>
