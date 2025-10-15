@@ -3,6 +3,7 @@ import BlockContent from "@/components/BlockContent/BlockContent"
 import { getAllPhotographyVideoPackages } from "@/sanity/queries/Photography-Video/Photography-video-packages"
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
 import { Cormorant_Garamond, Montserrat } from "next/font/google"
+import Link from "next/link"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -84,12 +85,12 @@ export default async function PhotographyVideoPackagePage({
                 Contact us today to discuss your photography and video needs
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
+                <Link
                   href="/contact"
                   className={`${montserrat.className} bg-caribbeanTurquoise hover:bg-caribbeanTurquoise/90 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300`}
                 >
                   Get in Touch
-                </a>
+                </Link>
                 <a
                   href="/weddings/photography-video"
                   className={`${montserrat.className} border-2 border-luxuryGold text-luxuryGold hover:bg-luxuryGold hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300`}
