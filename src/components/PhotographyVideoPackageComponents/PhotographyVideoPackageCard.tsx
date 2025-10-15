@@ -70,7 +70,7 @@ const PhotographyVideoPackageCard: React.FC<PhotographyVideoPackageCardProps> = 
     }
   }
 
-  const tierStyles = getPackageTierStyles(title)
+  const tierStyles = getPackageTierStyles(photoPackage.title.en)
 
   return (
     <Link
