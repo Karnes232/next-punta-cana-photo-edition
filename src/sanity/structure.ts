@@ -37,54 +37,6 @@ export const structure: StructureResolver = S =>
             .title("Home Page")
             .documentId("homepage"),
         ),
-      // S.listItem()
-      //   .title("Home Page 2")
-      //   .child(
-      //     S.list()
-      //       .title("Home Page")
-      //       .items([
-      //         S.listItem()
-      //           .title("Hero")
-      //           .child(
-      //             S.document()
-      //               .schemaType("hero")
-      //               .title("Hero")
-      //               .documentId("hero"),
-      //           ),
-      //         S.listItem()
-      //           .title("Section Titles")
-      //           .child(
-      //             S.document()
-      //               .schemaType("sectionTitles")
-      //               .title("Section Titles")
-      //               .documentId("sectionTitles"),
-      //           ),
-      //         S.listItem()
-      //           .title("Gallery")
-      //           .child(
-      //             S.document()
-      //               .schemaType("homePageGallery")
-      //               .title("Gallery")
-      //               .documentId("homePageGallery"),
-      //           ),
-      //         S.listItem()
-      //           .title("Testimonials")
-      //           .child(
-      //             S.documentList()
-      //               .schemaType("testimonial")
-      //               .title("Testimonials")
-      //               .filter("_type == 'testimonial'"),
-      //           ),
-      //         S.listItem()
-      //           .title("Content Block")
-      //           .child(
-      //             S.document()
-      //               .schemaType("contentBlock")
-      //               .title("Content Block")
-      //               .documentId("contentBlock"),
-      //           ),
-      //       ]),
-      //   ),
       S.listItem()
         .title("Photoshoots")
         .child(
@@ -122,10 +74,26 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("Photography Video")
         .child(
-          S.document()
-            .schemaType("photography-video")
+          S.list()
             .title("Photography Video")
-            .documentId("photography-video"),
+            .items([
+              S.listItem()
+                .title("Photography Video")
+                .child(
+                  S.document()
+                    .schemaType("photography-video")
+                    .title("Photography Video Page")
+                    .documentId("photography-video"),
+                ),
+              S.listItem()
+                .title("Photography Video Packages")
+                .child(
+                  S.documentList()
+                    .schemaType("photography-video-packages")
+                    .title("Photography Video Packages")
+                    .filter("_type == 'photography-video-packages'"),
+                ),
+            ]),
         ),
       S.listItem()
         .title("Wedding Planning")

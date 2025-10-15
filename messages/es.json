@@ -55,5 +55,10 @@
     "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
     "requiredField": "Este campo es requerido",
     "invalidEmail": "Por favor ingresa un correo electrónico válido"
+  },
+  "PhotographyVideoPackage": {
+    "Starting Price": "Precio Inicial",
+    "Learn More": "Aprender Más",
+    "Contact Us": "Contactar"
   }
 }

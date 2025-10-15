@@ -1,8 +1,6 @@
 import React from "react"
-import { getTestimonials, Testimonial } from "@/sanity/queries/HomePage/Testimonials"
-import { getSectionTitles } from "@/sanity/queries/HomePage/SectionTitles"
+import { Testimonial } from "@/sanity/queries/HomePage/Testimonials"
 import TextComponent from "../TextComponent/TextComponent"
-import TestimonialCard from "./TestimonialCard"
 import TestimonialsWithLightbox from "./TestimonialsWithLightbox"
 
 const TestimonialComponent = async ({ locale, titleTestimonials, testimonials }: { locale: "en" | "es", titleTestimonials: string, testimonials: Testimonial[] }) => {

@@ -2,7 +2,9 @@ import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
+import PhotographyVideoPackages from "@/components/PhotographyVideoPackageComponents/PhotographyVideoPackages"
 import { getPhotographyVideo } from "@/sanity/queries/Photography-Video/Photography-Video"
+import { getAllPhotographyVideoPackages } from "@/sanity/queries/Photography-Video/Photography-video-packages"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function PhotographyVideo({
@@ -13,7 +15,8 @@ export default async function PhotographyVideo({
   const { locale } = await params
   const structuredData = await getStructuredData("photography-video")
   const photographyVideo = await getPhotographyVideo()
-  console.log(photographyVideo)
+  const photographyVideoPackages = await getAllPhotographyVideoPackages()
+  console.log(photographyVideoPackages)
 
   return (
     <>
@@ -50,6 +53,14 @@ export default async function PhotographyVideo({
           <PhotoGrid photos={photographyVideo?.gallery || []} />
         </div>
       </section>
+
+      {/* Photography & Video Packages Section */}
+      <PhotographyVideoPackages
+        packages={photographyVideoPackages || []}
+        title={photographyVideo?.packageTitle?.[locale]}
+        subtitle={photographyVideo?.packageSubtitle?.[locale]}
+        locale={locale}
+      />
     </>
   )
 }

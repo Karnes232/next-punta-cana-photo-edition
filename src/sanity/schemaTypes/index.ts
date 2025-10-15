@@ -32,6 +32,7 @@ import Weddings from "./Weddings/Wedding"
 
 //Photography Video
 import PhotographyVideo from "./Photography-Video/photography-video"
+import PhotographyVideoPackages from "./Photography-Video/Photography-video-packages"
 
 //ServicesOffered
 import ServicesOffered from "./ServicesOffered/ServicesOffered"
@@ -92,6 +93,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //Photography Video
     PhotographyVideo,
+    PhotographyVideoPackages,
 
     //Wedding Planning
     WeddingPlanning,

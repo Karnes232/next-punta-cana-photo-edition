@@ -55,5 +55,17 @@ export default defineType({
       group: "Gallery",
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "packageTitle",
+      title: "Package Title",
+      type: "localizedString",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "packageSubtitle",
+      title: "Package Subtitle",
+      type: "localizedString",
+      validation: Rule => Rule.required(),
+    }),
   ],
 })

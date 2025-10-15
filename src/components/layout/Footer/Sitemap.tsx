@@ -14,7 +14,7 @@ const Sitemap = () => {
     <div className="flex flex-row space-x-4">
       <Link href="/" className={`${coromantGaramond.className} no-underline`}>
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Home")}
@@ -25,7 +25,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Photoshoots")}
@@ -36,7 +36,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Weddings")}
@@ -47,7 +47,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Wedding Planning")}
@@ -58,7 +58,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Proposals")}
@@ -69,7 +69,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Corporate Events")}
@@ -80,7 +80,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Stories & Blog")}
@@ -91,7 +91,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("About")}
@@ -102,7 +102,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Contact")}
@@ -113,7 +113,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer  `}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("FAQ")}
@@ -124,7 +124,7 @@ const Sitemap = () => {
         className={`${coromantGaramond.className} no-underline`}
       >
         <button
-          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer`}
+          className={`${coromantGaramond.className} no-underline xl:text-lg cursor-pointer hover:text-caribbeanTurquoise`}
           translate="no"
         >
           {t("Policies")}

@@ -21,6 +21,14 @@ export interface PhotographyVideo {
     }
     alt: string
   }[]
+  packageTitle: {
+    en: string
+    es: string
+  }
+  packageSubtitle: {
+    en: string
+    es: string
+  }
 }
 
 export const photographyVideoQuery = `*[_type == "photography-video"][0] {
@@ -67,6 +75,14 @@ export const photographyVideoQuery = `*[_type == "photography-video"][0] {
       },
       alt
     },
+    packageTitle {
+      en,
+      es
+    },
+    packageSubtitle {
+      en,
+      es
+    }
 }`
 
 export async function getPhotographyVideo(): Promise<PhotographyVideo | null> {
