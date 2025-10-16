@@ -20,10 +20,9 @@ interface PhotographyVideoPackageCardProps {
   locale: string
 }
 
-const PhotographyVideoPackageCard: React.FC<PhotographyVideoPackageCardProps> = ({
-  package: photoPackage,
-  locale,
-}) => {
+const PhotographyVideoPackageCard: React.FC<
+  PhotographyVideoPackageCardProps
+> = ({ package: photoPackage, locale }) => {
   const t = useTranslations("PhotographyVideoPackage")
 
   const title =
@@ -36,37 +35,41 @@ const PhotographyVideoPackageCard: React.FC<PhotographyVideoPackageCardProps> = 
   // Determine package tier color scheme using brand colors
   const getPackageTierStyles = (packageTitle: string) => {
     const titleLower = packageTitle.toLowerCase()
-    if (titleLower.includes('gold')) {
+    if (titleLower.includes("gold")) {
       return {
-        borderColor: 'border-luxuryGold',
-        bgGradient: 'from-luxuryGold/10 to-luxuryGold/20',
-        badgeColor: 'bg-luxuryGold',
-        textColor: 'text-luxuryGold',
-        buttonHover: 'hover:from-luxuryGold hover:to-yellow-400 hover:shadow-lg hover:shadow-luxuryGold/25'
+        borderColor: "border-luxuryGold",
+        bgGradient: "from-luxuryGold/10 to-luxuryGold/20",
+        badgeColor: "bg-luxuryGold",
+        textColor: "text-luxuryGold",
+        buttonHover:
+          "hover:from-luxuryGold hover:to-yellow-400 hover:shadow-lg hover:shadow-luxuryGold/25",
       }
-    } else if (titleLower.includes('silver')) {
+    } else if (titleLower.includes("silver")) {
       return {
-        borderColor: 'border-elegantSilver',
-        bgGradient: 'from-elegantSilver/10 to-elegantSilver/20',
-        badgeColor: 'bg-elegantSilver',
-        textColor: 'text-elegantSilver',
-        buttonHover: 'hover:from-elegantSilver hover:to-gray-300 hover:shadow-lg hover:shadow-elegantSilver/25'
+        borderColor: "border-elegantSilver",
+        bgGradient: "from-elegantSilver/10 to-elegantSilver/20",
+        badgeColor: "bg-elegantSilver",
+        textColor: "text-elegantSilver",
+        buttonHover:
+          "hover:from-elegantSilver hover:to-gray-300 hover:shadow-lg hover:shadow-elegantSilver/25",
       }
-    } else if (titleLower.includes('bronze')) {
+    } else if (titleLower.includes("bronze")) {
       return {
-        borderColor: 'border-caribbeanTurquoise',
-        bgGradient: 'from-caribbeanTurquoise/10 to-caribbeanTurquoise/20',
-        badgeColor: 'bg-caribbeanTurquoise',
-        textColor: 'text-caribbeanTurquoise',
-        buttonHover: 'hover:from-caribbeanTurquoise/20 hover:to-cyan-400/20 hover:shadow-lg hover:shadow-caribbeanTurquoise/25'
+        borderColor: "border-caribbeanTurquoise",
+        bgGradient: "from-caribbeanTurquoise/10 to-caribbeanTurquoise/20",
+        badgeColor: "bg-caribbeanTurquoise",
+        textColor: "text-caribbeanTurquoise",
+        buttonHover:
+          "hover:from-caribbeanTurquoise/20 hover:to-cyan-400/20 hover:shadow-lg hover:shadow-caribbeanTurquoise/25",
       }
     }
     return {
-      borderColor: 'border-caribbeanTurquoise',
-      bgGradient: 'from-caribbeanTurquoise/10 to-caribbeanTurquoise/20',
-      badgeColor: 'bg-caribbeanTurquoise',
-      textColor: 'text-caribbeanTurquoise',
-      buttonHover: 'hover:from-caribbeanTurquoise hover:to-cyan-400 hover:shadow-lg hover:shadow-caribbeanTurquoise/25'
+      borderColor: "border-caribbeanTurquoise",
+      bgGradient: "from-caribbeanTurquoise/10 to-caribbeanTurquoise/20",
+      badgeColor: "bg-caribbeanTurquoise",
+      textColor: "text-caribbeanTurquoise",
+      buttonHover:
+        "hover:from-caribbeanTurquoise hover:to-cyan-400 hover:shadow-lg hover:shadow-caribbeanTurquoise/25",
     }
   }
 
@@ -77,11 +80,15 @@ const PhotographyVideoPackageCard: React.FC<PhotographyVideoPackageCardProps> = 
       href={`/weddings/photography-video/${photoPackage.slug.current}`}
       className="block w-full h-full"
     >
-      <div className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group w-full h-full flex flex-col cursor-pointer border-2 ${tierStyles.borderColor}`}>
+      <div
+        className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group w-full h-full flex flex-col cursor-pointer border-2 ${tierStyles.borderColor}`}
+      >
         {/* Header with package tier badge */}
         <div className={`${tierStyles.bgGradient} p-4 border-b`}>
           <div className="flex items-center justify-center">
-            <span className={`inline-block px-3 py-1 rounded-full text-white text-sm font-semibold ${tierStyles.badgeColor}`}>
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-white text-sm font-semibold ${tierStyles.badgeColor}`}
+            >
               {title}
             </span>
           </div>
@@ -95,7 +102,7 @@ const PhotographyVideoPackageCard: React.FC<PhotographyVideoPackageCardProps> = 
             >
               {title}
             </h3>
-            
+
             <div className="mb-6">
               <p
                 className={`${montserrat.className} text-gray-600 text-sm leading-relaxed`}
@@ -123,7 +130,9 @@ const PhotographyVideoPackageCard: React.FC<PhotographyVideoPackageCardProps> = 
 
           {/* Learn More Button */}
           <div className="mt-auto flex-shrink-0">
-            <div className={`inline-block px-6 py-3 rounded-lg font-semibold text-white transition-all duration-500 ease-in-out group-hover:scale-105 bg-gradient-to-r ${tierStyles.badgeColor} ${tierStyles.buttonHover} hover:transition-all hover:duration-300`}>
+            <div
+              className={`inline-block px-6 py-3 rounded-lg font-semibold text-white transition-all duration-500 ease-in-out group-hover:scale-105 bg-gradient-to-r ${tierStyles.badgeColor} ${tierStyles.buttonHover} hover:transition-all hover:duration-300`}
+            >
               <span className={`${montserrat.className} text-sm`}>
                 {t("Learn More")}
               </span>

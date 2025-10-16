@@ -4,13 +4,13 @@ import { Testimonial } from "./Testimonials"
 import { ContentBlock } from "./ContentBlock"
 
 export interface Homepage {
-    hero: Hero
-    titleServicesOffered: string
-    titleGallery: string
-    galleryImages: any[]
-    titleTestimonials: string
-    testimonials: Testimonial[]
-    contentBlock: ContentBlock
+  hero: Hero
+  titleServicesOffered: string
+  titleGallery: string
+  galleryImages: any[]
+  titleTestimonials: string
+  testimonials: Testimonial[]
+  contentBlock: ContentBlock
 }
 
 export const homepageQuery = `*[_type == "homepage"][0] {
@@ -85,6 +85,6 @@ export const homepageQuery = `*[_type == "homepage"][0] {
 }`
 
 export async function getHomepage(): Promise<Homepage | null> {
-    const homepage = await client.fetch<Homepage>(homepageQuery)
-    return homepage
+  const homepage = await client.fetch<Homepage>(homepageQuery)
+  return homepage
 }

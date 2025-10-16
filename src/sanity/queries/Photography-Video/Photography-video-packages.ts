@@ -41,6 +41,24 @@ export async function getAllPhotographyVideoPackages(): Promise<
 
 export interface PhotographyVideoPackagesBySlug {
   hero: Hero
+  paragraph1: {
+    en: any[]
+    es: any[]
+  }
+  gallery: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+      _type: string
+      _ref?: string
+    }
+    alt: string
+  }[]
   startingPrice: number
 }
 
@@ -69,11 +87,29 @@ export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-vide
     heroVideo,
     fullSize
   },
+  paragraph1 {
+    en,
+    es
+  },
+  gallery[] {
+    asset -> {
+      url,
+      _type,
+      _ref,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
+  },
   startingPrice
 }`
 
-export async function getPhotographyVideoPackageBySlug(slug: string): Promise<
-  PhotographyVideoPackagesBySlug | null
-> {
+export async function getPhotographyVideoPackageBySlug(
+  slug: string,
+): Promise<PhotographyVideoPackagesBySlug | null> {
   return await client.fetch(photographyVideoPackagesQueryBySlug, { slug })
 }

@@ -13,8 +13,16 @@ export default defineType({
     },
     {
       name: "Hero",
-      title: "Hero"
-    }
+      title: "Hero",
+    },
+    {
+      name: "Paragraphs",
+      title: "Paragraphs",
+    },
+    {
+      name: "Gallery",
+      title: "Gallery",
+    },
   ],
   fields: [
     defineField({
@@ -25,34 +33,61 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
-        name: 'slug',
-        title: 'Slug',
-        type: 'slug',
-        options: {
-            source: 'title.en',
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "title.en",
+      },
+      group: "Package Card",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "localizedText",
+      group: "Package Card",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "startingPrice",
+      title: "Starting Price",
+      type: "number",
+      group: "Package Card",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "hero",
+      title: "Hero",
+      type: "hero",
+      group: "Hero",
+    }),
+    defineField({
+      name: "paragraph1",
+      title: "Paragraph 1",
+      type: "localizedBlock",
+      group: "Paragraphs",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "gallery",
+      title: "Gallery",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
         },
-        group: "Package Card",
-        validation: Rule => Rule.required(),
-    }),
-    defineField({
-        name: 'description',
-        title: 'Description',
-        type: 'localizedText',
-        group: "Package Card",
-        validation: Rule => Rule.required(),
-    }),
-    defineField({
-        name: 'startingPrice',
-        title: 'Starting Price',
-        type: 'number',
-        group: "Package Card",
-        validation: Rule => Rule.required(),
-    }),
-    defineField({
-        name: 'hero',
-        title: 'Hero',
-        type: 'hero',
-        group: "Hero",
+      ],
+      group: "Gallery",
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {

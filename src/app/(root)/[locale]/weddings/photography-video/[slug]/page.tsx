@@ -1,11 +1,16 @@
 import { notFound } from "next/navigation"
 import BlockContent from "@/components/BlockContent/BlockContent"
-import { getAllPhotographyVideoPackages, getPhotographyVideoPackageBySlug, PhotographyVideoPackages } from "@/sanity/queries/Photography-Video/Photography-video-packages"
+import {
+  getAllPhotographyVideoPackages,
+  getPhotographyVideoPackageBySlug,
+  PhotographyVideoPackages,
+} from "@/sanity/queries/Photography-Video/Photography-video-packages"
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
 import { Cormorant_Garamond, Montserrat } from "next/font/google"
 import Link from "next/link"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -52,28 +57,37 @@ export default async function PhotographyVideoPackagePage({
           subtitle={packageItem.hero.subtitle?.[locale]}
         />
       )}
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+        <BlockContent
+          content={packageItem?.paragraph1 || { en: [], es: [] }}
+          locale={locale}
+        />
+        <div className="my-10">
+          <PhotoGrid photos={packageItem.gallery || []} />
+        </div>
+      </section>
     </>
   )
 }
 
 export async function generateStaticParams() {
   const packages = await getAllPhotographyVideoPackages()
-  
+
   if (!packages) return []
-  
+
   const params: { locale: string; slug: string }[] = []
-  
-  packages.forEach((packageItem) => {
+
+  packages.forEach(packageItem => {
     params.push({
       locale: "en",
       slug: packageItem.slug.current,
     })
     params.push({
-      locale: "es", 
+      locale: "es",
       slug: packageItem.slug.current,
     })
   })
-  
+
   return params
 }
 
@@ -82,9 +96,9 @@ export async function generateMetadata({
 }: PhotographyVideoPackagePageProps) {
   const { locale, slug } = await params
   const packages = await getAllPhotographyVideoPackages()
-  
+
   const packageItem = packages?.find(pkg => pkg.slug.current === slug)
-  
+
   if (!packageItem) {
     return {
       title: "Package Not Found",
@@ -92,7 +106,8 @@ export async function generateMetadata({
   }
 
   const title = packageItem.title[locale] || packageItem.title.en
-  const description = packageItem.description[locale] || packageItem.description.en
+  const description =
+    packageItem.description[locale] || packageItem.description.en
 
   let canonicalUrl
   if (locale === "en") {

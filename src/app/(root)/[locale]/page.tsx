@@ -70,11 +70,23 @@ export default async function Home({ params }: PageProps) {
         />{" "}
         <div className="max-w-7xl mx-auto flex flex-col gap-4">
           <SwiperGallery
-            title={(homepage?.titleGallery?.[locale as keyof typeof homepage.titleGallery] as string) || ""}
+            title={
+              (homepage?.titleGallery?.[
+                locale as keyof typeof homepage.titleGallery
+              ] as string) || ""
+            }
             images={homepage?.galleryImages || []}
           />
         </div>
-        <TestimonialsComponent locale={locale} titleTestimonials={homepage?.titleTestimonials?.[locale as keyof typeof homepage.titleTestimonials] as string || ""} testimonials={homepage?.testimonials || []} />
+        <TestimonialsComponent
+          locale={locale}
+          titleTestimonials={
+            (homepage?.titleTestimonials?.[
+              locale as keyof typeof homepage.titleTestimonials
+            ] as string) || ""
+          }
+          testimonials={homepage?.testimonials || []}
+        />
       </main>
     </>
   )

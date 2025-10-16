@@ -17,7 +17,6 @@ export default async function PhotographyVideo({
   const photographyVideo = await getPhotographyVideo()
   const photographyVideoPackages = await getAllPhotographyVideoPackages()
 
-
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -61,12 +60,12 @@ export default async function PhotographyVideo({
         subtitle={photographyVideo?.packageSubtitle?.[locale]}
         locale={locale}
       />
-       <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
         <BlockContent
           content={photographyVideo?.paragraph2 || { en: [], es: [] }}
           locale={locale}
         />
-       </section>
+      </section>
     </>
   )
 }
