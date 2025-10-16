@@ -29,6 +29,10 @@ export interface PhotographyVideo {
     en: string
     es: string
   }
+  paragraph2: {
+    en: any[]
+    es: any[]
+  }
 }
 
 export const photographyVideoQuery = `*[_type == "photography-video"][0] {
@@ -80,6 +84,10 @@ export const photographyVideoQuery = `*[_type == "photography-video"][0] {
       es
     },
     packageSubtitle {
+      en,
+      es
+    },
+    paragraph2 {
       en,
       es
     }

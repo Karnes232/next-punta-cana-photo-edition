@@ -7,7 +7,6 @@ export interface Faqs {
 
 export const faqsQuery = `*[_type == "faqs"][0]  {
   hero {
-    pageName,
     title {
       en,
       es

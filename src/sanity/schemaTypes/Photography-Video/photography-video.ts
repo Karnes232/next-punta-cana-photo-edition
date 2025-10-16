@@ -67,5 +67,17 @@ export default defineType({
       type: "localizedString",
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "paragraph2",
+      title: "Paragraph 2",
+      type: "localizedBlock",
+      group: "Paragraphs",
+      validation: Rule => Rule.required(),
+    }),
   ],
+  preview: {
+    select: {
+      title: "hero.title.en",
+    },
+  },
 })
