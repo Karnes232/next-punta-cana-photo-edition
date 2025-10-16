@@ -23,6 +23,10 @@ export default defineType({
       name: "Gallery",
       title: "Gallery",
     },
+    {
+      name: "SEO",
+      title: "SEO",
+    },
   ],
   fields: [
     defineField({
@@ -89,6 +93,9 @@ export default defineType({
       group: "Gallery",
       validation: Rule => Rule.required(),
     }),
+
+
+    defineField({ name: "seo", type: "seo", group: "SEO" }),
   ],
   preview: {
     select: {

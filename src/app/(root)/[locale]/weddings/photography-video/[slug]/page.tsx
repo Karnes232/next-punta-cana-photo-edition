@@ -3,6 +3,7 @@ import BlockContent from "@/components/BlockContent/BlockContent"
 import {
   getAllPhotographyVideoPackages,
   getPhotographyVideoPackageBySlug,
+  getPhotographyVideoPackageSEO,
   PhotographyVideoPackages,
 } from "@/sanity/queries/Photography-Video/Photography-video-packages"
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
@@ -95,19 +96,13 @@ export async function generateMetadata({
   params,
 }: PhotographyVideoPackagePageProps) {
   const { locale, slug } = await params
-  const packages = await getAllPhotographyVideoPackages()
+ 
+  const pageSeo = await getPhotographyVideoPackageSEO(slug)
 
-  const packageItem = packages?.find(pkg => pkg.slug.current === slug)
-
-  if (!packageItem) {
-    return {
-      title: "Package Not Found",
-    }
+  if (!pageSeo) {
+    return {}
   }
 
-  const title = packageItem.title[locale] || packageItem.title.en
-  const description =
-    packageItem.description[locale] || packageItem.description.en
 
   let canonicalUrl
   if (locale === "en") {
@@ -117,18 +112,20 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${title} - Punta Cana Photo Edition`,
-    description: description,
+    title: pageSeo.seo.meta[locale].title,
+    description: pageSeo.seo.meta[locale].description,
+    keywords: pageSeo.seo.meta[locale].keywords.join(", "),
     url: canonicalUrl,
     openGraph: {
-      title: `${title} - Punta Cana Photo Edition`,
-      description: description,
+      title: pageSeo.seo.openGraph[locale].title,
+      description: pageSeo.seo.openGraph[locale].description,
+      images: pageSeo.seo.openGraph.image.url,
       type: "website",
       url: canonicalUrl,
     },
     robots: {
-      index: true,
-      follow: true,
+      index: !pageSeo.seo.noIndex,
+      follow: !pageSeo.seo.noFollow,
     },
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {

@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
+import { PageSeo } from "../SEO/seo"
 
 export interface PhotographyVideoPackages {
   _id: string
@@ -112,4 +113,83 @@ export async function getPhotographyVideoPackageBySlug(
   slug: string,
 ): Promise<PhotographyVideoPackagesBySlug | null> {
   return await client.fetch(photographyVideoPackagesQueryBySlug, { slug })
+}
+
+
+export interface PhotographyVideoPackageSEO {
+  seo: {
+    meta: {
+      en: {
+        title: string
+        description: string
+        keywords: string[]
+      }
+      es: {
+        title: string
+        description: string
+        keywords: string[]
+      }
+    }
+    openGraph: {
+      en: {
+        title: string
+        description: string
+      }
+      es: {
+        title: string
+        description: string
+      }
+      image: {
+        url: string
+        alt?: string
+        width?: number
+        height?: number
+      }
+    }
+    noIndex: boolean
+    noFollow: boolean
+  }
+}
+
+export const photographyVideoPackageSEOQuery = `*[_type == "photography-video-packages" && slug.current == $slug][0] {
+  seo {
+        meta {
+          en {
+            title,
+            description,
+            keywords
+          },
+          es {
+            title,
+            description,
+            keywords
+          }
+        },
+        // Open Graph data
+        openGraph {
+          en {
+            title,
+            description
+          },
+          es {
+            title,
+            description
+          },
+          "image": {
+            "url": image.asset->url,
+            "alt": image.alt,
+            "width": image.asset->metadata.dimensions.width,
+            "height": image.asset->metadata.dimensions.height
+          }
+        },
+        // Other SEO settings
+        noIndex,
+        noFollow
+    }
+}`
+
+export async function getPhotographyVideoPackageSEO(
+  slug: string,
+): Promise<PhotographyVideoPackageSEO | null> {
+  return await client.fetch(photographyVideoPackageSEOQuery, { slug })
 }

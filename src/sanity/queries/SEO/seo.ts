@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client"
 
-interface PageSeo {
+export interface PageSeo {
   pageName: string
   seo: {
     meta: {
