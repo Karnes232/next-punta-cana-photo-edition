@@ -12,6 +12,7 @@ import Link from "next/link"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
+import ServicesCalculator from "@/components/PhotographyVideoPackageComponents/ServicesCalculator"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -67,6 +68,15 @@ export default async function PhotographyVideoPackagePage({
           <PhotoGrid photos={packageItem.gallery || []} />
         </div>
       </section>
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+        <ServicesCalculator
+          hourlyRate={packageItem.hourlyRate}
+          minimumHours={packageItem.minimumHours}
+          additions={packageItem.addtions}
+          includedServices={packageItem.includedServices}
+          locale={locale}
+        />
+      </section>
     </>
   )
 }
@@ -96,13 +106,12 @@ export async function generateMetadata({
   params,
 }: PhotographyVideoPackagePageProps) {
   const { locale, slug } = await params
- 
+
   const pageSeo = await getPhotographyVideoPackageSEO(slug)
 
   if (!pageSeo) {
     return {}
   }
-
 
   let canonicalUrl
   if (locale === "en") {

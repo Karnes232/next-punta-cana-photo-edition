@@ -60,5 +60,24 @@
     "Starting Price": "Starting Price",
     "Learn More": "Learn More",
     "Contact Us": "Contact Us"
+  },
+  "ServicesCalculator": {
+    "Services Calculator": "Services Calculator",
+    "Estimate your photography and video package costs": "Estimate your photography and video package costs",
+    "Hours Required": "Hours Required",
+    "Hours:": "Hours:",
+    "Minimum:": "Minimum:",
+    "Rate:": "Rate:",
+    "Additional Services": "Additional Services",
+    "Cost Breakdown": "Cost Breakdown",
+    "hour": "hour",
+    "hours": "hours",
+    "fixed": "fixed",
+    "Total:": "Total:",
+    "Package Summary": "Package Summary",
+    "photography/video": "photography/video",
+    "Included Services:": "Included Services:",
+    "Additional Services:": "Additional Services:",
+    "Startingfromthisestimate": "Starting from this estimate - contact us for a detailed quote!"
   }
 }

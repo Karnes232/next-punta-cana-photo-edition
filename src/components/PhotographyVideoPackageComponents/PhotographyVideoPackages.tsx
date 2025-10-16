@@ -23,8 +23,8 @@ interface PhotographyVideoPackagesProps {
 const PhotographyVideoPackages: React.FC<PhotographyVideoPackagesProps> = ({
   packages,
   locale,
-  title = "Photography & Video Packages",
-  subtitle = "Choose the perfect package for your special day",
+  title,
+  subtitle,
 }) => {
   if (!packages || packages.length === 0) {
     return null
@@ -32,7 +32,7 @@ const PhotographyVideoPackages: React.FC<PhotographyVideoPackagesProps> = ({
 
   // Sort packages by starting price (lowest to highest)
   const sortedPackages = [...packages].sort(
-    (a, b) => a.startingPrice - b.startingPrice,
+    (a, b) => a.minimumHours * a.hourlyRate - b.minimumHours * b.hourlyRate,
   )
 
   return (

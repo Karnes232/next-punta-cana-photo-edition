@@ -15,7 +15,8 @@ export interface PhotographyVideoPackages {
     en: string
     es: string
   }
-  startingPrice: number
+  minimumHours: number
+  hourlyRate: number
 }
 
 export const photographyVideoPackagesQuery = `*[_type == "photography-video-packages"] {    
@@ -31,7 +32,8 @@ export const photographyVideoPackagesQuery = `*[_type == "photography-video-pack
     en,
     es
   },
-  startingPrice
+  minimumHours,
+  hourlyRate,
 }`
 
 export async function getAllPhotographyVideoPackages(): Promise<
@@ -61,6 +63,20 @@ export interface PhotographyVideoPackagesBySlug {
     alt: string
   }[]
   startingPrice: number
+  addtions: {
+    title: {
+      en: string
+      es: string
+    }
+    fixedorhourly: string
+    price: number
+  }[]
+  hourlyRate: number
+  minimumHours: number
+  includedServices: {
+    en: string
+    es: string
+  }[]
 }
 
 export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-video-packages" && slug.current == $slug][0] {    
@@ -106,7 +122,21 @@ export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-vide
     },
     alt
   },
-  startingPrice
+  startingPrice,
+  addtions[] {
+    title {
+      en,
+      es
+    },
+    fixedorhourly,
+    price
+  },
+  hourlyRate,
+  minimumHours,
+  includedServices[] {
+    en,
+    es
+  }
 }`
 
 export async function getPhotographyVideoPackageBySlug(
@@ -114,7 +144,6 @@ export async function getPhotographyVideoPackageBySlug(
 ): Promise<PhotographyVideoPackagesBySlug | null> {
   return await client.fetch(photographyVideoPackagesQueryBySlug, { slug })
 }
-
 
 export interface PhotographyVideoPackageSEO {
   seo: {

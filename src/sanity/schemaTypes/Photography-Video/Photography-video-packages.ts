@@ -24,6 +24,10 @@ export default defineType({
       title: "Gallery",
     },
     {
+      name: "Services Calculator",
+      title: "Services Calculator",
+    },
+    {
       name: "SEO",
       title: "SEO",
     },
@@ -93,7 +97,35 @@ export default defineType({
       group: "Gallery",
       validation: Rule => Rule.required(),
     }),
-
+    defineField({
+      name: "includedServices",
+      title: "Included Services",
+      type: "array",
+      of: [{ type: "localizedString" }],
+      group: "Services Calculator",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "hourlyRate",
+      title: "Hourly Rate",
+      type: "number",
+      group: "Services Calculator",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "minimumHours",
+      title: "Minimum Hours",
+      type: "number",
+      group: "Services Calculator",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "addtions",
+      title: "Addtions",
+      type: "array",
+      of: [{ type: "photoPackagesAdditions" }],
+      group: "Services Calculator",
+    }),
 
     defineField({ name: "seo", type: "seo", group: "SEO" }),
   ],

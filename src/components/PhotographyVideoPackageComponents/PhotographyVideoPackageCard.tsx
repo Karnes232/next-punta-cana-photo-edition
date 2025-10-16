@@ -30,7 +30,7 @@ const PhotographyVideoPackageCard: React.FC<
   const description =
     photoPackage.description[locale as "en" | "es"] ||
     photoPackage.description.en
-  const startingPrice = photoPackage.startingPrice
+  const startingPrice = photoPackage.minimumHours * photoPackage.hourlyRate
 
   // Determine package tier color scheme using brand colors
   const getPackageTierStyles = (packageTitle: string) => {
