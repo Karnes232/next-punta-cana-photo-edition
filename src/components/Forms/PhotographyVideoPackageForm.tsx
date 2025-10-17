@@ -83,17 +83,23 @@ const PhotographyVideoPackageForm = ({
 
   // Update form data when calculator data changes
   useEffect(() => {
-    if (calculatorData) {
+    if (calculatorData && packageData) {
+      // Convert selected additions from index-based object to array of addition names
+      const selectedAdditionNames = Object.keys(
+        calculatorData.selectedAdditions,
+      )
+        .filter(key => calculatorData.selectedAdditions[key])
+        .map(index => packageData.additions[parseInt(index)]?.title[locale])
+        .filter(Boolean) // Remove any undefined values
+
       setFormData(prev => ({
         ...prev,
         selectedHours: calculatorData.selectedHours,
         totalCost: calculatorData.totalCost,
-        selectedAdditions: Object.keys(calculatorData.selectedAdditions).filter(
-          key => calculatorData.selectedAdditions[key]
-        ),
+        selectedAdditions: selectedAdditionNames,
       }))
     }
-  }, [calculatorData])
+  }, [calculatorData, packageData, locale])
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -161,7 +167,10 @@ const PhotographyVideoPackageForm = ({
       formDataToSend.append("package", formData.packageName)
       formDataToSend.append("selectedHours", formData.selectedHours.toString())
       formDataToSend.append("totalCost", formData.totalCost.toString())
-      formDataToSend.append("selectedAdditions", formData.selectedAdditions.join(", "))
+      formDataToSend.append(
+        "selectedAdditions",
+        formData.selectedAdditions.join(", "),
+      )
       formDataToSend.append("locale", locale)
 
       const response = await fetch("/__forms.html", {
@@ -227,7 +236,8 @@ const PhotographyVideoPackageForm = ({
               <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-luxuryGold" />
                 <span className="text-darkGray">
-                  <strong>{t("estimatedCost")}:</strong> ${formData.totalCost.toLocaleString()}
+                  <strong>{t("estimatedCost")}:</strong> $
+                  {formData.totalCost.toLocaleString()}
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -274,11 +284,23 @@ const PhotographyVideoPackageForm = ({
             className="space-y-6"
           >
             {/* Hidden fields for Netlify */}
-            <input type="hidden" name="form-name" value="photography-video-booking" />
+            <input
+              type="hidden"
+              name="form-name"
+              value="photography-video-booking"
+            />
             <input type="hidden" name="package" value={formData.packageName} />
-            <input type="hidden" name="selectedHours" value={formData.selectedHours} />
+            <input
+              type="hidden"
+              name="selectedHours"
+              value={formData.selectedHours}
+            />
             <input type="hidden" name="totalCost" value={formData.totalCost} />
-            <input type="hidden" name="selectedAdditions" value={formData.selectedAdditions.join(", ")} />
+            <input
+              type="hidden"
+              name="selectedAdditions"
+              value={formData.selectedAdditions.join(", ")}
+            />
             <input type="hidden" name="locale" value={locale} />
 
             {/* Honeypot field for spam protection */}

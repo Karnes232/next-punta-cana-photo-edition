@@ -55,7 +55,13 @@ const PhotographyVideoPackageWithForm = ({
     }
 
     return cost
-  }, [selectedHours, packageData.minimumHours, packageData.hourlyRate, selectedAdditions, packageData.additions])
+  }, [
+    selectedHours,
+    packageData.minimumHours,
+    packageData.hourlyRate,
+    selectedAdditions,
+    packageData.additions,
+  ])
 
   const handleHoursChange = (hours: number) => {
     setSelectedHours(Math.max(hours, 0))

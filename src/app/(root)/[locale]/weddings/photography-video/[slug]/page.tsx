@@ -10,7 +10,6 @@ import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import PhotographyVideoPackageWithForm from "@/components/PhotographyVideoPackageComponents/PhotographyVideoPackageWithForm"
 
-
 interface PhotographyVideoPackagePageProps {
   params: Promise<{
     locale: "en" | "es"

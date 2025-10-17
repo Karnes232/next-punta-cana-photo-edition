@@ -46,11 +46,12 @@ const ServicesCalculator = ({
   onHoursChange,
   onAdditionToggle,
 }: ServicesCalculatorProps) => {
-  const [internalSelectedHours, setInternalSelectedHours] = useState(minimumHours)
+  const [internalSelectedHours, setInternalSelectedHours] =
+    useState(minimumHours)
   const [internalSelectedAdditions, setInternalSelectedAdditions] = useState<
     Record<string, boolean>
   >({})
-  
+
   // Use props if provided, otherwise use internal state
   const selectedHours = propSelectedHours ?? internalSelectedHours
   const selectedAdditions = propSelectedAdditions ?? internalSelectedAdditions
@@ -124,7 +125,10 @@ const ServicesCalculator = ({
               {t("Hours Required")}
             </h3>
             <div className="flex items-center space-x-4">
-              <label htmlFor="hours" className={`${montserrat.className} text-darkGray font-medium`}>
+              <label
+                htmlFor="hours"
+                className={`${montserrat.className} text-darkGray font-medium`}
+              >
                 {t("Hours:")}
               </label>
               <input
@@ -137,11 +141,15 @@ const ServicesCalculator = ({
                 className="w-20 px-3 py-2 border border-elegantSilver rounded-md focus:outline-none focus:ring-2 focus:ring-luxuryGold focus:border-luxuryGold transition-all duration-300"
               />
             </div>
-            <div className={`${montserrat.className} mt-2 text-sm text-elegantSilver`}>
+            <div
+              className={`${montserrat.className} mt-2 text-sm text-elegantSilver`}
+            >
               <p>
                 {t("Minimum:")} {minimumHours} {t("hours")}
               </p>
-              <p className={`${montserrat.className} text-luxuryGold font-medium`}>
+              <p
+                className={`${montserrat.className} text-luxuryGold font-medium`}
+              >
                 {t("Rate:")} ${hourlyRate}/{t("hour")}
               </p>
             </div>
@@ -155,32 +163,42 @@ const ServicesCalculator = ({
               {t("Additional Services")}
             </h3>
             <div className="space-y-3">
-              {additions && additions.length > 0 ? additions.map((addition, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-4 bg-pureWhite rounded-lg border border-elegantSilver/30 hover:border-luxuryGold/50 transition-all duration-300 hover:shadow-md"
-                >
-                  <div className="flex-1">
-                    <h4 className={`${coromantGaramond.className} font-medium text-darkGray`}>
-                      {addition.title[locale]}
-                    </h4>
-                    <p className={`${montserrat.className} text-sm text-elegantSilver`}>
-                      {addition.fixedorhourly === "fixed"
-                        ? `$${addition.price} ${t("fixed")}`
-                        : `$${addition.price}/${t("hour")}`}
-                    </p>
+              {additions && additions.length > 0 ? (
+                additions.map((addition, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 bg-pureWhite rounded-lg border border-elegantSilver/30 hover:border-luxuryGold/50 transition-all duration-300 hover:shadow-md"
+                  >
+                    <div className="flex-1">
+                      <h4
+                        className={`${coromantGaramond.className} font-medium text-darkGray`}
+                      >
+                        {addition.title[locale]}
+                      </h4>
+                      <p
+                        className={`${montserrat.className} text-sm text-elegantSilver`}
+                      >
+                        {addition.fixedorhourly === "fixed"
+                          ? `$${addition.price} ${t("fixed")}`
+                          : `$${addition.price}/${t("hour")}`}
+                      </p>
+                    </div>
+                    <label
+                      className={`${montserrat.className} flex items-center`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedAdditions[index] || false}
+                        onChange={() => handleAdditionToggle(index)}
+                        className="w-5 h-5 text-luxuryGold border-elegantSilver rounded focus:ring-luxuryGold focus:ring-2"
+                      />
+                    </label>
                   </div>
-                  <label className={`${montserrat.className} flex items-center`}>
-                    <input
-                      type="checkbox"
-                      checked={selectedAdditions[index] || false}
-                      onChange={() => handleAdditionToggle(index)}
-                      className="w-5 h-5 text-luxuryGold border-elegantSilver rounded focus:ring-luxuryGold focus:ring-2"
-                    />
-                  </label>
-                </div>
-              )) : (
-                <p className={`${montserrat.className} text-elegantSilver text-center py-4`}>
+                ))
+              ) : (
+                <p
+                  className={`${montserrat.className} text-elegantSilver text-center py-4`}
+                >
                   {t("No additional services available")}
                 </p>
               )}
@@ -204,34 +222,40 @@ const ServicesCalculator = ({
                   {Math.max(selectedHours, minimumHours)} {t("hours")} × $
                   {hourlyRate}
                 </span>
-                <span className={`${montserrat.className} font-semibold text-luxuryGold`}>
+                <span
+                  className={`${montserrat.className} font-semibold text-luxuryGold`}
+                >
                   ${Math.max(selectedHours, minimumHours) * hourlyRate}
                 </span>
               </div>
 
               {/* Additions Cost */}
-              {additions && additions.length > 0 && additions.map((addition, index) => {
-                if (!selectedAdditions[index]) return null
+              {additions &&
+                additions.length > 0 &&
+                additions.map((addition, index) => {
+                  if (!selectedAdditions[index]) return null
 
-                const additionCost =
-                  addition.fixedorhourly === "fixed"
-                    ? addition.price
-                    : addition.price * Math.max(selectedHours, minimumHours)
+                  const additionCost =
+                    addition.fixedorhourly === "fixed"
+                      ? addition.price
+                      : addition.price * Math.max(selectedHours, minimumHours)
 
-                return (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center py-2 border-b border-elegantSilver/30"
-                  >
-                    <span className={`${montserrat.className} text-darkGray`}>
-                      {addition.title[locale]}
-                    </span>
-                    <span className={`${montserrat.className} font-semibold text-caribbeanTurquoise`}>
-                      ${additionCost}
-                    </span>
-                  </div>
-                )
-              })}
+                  return (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center py-2 border-b border-elegantSilver/30"
+                    >
+                      <span className={`${montserrat.className} text-darkGray`}>
+                        {addition.title[locale]}
+                      </span>
+                      <span
+                        className={`${montserrat.className} font-semibold text-caribbeanTurquoise`}
+                      >
+                        ${additionCost}
+                      </span>
+                    </div>
+                  )
+                })}
 
               {/* Total */}
               <div className="flex justify-between items-center py-4 border-t-2 border-luxuryGold bg-luxuryGold/5 px-4 rounded-lg">
@@ -241,7 +265,9 @@ const ServicesCalculator = ({
                 >
                   {t("Total:")}
                 </span>
-                <span className={`${coromantGaramond.className} text-3xl font-bold text-luxuryGold`}>
+                <span
+                  className={`${coromantGaramond.className} text-3xl font-bold text-luxuryGold`}
+                >
                   ${totalCost.toLocaleString()}
                 </span>
               </div>
@@ -256,7 +282,9 @@ const ServicesCalculator = ({
             >
               {t("Package Summary")}
             </h4>
-            <div className={`${montserrat.className} text-sm text-elegantSilver space-y-3`}>
+            <div
+              className={`${montserrat.className} text-sm text-elegantSilver space-y-3`}
+            >
               <p>
                 {`• ${Math.max(selectedHours, minimumHours)} ${t("hours")} of ${t("photography/video")}`}
               </p>
@@ -264,12 +292,17 @@ const ServicesCalculator = ({
               {/* Included Services List */}
               {includedServices.length > 0 && (
                 <div>
-                  <p className={`${montserrat.className} font-medium text-darkGray mb-1`}>
+                  <p
+                    className={`${montserrat.className} font-medium text-darkGray mb-1`}
+                  >
                     {t("Included Services:")}
                   </p>
                   <ul className="space-y-1">
                     {includedServices.map((service, index) => (
-                      <li key={index} className={`${montserrat.className} text-elegantSilver`}>
+                      <li
+                        key={index}
+                        className={`${montserrat.className} text-elegantSilver`}
+                      >
                         • {service[locale]}
                       </li>
                     ))}
@@ -280,14 +313,19 @@ const ServicesCalculator = ({
               {/* Selected Additional Services */}
               {Object.values(selectedAdditions).filter(Boolean).length > 0 && (
                 <div>
-                  <p className={`${montserrat.className} font-medium text-darkGray mb-1`}>
+                  <p
+                    className={`${montserrat.className} font-medium text-darkGray mb-1`}
+                  >
                     {t("Additional Services:")}
                   </p>
                   <ul className="space-y-1">
                     {additions.map((addition, index) => {
                       if (!selectedAdditions[index]) return null
                       return (
-                        <li key={index} className={`${montserrat.className} text-caribbeanTurquoise`}>
+                        <li
+                          key={index}
+                          className={`${montserrat.className} text-caribbeanTurquoise`}
+                        >
                           • {addition.title[locale]}
                         </li>
                       )
@@ -296,7 +334,9 @@ const ServicesCalculator = ({
                 </div>
               )}
 
-              <p className={`${montserrat.className} font-medium text-caribbeanTurquoise mt-3`}>
+              <p
+                className={`${montserrat.className} font-medium text-caribbeanTurquoise mt-3`}
+              >
                 {t("Startingfromthisestimate")}
               </p>
             </div>
