@@ -37,7 +37,7 @@
     "faq": "FAQ"
   },
   "BookingForm": {
-    "title": "Book Your Photoshoot",
+    "title": "Book Your Photography & Video Package",
     "subtitle": "Fill out the form below and we'll get back to you as soon as possible",
     "name": "Full Name",
     "namePlaceholder": "Enter your full name",
@@ -48,13 +48,18 @@
     "date": "Preferred Date",
     "datePlaceholder": "Select a date",
     "message": "Message",
-    "messagePlaceholder": "Tell us about your photoshoot needs...",
+    "messagePlaceholder": "Tell us about your photography and video needs...",
     "submit": "Send Booking Request",
     "sending": "Sending...",
     "successMessage": "Thank you! We've received your booking request and will contact you soon.",
     "errorMessage": "Oops! Something went wrong. Please try again.",
     "requiredField": "This field is required",
-    "invalidEmail": "Please enter a valid email address"
+    "invalidEmail": "Please enter a valid email address",
+    "packageSummary": "Package Summary",
+    "hours": "Hours",
+    "estimatedCost": "Estimated Cost",
+    "package": "Package",
+    "selectedAdditions": "Selected Additions"
   },
   "PhotographyVideoPackage": {
     "Starting Price": "Starting Price",

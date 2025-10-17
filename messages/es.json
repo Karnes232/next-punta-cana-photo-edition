@@ -37,7 +37,7 @@
     "faq": "Preguntas Frecuentes"
   },
   "BookingForm": {
-    "title": "Reserva tu Sesión Fotográfica",
+    "title": "Reserva tu Paquete de Fotografía y Video",
     "subtitle": "Completa el formulario y nos pondremos en contacto contigo lo antes posible",
     "name": "Nombre Completo",
     "namePlaceholder": "Ingresa tu nombre completo",
@@ -48,13 +48,18 @@
     "date": "Fecha Preferida",
     "datePlaceholder": "Selecciona una fecha",
     "message": "Mensaje",
-    "messagePlaceholder": "Cuéntanos sobre tus necesidades fotográficas...",
+    "messagePlaceholder": "Cuéntanos sobre tus necesidades de fotografía y video...",
     "submit": "Enviar Solicitud de Reserva",
     "sending": "Enviando...",
     "successMessage": "¡Gracias! Hemos recibido tu solicitud de reserva y te contactaremos pronto.",
     "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
     "requiredField": "Este campo es requerido",
-    "invalidEmail": "Por favor ingresa un correo electrónico válido"
+    "invalidEmail": "Por favor ingresa un correo electrónico válido",
+    "packageSummary": "Resumen del Paquete",
+    "hours": "Horas",
+    "estimatedCost": "Costo Estimado",
+    "package": "Paquete",
+    "selectedAdditions": "Servicios Adicionales Seleccionados"
   },
   "PhotographyVideoPackage": {
     "Starting Price": "Precio Inicial",

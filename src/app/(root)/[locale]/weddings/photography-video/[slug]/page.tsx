@@ -4,24 +4,12 @@ import {
   getAllPhotographyVideoPackages,
   getPhotographyVideoPackageBySlug,
   getPhotographyVideoPackageSEO,
-  PhotographyVideoPackages,
 } from "@/sanity/queries/Photography-Video/Photography-video-packages"
-import { Cormorant_Garamond, Montserrat } from "next/font/google"
-import Link from "next/link"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
-import ServicesCalculator from "@/components/PhotographyVideoPackageComponents/ServicesCalculator"
+import PhotographyVideoPackageWithForm from "@/components/PhotographyVideoPackageComponents/PhotographyVideoPackageWithForm"
 
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 interface PhotographyVideoPackagePageProps {
   params: Promise<{
@@ -68,11 +56,14 @@ export default async function PhotographyVideoPackagePage({
         </div>
       </section>
       <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-        <ServicesCalculator
-          hourlyRate={packageItem.hourlyRate}
-          minimumHours={packageItem.minimumHours}
-          additions={packageItem.addtions}
-          includedServices={packageItem.includedServices}
+        <PhotographyVideoPackageWithForm
+          packageData={{
+            title: packageItem.hero.title,
+            hourlyRate: packageItem.hourlyRate,
+            minimumHours: packageItem.minimumHours,
+            additions: packageItem.addtions,
+            includedServices: packageItem.includedServices,
+          }}
           locale={locale}
         />
       </section>

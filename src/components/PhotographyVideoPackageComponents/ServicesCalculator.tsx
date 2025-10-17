@@ -29,6 +29,10 @@ interface ServicesCalculatorProps {
   additions: Addition[]
   includedServices: { en: string; es: string }[]
   locale: "en" | "es"
+  selectedHours?: number
+  selectedAdditions?: Record<string, boolean>
+  onHoursChange?: (hours: number) => void
+  onAdditionToggle?: (index: number) => void
 }
 
 const ServicesCalculator = ({
@@ -37,11 +41,19 @@ const ServicesCalculator = ({
   additions,
   includedServices,
   locale,
+  selectedHours: propSelectedHours,
+  selectedAdditions: propSelectedAdditions,
+  onHoursChange,
+  onAdditionToggle,
 }: ServicesCalculatorProps) => {
-  const [selectedHours, setSelectedHours] = useState(minimumHours)
-  const [selectedAdditions, setSelectedAdditions] = useState<
+  const [internalSelectedHours, setInternalSelectedHours] = useState(minimumHours)
+  const [internalSelectedAdditions, setInternalSelectedAdditions] = useState<
     Record<string, boolean>
   >({})
+  
+  // Use props if provided, otherwise use internal state
+  const selectedHours = propSelectedHours ?? internalSelectedHours
+  const selectedAdditions = propSelectedAdditions ?? internalSelectedAdditions
   const t = useTranslations("ServicesCalculator")
 
   // Calculate total cost
@@ -69,14 +81,23 @@ const ServicesCalculator = ({
   }, [selectedHours, minimumHours, hourlyRate, selectedAdditions, additions])
 
   const handleHoursChange = (hours: number) => {
-    setSelectedHours(Math.max(hours, 0))
+    const newHours = Math.max(hours, 0)
+    if (onHoursChange) {
+      onHoursChange(newHours)
+    } else {
+      setInternalSelectedHours(newHours)
+    }
   }
 
   const handleAdditionToggle = (index: number) => {
-    setSelectedAdditions(prev => ({
-      ...prev,
-      [index]: !prev[index],
-    }))
+    if (onAdditionToggle) {
+      onAdditionToggle(index)
+    } else {
+      setInternalSelectedAdditions(prev => ({
+        ...prev,
+        [index]: !prev[index],
+      }))
+    }
   }
 
   return (
