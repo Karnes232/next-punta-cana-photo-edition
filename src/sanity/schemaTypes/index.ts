@@ -40,6 +40,7 @@ import ServicesOffered from "./ServicesOffered/ServicesOffered"
 
 //Wedding Planning
 import WeddingPlanning from "./Wedding-Planning/WeddingPlanning"
+import WeddingPlannerPackages from "./Wedding-Planning/WeddingPlannerPackages"
 
 //Proposal
 import Proposal from "./Proposal/Proposal"
@@ -99,6 +100,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //Wedding Planning
     WeddingPlanning,
+    WeddingPlannerPackages,
 
     //Proposal
     Proposal,

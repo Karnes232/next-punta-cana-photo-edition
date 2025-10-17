@@ -4,7 +4,9 @@ import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getWeddingPlanning } from "@/sanity/queries/Wedding-Planning/WeddingPlanning"
+import { getWeddingPlannerPackages } from "@/sanity/queries/Wedding-Planning/WeddingPlannerPackages"
 import { notFound } from "next/navigation"
+import WeddingPlannerPackages from "@/components/WeddingPlannerComponents/WeddingPlannerPackages"
 
 export default async function WeddingPlanning({
   params,
@@ -14,10 +16,11 @@ export default async function WeddingPlanning({
   const { locale } = await params
   const structuredData = await getStructuredData("wedding-planning")
   const weddingPlanning = await getWeddingPlanning()
+  const weddingPlannerPackages = await getWeddingPlannerPackages()
   if (!weddingPlanning) {
     notFound()
   }
-  console.log(weddingPlanning)
+  console.log(weddingPlannerPackages)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -52,6 +55,9 @@ export default async function WeddingPlanning({
           <div className="my-10">
             <PhotoGrid photos={weddingPlanning?.galleryImages || []} />
           </div>
+        </section>
+        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <WeddingPlannerPackages packages={weddingPlannerPackages || []} locale={locale} />
         </section>
       </main>
     </>
