@@ -6,7 +6,6 @@ import {
   getPhotographyVideoPackageSEO,
   PhotographyVideoPackages,
 } from "@/sanity/queries/Photography-Video/Photography-video-packages"
-import { getPageSeo } from "@/sanity/queries/SEO/seo"
 import { Cormorant_Garamond, Montserrat } from "next/font/google"
 import Link from "next/link"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
