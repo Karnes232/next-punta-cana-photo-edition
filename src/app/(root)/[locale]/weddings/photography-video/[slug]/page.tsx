@@ -22,7 +22,6 @@ export default async function PhotographyVideoPackagePage({
 }: PhotographyVideoPackagePageProps) {
   const { locale, slug } = await params
   const packageItem = await getPhotographyVideoPackageBySlug(slug)
-  console.log(packageItem)
 
   if (!packageItem) {
     notFound()

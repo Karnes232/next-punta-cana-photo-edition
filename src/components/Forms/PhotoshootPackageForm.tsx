@@ -108,18 +108,6 @@ const PhotoshootPackageForm = ({
     setSubmitStatus("idle")
 
     try {
-      // Create form body for Netlify
-      // const myForm = e.currentTarget
-      // const formData = new FormData(myForm)
-
-      // const response = await fetch('/', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      //   body: new URLSearchParams(formData as any).toString()
-      // })
-
-      // console.log('Response status:', response.status)
-      // console.log('Response ok:', response.ok)
       const formDataToSend = new FormData()
       formDataToSend.append("form-name", "photoshoot-booking")
       formDataToSend.append("name", formData.name)

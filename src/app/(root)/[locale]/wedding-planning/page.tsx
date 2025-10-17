@@ -1,7 +1,10 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getWeddingPlanning } from "@/sanity/queries/Wedding-Planning/WeddingPlanning"
+import { notFound } from "next/navigation"
 
 export default async function WeddingPlanning({
   params,
@@ -11,6 +14,10 @@ export default async function WeddingPlanning({
   const { locale } = await params
   const structuredData = await getStructuredData("wedding-planning")
   const weddingPlanning = await getWeddingPlanning()
+  if (!weddingPlanning) {
+    notFound()
+  }
+  console.log(weddingPlanning)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -37,6 +44,15 @@ export default async function WeddingPlanning({
             subtitle={weddingPlanning?.hero?.subtitle?.[locale]}
           />
         )}
+        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <BlockContent
+            content={weddingPlanning?.paragraph1 || { en: [], es: [] }}
+            locale={locale}
+          />
+          <div className="my-10">
+            <PhotoGrid photos={weddingPlanning?.galleryImages || []} />
+          </div>
+        </section>
       </main>
     </>
   )
