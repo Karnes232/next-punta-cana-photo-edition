@@ -111,5 +111,11 @@
     "errorMessage": "Oops! Something went wrong. Please try again.",
     "requiredField": "This field is required",
     "invalidEmail": "Please enter a valid email address"
+  },
+  "ProposalPackages": {
+    "noProposalPackagesAvailable": "No proposal packages available at the moment.",
+    "startingPrice": "Starting Price",
+    "priceNotAvailable": "Price not available",
+    "includedItems": "Included Items"
   }
 }

@@ -111,5 +111,11 @@
     "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
     "requiredField": "Este campo es requerido",
     "invalidEmail": "Por favor ingresa un correo electrónico válido"
+  },
+  "ProposalPackages": {
+    "noProposalPackagesAvailable": "No hay paquetes de propuestas disponibles en este momento.",
+    "startingPrice": "Precio Inicial",
+    "priceNotAvailable": "Precio no disponible",
+    "includedItems": "Items Incluidos"
   }
 }

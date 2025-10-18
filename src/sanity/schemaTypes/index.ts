@@ -44,6 +44,7 @@ import WeddingPlannerPackages from "./Wedding-Planning/WeddingPlannerPackages"
 
 //Proposal
 import Proposal from "./Proposal/Proposal"
+import ProposalPackages from "./Proposal/ProposalPackages"
 
 //Corporate Events
 import CorporateEvents from "./CorporateEvents/CorporateEvents"
@@ -104,6 +105,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //Proposal
     Proposal,
+    ProposalPackages,
 
     //Corporate Events
     CorporateEvents,

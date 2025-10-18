@@ -6,6 +6,8 @@ import TextComponent from "@/components/TextComponent/TextComponent"
 import { getProposal } from "@/sanity/queries/Proposal/Proposal"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
+import { getAllProposalPackages } from "@/sanity/queries/Proposal/ProposalPackages"
+import ProposalComponent from "@/components/ProposalComponents/ProposalComponent"
 
 export default async function Proposals({
   params,
@@ -15,6 +17,7 @@ export default async function Proposals({
   const { locale } = await params
   const structuredData = await getStructuredData("proposals")
   const proposal = await getProposal()
+  const proposalPackages = await getAllProposalPackages()
 
   return (
     <>
@@ -52,6 +55,12 @@ export default async function Proposals({
         <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <BlockContent
             content={proposal?.paragraph1 || { en: [], es: [] }}
+            locale={locale}
+          />
+        </section>
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <ProposalComponent
+            proposalPackages={proposalPackages || []}
             locale={locale}
           />
         </section>
