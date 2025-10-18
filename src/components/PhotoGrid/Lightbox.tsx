@@ -82,12 +82,12 @@ const Lightbox: React.FC<LightboxProps> = ({
 
         <div className="relative">
           <Image
-            src={optimizedUrl}
+            src={currentPhoto.asset.url}
             alt={currentPhoto.alt || `Photo ${selectedIndex + 1}`}
             width={currentPhoto.asset.metadata?.dimensions?.width || 1200}
             height={currentPhoto.asset.metadata?.dimensions?.height || 800}
             className="max-w-full max-h-[90vh] object-contain"
-            quality={90}
+            quality={95}
             priority
           />
         </div>
