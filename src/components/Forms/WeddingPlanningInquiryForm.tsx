@@ -44,7 +44,9 @@ interface WeddingPlanningInquiryFormProps {
   locale: "en" | "es"
 }
 
-const WeddingPlanningInquiryForm = ({ locale }: WeddingPlanningInquiryFormProps) => {
+const WeddingPlanningInquiryForm = ({
+  locale,
+}: WeddingPlanningInquiryFormProps) => {
   const t = useTranslations("WeddingPlanningForm")
 
   const [formData, setFormData] = useState<FormData>({
@@ -111,7 +113,9 @@ const WeddingPlanningInquiryForm = ({ locale }: WeddingPlanningInquiryFormProps)
   }
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
@@ -179,7 +183,10 @@ const WeddingPlanningInquiryForm = ({ locale }: WeddingPlanningInquiryFormProps)
   }
 
   return (
-    <div id="wedding-planning-inquiry-form" className="w-full max-w-4xl mx-auto my-8 px-4">
+    <div
+      id="wedding-planning-inquiry-form"
+      className="w-full max-w-4xl mx-auto my-8 px-4"
+    >
       <div className="bg-gradient-to-br from-pureWhite to-luxuryGold/5 rounded-2xl shadow-xl p-8 md:p-12 border border-luxuryGold/30">
         {/* Header */}
         <div className="text-center mb-8">
@@ -339,7 +346,9 @@ const WeddingPlanningInquiryForm = ({ locale }: WeddingPlanningInquiryFormProps)
                   } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.weddingDate && (
-                  <p className="mt-1 text-sm text-red-600">{errors.weddingDate}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.weddingDate}
+                  </p>
                 )}
               </div>
 
@@ -372,7 +381,9 @@ const WeddingPlanningInquiryForm = ({ locale }: WeddingPlanningInquiryFormProps)
                   <option value="200+">200+ {t("guests")}</option>
                 </select>
                 {errors.guestCount && (
-                  <p className="mt-1 text-sm text-red-600">{errors.guestCount}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.guestCount}
+                  </p>
                 )}
               </div>
             </div>

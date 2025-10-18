@@ -63,16 +63,48 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
     return {
       mobile: photos.slice(0, 4),
       lg: photos.slice(0, 6),
-      xl: photos.slice(0, 8)
+      xl: photos.slice(0, 8),
     }
   }
 
-  const { mobile: mobilePhotos, lg: lgPhotos, xl: xlPhotos } = getVisiblePhotos()
+  const {
+    mobile: mobilePhotos,
+    lg: lgPhotos,
+    xl: xlPhotos,
+  } = getVisiblePhotos()
   const remainingMobile = photos.length - 4
   const remainingLg = photos.length - 6
   const remainingXl = photos.length - 8
 
-  const renderPhoto = (photo: SanityPhoto, index: number, showOverlay: boolean = false, remainingCount: number = 0) => {
+  // Calculate grid classes based on number of photos
+  const getGridClasses = (
+    photoCount: number,
+    screenSize: "mobile" | "lg" | "xl",
+  ) => {
+    if (screenSize === "mobile") {
+      if (photoCount <= 2) return "grid-cols-1 sm:grid-cols-2"
+      return "grid-cols-1 sm:grid-cols-2"
+    }
+    if (screenSize === "lg") {
+      if (photoCount <= 2) return "grid-cols-2"
+      if (photoCount <= 4) return "grid-cols-2"
+      return "grid-cols-3"
+    }
+    if (screenSize === "xl") {
+      if (photoCount <= 2) return "grid-cols-2"
+      if (photoCount <= 4) return "grid-cols-2"
+      if (photoCount <= 6) return "grid-cols-3"
+      return "grid-cols-4"
+    }
+    return ""
+  }
+
+  const renderPhoto = (
+    photo: SanityPhoto,
+    index: number,
+    showOverlay: boolean = false,
+    remainingCount: number = 0,
+  ) => {
     // Check if we have the required asset data
     if (!photo.asset || !photo.asset.url) {
       console.error(`Photo ${index} missing asset or URL:`, photo)
@@ -84,16 +116,10 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
     // Add quality and format parameters for better image quality
     const optimizedUrl = `${baseUrl}?q=100&fm=webp&fit=max&w=800`
 
-    const aspectRatio = photo.asset.metadata?.dimensions?.height
-      ? photo.asset.metadata.dimensions.width /
-        photo.asset.metadata.dimensions.height
-      : 1
-
     return (
       <div
         key={index}
-        className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-        style={{ aspectRatio: aspectRatio }}
+        className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer aspect-square"
         onClick={() => openLightbox(index)}
       >
         <Image
@@ -121,7 +147,9 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
   return (
     <div className="w-full px-2 sm:px-4 md:px-8">
       {/* Mobile and MD screens - show first 4 photos */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
+      <div
+        className={`grid ${getGridClasses(mobilePhotos.length, "mobile")} gap-4 lg:hidden`}
+      >
         {mobilePhotos.map((photo, index) => {
           // Show overlay on the 4th image (index 3) if there are more than 4 photos
           const showOverlay = index === 3 && remainingMobile > 0
@@ -130,7 +158,9 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
       </div>
 
       {/* LG screens - show first 6 photos */}
-      <div className="hidden lg:grid xl:hidden grid-cols-3 gap-4">
+      <div
+        className={`hidden lg:grid xl:hidden ${getGridClasses(lgPhotos.length, "lg")} gap-4`}
+      >
         {lgPhotos.map((photo, index) => {
           // Show overlay on the 6th image (index 5) if there are more than 6 photos
           const showOverlay = index === 5 && remainingLg > 0
@@ -139,7 +169,9 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({ photos }) => {
       </div>
 
       {/* XL screens - show first 8 photos */}
-      <div className="hidden xl:grid grid-cols-4 gap-4">
+      <div
+        className={`hidden xl:grid ${getGridClasses(xlPhotos.length, "xl")} gap-4`}
+      >
         {xlPhotos.map((photo, index) => {
           // Show overlay on the 8th image (index 7) if there are more than 8 photos
           const showOverlay = index === 7 && remainingXl > 0

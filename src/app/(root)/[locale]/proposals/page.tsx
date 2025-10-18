@@ -1,7 +1,11 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
+import TextComponent from "@/components/TextComponent/TextComponent"
 import { getProposal } from "@/sanity/queries/Proposal/Proposal"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 
 export default async function Proposals({
   params,
@@ -38,6 +42,29 @@ export default async function Proposals({
             subtitle={proposal?.hero?.subtitle?.[locale]}
           />
         )}
+        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+          <TextComponent
+            title={proposal?.galleryTitle?.[locale]}
+            className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
+          />
+          <PhotoGrid photos={proposal?.gallery || []} />
+        </section>
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <BlockContent
+            content={proposal?.paragraph1 || { en: [], es: [] }}
+            locale={locale}
+          />
+        </section>
+
+        <TestimonialsComponent
+          locale={locale}
+          titleTestimonials={
+            (proposal?.titleTestimonials?.[
+              locale as keyof typeof proposal.titleTestimonials
+            ] as string) || ""
+          }
+          testimonials={proposal?.testimonials || []}
+        />
       </main>
     </>
   )

@@ -72,9 +72,9 @@ export default async function WeddingPlanning({
           }
           testimonials={weddingPlanning?.testimonials || []}
         />
-         <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+        <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <WeddingPlanningInquiryForm locale={locale} />
-         </section>
+        </section>
       </main>
     </>
   )
