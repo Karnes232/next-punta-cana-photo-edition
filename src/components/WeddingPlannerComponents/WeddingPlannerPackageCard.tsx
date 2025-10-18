@@ -4,6 +4,7 @@ import React from "react"
 import { WeddingPlannerPackages as WeddingPlannerPackagesType } from "@/sanity/queries/Wedding-Planning/WeddingPlannerPackages"
 import { useTranslations } from "next-intl"
 import { CheckCircle, Star } from "lucide-react"
+import Link from "next/link"
 
 interface WeddingPlannerPackageCardProps {
   packageData: WeddingPlannerPackagesType
@@ -16,11 +17,7 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
 }) => {
   const t = useTranslations()
 
-  const handleInquireClick = () => {
-    // Scroll to consultation form on contact page
-    const contactUrl = locale === "en" ? "/contact" : "/es/contact"
-    window.location.href = `${contactUrl}#consultation-form`
-  }
+
 
   return (
     <div
@@ -78,8 +75,8 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
 
       {/* CTA Button - Fixed position from bottom */}
       <div className="text-center mt-auto">
-        <button
-          onClick={handleInquireClick}
+        <Link
+          href={`#wedding-planning-inquiry-form`}
           className={`w-full py-3 px-6 rounded-lg font-semibold text-pureWhite transition-all duration-300 transform hover:scale-105 active:scale-95 ${
             packageData.mostPopular
               ? "bg-luxuryGold hover:bg-luxuryGold/90 shadow-lg hover:shadow-xl hover:shadow-luxuryGold/25"
@@ -87,7 +84,7 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
           }`}
         >
           {packageData.ctaText[locale]}
-        </button>
+        </Link>
       </div>
     </div>
   )

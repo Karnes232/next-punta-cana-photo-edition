@@ -85,5 +85,31 @@
     "Additional Services:": "Additional Services:",
     "Startingfromthisestimate": "Starting from this estimate - contact us for a detailed quote!",
     "No additional services available": "No additional services available"
+  },
+  "WeddingPlanningForm": {
+    "title": "Wedding Planning Consultation Request",
+    "subtitle": "Tell us about your dream wedding and we'll help make it a reality",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "your.email@example.com",
+    "telephone": "Phone Number",
+    "telephonePlaceholder": "+1 (555) 123-4567",
+    "weddingDate": "Wedding Date",
+    "guestCount": "Expected Guest Count",
+    "selectGuestCount": "Select guest count",
+    "guests": "guests",
+    "venue": "Wedding Venue",
+    "venuePlaceholder": "Enter your wedding venue or preferred location",
+    "budget": "Wedding Budget",
+    "selectBudget": "Select your budget range",
+    "message": "Additional Details",
+    "messagePlaceholder": "Tell us about your vision, special requirements, or any questions you have...",
+    "submit": "Request Consultation",
+    "sending": "Sending...",
+    "successMessage": "Thank you! We've received your wedding planning inquiry and will contact you soon to discuss your special day.",
+    "errorMessage": "Oops! Something went wrong. Please try again.",
+    "requiredField": "This field is required",
+    "invalidEmail": "Please enter a valid email address"
   }
 }

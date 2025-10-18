@@ -85,5 +85,31 @@
     "Additional Services:": "Servicios Adicionales:",
     "Startingfromthisestimate": "A partir de esta estimación - ¡contáctanos para una cotización detallada!",
     "No additional services available": "No hay servicios adicionales disponibles"
+  },
+  "WeddingPlanningForm": {
+    "title": "Solicitud de Consulta de Planificación de Bodas",
+    "subtitle": "Cuéntanos sobre tu boda soñada y te ayudaremos a hacerla realidad",
+    "name": "Nombre Completo",
+    "namePlaceholder": "Ingresa tu nombre completo",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "tu.correo@ejemplo.com",
+    "telephone": "Número de Teléfono",
+    "telephonePlaceholder": "+1 (555) 123-4567",
+    "weddingDate": "Fecha de la Boda",
+    "guestCount": "Número Esperado de Invitados",
+    "selectGuestCount": "Selecciona el número de invitados",
+    "guests": "invitados",
+    "venue": "Lugar de la Boda",
+    "venuePlaceholder": "Ingresa el lugar de tu boda o ubicación preferida",
+    "budget": "Presupuesto de la Boda",
+    "selectBudget": "Selecciona tu rango de presupuesto",
+    "message": "Detalles Adicionales",
+    "messagePlaceholder": "Cuéntanos sobre tu visión, requisitos especiales, o cualquier pregunta que tengas...",
+    "submit": "Solicitar Consulta",
+    "sending": "Enviando...",
+    "successMessage": "¡Gracias! Hemos recibido tu consulta de planificación de bodas y te contactaremos pronto para discutir tu día especial.",
+    "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
+    "requiredField": "Este campo es requerido",
+    "invalidEmail": "Por favor ingresa un correo electrónico válido"
   }
 }

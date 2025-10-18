@@ -8,6 +8,7 @@ import { getWeddingPlannerPackages } from "@/sanity/queries/Wedding-Planning/Wed
 import { notFound } from "next/navigation"
 import WeddingPlannerPackages from "@/components/WeddingPlannerComponents/WeddingPlannerPackages"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
+import WeddingPlanningInquiryForm from "@/components/Forms/WeddingPlanningInquiryForm"
 export default async function WeddingPlanning({
   params,
 }: {
@@ -71,6 +72,9 @@ export default async function WeddingPlanning({
           }
           testimonials={weddingPlanning?.testimonials || []}
         />
+         <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <WeddingPlanningInquiryForm locale={locale} />
+         </section>
       </main>
     </>
   )
