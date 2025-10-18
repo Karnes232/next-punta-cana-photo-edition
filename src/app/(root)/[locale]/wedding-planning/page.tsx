@@ -7,7 +7,7 @@ import { getWeddingPlanning } from "@/sanity/queries/Wedding-Planning/WeddingPla
 import { getWeddingPlannerPackages } from "@/sanity/queries/Wedding-Planning/WeddingPlannerPackages"
 import { notFound } from "next/navigation"
 import WeddingPlannerPackages from "@/components/WeddingPlannerComponents/WeddingPlannerPackages"
-
+import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 export default async function WeddingPlanning({
   params,
 }: {
@@ -20,7 +20,7 @@ export default async function WeddingPlanning({
   if (!weddingPlanning) {
     notFound()
   }
-  console.log(weddingPlannerPackages)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -56,9 +56,21 @@ export default async function WeddingPlanning({
             <PhotoGrid photos={weddingPlanning?.galleryImages || []} />
           </div>
         </section>
-        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-          <WeddingPlannerPackages packages={weddingPlannerPackages || []} locale={locale} />
+        <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <WeddingPlannerPackages
+            packages={weddingPlannerPackages || []}
+            locale={locale}
+          />
         </section>
+        <TestimonialsComponent
+          locale={locale}
+          titleTestimonials={
+            (weddingPlanning?.titleTestimonials?.[
+              locale as keyof typeof weddingPlanning.titleTestimonials
+            ] as string) || ""
+          }
+          testimonials={weddingPlanning?.testimonials || []}
+        />
       </main>
     </>
   )

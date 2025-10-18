@@ -19,6 +19,10 @@ export default defineType({
       name: "Gallery",
       title: "Gallery",
     },
+    {
+      name: "Testimonials",
+      title: "Testimonials",
+    },
   ],
   fields: [
     defineField({
@@ -53,6 +57,21 @@ export default defineType({
           ],
         },
       ],
+    }),
+    defineField({
+      name: "titleTestimonials",
+      title: "Title Testimonials",
+      type: "localizedString",
+      group: "Testimonials",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "testimonials",
+      title: "Testimonials",
+      type: "array",
+      group: "Testimonials",
+      of: [{ type: "testimonial" }],
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {

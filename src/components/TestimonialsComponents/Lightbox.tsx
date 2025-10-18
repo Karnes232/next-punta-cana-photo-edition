@@ -119,7 +119,7 @@ const Lightbox = ({
               <Image
                 src={urlFor(currentImage.photo)
                   .width(1200)
-                  .height(800)
+                  .height(1200)
                   .quality(95)
                   .url()}
                 alt={

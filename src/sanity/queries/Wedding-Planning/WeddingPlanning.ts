@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
+import { Testimonial } from "../HomePage/Testimonials"
 
 export interface WeddingPlanning {
   hero: Hero
@@ -21,6 +22,8 @@ export interface WeddingPlanning {
     }
     alt: string
   }[]
+  titleTestimonials: string
+  testimonials: Testimonial[]
 }
 
 export const weddingPlanningQuery = `*[_type == "wedding-planning"][0] {
@@ -67,6 +70,34 @@ export const weddingPlanningQuery = `*[_type == "wedding-planning"][0] {
     },
     alt
   },
+  titleTestimonials {
+    en,
+    es
+  },
+  testimonials[] {
+        _id,
+        name,
+        photo {
+            asset -> {
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
+            },
+            alt
+        },
+        role {
+            en,
+            es
+        },
+        shortQuote {
+            en,
+            es
+        }
+  }
 }`
 
 export async function getWeddingPlanning(): Promise<WeddingPlanning | null> {

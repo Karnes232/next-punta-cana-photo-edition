@@ -42,6 +42,8 @@ export const weddingPlannerPackagesQuery = `*[_type == "wedding-planner-packages
   mostPopular
 }`
 
-export async function getWeddingPlannerPackages(): Promise<WeddingPlannerPackages[] | null> {
-    return await client.fetch(weddingPlannerPackagesQuery)
+export async function getWeddingPlannerPackages(): Promise<
+  WeddingPlannerPackages[] | null
+> {
+  return await client.fetch(weddingPlannerPackagesQuery)
 }
