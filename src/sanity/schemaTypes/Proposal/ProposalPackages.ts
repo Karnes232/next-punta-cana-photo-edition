@@ -19,6 +19,10 @@ export default defineType({
       name: "Paragraphs",
       title: "Paragraphs",
     },
+    {
+      name: "Gallery",
+      title: "Gallery",
+    },
   ],
   fields: [
     defineField({
@@ -75,6 +79,27 @@ export default defineType({
       title: "Paragraph 1",
       type: "localizedBlock",
       group: "Paragraphs",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "photoGallery",
+      title: "Photo Gallery",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
+      group: "Gallery",
+      description: "Minimum 8 images",
       validation: Rule => Rule.required(),
     }),
   ],

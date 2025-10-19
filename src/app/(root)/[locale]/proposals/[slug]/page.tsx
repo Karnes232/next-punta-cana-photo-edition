@@ -1,29 +1,27 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import { getProposalPackagesBySlug } from "@/sanity/queries/Proposal/ProposalPackages"
 import { notFound } from "next/navigation"
 
-
 interface PageProps {
-    params: Promise<{
-      locale: "en" | "es"
-      slug: string
-    }>
+  params: Promise<{
+    locale: "en" | "es"
+    slug: string
+  }>
 }
 
 export default async function ProposalPackagePage({ params }: PageProps) {
-    const { locale, slug } = await params
-    const proposalPackage = await getProposalPackagesBySlug(slug)
-    console.log(proposalPackage)
-    if (!proposalPackage) {
-        notFound()
-    }
-    return (
-      <>
+  const { locale, slug } = await params
+  const proposalPackage = await getProposalPackagesBySlug(slug)
+
+  if (!proposalPackage) {
+    notFound()
+  }
+  return (
+    <>
       <main>
-
-
         {proposalPackage.hero.heroVideo ? (
           <BackgroundVideo
             heroVideo={proposalPackage.hero.heroVideo}
@@ -44,8 +42,9 @@ export default async function ProposalPackagePage({ params }: PageProps) {
             content={proposalPackage.paragraph1 || { en: [], es: [] }}
             locale={locale}
           />
+          <PhotoGrid photos={proposalPackage?.photoGallery || []} />
         </section>
       </main>
-      </>
-    )
+    </>
+  )
 }

@@ -72,6 +72,20 @@ export interface ProposalPackagesBySlug {
     en: any[]
     es: any[]
   }
+  photoGallery: {
+    asset: {
+      url: string
+      _type: string
+      _ref: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }[]
 }
 
 export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slug.current == $slug][0] {
@@ -104,9 +118,27 @@ export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slu
   paragraph1 {
     en,
     es
+  },
+  photoGallery[] {
+    _type,
+    _ref,
+    asset -> {
+      url,
+      _type,
+      _ref,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
   }
 }`
 
-export async function getProposalPackagesBySlug(slug: string): Promise<ProposalPackagesBySlug | null> {
+export async function getProposalPackagesBySlug(
+  slug: string,
+): Promise<ProposalPackagesBySlug | null> {
   return await client.fetch(proposalPackagesBySlugQuery, { slug })
 }

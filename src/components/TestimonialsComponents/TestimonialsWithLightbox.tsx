@@ -80,7 +80,7 @@ const TestimonialsWithLightbox = ({
           className="testimonials-swiper !h-auto"
         >
           {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={testimonial._id} className="!h-auto">
+            <SwiperSlide key={index} className="!h-auto">
               <div className="h-full flex">
                 <TestimonialCard
                   testimonial={testimonial}
