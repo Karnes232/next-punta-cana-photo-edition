@@ -6,11 +6,66 @@ export default defineType({
   title: "Corporate Events",
   type: "document",
   icon: DocumentIcon,
+  groups: [
+    {
+      name: "Hero",
+      title: "Hero",
+    },
+    {
+      name: "Paragraphs",
+      title: "Paragraphs",
+    },
+    {
+      name: "Gallery",
+      title: "Gallery",
+    },
+  ],
   fields: [
     defineField({
       name: "hero",
       title: "Hero",
       type: "hero",
+      group: "Hero",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "paragraph1",
+      title: "Paragraph 1",
+      type: "localizedBlock",
+      group: "Paragraphs",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "galleryTitle",
+      title: "Gallery Title",
+      type: "localizedString",
+      group: "Gallery",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "gallery",
+      title: "Gallery",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
+      group: "Gallery",
+      validation: Rule => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: "hero.title.en",
+    },
+  },
 })

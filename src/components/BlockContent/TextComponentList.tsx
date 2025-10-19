@@ -22,13 +22,13 @@ const TextComponentList: React.FC<TextComponentListProps> = ({
       <div className="flex flex-col justify-center max-w-5xl mx-5 lg:p-2 xl:mx-auto">
         {listType === "bullet" ? (
           <ul
-            className={`${montserrat.className} list-disc pl-6 space-y-2 ${ListClassName}`}
+            className={`${montserrat.className} list-disc pl-6 space-y-2 ${ListClassName} text-start`}
           >
             {items}
           </ul>
         ) : (
           <ol
-            className={`${montserrat.className} list-decimal pl-6 space-y-2 ${ListClassName}`}
+            className={`${montserrat.className} list-decimal pl-6 space-y-2 ${ListClassName} text-start`}
           >
             {items}
           </ol>

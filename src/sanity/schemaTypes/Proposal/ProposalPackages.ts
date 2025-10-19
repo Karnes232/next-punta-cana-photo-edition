@@ -106,7 +106,13 @@ export default defineType({
       description: "Minimum 8 images",
       validation: Rule => Rule.required(),
     }),
-
+    defineField({
+      name: "paragraph2",
+      title: "Paragraph 2",
+      type: "localizedBlock",
+      group: "Paragraphs",
+      validation: Rule => Rule.required(),
+    }),
     defineField({
       name: "seo",
       title: "SEO",

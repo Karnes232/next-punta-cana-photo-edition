@@ -2,6 +2,9 @@ import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getCorporateEvents } from "@/sanity/queries/CorporateEvents/CorporateEvents"
+import BlockContent from "@/components/BlockContent/BlockContent"
+import TextComponent from "@/components/TextComponent/TextComponent"
+import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 
 export default async function CorporateEvents({
   params,
@@ -38,6 +41,19 @@ export default async function CorporateEvents({
             subtitle={corporateEvents?.hero?.subtitle?.[locale]}
           />
         )}
+        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <BlockContent
+            content={corporateEvents?.paragraph1 || { en: [], es: [] }}
+            locale={locale}
+          />
+        </section>
+        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+          <TextComponent
+            title={corporateEvents?.galleryTitle?.[locale]}
+            className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
+          />
+          <PhotoGrid photos={corporateEvents?.gallery || []} />
+        </section>
       </main>
     </>
   )

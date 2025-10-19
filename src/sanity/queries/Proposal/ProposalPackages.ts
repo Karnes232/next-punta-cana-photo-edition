@@ -86,6 +86,10 @@ export interface ProposalPackagesBySlug {
     }
     alt: string
   }[]
+  paragraph2: {
+    en: any[]
+    es: any[]
+  }
 }
 
 export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slug.current == $slug][0] {
@@ -134,6 +138,10 @@ export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slu
       }
     },
     alt
+  },
+  paragraph2 {
+    en,
+    es
   }
 }`
 

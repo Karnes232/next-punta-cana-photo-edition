@@ -3,6 +3,28 @@ import { Hero } from "../HomePage/Hero"
 
 export interface CorporateEvents {
   hero: Hero
+  paragraph1: {
+    en: any[]
+    es: any[]
+  }
+  galleryTitle: {
+    en: string
+    es: string
+  }
+  gallery: {
+    asset: {
+      url: string
+      _ref: string
+      _type: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }[]
 }
 
 export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
@@ -30,7 +52,27 @@ export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
     },
     heroVideo,
     fullSize
-  }
+  },
+  paragraph1 {
+    en,
+    es
+  },
+  galleryTitle {
+      en,
+      es
+    },
+    gallery[] {
+      asset -> {
+        url,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      alt
+    },
 }`
 
 export async function getCorporateEvents(): Promise<CorporateEvents | null> {

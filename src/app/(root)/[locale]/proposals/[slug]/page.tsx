@@ -57,6 +57,12 @@ export default async function ProposalPackagePage({ params }: PageProps) {
           />
           <PhotoGrid photos={proposalPackage?.photoGallery || []} />
         </section>
+        <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <BlockContent
+            content={proposalPackage.paragraph2 || { en: [], es: [] }}
+            locale={locale}
+          />
+        </section>
         <section className="max-w-7xl my-5 xl:mx-auto flex flex-col gap-4">
           <ProposalPackageForm
             page={proposalPackage.hero.title?.[locale] || ""}
