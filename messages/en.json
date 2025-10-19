@@ -117,5 +117,32 @@
     "startingPrice": "Starting Price",
     "priceNotAvailable": "Price not available",
     "includedItems": "Included Items"
+  },
+  "ProposalBookingForm": {
+    "title": "Book Your Perfect Proposal",
+    "subtitle": "Let us help you create the most romantic and memorable proposal experience",
+    "packageInfo": "Proposal Package Information",
+    "package": "Package",
+    "name": "Your Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "your.email@example.com",
+    "telephone": "Phone Number",
+    "telephonePlaceholder": "+1 (555) 123-4567",
+    "partnerName": "Partner's Name",
+    "partnerNamePlaceholder": "Enter your partner's name",
+    "date": "Proposal Date",
+    "location": "Proposal Location",
+    "locationPlaceholder": "Where would you like the proposal to take place?",
+    "specialRequests": "Special Requests",
+    "specialRequestsPlaceholder": "Any special requests, romantic touches, or specific details for your proposal...",
+    "message": "Additional Details",
+    "messagePlaceholder": "Tell us about your vision for the perfect proposal, any specific moments you want captured, or questions you have...",
+    "submit": "Book My Proposal",
+    "sending": "Sending...",
+    "successMessage": "Thank you! We've received your proposal booking request and will contact you soon to plan your perfect moment.",
+    "errorMessage": "Oops! Something went wrong. Please try again.",
+    "requiredField": "This field is required",
+    "invalidEmail": "Please enter a valid email address"
   }
 }

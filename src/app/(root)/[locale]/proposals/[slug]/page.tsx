@@ -1,4 +1,5 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
+import ProposalPackageForm from "@/components/Forms/ProposalPackageForm"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
@@ -55,6 +56,12 @@ export default async function ProposalPackagePage({ params }: PageProps) {
             locale={locale}
           />
           <PhotoGrid photos={proposalPackage?.photoGallery || []} />
+        </section>
+        <section className="max-w-7xl my-5 xl:mx-auto flex flex-col gap-4">
+          <ProposalPackageForm
+            page={proposalPackage.hero.title?.[locale] || ""}
+            locale={locale}
+          />
         </section>
       </main>
     </>

@@ -117,5 +117,32 @@
     "startingPrice": "Precio Inicial",
     "priceNotAvailable": "Precio no disponible",
     "includedItems": "Items Incluidos"
+  },
+  "ProposalBookingForm": {
+    "title": "Reserva tu Propuesta Perfecta",
+    "subtitle": "Déjanos ayudarte a crear la experiencia de propuesta más romántica y memorable",
+    "packageInfo": "Información del Paquete de Propuesta",
+    "package": "Paquete",
+    "name": "Tu Nombre",
+    "namePlaceholder": "Ingresa tu nombre completo",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "tu.correo@ejemplo.com",
+    "telephone": "Número de Teléfono",
+    "telephonePlaceholder": "+1 (555) 123-4567",
+    "partnerName": "Nombre de tu Pareja",
+    "partnerNamePlaceholder": "Ingresa el nombre de tu pareja",
+    "date": "Fecha de la Propuesta",
+    "location": "Ubicación de la Propuesta",
+    "locationPlaceholder": "¿Dónde te gustaría que se realice la propuesta?",
+    "specialRequests": "Solicitudes Especiales",
+    "specialRequestsPlaceholder": "Cualquier solicitud especial, toques románticos, o detalles específicos para tu propuesta...",
+    "message": "Detalles Adicionales",
+    "messagePlaceholder": "Cuéntanos sobre tu visión para la propuesta perfecta, cualquier momento específico que quieras capturar, o preguntas que tengas...",
+    "submit": "Reservar mi Propuesta",
+    "sending": "Enviando...",
+    "successMessage": "¡Gracias! Hemos recibido tu solicitud de reserva de propuesta y te contactaremos pronto para planear tu momento perfecto.",
+    "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
+    "requiredField": "Este campo es requerido",
+    "invalidEmail": "Por favor ingresa un correo electrónico válido"
   }
 }
