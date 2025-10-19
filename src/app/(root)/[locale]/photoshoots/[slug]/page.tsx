@@ -2,6 +2,7 @@ import BlockContent from "@/components/BlockContent/BlockContent"
 import Faqs from "@/components/FaqsComponents/Faqs"
 import PhotoshootPackageForm from "@/components/Forms/PhotoshootPackageForm"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
+import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PackageSwiperGallery from "@/components/SwiperGallery/PackageSwiperGallery"
 import {
   getIndividualPhotoshootsPackage,
@@ -34,12 +35,21 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
         />
       )}
       <main>
-        <BackgroundImage
-          heroImages={photoshootsPackage?.heroImages || []}
-          fullSize={false}
-          title={photoshootsPackage?.heroTitle?.[locale]}
-          subtitle={photoshootsPackage?.heroSubtitle?.[locale]}
-        />
+        {photoshootsPackage?.hero?.heroVideo ? (
+          <BackgroundVideo
+            heroVideo={photoshootsPackage?.hero?.heroVideo}
+            fullSize={photoshootsPackage?.hero?.fullSize}
+            title={photoshootsPackage?.hero?.title?.[locale]}
+            subtitle={photoshootsPackage?.hero?.subtitle?.[locale]}
+          />
+        ) : (
+          <BackgroundImage
+            heroImages={photoshootsPackage?.hero?.heroImage || []}
+            fullSize={photoshootsPackage?.hero?.fullSize}
+            title={photoshootsPackage?.hero?.title?.[locale]}
+            subtitle={photoshootsPackage?.hero?.subtitle?.[locale]}
+          />
+        )}
         <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <BlockContent
             content={photoshootsPackage?.paragraph1 || { en: [], es: [] }}

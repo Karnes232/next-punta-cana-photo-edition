@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import { FaqComponent } from "./Photoshoot"
+import { Hero } from "../HomePage/Hero"
 
 export interface PhotoshootsPackages {
   _id: string
@@ -79,26 +80,7 @@ export interface IndividualPhotoshootsPackage {
   slug: {
     current: string
   }
-  heroImages: {
-    asset: {
-      url: string
-      metadata: {
-        dimensions: {
-          width: number
-          height: number
-        }
-      }
-    }
-    alt: string
-  }[]
-  heroTitle: {
-    en: string
-    es: string
-  }
-  heroSubtitle: {
-    en: string
-    es: string
-  }
+  hero: Hero
   paragraph1: {
     en: any[]
     es: any[]
@@ -122,25 +104,30 @@ export const individualPhotoshootsPackageQuery = `*[_type == "photoshootsPackage
   slug {
     current
   },
-  heroImages[] {
-    asset -> {
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
+  hero {
+    pageName,
+    title {
+      en,
+      es
     },
-    alt
-  },
-  heroTitle {
-    en,
-    es
-  },
-  heroSubtitle {
-    en,
-    es
+    subtitle {
+      en,
+      es
+    },
+    heroImage[] {
+      asset -> {
+        url,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      alt
+    },
+    heroVideo,
+    fullSize
   },
   paragraph1 {
     en,

@@ -11,6 +11,14 @@ export default defineType({
       name: "Package Card",
       title: "Package Card",
     },
+    {
+      name: "Hero",
+      title: "Hero",
+    },
+    {
+      name: "Paragraphs",
+      title: "Paragraphs",
+    },
   ],
   fields: [
     defineField({
@@ -54,6 +62,20 @@ export default defineType({
       type: "number",
       validation: Rule => Rule.required(),
       group: "Package Card",
+    }),
+    defineField({
+      name: "hero",
+      title: "Hero",
+      type: "hero",
+      group: "Hero",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "paragraph1",
+      title: "Paragraph 1",
+      type: "localizedBlock",
+      group: "Paragraphs",
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {
