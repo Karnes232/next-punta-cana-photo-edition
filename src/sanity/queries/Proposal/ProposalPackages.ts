@@ -30,7 +30,7 @@ export interface ProposalPackages {
   packageCardStartingPrice: number
 }
 
-export const getAllProposalPackagesQuery = `*[_type == "proposalPackages"] {
+export const getAllProposalPackagesQuery = `*[_type == "proposalPackages"] | order(packageCardStartingPrice asc) {
   _id,
   packageName {
     en,
