@@ -23,6 +23,10 @@ export default defineType({
       name: "Gallery",
       title: "Gallery",
     },
+    {
+      name: "SEO",
+      title: "SEO",
+    },
   ],
   fields: [
     defineField({
@@ -101,6 +105,13 @@ export default defineType({
       group: "Gallery",
       description: "Minimum 8 images",
       validation: Rule => Rule.required(),
+    }),
+
+    defineField({
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      group: "SEO",
     }),
   ],
   preview: {

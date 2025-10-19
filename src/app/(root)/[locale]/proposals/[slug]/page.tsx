@@ -2,7 +2,11 @@ import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
-import { getProposalPackagesBySlug } from "@/sanity/queries/Proposal/ProposalPackages"
+import {
+  getProposalPackagesBySlug,
+  getProposalPackagesBySlugSEO,
+  getProposalPackagesBySlugStructuredData,
+} from "@/sanity/queries/Proposal/ProposalPackages"
 import { notFound } from "next/navigation"
 
 interface PageProps {
@@ -15,12 +19,20 @@ interface PageProps {
 export default async function ProposalPackagePage({ params }: PageProps) {
   const { locale, slug } = await params
   const proposalPackage = await getProposalPackagesBySlug(slug)
-
+  const structuredData = await getProposalPackagesBySlugStructuredData(slug)
   if (!proposalPackage) {
     notFound()
   }
   return (
     <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
       <main>
         {proposalPackage.hero.heroVideo ? (
           <BackgroundVideo
@@ -47,4 +59,42 @@ export default async function ProposalPackagePage({ params }: PageProps) {
       </main>
     </>
   )
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { locale, slug } = await params
+  const pageSeo = await getProposalPackagesBySlugSEO(slug)
+
+  if (!pageSeo) {
+    return {}
+  }
+
+  let canonicalUrl
+  if (locale === "en") {
+    canonicalUrl = `https://www.puntacanaphotoedition.com/proposals/${slug}`
+  } else {
+    canonicalUrl = `https://www.puntacanaphotoedition.com/es/proposals/${slug}`
+  }
+
+  return {
+    title: pageSeo.seo.meta[locale].title,
+    description: pageSeo.seo.meta[locale].description,
+    keywords: pageSeo.seo.meta[locale].keywords.join(", "),
+    url: canonicalUrl,
+    openGraph: {
+      title: pageSeo.seo.openGraph[locale].title,
+      description: pageSeo.seo.openGraph[locale].description,
+      images: pageSeo.seo.openGraph.image.url,
+      type: "website",
+      url: canonicalUrl,
+    },
+    robots: {
+      index: !pageSeo.seo.noIndex,
+      follow: !pageSeo.seo.noFollow,
+    },
+    ...(canonicalUrl && { canonical: canonicalUrl }),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+  }
 }

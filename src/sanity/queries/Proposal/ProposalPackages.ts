@@ -142,3 +142,103 @@ export async function getProposalPackagesBySlug(
 ): Promise<ProposalPackagesBySlug | null> {
   return await client.fetch(proposalPackagesBySlugQuery, { slug })
 }
+
+export interface ProposalPackagesBySlugSEO {
+  seo: {
+    meta: {
+      en: {
+        title: string
+        description: string
+        keywords: string[]
+      }
+      es: {
+        title: string
+        description: string
+        keywords: string[]
+      }
+    }
+    openGraph: {
+      en: {
+        title: string
+        description: string
+      }
+      es: {
+        title: string
+        description: string
+      }
+      image: {
+        url: string
+        alt?: string
+        width?: number
+        height?: number
+      }
+    }
+    noIndex: boolean
+    noFollow: boolean
+  }
+}
+
+export const proposalPackagesBySlugSEOQuery = `*[_type == "proposalPackages" && slug.current == $slug][0] {
+  seo {
+    meta {
+      en {
+        title,
+        description,
+        keywords
+      },
+      es {
+        title,
+        description,
+        keywords
+      }
+    },  
+    openGraph {
+      en {
+        title,
+        description
+      },
+      es {
+        title,
+        description
+      },
+      "image": {
+      "url": image.asset->url,
+      "alt": image.alt,
+      "width": image.asset->metadata.dimensions.width,
+      "height": image.asset->metadata.dimensions.height
+    },
+      },
+      noIndex,
+      noFollow
+    }
+}`
+
+export async function getProposalPackagesBySlugSEO(
+  slug: string,
+): Promise<ProposalPackagesBySlugSEO | null> {
+  return await client.fetch(proposalPackagesBySlugSEOQuery, { slug })
+}
+
+export interface ProposalPackagesBySlugStructuredData {
+  seo: {
+    structuredData: {
+      en: string
+      es: string
+    }
+  }
+}
+
+export const proposalPackagesBySlugStructuredDataQuery = `*[_type == "proposalPackages" && slug.current == $slug][0] {
+seo {
+    structuredData {
+      en,
+      es
+    }
+  }
+}`
+
+export async function getProposalPackagesBySlugStructuredData(
+  slug: string,
+): Promise<ProposalPackagesBySlugStructuredData | null> {
+  return await client.fetch(proposalPackagesBySlugStructuredDataQuery, { slug })
+}
