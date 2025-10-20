@@ -1,5 +1,6 @@
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import ContactForm from "@/components/Forms/ContactForm"
 import { getContact } from "@/sanity/queries/Contact/Contact"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
@@ -39,9 +40,7 @@ export default async function Contact({
           />
         )}
       </main>
-      <div>
-        <h1>Contact</h1>
-      </div>
+      <ContactForm locale={locale} />
     </>
   )
 }

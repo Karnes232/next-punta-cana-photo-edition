@@ -7,6 +7,7 @@ import TextComponent from "@/components/TextComponent/TextComponent"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import { getCorporateEventPackages } from "@/sanity/queries/CorporateEvents/CorporateEventPackages"
 import CorporateEventsPackages from "@/components/CorporateEventsComponents/CorporateEventsPackages"
+import CorporateEventForm from "@/components/Forms/CorporateEventForm"
 
 export default async function CorporateEvents({
   params,
@@ -62,6 +63,9 @@ export default async function CorporateEvents({
             packages={corporateEventPackages}
             locale={locale}
           />
+        </section>
+        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+          <CorporateEventForm locale={locale} />
         </section>
       </main>
     </>
