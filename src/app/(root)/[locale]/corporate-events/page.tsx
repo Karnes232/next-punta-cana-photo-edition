@@ -72,6 +72,7 @@ export default async function CorporateEvents({
           <CorporateEventTestimonialsComponent
             locale={locale}
             testimonials={corporateEvents?.testimonials || []}
+            title={{ en: "Testimonials", es: "Testimonios" }}
           />
         </section>
       </main>
