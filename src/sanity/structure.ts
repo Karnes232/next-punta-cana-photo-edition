@@ -147,10 +147,26 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("Corporate Events")
         .child(
-          S.document()
-            .schemaType("corporate-events")
+          S.list()
             .title("Corporate Events")
-            .documentId("corporate-events"),
+            .items([
+              S.listItem()
+                .title("Corporate Events")
+                .child(
+                  S.document()
+                    .schemaType("corporate-events")
+                    .title("Corporate Events")
+                    .documentId("corporate-events"),
+                ),
+              S.listItem()
+                .title("Corporate Event Packages")
+                .child(
+                  S.documentList()
+                    .schemaType("corporate-event-packages")
+                    .title("Corporate Event Packages")
+                    .filter("_type == 'corporate-event-packages'"),
+                ),
+            ]),
         ),
       S.listItem()
         .title("Stories")

@@ -5,6 +5,8 @@ import { getCorporateEvents } from "@/sanity/queries/CorporateEvents/CorporateEv
 import BlockContent from "@/components/BlockContent/BlockContent"
 import TextComponent from "@/components/TextComponent/TextComponent"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
+import { getCorporateEventPackages } from "@/sanity/queries/CorporateEvents/CorporateEventPackages"
+import CorporateEventsPackages from "@/components/CorporateEventsComponents/CorporateEventsPackages"
 
 export default async function CorporateEvents({
   params,
@@ -14,7 +16,8 @@ export default async function CorporateEvents({
   const { locale } = await params
   const structuredData = await getStructuredData("corporate-events")
   const corporateEvents = await getCorporateEvents()
-
+  const corporateEventPackages = await getCorporateEventPackages()
+  console.log(corporateEventPackages)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -53,6 +56,12 @@ export default async function CorporateEvents({
             className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
           />
           <PhotoGrid photos={corporateEvents?.gallery || []} />
+        </section>
+        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+          <CorporateEventsPackages
+            packages={corporateEventPackages}
+            locale={locale}
+          />
         </section>
       </main>
     </>

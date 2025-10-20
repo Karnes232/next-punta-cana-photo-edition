@@ -144,5 +144,10 @@
     "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
     "requiredField": "Este campo es requerido",
     "invalidEmail": "Por favor ingresa un correo electrónico válido"
+  },
+  "CorporateEventsPackages": {
+    "title": "Paquetes de Eventos Corporativos",
+    "description": "Servicios profesionales de fotografía y videografía para tus eventos corporativos, conferencias y reuniones empresariales.",
+    "Contact Us": "Contactar"
   }
 }

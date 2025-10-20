@@ -144,5 +144,10 @@
     "errorMessage": "Oops! Something went wrong. Please try again.",
     "requiredField": "This field is required",
     "invalidEmail": "Please enter a valid email address"
+  },
+  "CorporateEventsPackages": {
+    "title": "Corporate Events Packages",
+    "description": "Professional photography and videography services for your corporate events, conferences, and business gatherings.",
+    "Contact Us": "Contact Us"
   }
 }
