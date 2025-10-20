@@ -1,6 +1,31 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
 
+export interface CorporateEventTestimonials {
+  clientName: string
+  clientRole: {
+    en: string
+    es: string
+  }
+  companyName: string
+  testimonial: {
+    en: string
+    es: string
+  }
+  companyLogo: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }
+}
+
 export interface CorporateEvents {
   hero: Hero
   paragraph1: {
@@ -25,6 +50,7 @@ export interface CorporateEvents {
     }
     alt: string
   }[]
+  testimonials: CorporateEventTestimonials[]
 }
 
 export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
@@ -73,6 +99,30 @@ export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
       },
       alt
     },
+    testimonials[] {
+      clientName,
+      clientRole {
+        en,
+        es
+      },
+      companyName,
+      testimonial {
+        en,
+        es
+      },
+      companyLogo {
+        asset -> {
+          url,
+          metadata {
+            dimensions {
+              width,
+              height
+            }
+          }
+        },
+        alt
+      }
+    }
 }`
 
 export async function getCorporateEvents(): Promise<CorporateEvents | null> {

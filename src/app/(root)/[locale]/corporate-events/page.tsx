@@ -8,6 +8,7 @@ import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import { getCorporateEventPackages } from "@/sanity/queries/CorporateEvents/CorporateEventPackages"
 import CorporateEventsPackages from "@/components/CorporateEventsComponents/CorporateEventsPackages"
 import CorporateEventForm from "@/components/Forms/CorporateEventForm"
+import CorporateEventTestimonialsComponent from "@/components/CorporateEventsComponents/CorporateEventTestimonials"
 
 export default async function CorporateEvents({
   params,
@@ -18,7 +19,7 @@ export default async function CorporateEvents({
   const structuredData = await getStructuredData("corporate-events")
   const corporateEvents = await getCorporateEvents()
   const corporateEventPackages = await getCorporateEventPackages()
-  console.log(corporateEventPackages)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -66,6 +67,12 @@ export default async function CorporateEvents({
         </section>
         <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
           <CorporateEventForm locale={locale} />
+        </section>
+        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+          <CorporateEventTestimonialsComponent
+            locale={locale}
+            testimonials={corporateEvents?.testimonials || []}
+          />
         </section>
       </main>
     </>
