@@ -20,7 +20,7 @@ const FaqPageComponent = ({
   if (!faqCategories || faqCategories.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 text-lg">
+        <p className="text-elegantSilver text-lg">
           No FAQs available at the moment.
         </p>
       </div>

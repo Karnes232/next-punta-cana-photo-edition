@@ -34,7 +34,9 @@
     "weddingPlanningCardParagraph": "Let us help you plan the perfect wedding day with our comprehensive planning services."
   },
   "Faqs": {
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "searchFaqs": "Search FAQs...",
+    "allCategories": "All Categories"
   },
   "BookingForm": {
     "title": "Book Your Photography & Video Package",

@@ -34,7 +34,9 @@
     "weddingPlanningCardParagraph": "Déjanos ayudarte a planear el día de boda perfecto con nuestros servicios integrales de planeación."
   },
   "Faqs": {
-    "faq": "Preguntas Frecuentes"
+    "faq": "Preguntas Frecuentes",
+    "searchFaqs": "Buscar preguntas frecuentes...",
+    "allCategories": "Todas las Categorías"
   },
   "BookingForm": {
     "title": "Reserva tu Paquete de Fotografía y Video",

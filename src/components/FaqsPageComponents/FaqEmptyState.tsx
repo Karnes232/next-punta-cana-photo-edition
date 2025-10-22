@@ -12,7 +12,7 @@ const FaqEmptyState: React.FC<FaqEmptyStateProps> = ({
 }) => {
   return (
     <div className="text-center py-12">
-      <p className="text-gray-500 text-lg">
+      <p className="text-elegantSilver text-lg">
         {hasSearchTerm
           ? locale === "en"
             ? "No FAQs found matching your search."

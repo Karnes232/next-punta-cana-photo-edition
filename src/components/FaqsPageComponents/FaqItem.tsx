@@ -16,16 +16,16 @@ const FaqItem: React.FC<FaqItemProps> = ({
   onToggle,
 }) => {
   return (
-    <div className="border-b border-gray-200 last:border-b-0">
+    <div className="border-b border-elegantSilver/30 last:border-b-0">
       <button
-        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200"
+        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-luxuryGold/5 transition-colors duration-200"
         onClick={onToggle}
       >
-        <span className="text-lg font-medium text-gray-900 pr-4">
+        <span className="text-lg font-medium text-darkGray pr-4">
           {question}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+          className={`w-5 h-5 text-caribbeanTurquoise transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -36,7 +36,7 @@ const FaqItem: React.FC<FaqItemProps> = ({
         }`}
       >
         <div className="px-6 pb-4">
-          <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+          <div className="text-darkGray/80 leading-relaxed whitespace-pre-line">
             {answer}
           </div>
         </div>

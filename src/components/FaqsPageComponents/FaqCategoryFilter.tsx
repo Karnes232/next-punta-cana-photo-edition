@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
 import { FaqCategory } from "@/sanity/queries/Faqs/faqCategory"
+import { useTranslations } from "next-intl"
 
 interface FaqCategoryFilterProps {
   faqCategories: FaqCategory[]
@@ -22,7 +23,7 @@ const FaqCategoryFilter: React.FC<FaqCategoryFilterProps> = ({
       onCategorySelect(categoryTitle)
     }
   }
-
+  const t = useTranslations("Faqs")
   return (
     <div className="mb-8">
       <div className="flex flex-wrap gap-2 justify-center">
@@ -30,11 +31,11 @@ const FaqCategoryFilter: React.FC<FaqCategoryFilterProps> = ({
           onClick={() => onCategorySelect(null)}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
             selectedCategory === null
-              ? "bg-blue-500 text-white shadow-md"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-luxuryGold text-pureWhite shadow-lg shadow-luxuryGold/25"
+              : "bg-elegantSilver/20 text-darkGray hover:bg-luxuryGold/10 hover:text-luxuryGold"
           }`}
         >
-          {locale === "en" ? "All Categories" : "Todas las Categorías"}
+          {t("allCategories")}
         </button>
         {faqCategories.map((category, index) => (
           <button
@@ -42,8 +43,8 @@ const FaqCategoryFilter: React.FC<FaqCategoryFilterProps> = ({
             onClick={() => handleCategoryFilter(category.title[locale])}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               selectedCategory === category.title[locale]
-                ? "bg-blue-500 text-white shadow-md"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                ? "bg-luxuryGold text-pureWhite shadow-lg shadow-luxuryGold/25"
+                : "bg-elegantSilver/20 text-darkGray hover:bg-luxuryGold/10 hover:text-luxuryGold"
             }`}
           >
             {category.title[locale]}

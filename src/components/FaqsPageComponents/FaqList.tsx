@@ -20,7 +20,7 @@ const FaqList: React.FC<FaqListProps> = ({ faqs, openItems, onToggleItem }) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-pureWhite rounded-lg shadow-lg border border-elegantSilver/30 overflow-hidden">
       {faqs.map(faq => (
         <FaqItem
           key={faq.id}
