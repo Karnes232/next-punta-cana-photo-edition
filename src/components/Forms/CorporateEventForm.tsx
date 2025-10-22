@@ -500,7 +500,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
                 >
                   <option value="">{t("selectBudget")}</option>
-                  <option value="under-5k">Under $5,000</option>
+                  <option value="under-5k">{t("under5k")}</option>
                   <option value="5k-10k">$5,000 - $10,000</option>
                   <option value="10k-25k">$10,000 - $25,000</option>
                   <option value="25k-50k">$25,000 - $50,000</option>
