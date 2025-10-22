@@ -1,5 +1,9 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import TeamVideo from "@/components/HeroComponent/TeamVideo"
+import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
+import TextComponent from "@/components/TextComponent/TextComponent"
 import { getAbout } from "@/sanity/queries/About/About"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
@@ -11,7 +15,7 @@ export default async function About({
   const { locale } = await params
   const structuredData = await getStructuredData("about")
   const about = await getAbout()
-
+  console.log(about)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -39,9 +43,26 @@ export default async function About({
           />
         )}
       </main>
-      <div>
-        <h1>About</h1>
-      </div>
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
+        <BlockContent
+          content={about?.brandStory || { en: [], es: [] }}
+          locale={locale}
+        />
+      </section>
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
+        <TextComponent
+          title={about?.galleryTitle?.[locale]}
+          className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
+        />
+        <PhotoGrid photos={about?.gallery || []} />
+      </section>
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
+        <BlockContent
+          content={about?.bio || { en: [], es: [] }}
+          locale={locale}
+        />
+      </section>
+      {about?.teamVideo && <TeamVideo heroVideo={about?.teamVideo} />}
     </>
   )
 }
