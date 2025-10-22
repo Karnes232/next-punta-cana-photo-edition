@@ -171,10 +171,34 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("Stories")
         .child(
-          S.document()
-            .schemaType("stories")
+          S.list()
             .title("Stories")
-            .documentId("stories"),
+            .items([
+              S.listItem()
+                .title("Stories")
+                .child(
+                  S.document()
+                    .schemaType("stories")
+                    .title("Stories")
+                    .documentId("stories"),
+                ),
+              S.listItem()
+                .title("Blog Categories")
+                .child(
+                  S.documentList()
+                    .schemaType("blogCategory")
+                    .title("Blog Categories")
+                    .filter("_type == 'blogCategory'"),
+                ),
+              S.listItem()
+                .title("Blog Posts")
+                .child(
+                  S.documentList()
+                    .schemaType("blogPost")
+                    .title("Blog Posts")
+                    .filter("_type == 'blogPost'"),
+                ),
+            ]),
         ),
       S.listItem()
         .title("About")

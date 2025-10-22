@@ -53,7 +53,8 @@ import CorporateEventTestimonials from "./CorporateEvents/CorporateEventTestimon
 
 //Stories
 import stories from "./stories/stories"
-
+import BlogCategory from "./stories/blogCategory"
+import BlogPost from "./stories/blogPost"
 //About
 import About from "./About/About"
 
@@ -118,7 +119,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //Stories
     stories,
-
+    BlogCategory,
+    BlogPost,
     //About
     About,
 

@@ -1,7 +1,13 @@
+import BlogContent from "@/components/BlogComponents/BlogContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
-import { getStories } from "@/sanity/queries/Stories/Stories"
+import {
+  BlogCategory,
+  getAllBlogCategories,
+  getAllBlogPosts,
+  getStories,
+} from "@/sanity/queries/Stories/Stories"
 
 export default async function Stories({
   params,
@@ -11,6 +17,9 @@ export default async function Stories({
   const { locale } = await params
   const structuredData = await getStructuredData("stories")
   const stories = await getStories()
+  const blogCategories = await getAllBlogCategories()
+  const blogPosts = await getAllBlogPosts()
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -38,9 +47,11 @@ export default async function Stories({
           />
         )}
       </main>
-      <div>
-        <h1>Stories</h1>
-      </div>
+      <BlogContent
+        blogPosts={blogPosts || []}
+        blogCategories={blogCategories || ([] as BlogCategory[])}
+        locale={locale}
+      />
     </>
   )
 }

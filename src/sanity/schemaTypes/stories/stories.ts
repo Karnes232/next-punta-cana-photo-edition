@@ -6,11 +6,24 @@ export default defineType({
   title: "Stories",
   type: "document",
   icon: DocumentIcon,
+  groups: [
+    {
+      name: "Hero",
+      title: "Hero",
+    },
+  ],
   fields: [
     defineField({
       name: "hero",
       title: "Hero",
       type: "hero",
+      group: "Hero",
+      validation: Rule => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: "hero.title.en",
+    },
+  },
 })
