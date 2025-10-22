@@ -11,6 +11,10 @@ export default defineType({
       name: "Hero",
       title: "Hero",
     },
+    {
+      name: "Featured Post",
+      title: "Featured Post",
+    },
   ],
   fields: [
     defineField({
@@ -18,6 +22,17 @@ export default defineType({
       title: "Hero",
       type: "hero",
       group: "Hero",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "featuredPost",
+      title: "Featured Post",
+      type: "reference",
+      to: [{ type: "blogPost" }],
+      options: {
+        disableNew: true,
+      },
+      group: "Featured Post",
       validation: Rule => Rule.required(),
     }),
   ],

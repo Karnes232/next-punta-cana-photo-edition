@@ -51,6 +51,7 @@ export default async function Stories({
         blogPosts={blogPosts || []}
         blogCategories={blogCategories || ([] as BlogCategory[])}
         locale={locale}
+        featuredPost={stories?.featuredPost || null}
       />
     </>
   )

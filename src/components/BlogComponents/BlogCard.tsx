@@ -1,10 +1,15 @@
-import { ArrowRight, Clock, Calendar } from "lucide-react"
+import { ArrowRight, Calendar } from "lucide-react"
+import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 
-const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
+const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
   return (
     <article className="bg-pureWhite rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-elegantSilver/20 hover:border-luxuryGold/30">
       <div className="relative">
@@ -24,31 +29,33 @@ const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
         )}
       </div>
 
-       <div className="p-6">
-         <h3 className="text-xl font-bold text-darkGray mb-3 line-clamp-2">
-           {post.title[locale]}
-         </h3>
+      <div className="p-6">
+        <h3
+          className={`${coromantGaramond.className} text-2xl font-bold text-darkGray mb-3 line-clamp-2`}
+        >
+          {post.title[locale]}
+        </h3>
 
-         {post.description && post.description[locale] && (
-           <p className="text-elegantSilver text-sm mb-4 line-clamp-3">
-             {post.description[locale]}
-           </p>
-         )}
+        {post.description && post.description[locale] && (
+          <p className="text-elegantSilver text-sm mb-4 line-clamp-3">
+            {post.description[locale]}
+          </p>
+        )}
 
-         <div className="flex items-center justify-between mb-4">
-           <div className="flex items-center text-sm text-elegantSilver">
-             <Calendar className="h-4 w-4 mr-2" />
-             {new Date(post.publishedAt).toLocaleDateString()}
-           </div>
-           <Link
-             href={`/stories/${post.slug.current}`}
-             className="text-luxuryGold hover:text-caribbeanTurquoise font-medium flex items-center transition-colors"
-           >
-             Read More
-             <ArrowRight className="ml-1 h-4 w-4" />
-           </Link>
-         </div>
-       </div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center text-sm text-elegantSilver">
+            <Calendar className="h-4 w-4 mr-2" />
+            {new Date(post.publishedAt).toLocaleDateString()}
+          </div>
+          <Link
+            href={`/stories/${post.slug.current}`}
+            className="text-luxuryGold hover:text-caribbeanTurquoise font-medium flex items-center transition-colors"
+          >
+            Read More
+            <ArrowRight className="ml-1 h-4 w-4" />
+          </Link>
+        </div>
+      </div>
     </article>
   )
 }

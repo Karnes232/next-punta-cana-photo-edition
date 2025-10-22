@@ -3,6 +3,9 @@ import { Hero } from "../HomePage/Hero"
 
 export interface Stories {
   hero: Hero
+  featuredPost: {
+    _id: string
+  }
 }
 
 export const storiesQuery = `*[_type == "stories"][0]  {
@@ -30,6 +33,9 @@ export const storiesQuery = `*[_type == "stories"][0]  {
     },
     heroVideo,
     fullSize
+  },
+  featuredPost->{
+    _id,
   }
 }`
 
