@@ -192,7 +192,26 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("FAQs")
         .child(
-          S.document().schemaType("faqs").title("FAQs").documentId("faqs"),
+          S.list()
+            .title("FAQs")
+            .items([
+              S.listItem()
+                .title("FAQs Page")
+                .child(
+                  S.document()
+                    .schemaType("faqs")
+                    .title("FAQs")
+                    .documentId("faqs"),
+                ),
+              S.listItem()
+                .title("FAQ Categories")
+                .child(
+                  S.documentList()
+                    .schemaType("faqCategory")
+                    .title("FAQ Categories")
+                    .filter("_type == 'faqCategory'"),
+                ),
+            ]),
         ),
       S.listItem()
         .title("Policies")

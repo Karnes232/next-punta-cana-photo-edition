@@ -15,7 +15,6 @@ export default async function About({
   const { locale } = await params
   const structuredData = await getStructuredData("about")
   const about = await getAbout()
-  console.log(about)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (

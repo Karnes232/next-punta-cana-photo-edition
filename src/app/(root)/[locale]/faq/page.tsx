@@ -1,5 +1,7 @@
+import FaqPageComponent from "@/components/FaqsPageComponents/FaqPageComponent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import { getFaqCategories } from "@/sanity/queries/Faqs/faqCategory"
 import { getFaqs } from "@/sanity/queries/Faqs/Faqs"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
@@ -11,6 +13,7 @@ export default async function FAQ({
   const { locale } = await params
   const structuredData = await getStructuredData("faq")
   const faq = await getFaqs()
+  const faqCategories = await getFaqCategories()
 
   return (
     <>
@@ -39,9 +42,9 @@ export default async function FAQ({
           />
         )}
       </main>
-      <div>
-        <h1>FAQ</h1>
-      </div>
+      <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+        <FaqPageComponent faqCategories={faqCategories} locale={locale} />
+      </section>
     </>
   )
 }

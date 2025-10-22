@@ -37,6 +37,22 @@ const Footer = async () => {
         <LanguageSwitcher color="gray-400" />
         {socialLinks && <SocialMedia socialLinks={socialLinks} />}
       </div>
+      <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 mt-4">
+        <p className="text-sm text-gray-400 flex items-center gap-2 flex-1 justify-start md:justify-end md:mr-8">
+          Built by
+          <a
+            href="https://dr-webstudio.com"
+            className="flex items-center gap-1 hover:text-caribbeanTurquoise cursor-pointer"
+          >
+            <img
+              src="https://cdn.sanity.io/images/6r8ro1r9/production/81a1e4e2b8efbeb881d9ef9dd1624377bcd2f6d0-512x487.png"
+              alt="DR Web Studio"
+              className="h-4"
+            />
+            DR Web Studio
+          </a>
+        </p>
+      </div>
     </div>
   )
 }

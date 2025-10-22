@@ -62,6 +62,8 @@ import Contact from "./contact/contact"
 
 //FAQs
 import FAQs from "./faqs/faqs"
+import FaqCategory from "./faqs/faqCategory"
+import CategorizedFaqs from "./faqs/categorizedFaqs"
 
 //Policies
 import Policies from "./policies/policies"
@@ -125,6 +127,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     //FAQs
     FAQs,
+    FaqCategory,
+    CategorizedFaqs,
 
     //Policies
     Policies,

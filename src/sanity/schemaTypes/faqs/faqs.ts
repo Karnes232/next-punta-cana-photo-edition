@@ -13,4 +13,9 @@ export default defineType({
       type: "hero",
     }),
   ],
+  preview: {
+    select: {
+      title: "hero.title.en",
+    },
+  },
 })
