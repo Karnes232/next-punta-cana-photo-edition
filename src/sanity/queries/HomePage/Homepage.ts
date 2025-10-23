@@ -92,7 +92,7 @@ export async function getHomepage(): Promise<Homepage | null> {
         // Add caching configuration
         cache: 'force-cache',
         next: { 
-          revalidate: 3600, // 1 hour
+          revalidate: 259200, // 3 days (259200 seconds)
           tags: ['homepage'] // For tag-based revalidation
         }
       }

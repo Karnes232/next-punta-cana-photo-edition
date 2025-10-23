@@ -13,14 +13,14 @@ const nextConfig: NextConfig = {
         hostname: "cdn.sanity.io",
       },
     ],
-    // Add image caching
-    minimumCacheTTL: 3600, // 1 hour
+    // Update image caching to match 3-day revalidation
+    minimumCacheTTL: 259200, // 3 days
   },
   // Add experimental features for better caching
   experimental: {
     staleTimes: {
       dynamic: 30, // 30 seconds for dynamic content
-      static: 180, // 3 minutes for static content
+      static: 259200, // 3 days for static content
     },
   },
   // Add headers for static assets
@@ -58,6 +58,43 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Add specific caching for homepage
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+          },
+        ],
+      },
+      {
+        source: '/es',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+          },
+        ],
+      },
+      {
+        source: '/weddings',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+          },
+        ],
+      },
+      {
+        source: '/es/weddings',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
           },
         ],
       },

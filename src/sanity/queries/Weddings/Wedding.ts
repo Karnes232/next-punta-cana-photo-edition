@@ -78,5 +78,16 @@ export const weddingQuery = `*[_type == "weddings"][0] {
 }`
 
 export async function getWedding(): Promise<Wedding | null> {
-  return await client.fetch(weddingQuery)
+  return await client.fetch(
+    weddingQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: 'force-cache',
+      next: { 
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ['weddings'] // For tag-based revalidation
+      }
+    }
+  )
 }

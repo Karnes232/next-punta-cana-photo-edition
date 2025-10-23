@@ -17,7 +17,7 @@ interface PageProps {
 }
 
 // Add revalidation configuration
-export const revalidate = 3600 // Revalidate every hour (3600 seconds)
+export const revalidate = 259200; // Revalidate every 3 days
 export const dynamic = 'force-static' // Force static generation
 
 
@@ -139,7 +139,7 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     other: {
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+      'Cache-Control': 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
     },
   }
 }

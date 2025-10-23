@@ -7,6 +7,10 @@ import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getWedding } from "@/sanity/queries/Weddings/Wedding"
 import { getTranslations } from "next-intl/server"
 
+// Add revalidation configuration
+export const revalidate = 259200; // Revalidate every 3 days
+export const dynamic = 'force-static'; // Force static generation
+
 export default async function Weddings({
   params,
 }: {
@@ -124,6 +128,9 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    other: {
+      'Cache-Control': 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
     },
   }
 }
