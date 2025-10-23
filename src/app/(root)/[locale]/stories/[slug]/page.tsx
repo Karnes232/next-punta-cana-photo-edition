@@ -1,4 +1,4 @@
-import { getBlogPostSeo } from "@/sanity/queries/Stories/BlogPosts"
+import { getBlogPostSeo, getBlogPostStructuredData } from "@/sanity/queries/Stories/BlogPosts"
 
 export default async function StoryPage({
   params,
@@ -6,11 +6,24 @@ export default async function StoryPage({
   params: Promise<{ slug: string; locale: "en" | "es" }>
 }) {
   const { slug, locale } = await params
-
+  
+  const structuredData = await getBlogPostStructuredData(slug)
+  console.log(structuredData)
+  
   return (
-    <div>
-      <h1>Story Page</h1>
-    </div>
+    <>
+    {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
+      <main>
+        <h1>{structuredData?.seo?.structuredData[locale]}</h1>
+      </main>
+    </>
   )
 }
 

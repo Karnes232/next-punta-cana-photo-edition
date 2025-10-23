@@ -75,3 +75,26 @@ export const blogPostsSeoQuery = `*[_type == "blogPost" && slug.current == $slug
 export async function getBlogPostSeo(slug: string): Promise<BlogSeo | null> {
   return await client.fetch(blogPostsSeoQuery, { slug })
 }
+
+
+export const blogPostsStructuredDataQuery = `*[_type == "blogPost" && slug.current == $slug][0] {
+    seo {
+        structuredData {
+            en,
+            es
+        }
+    }
+}`
+
+export interface structuredData {
+  seo: {
+    structuredData: {
+      en: string
+      es: string
+    }
+  }
+}
+
+export async function getBlogPostStructuredData(slug: string): Promise<structuredData | null> {
+  return await client.fetch(blogPostsStructuredDataQuery, { slug })
+}
