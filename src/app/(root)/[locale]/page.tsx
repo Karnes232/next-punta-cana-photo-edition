@@ -16,6 +16,11 @@ interface PageProps {
   }>
 }
 
+// Add revalidation configuration
+export const revalidate = 3600 // Revalidate every hour (3600 seconds)
+export const dynamic = 'force-static' // Force static generation
+
+
 export default async function Home({ params }: PageProps) {
   const { locale } = await params
   const structuredData = await getStructuredData("home")
@@ -132,6 +137,9 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    other: {
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
     },
   }
 }

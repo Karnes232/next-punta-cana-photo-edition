@@ -29,7 +29,6 @@ export default async function StoryPage({
     (post: any) => post._id !== blogPost._id,
   )
 
-  console.log(blogPostRecommendationsCard)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
