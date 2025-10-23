@@ -98,6 +98,24 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: '/wedding-planning',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+          },
+        ],
+      },
+      {
+        source: '/es/wedding-planning',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+          },
+        ],
+      },
     ]
   },
 }

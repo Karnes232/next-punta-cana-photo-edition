@@ -38,6 +38,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
     alt: image.alt || service.title[locale as "en" | "es"] || "Service image",
   }
 
+  // Calculate responsive dimensions based on container constraints
+  const maxDisplayWidth = 400 // Maximum width the image will be displayed at
+  const aspectRatio = photo.width / photo.height
+  const responsiveWidth = Math.min(photo.width, maxDisplayWidth)
+  const responsiveHeight = Math.round(responsiveWidth / aspectRatio)
+
   return (
     <Link
       href={`/${service.slug.current}`}
@@ -48,8 +54,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
         <Image
           src={photo.src}
           alt={photo.alt || "Service image"}
-          width={photo.width}
-          height={photo.height}
+          width={responsiveWidth}
+          height={responsiveHeight}
           className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
           style={{
             aspectRatio: `${photo.width} / ${photo.height}`,

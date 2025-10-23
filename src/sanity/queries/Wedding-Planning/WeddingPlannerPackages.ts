@@ -45,5 +45,16 @@ export const weddingPlannerPackagesQuery = `*[_type == "wedding-planner-packages
 export async function getWeddingPlannerPackages(): Promise<
   WeddingPlannerPackages[] | null
 > {
-  return await client.fetch(weddingPlannerPackagesQuery)
+  return await client.fetch(
+    weddingPlannerPackagesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: 'force-cache',
+      next: { 
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ['wedding-planner-packages'] // For tag-based revalidation
+      }
+    }
+  )
 }

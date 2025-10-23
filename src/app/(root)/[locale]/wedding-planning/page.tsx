@@ -9,6 +9,12 @@ import { notFound } from "next/navigation"
 import WeddingPlannerPackages from "@/components/WeddingPlannerComponents/WeddingPlannerPackages"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 import WeddingPlanningInquiryForm from "@/components/Forms/WeddingPlanningInquiryForm"
+
+// Add revalidation configuration
+export const revalidate = 259200; // Revalidate every 3 days
+export const dynamic = 'force-static'; // Force static generation
+
+
 export default async function WeddingPlanning({
   params,
 }: {
@@ -120,6 +126,9 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    other: {
+      'Cache-Control': 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
     },
   }
 }
