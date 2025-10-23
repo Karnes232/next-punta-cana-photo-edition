@@ -16,7 +16,7 @@ const FeaturedPost = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
             className="h-64 md:h-full w-full object-cover"
           />
           <div className="absolute top-4 left-4">
-            <span className="bg-pureWhite/90 text-luxuryGold text-xs px-3 tracking-wider py-1 rounded-full shadow-md backdrop-blur-sm">
+            <span className="bg-pureWhite/90 text-darkGray text-xs px-3 tracking-wider py-1 rounded-full shadow-md backdrop-blur-sm">
               Featured
             </span>
           </div>

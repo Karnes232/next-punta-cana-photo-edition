@@ -90,7 +90,7 @@ export interface BlogPostCard {
   publishedAt: string
 }
 
-export const blogPostsQuery = `*[_type == "blogPost"]  {
+export const blogPostsQuery = `*[_type == "blogPost"] | order(publishedAt desc) {
   _id,
   title {
     en,
