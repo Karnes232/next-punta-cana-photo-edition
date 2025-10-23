@@ -1,4 +1,11 @@
-import { getBlogPostSeo, getBlogPostStructuredData } from "@/sanity/queries/Stories/BlogPosts"
+import BlockContent from "@/components/BlockContent/BlockContent"
+import BlogPostHeader from "@/components/BlogComponents/BlogPostHeader"
+import {
+  getBlogPostSeo,
+  getBlogPostStructuredData,
+} from "@/sanity/queries/Stories/BlogPosts"
+import { getBlogPost } from "@/sanity/queries/Stories/BlogPosts"
+import { notFound } from "next/navigation"
 
 export default async function StoryPage({
   params,
@@ -6,13 +13,16 @@ export default async function StoryPage({
   params: Promise<{ slug: string; locale: "en" | "es" }>
 }) {
   const { slug, locale } = await params
-  
+
   const structuredData = await getBlogPostStructuredData(slug)
-  console.log(structuredData)
-  
+  const blogPost = await getBlogPost(slug)
+  if (!blogPost) {
+    return notFound()
+  }
+
   return (
     <>
-    {structuredData?.seo?.structuredData[locale] && (
+      {structuredData?.seo?.structuredData[locale] && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -20,9 +30,15 @@ export default async function StoryPage({
           }}
         />
       )}
-      <main>
-        <h1>{structuredData?.seo?.structuredData[locale]}</h1>
-      </main>
+      <BlogPostHeader
+        image={blogPost?.mainImage}
+        publishedAt={blogPost?.publishedAt}
+        title={blogPost?.title}
+        locale={locale}
+      />
+      <section className="max-w-5xl my-5 mx-5 xl:mx-auto flex flex-col">
+        <BlockContent content={blogPost?.body} locale={locale} />
+      </section>
     </>
   )
 }

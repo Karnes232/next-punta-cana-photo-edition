@@ -76,7 +76,6 @@ export async function getBlogPostSeo(slug: string): Promise<BlogSeo | null> {
   return await client.fetch(blogPostsSeoQuery, { slug })
 }
 
-
 export const blogPostsStructuredDataQuery = `*[_type == "blogPost" && slug.current == $slug][0] {
     seo {
         structuredData {
@@ -95,6 +94,62 @@ export interface structuredData {
   }
 }
 
-export async function getBlogPostStructuredData(slug: string): Promise<structuredData | null> {
+export async function getBlogPostStructuredData(
+  slug: string,
+): Promise<structuredData | null> {
   return await client.fetch(blogPostsStructuredDataQuery, { slug })
+}
+
+export interface BlogPost {
+  _id: string
+  title: {
+    en: string
+    es: string
+  }
+  body: {
+    en: any[]
+    es: any[]
+  }
+  mainImage: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }
+  publishedAt: string
+}
+
+export const blogPostQuery = `*[_type == "blogPost" && slug.current == $slug][0] {
+  _id,
+  title {
+    en,
+    es
+  },
+  body {
+    en,
+    es
+  },
+  mainImage {
+    asset -> {
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
+  },
+  publishedAt
+}`
+
+export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  return await client.fetch(blogPostQuery, { slug })
 }
