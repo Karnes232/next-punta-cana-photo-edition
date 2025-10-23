@@ -1,6 +1,8 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import BlogPostHeader from "@/components/BlogComponents/BlogPostHeader"
+import BlogPostRecommendationsCard from "@/components/BlogComponents/BlogPostRecommendationsCard"
 import {
+  getBlogPostRecommendationsCard,
   getBlogPostSeo,
   getBlogPostStructuredData,
 } from "@/sanity/queries/Stories/BlogPosts"
@@ -20,6 +22,14 @@ export default async function StoryPage({
     return notFound()
   }
 
+  let blogPostRecommendationsCard = await getBlogPostRecommendationsCard(
+    blogPost.categories.map((category: any) => category._id),
+  )
+  blogPostRecommendationsCard = blogPostRecommendationsCard.filter(
+    (post: any) => post._id !== blogPost._id,
+  )
+
+  console.log(blogPostRecommendationsCard)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -38,6 +48,12 @@ export default async function StoryPage({
       />
       <section className="max-w-5xl my-5 mx-5 xl:mx-auto flex flex-col">
         <BlockContent content={blogPost?.body} locale={locale} />
+      </section>
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col">
+        <BlogPostRecommendationsCard
+          blogPostRecommendationsCard={blogPostRecommendationsCard}
+          locale={locale}
+        />
       </section>
     </>
   )

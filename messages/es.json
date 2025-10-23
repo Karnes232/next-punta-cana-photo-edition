@@ -257,5 +257,15 @@
     "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
     "requiredField": "Este campo es requerido",
     "invalidEmail": "Por favor ingresa un correo electrónico válido"
+  },
+  "blog": {
+    "backToStories": "Volver a Historias",
+    "searchPlaceholder": "Buscar",
+    "all": "Todos",
+    "readMore": "Leer Más",
+    "featured": "Destacado",
+    "recommendedForYou": "Recomendado para Ti",
+    "recommendationsDescription": "Descubre más historias que podrían interesarte basadas en tu lectura actual.",
+    "noDescriptionAvailable": "No hay descripción disponible"
   }
 }

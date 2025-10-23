@@ -257,5 +257,15 @@
     "errorMessage": "Oops! Something went wrong. Please try again.",
     "requiredField": "This field is required",
     "invalidEmail": "Please enter a valid email address"
+  },
+  "blog": {
+    "backToStories": "Back to Stories",
+    "searchPlaceholder": "Search",
+    "all": "All",
+    "readMore": "Read More",
+    "featured": "Featured",
+    "recommendedForYou": "Recommended for You",
+    "recommendationsDescription": "Discover more stories that might interest you based on your current reading.",
+    "noDescriptionAvailable": "No description available"
   }
 }

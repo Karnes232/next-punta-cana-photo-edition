@@ -123,6 +123,9 @@ export interface BlogPost {
     alt: string
   }
   publishedAt: string
+  categories: {
+    _id: string
+  }[]
 }
 
 export const blogPostQuery = `*[_type == "blogPost" && slug.current == $slug][0] {
@@ -147,9 +150,72 @@ export const blogPostQuery = `*[_type == "blogPost" && slug.current == $slug][0]
     },
     alt
   },
-  publishedAt
+  publishedAt,
+  categories[]->{
+    _id
+  }
 }`
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   return await client.fetch(blogPostQuery, { slug })
+}
+
+export interface BlogPostRecommendationsCard {
+  _id: string
+  title: {
+    en: string
+    es: string
+  }
+  slug: {
+    current: string
+  }
+  mainImage: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }
+  publishedAt: string
+  description: {
+    en: string
+    es: string
+  }
+}
+
+export const blogPostRecommendationsCardQuery = `*[_type == "blogPost" && count(categories[@._ref in $categoryIds]) > 0] {
+  _id,
+  title {
+    en,
+    es
+  },
+  slug,
+  mainImage {
+    asset -> {
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
+  },
+  publishedAt,
+  description {
+    en,
+    es
+  }
+}`
+
+export async function getBlogPostRecommendationsCard(
+  categoryIds: string[],
+): Promise<BlogPostRecommendationsCard[]> {
+  return await client.fetch(blogPostRecommendationsCardQuery, { categoryIds })
 }

@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowLeft, Calendar } from "lucide-react"
 import { Cormorant_Garamond } from "next/font/google"
+import { useTranslations } from "next-intl"
 
 const CoromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ const BlogPostHeader = ({
   title: { en: string; es: string }
   locale: "en" | "es"
 }) => {
+  const t = useTranslations("blog")
   return (
     <>
       <div className={`absolute top-0 w-full h-[65vh]`}>
@@ -57,7 +59,7 @@ const BlogPostHeader = ({
           >
             <ArrowLeft className="h-4 w-4 lg:h-5 lg:w-5 mr-2 flex-shrink-0" />
             <span className="text-sm lg:text-base leading-4">
-              Back to Stories
+              {t("backToStories")}
             </span>
           </Link>
         </div>

@@ -3,13 +3,14 @@ import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-
+import { useTranslations } from "next-intl"
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 })
 
 const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
+  const t = useTranslations("blog")
   return (
     <article className="bg-pureWhite rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-elegantSilver/20 hover:border-luxuryGold/30">
       <div className="relative">
@@ -51,7 +52,7 @@ const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
             href={`/stories/${post.slug.current}`}
             className="text-luxuryGold hover:text-caribbeanTurquoise font-medium flex items-center transition-colors"
           >
-            Read More
+            {t("readMore")}
             <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </div>

@@ -2,8 +2,10 @@ import { ArrowRight, Calendar, Clock, Eye } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
+import { useTranslations } from "next-intl"
 
 const FeaturedPost = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
+  const t = useTranslations("blog")
   return (
     <div className="relative bg-pureWhite rounded-xl shadow-lg overflow-hidden mb-12">
       <div className="md:flex">
@@ -17,7 +19,7 @@ const FeaturedPost = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
           />
           <div className="absolute top-4 left-4">
             <span className="bg-pureWhite/90 text-darkGray text-xs px-3 tracking-wider py-1 rounded-full shadow-md backdrop-blur-sm">
-              Featured
+              {t("featured")}
             </span>
           </div>
         </div>
@@ -61,7 +63,7 @@ const FeaturedPost = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
               href={`/stories/${post.slug.current}`}
               className="inline-flex items-center bg-luxuryGold text-pureWhite px-6 py-3 rounded-lg font-medium hover:bg-luxuryGold/90 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
             >
-              Read More
+              {t("readMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
