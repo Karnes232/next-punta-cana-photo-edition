@@ -7,14 +7,22 @@ import TextComponent from "@/components/TextComponent/TextComponent"
 import { getAbout } from "@/sanity/queries/About/About"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function About({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("about")
-  const about = await getAbout()
+
+  // Fetch data with caching - parallel requests
+  const [structuredData, about] = await Promise.all([
+    getStructuredData("about"),
+    getAbout(),
+  ])
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -106,6 +114,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

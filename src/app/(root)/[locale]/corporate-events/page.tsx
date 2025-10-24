@@ -10,15 +10,23 @@ import CorporateEventsPackages from "@/components/CorporateEventsComponents/Corp
 import CorporateEventForm from "@/components/Forms/CorporateEventForm"
 import CorporateEventTestimonialsComponent from "@/components/CorporateEventsComponents/CorporateEventTestimonials"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function CorporateEvents({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("corporate-events")
-  const corporateEvents = await getCorporateEvents()
-  const corporateEventPackages = await getCorporateEventPackages()
+
+  // Fetch data with caching - parallel requests
+  const [structuredData, corporateEvents, corporateEventPackages] = await Promise.all([
+    getStructuredData("corporate-events"),
+    getCorporateEvents(),
+    getCorporateEventPackages(),
+  ])
 
   return (
     <>
@@ -120,6 +128,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

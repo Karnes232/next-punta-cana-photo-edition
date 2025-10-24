@@ -432,6 +432,99 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Add specific caching for corporate-events page
+      {
+        source: "/corporate-events",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/corporate-events",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/corporate-events",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for contact page
+      {
+        source: "/contact",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/contact",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/contact",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for about page
+      {
+        source: "/about",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/about",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/about",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
     ]
   },
 }

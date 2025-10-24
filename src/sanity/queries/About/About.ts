@@ -87,5 +87,16 @@ export const aboutQuery = `*[_type == "about"][0]  {
 }`
 
 export async function getAbout(): Promise<About | null> {
-  return await client.fetch(aboutQuery)
+  return await client.fetch(
+    aboutQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["about"], // For tag-based revalidation
+      },
+    },
+  )
 }

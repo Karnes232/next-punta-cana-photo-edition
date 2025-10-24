@@ -34,5 +34,16 @@ export const contactQuery = `*[_type == "contact"][0]  {
 }`
 
 export async function getContact(): Promise<Contact | null> {
-  return await client.fetch(contactQuery)
+  return await client.fetch(
+    contactQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["contact"], // For tag-based revalidation
+      },
+    },
+  )
 }

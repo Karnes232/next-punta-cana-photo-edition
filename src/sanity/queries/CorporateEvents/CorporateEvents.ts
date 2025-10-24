@@ -126,5 +126,16 @@ export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
 }`
 
 export async function getCorporateEvents(): Promise<CorporateEvents | null> {
-  return await client.fetch(corporateEventsQuery)
+  return await client.fetch(
+    corporateEventsQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["corporate-events"], // For tag-based revalidation
+      },
+    },
+  )
 }
