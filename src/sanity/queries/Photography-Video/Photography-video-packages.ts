@@ -161,7 +161,7 @@ export async function getPhotographyVideoPackageBySlug(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photography-video-package"], // For tag-based revalidation
+        tags: ["photography-video-packages"], // For tag-based revalidation
       },
     },
   )

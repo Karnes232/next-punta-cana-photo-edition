@@ -79,7 +79,7 @@ export async function getAllBlogCategories(): Promise<BlogCategory[] | null> {
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["blog-categories"], // For tag-based revalidation
+        tags: ["blogCategory"], // For tag-based revalidation
       },
     },
   )
@@ -156,7 +156,7 @@ export async function getAllBlogPosts(): Promise<BlogPostCard[] | null> {
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["blog-posts"], // For tag-based revalidation
+        tags: ["blogPost"], // For tag-based revalidation
       },
     },
   )

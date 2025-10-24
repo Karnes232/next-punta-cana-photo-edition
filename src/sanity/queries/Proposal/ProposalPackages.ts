@@ -70,7 +70,7 @@ export async function getAllProposalPackages(): Promise<
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposal-packages"], // For tag-based revalidation
+        tags: ["proposalPackages"], // For tag-based revalidation
       },
     },
   )
@@ -167,7 +167,7 @@ export async function getProposalPackagesBySlug(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposal-package"], // For tag-based revalidation
+        tags: ["proposalPackages"], // For tag-based revalidation
       },
     },
   )
@@ -254,7 +254,7 @@ export async function getProposalPackagesBySlugSEO(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposal-package-seo"], // For tag-based revalidation
+        tags: ["proposalPackages"], // For tag-based revalidation
       },
     },
   )
@@ -289,7 +289,7 @@ export async function getProposalPackagesBySlugStructuredData(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposal-package-structured-data"], // For tag-based revalidation
+        tags: ["proposalPackages"], // For tag-based revalidation
       },
     },
   )

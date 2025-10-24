@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { revalidateTag, revalidatePath } from 'next/cache'
+import { NextRequest, NextResponse } from "next/server"
+import { revalidateTag, revalidatePath } from "next/cache"
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     //   return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
     // }
 
-    console.log('Revalidating:', { type, tags, paths })
+    console.log("Revalidating:", { type, tags, paths })
 
     // Revalidate by tags (most efficient for our setup)
     if (tags && Array.isArray(tags)) {
@@ -34,15 +34,14 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ 
-      revalidated: true, 
+    return NextResponse.json({
+      revalidated: true,
       now: Date.now(),
       tags: tags || [],
-      paths: paths || []
+      paths: paths || [],
     })
-
   } catch (err) {
-    console.error('Revalidation error:', err)
-    return NextResponse.json({ message: 'Error revalidating' }, { status: 500 })
+    console.error("Revalidation error:", err)
+    return NextResponse.json({ message: "Error revalidating" }, { status: 500 })
   }
 }

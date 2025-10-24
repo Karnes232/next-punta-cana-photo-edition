@@ -22,11 +22,12 @@ export default async function CorporateEvents({
   const { locale } = await params
 
   // Fetch data with caching - parallel requests
-  const [structuredData, corporateEvents, corporateEventPackages] = await Promise.all([
-    getStructuredData("corporate-events"),
-    getCorporateEvents(),
-    getCorporateEventPackages(),
-  ])
+  const [structuredData, corporateEvents, corporateEventPackages] =
+    await Promise.all([
+      getStructuredData("corporate-events"),
+      getCorporateEvents(),
+      getCorporateEventPackages(),
+    ])
 
   return (
     <>
