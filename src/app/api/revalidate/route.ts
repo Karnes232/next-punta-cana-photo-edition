@@ -5,11 +5,11 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { secret, type, tags, paths } = body
-    console.log('body', body)
+    console.log(request)
     // Verify the secret to prevent unauthorized access
-    if (secret !== process.env.SANITY_REVALIDATE_SECRET) {
-      return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
-    }
+    // if (secret !== process.env.SANITY_REVALIDATE_SECRET) {
+    //   return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
+    // }
 
     console.log('Revalidating:', { type, tags, paths })
 
