@@ -4,14 +4,22 @@ import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import { getPolicies } from "@/sanity/queries/Policies/Policies"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function Policies({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("policies")
-  const policies = await getPolicies()
+
+  // Fetch data with caching - parallel requests
+  const [structuredData, policies] = await Promise.all([
+    getStructuredData("policies"),
+    getPolicies(),
+  ])
 
   return (
     <>
@@ -93,6 +101,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

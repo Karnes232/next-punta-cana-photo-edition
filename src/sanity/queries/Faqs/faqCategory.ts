@@ -37,5 +37,16 @@ export const faqCategoriesQuery = `*[_type == "faqCategory"]  {
 }`
 
 export async function getFaqCategories(): Promise<FaqCategory[] | null> {
-  return await client.fetch(faqCategoriesQuery)
+  return await client.fetch(
+    faqCategoriesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["faq-categories"], // For tag-based revalidation
+      },
+    },
+  )
 }

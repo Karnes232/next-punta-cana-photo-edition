@@ -246,6 +246,192 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Add specific caching for proposals page
+      {
+        source: "/proposals",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/proposals",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/proposals",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for individual proposal pages
+      {
+        source: "/proposals/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/proposals/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/proposals/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for policies page
+      {
+        source: "/policies",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/policies",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/policies",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for photoshoots page
+      {
+        source: "/photoshoots",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/photoshoots",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/photoshoots",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for individual photoshoot pages
+      {
+        source: "/photoshoots/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/photoshoots/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/photoshoots/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for FAQ page
+      {
+        source: "/faq",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/faq",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/faq",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
     ]
   },
 }

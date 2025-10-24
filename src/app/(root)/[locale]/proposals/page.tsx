@@ -9,15 +9,23 @@ import TestimonialsComponent from "@/components/TestimonialsComponents/Testimoni
 import { getAllProposalPackages } from "@/sanity/queries/Proposal/ProposalPackages"
 import ProposalComponent from "@/components/ProposalComponents/ProposalComponent"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function Proposals({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("proposals")
-  const proposal = await getProposal()
-  const proposalPackages = await getAllProposalPackages()
+
+  // Fetch data with caching - parallel requests
+  const [structuredData, proposal, proposalPackages] = await Promise.all([
+    getStructuredData("proposals"),
+    getProposal(),
+    getAllProposalPackages(),
+  ])
 
   return (
     <>
@@ -119,6 +127,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

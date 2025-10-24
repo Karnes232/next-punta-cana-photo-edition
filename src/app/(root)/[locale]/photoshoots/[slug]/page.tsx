@@ -10,6 +10,10 @@ import {
   getIndividualPhotoshootsPackagesStructuredData,
 } from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 interface PageProps {
   params: Promise<{
     locale: "en" | "es"
@@ -20,9 +24,11 @@ interface PageProps {
 export default async function PhotoshootsPackage({ params }: PageProps) {
   const { locale, slug } = await params
 
-  const photoshootsPackage = await getIndividualPhotoshootsPackage(slug)
-  const structuredData =
-    await getIndividualPhotoshootsPackagesStructuredData(slug)
+  // Fetch data with caching - parallel requests
+  const [photoshootsPackage, structuredData] = await Promise.all([
+    getIndividualPhotoshootsPackage(slug),
+    getIndividualPhotoshootsPackagesStructuredData(slug),
+  ])
 
   return (
     <>
@@ -105,6 +111,11 @@ export async function generateMetadata({ params }: PageProps) {
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

@@ -33,5 +33,16 @@ export const faqsQuery = `*[_type == "faqs"][0]  {
 }`
 
 export async function getFaqs(): Promise<Faqs | null> {
-  return await client.fetch(faqsQuery)
+  return await client.fetch(
+    faqsQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["faqs"], // For tag-based revalidation
+      },
+    },
+  )
 }

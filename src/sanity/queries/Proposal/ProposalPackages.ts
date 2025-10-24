@@ -62,7 +62,18 @@ export const getAllProposalPackagesQuery = `*[_type == "proposalPackages"] | ord
 export async function getAllProposalPackages(): Promise<
   ProposalPackages[] | null
 > {
-  return await client.fetch(getAllProposalPackagesQuery)
+  return await client.fetch(
+    getAllProposalPackagesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["proposal-packages"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface ProposalPackagesBySlug {
@@ -148,7 +159,18 @@ export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slu
 export async function getProposalPackagesBySlug(
   slug: string,
 ): Promise<ProposalPackagesBySlug | null> {
-  return await client.fetch(proposalPackagesBySlugQuery, { slug })
+  return await client.fetch(
+    proposalPackagesBySlugQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["proposal-package"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface ProposalPackagesBySlugSEO {
@@ -224,7 +246,18 @@ export const proposalPackagesBySlugSEOQuery = `*[_type == "proposalPackages" && 
 export async function getProposalPackagesBySlugSEO(
   slug: string,
 ): Promise<ProposalPackagesBySlugSEO | null> {
-  return await client.fetch(proposalPackagesBySlugSEOQuery, { slug })
+  return await client.fetch(
+    proposalPackagesBySlugSEOQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["proposal-package-seo"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface ProposalPackagesBySlugStructuredData {
@@ -248,5 +281,16 @@ seo {
 export async function getProposalPackagesBySlugStructuredData(
   slug: string,
 ): Promise<ProposalPackagesBySlugStructuredData | null> {
-  return await client.fetch(proposalPackagesBySlugStructuredDataQuery, { slug })
+  return await client.fetch(
+    proposalPackagesBySlugStructuredDataQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["proposal-package-structured-data"], // For tag-based revalidation
+      },
+    },
+  )
 }

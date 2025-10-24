@@ -5,15 +5,23 @@ import { getFaqCategories } from "@/sanity/queries/Faqs/faqCategory"
 import { getFaqs } from "@/sanity/queries/Faqs/Faqs"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function FAQ({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("faq")
-  const faq = await getFaqs()
-  const faqCategories = await getFaqCategories()
+
+  // Fetch data with caching - parallel requests
+  const [structuredData, faq, faqCategories] = await Promise.all([
+    getStructuredData("faq"),
+    getFaqs(),
+    getFaqCategories(),
+  ])
 
   return (
     <>
@@ -89,6 +97,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

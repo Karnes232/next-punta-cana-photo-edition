@@ -73,7 +73,18 @@ export const photoshootsPackagesQuery = `*[_type == "photoshootsPackages"] {
 export async function getAllPhotoshootsPackages(): Promise<
   PhotoshootsPackages[] | null
 > {
-  return await client.fetch(photoshootsPackagesQuery)
+  return await client.fetch(
+    photoshootsPackagesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photoshoot-packages"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface IndividualPhotoshootsPackage {
@@ -160,7 +171,18 @@ export const individualPhotoshootsPackageQuery = `*[_type == "photoshootsPackage
 export async function getIndividualPhotoshootsPackage(
   slug: string,
 ): Promise<IndividualPhotoshootsPackage | null> {
-  return await client.fetch(individualPhotoshootsPackageQuery, { slug })
+  return await client.fetch(
+    individualPhotoshootsPackageQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photoshoot-package"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface IndividualPhotoshootsPackageSEO {
@@ -236,7 +258,18 @@ export const individualPhotoshootsPackageSEOQuery = `*[_type == "photoshootsPack
 export async function getIndividualPhotoshootsPackageSEO(
   slug: string,
 ): Promise<IndividualPhotoshootsPackageSEO | null> {
-  return await client.fetch(individualPhotoshootsPackageSEOQuery, { slug })
+  return await client.fetch(
+    individualPhotoshootsPackageSEOQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photoshoot-package-seo"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface IndividualPhotoshootsPackagesStructuredData {
@@ -260,7 +293,16 @@ export const individualPhotoshootsPackagesStructuredDataQuery = `*[_type == "pho
 export async function getIndividualPhotoshootsPackagesStructuredData(
   slug: string,
 ): Promise<IndividualPhotoshootsPackagesStructuredData | null> {
-  return await client.fetch(individualPhotoshootsPackagesStructuredDataQuery, {
-    slug,
-  })
+  return await client.fetch(
+    individualPhotoshootsPackagesStructuredDataQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photoshoot-package-structured-data"], // For tag-based revalidation
+      },
+    },
+  )
 }

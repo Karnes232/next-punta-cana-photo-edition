@@ -110,5 +110,16 @@ export const proposalQuery = `*[_type == "proposal"][0] {
 }`
 
 export async function getProposal(): Promise<Proposal | null> {
-  return await client.fetch(proposalQuery)
+  return await client.fetch(
+    proposalQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["proposal"], // For tag-based revalidation
+      },
+    },
+  )
 }

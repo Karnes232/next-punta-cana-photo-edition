@@ -50,5 +50,16 @@ export const policiesQuery = `*[_type == "policies"][0]  {
 }`
 
 export async function getPolicies(): Promise<Policies | null> {
-  return await client.fetch(policiesQuery)
+  return await client.fetch(
+    policiesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["policies"], // For tag-based revalidation
+      },
+    },
+  )
 }

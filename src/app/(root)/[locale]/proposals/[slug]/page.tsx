@@ -10,6 +10,10 @@ import {
 } from "@/sanity/queries/Proposal/ProposalPackages"
 import { notFound } from "next/navigation"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 interface PageProps {
   params: Promise<{
     locale: "en" | "es"
@@ -19,8 +23,13 @@ interface PageProps {
 
 export default async function ProposalPackagePage({ params }: PageProps) {
   const { locale, slug } = await params
-  const proposalPackage = await getProposalPackagesBySlug(slug)
-  const structuredData = await getProposalPackagesBySlugStructuredData(slug)
+
+  // Fetch data with caching - parallel requests
+  const [proposalPackage, structuredData] = await Promise.all([
+    getProposalPackagesBySlug(slug),
+    getProposalPackagesBySlugStructuredData(slug),
+  ])
+
   if (!proposalPackage) {
     notFound()
   }
@@ -108,6 +117,11 @@ export async function generateMetadata({ params }: PageProps) {
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

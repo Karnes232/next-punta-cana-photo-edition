@@ -162,5 +162,16 @@ export const photoshootQuery = `*[_type == "photoshoots"][0] {
 }`
 
 export async function getPhotoshoot(): Promise<Photoshoot | null> {
-  return await client.fetch(photoshootQuery)
+  return await client.fetch(
+    photoshootQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photoshoot"], // For tag-based revalidation
+      },
+    },
+  )
 }

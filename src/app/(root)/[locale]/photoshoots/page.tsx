@@ -15,15 +15,23 @@ import {
 
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function Photoshoots({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("photoshoots")
-  const photoshoot = await getPhotoshoot()
-  const photoshootsPackages = await getAllPhotoshootsPackages()
+
+  // Fetch data with caching - parallel requests
+  const [structuredData, photoshoot, photoshootsPackages] = await Promise.all([
+    getStructuredData("photoshoots"),
+    getPhotoshoot(),
+    getAllPhotoshootsPackages(),
+  ])
 
   return (
     <>
@@ -147,6 +155,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }
