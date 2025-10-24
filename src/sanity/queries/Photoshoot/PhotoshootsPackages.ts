@@ -38,6 +38,7 @@ export interface PhotoshootsPackages {
 
 export const photoshootsPackagesQuery = `*[_type == "photoshootsPackages"] {
   _id,
+  _type,
   title {
     en,
     es
@@ -81,7 +82,7 @@ export async function getAllPhotoshootsPackages(): Promise<
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshoot-packages"], // For tag-based revalidation
+        tags: ["photoshootsPackages"], // For tag-based revalidation
       },
     },
   )
@@ -179,7 +180,7 @@ export async function getIndividualPhotoshootsPackage(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshoot-package"], // For tag-based revalidation
+        tags: ["photoshootsPackages"], // For tag-based revalidation
       },
     },
   )
@@ -266,7 +267,7 @@ export async function getIndividualPhotoshootsPackageSEO(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshoot-package-seo"], // For tag-based revalidation
+        tags: ["photoshootsPackages"], // For tag-based revalidation
       },
     },
   )
@@ -301,7 +302,7 @@ export async function getIndividualPhotoshootsPackagesStructuredData(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshoot-package-structured-data"], // For tag-based revalidation
+        tags: ["photoshootsPackages"], // For tag-based revalidation
       },
     },
   )

@@ -20,6 +20,7 @@ export interface FaqCategory {
 }
 
 export const faqCategoriesQuery = `*[_type == "faqCategory"]  {
+_type,
   title {
     en,
     es
@@ -45,7 +46,7 @@ export async function getFaqCategories(): Promise<FaqCategory[] | null> {
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["faq-categories"], // For tag-based revalidation
+        tags: ["faqCategory"], // For tag-based revalidation
       },
     },
   )

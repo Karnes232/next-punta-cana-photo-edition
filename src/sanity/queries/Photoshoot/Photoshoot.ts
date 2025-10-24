@@ -48,6 +48,7 @@ export interface Photoshoot {
 }
 
 export const photoshootQuery = `*[_type == "photoshoots"][0] {
+  _type,
   hero {
         pageName,
         title {
@@ -170,7 +171,7 @@ export async function getPhotoshoot(): Promise<Photoshoot | null> {
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshoot"], // For tag-based revalidation
+        tags: ["photoshoots"], // For tag-based revalidation
       },
     },
   )
