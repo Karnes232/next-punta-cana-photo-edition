@@ -94,6 +94,16 @@ export const photographyVideoQuery = `*[_type == "photography-video"][0] {
 }`
 
 export async function getPhotographyVideo(): Promise<PhotographyVideo | null> {
-  const data = await client.fetch(photographyVideoQuery)
-  return data
+  return await client.fetch(
+    photographyVideoQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photography-video"], // For tag-based revalidation
+      },
+    },
+  )
 }

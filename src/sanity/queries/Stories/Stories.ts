@@ -40,7 +40,18 @@ export const storiesQuery = `*[_type == "stories"][0]  {
 }`
 
 export async function getStories(): Promise<Stories | null> {
-  return await client.fetch(storiesQuery)
+  return await client.fetch(
+    storiesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["stories"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface BlogCategory {
@@ -60,7 +71,18 @@ export const blogCategoriesQuery = `*[_type == "blogCategory"]  {
 }`
 
 export async function getAllBlogCategories(): Promise<BlogCategory[] | null> {
-  return await client.fetch(blogCategoriesQuery)
+  return await client.fetch(
+    blogCategoriesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["blog-categories"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface BlogPostCard {
@@ -126,5 +148,16 @@ export const blogPostsQuery = `*[_type == "blogPost"] | order(publishedAt desc) 
 }`
 
 export async function getAllBlogPosts(): Promise<BlogPostCard[] | null> {
-  return await client.fetch(blogPostsQuery)
+  return await client.fetch(
+    blogPostsQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["blog-posts"], // For tag-based revalidation
+      },
+    },
+  )
 }

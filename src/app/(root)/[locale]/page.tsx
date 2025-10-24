@@ -2,12 +2,9 @@ import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import ServicesOffered from "@/components/ServicesOfferedComponents/ServicesOffered"
 import SwiperGallery from "@/components/SwiperGallery/SwiperGallery"
-import { getHomePageGallery } from "@/sanity/queries/HomePage/Gallery"
-import { getHero } from "@/sanity/queries/HomePage/Hero"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 import ContentBlock from "@/components/ContentBlockComponents/ContentBlock"
-import { getContentBlock } from "@/sanity/queries/HomePage/ContentBlock"
 import { getHomepage } from "@/sanity/queries/HomePage/Homepage"
 
 interface PageProps {
@@ -17,14 +14,16 @@ interface PageProps {
 }
 
 // Add revalidation configuration
-export const revalidate = 259200; // Revalidate every 3 days
-export const dynamic = 'force-static' // Force static generation
-
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
 
 export default async function Home({ params }: PageProps) {
   const { locale } = await params
-  const structuredData = await getStructuredData("home")
-  const homepage = await getHomepage()
+  // Fetch data with caching - parallel requests
+  const [structuredData, homepage] = await Promise.all([
+    getStructuredData("home"),
+    getHomepage(),
+  ])
 
   return (
     <>
@@ -139,7 +138,8 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     other: {
-      'Cache-Control': 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

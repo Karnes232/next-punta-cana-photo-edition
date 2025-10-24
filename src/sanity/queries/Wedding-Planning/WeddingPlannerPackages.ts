@@ -50,11 +50,11 @@ export async function getWeddingPlannerPackages(): Promise<
     {},
     {
       // Add caching configuration
-      cache: 'force-cache',
-      next: { 
+      cache: "force-cache",
+      next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ['wedding-planner-packages'] // For tag-based revalidation
-      }
-    }
+        tags: ["wedding-planner-packages"], // For tag-based revalidation
+      },
+    },
   )
 }

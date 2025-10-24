@@ -39,7 +39,18 @@ export const photographyVideoPackagesQuery = `*[_type == "photography-video-pack
 export async function getAllPhotographyVideoPackages(): Promise<
   PhotographyVideoPackages[] | null
 > {
-  return await client.fetch(photographyVideoPackagesQuery)
+  return await client.fetch(
+    photographyVideoPackagesQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photography-video-packages"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface PhotographyVideoPackagesBySlug {
@@ -142,7 +153,18 @@ export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-vide
 export async function getPhotographyVideoPackageBySlug(
   slug: string,
 ): Promise<PhotographyVideoPackagesBySlug | null> {
-  return await client.fetch(photographyVideoPackagesQueryBySlug, { slug })
+  return await client.fetch(
+    photographyVideoPackagesQueryBySlug,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photography-video-package"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface PhotographyVideoPackageSEO {
@@ -220,5 +242,16 @@ export const photographyVideoPackageSEOQuery = `*[_type == "photography-video-pa
 export async function getPhotographyVideoPackageSEO(
   slug: string,
 ): Promise<PhotographyVideoPackageSEO | null> {
-  return await client.fetch(photographyVideoPackageSEOQuery, { slug })
+  return await client.fetch(
+    photographyVideoPackageSEOQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["photography-video-package-seo"], // For tag-based revalidation
+      },
+    },
+  )
 }

@@ -45,7 +45,7 @@ const Footer = async () => {
             href="https://dr-webstudio.com"
             className="flex items-center gap-1 hover:text-caribbeanTurquoise cursor-pointer"
           >
-           <Image
+            <Image
               src="https://cdn.sanity.io/images/6r8ro1r9/production/81a1e4e2b8efbeb881d9ef9dd1624377bcd2f6d0-512x487.png"
               alt="DR Web Studio"
               className="h-4"

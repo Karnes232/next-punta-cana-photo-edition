@@ -11,9 +11,8 @@ import TestimonialsComponent from "@/components/TestimonialsComponents/Testimoni
 import WeddingPlanningInquiryForm from "@/components/Forms/WeddingPlanningInquiryForm"
 
 // Add revalidation configuration
-export const revalidate = 259200; // Revalidate every 3 days
-export const dynamic = 'force-static'; // Force static generation
-
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
 
 export default async function WeddingPlanning({
   params,
@@ -21,9 +20,14 @@ export default async function WeddingPlanning({
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("wedding-planning")
-  const weddingPlanning = await getWeddingPlanning()
-  const weddingPlannerPackages = await getWeddingPlannerPackages()
+  // Fetch data with caching - parallel requests
+  const [structuredData, weddingPlanning, weddingPlannerPackages] =
+    await Promise.all([
+      getStructuredData("wedding-planning"),
+      getWeddingPlanning(),
+      getWeddingPlannerPackages(),
+    ])
+
   if (!weddingPlanning) {
     notFound()
   }
@@ -128,7 +132,8 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     other: {
-      'Cache-Control': 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

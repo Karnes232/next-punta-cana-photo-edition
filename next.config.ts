@@ -27,92 +27,222 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
         ],
       },
       {
-        source: '/images/(.*)',
+        source: "/images/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
-        source: '/_next/static/(.*)',
+        source: "/_next/static/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       // Add specific caching for homepage
       {
-        source: '/',
+        source: "/",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
           },
         ],
       },
       {
-        source: '/es',
+        source: "/es",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
           },
         ],
       },
       {
-        source: '/weddings',
+        source: "/weddings",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
           },
         ],
       },
       {
-        source: '/es/weddings',
+        source: "/es/weddings",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
           },
         ],
       },
       {
-        source: '/wedding-planning',
+        source: "/wedding-planning",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
           },
         ],
       },
       {
-        source: '/es/wedding-planning',
+        source: "/es/wedding-planning",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for stories page
+      {
+        source: "/stories",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/stories",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/stories",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for individual story pages
+      {
+        source: "/stories/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/stories/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/stories/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for photography-video page
+      {
+        source: "/weddings/photography-video",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/weddings/photography-video",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/weddings/photography-video",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      // Add specific caching for individual photography-video package pages
+      {
+        source: "/weddings/photography-video/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/en/weddings/photography-video/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+          },
+        ],
+      },
+      {
+        source: "/es/weddings/photography-video/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
           },
         ],
       },

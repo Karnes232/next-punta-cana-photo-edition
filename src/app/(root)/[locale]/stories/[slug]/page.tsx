@@ -9,6 +9,10 @@ import {
 import { getBlogPost } from "@/sanity/queries/Stories/BlogPosts"
 import { notFound } from "next/navigation"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function StoryPage({
   params,
 }: {
@@ -16,12 +20,17 @@ export default async function StoryPage({
 }) {
   const { slug, locale } = await params
 
-  const structuredData = await getBlogPostStructuredData(slug)
-  const blogPost = await getBlogPost(slug)
+  // Fetch data with caching - parallel requests
+  const [structuredData, blogPost] = await Promise.all([
+    getBlogPostStructuredData(slug),
+    getBlogPost(slug),
+  ])
+
   if (!blogPost) {
     return notFound()
   }
 
+  // Fetch recommendations after we have the blog post
   let blogPostRecommendationsCard = await getBlogPostRecommendationsCard(
     blogPost.categories.map((category: any) => category._id),
   )
@@ -96,6 +105,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

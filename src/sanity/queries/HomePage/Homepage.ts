@@ -85,17 +85,17 @@ export const homepageQuery = `*[_type == "homepage"][0] {
 }`
 
 export async function getHomepage(): Promise<Homepage | null> {
-    const homepage = await client.fetch<Homepage>(
-      homepageQuery,
-      {},
-      {
-        // Add caching configuration
-        cache: 'force-cache',
-        next: { 
-          revalidate: 259200, // 3 days (259200 seconds)
-          tags: ['homepage'] // For tag-based revalidation
-        }
-      }
-    )
-    return homepage
-  }
+  const homepage = await client.fetch<Homepage>(
+    homepageQuery,
+    {},
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["homepage"], // For tag-based revalidation
+      },
+    },
+  )
+  return homepage
+}

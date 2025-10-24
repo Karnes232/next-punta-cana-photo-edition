@@ -83,11 +83,11 @@ export async function getWedding(): Promise<Wedding | null> {
     {},
     {
       // Add caching configuration
-      cache: 'force-cache',
-      next: { 
+      cache: "force-cache",
+      next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ['weddings'] // For tag-based revalidation
-      }
-    }
+        tags: ["weddings"], // For tag-based revalidation
+      },
+    },
   )
 }

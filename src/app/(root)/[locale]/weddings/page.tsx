@@ -8,8 +8,8 @@ import { getWedding } from "@/sanity/queries/Weddings/Wedding"
 import { getTranslations } from "next-intl/server"
 
 // Add revalidation configuration
-export const revalidate = 259200; // Revalidate every 3 days
-export const dynamic = 'force-static'; // Force static generation
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
 
 export default async function Weddings({
   params,
@@ -18,8 +18,11 @@ export default async function Weddings({
 }) {
   const t = await getTranslations("weddings")
   const { locale } = await params
-  const structuredData = await getStructuredData("weddings")
-  const wedding = await getWedding()
+  // Fetch data with caching - parallel requests
+  const [structuredData, wedding] = await Promise.all([
+    getStructuredData("weddings"),
+    getWedding(),
+  ])
 
   return (
     <>
@@ -130,7 +133,8 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     other: {
-      'Cache-Control': 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400',
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

@@ -17,11 +17,19 @@ interface PhotographyVideoPackagePageProps {
   }>
 }
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function PhotographyVideoPackagePage({
   params,
 }: PhotographyVideoPackagePageProps) {
   const { locale, slug } = await params
-  const packageItem = await getPhotographyVideoPackageBySlug(slug)
+
+  // Fetch data with caching - parallel requests
+  const [packageItem] = await Promise.all([
+    getPhotographyVideoPackageBySlug(slug),
+  ])
 
   if (!packageItem) {
     notFound()
@@ -127,6 +135,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }

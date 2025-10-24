@@ -73,7 +73,18 @@ export const blogPostsSeoQuery = `*[_type == "blogPost" && slug.current == $slug
 }`
 
 export async function getBlogPostSeo(slug: string): Promise<BlogSeo | null> {
-  return await client.fetch(blogPostsSeoQuery, { slug })
+  return await client.fetch(
+    blogPostsSeoQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["blog-post-seo"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export const blogPostsStructuredDataQuery = `*[_type == "blogPost" && slug.current == $slug][0] {
@@ -97,7 +108,18 @@ export interface structuredData {
 export async function getBlogPostStructuredData(
   slug: string,
 ): Promise<structuredData | null> {
-  return await client.fetch(blogPostsStructuredDataQuery, { slug })
+  return await client.fetch(
+    blogPostsStructuredDataQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["blog-post-structured-data"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface BlogPost {
@@ -157,7 +179,18 @@ export const blogPostQuery = `*[_type == "blogPost" && slug.current == $slug][0]
 }`
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  return await client.fetch(blogPostQuery, { slug })
+  return await client.fetch(
+    blogPostQuery,
+    { slug },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["blog-post"], // For tag-based revalidation
+      },
+    },
+  )
 }
 
 export interface BlogPostRecommendationsCard {
@@ -217,5 +250,16 @@ export const blogPostRecommendationsCardQuery = `*[_type == "blogPost" && count(
 export async function getBlogPostRecommendationsCard(
   categoryIds: string[],
 ): Promise<BlogPostRecommendationsCard[]> {
-  return await client.fetch(blogPostRecommendationsCardQuery, { categoryIds })
+  return await client.fetch(
+    blogPostRecommendationsCardQuery,
+    { categoryIds },
+    {
+      // Add caching configuration
+      cache: "force-cache",
+      next: {
+        revalidate: 259200, // 3 days (259200 seconds)
+        tags: ["blog-post-recommendations"], // For tag-based revalidation
+      },
+    },
+  )
 }

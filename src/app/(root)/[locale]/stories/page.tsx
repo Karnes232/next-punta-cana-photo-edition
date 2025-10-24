@@ -9,16 +9,25 @@ import {
   getStories,
 } from "@/sanity/queries/Stories/Stories"
 
+// Add revalidation configuration
+export const revalidate = 259200 // Revalidate every 3 days
+export const dynamic = "force-static" // Force static generation
+
 export default async function Stories({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("stories")
-  const stories = await getStories()
-  const blogCategories = await getAllBlogCategories()
-  const blogPosts = await getAllBlogPosts()
+
+  // Fetch data with caching - parallel requests
+  const [structuredData, stories, blogCategories, blogPosts] =
+    await Promise.all([
+      getStructuredData("stories"),
+      getStories(),
+      getAllBlogCategories(),
+      getAllBlogPosts(),
+    ])
 
   return (
     <>
@@ -97,6 +106,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+    },
+    // Add caching headers to metadata
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
     },
   }
 }
