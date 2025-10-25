@@ -139,8 +139,9 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        // priority={index < 4}
-                        loading="lazy"
+                        priority={index < 2} // Priority for first 2 images
+                        loading={index < 2 ? "eager" : "lazy"}
+                        quality={85} // Add quality optimization
                       />
 
                       {/* Click overlay - only show icon, no background */}

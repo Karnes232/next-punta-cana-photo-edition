@@ -54,7 +54,7 @@ function createSecurityHeaders() {
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    qualities: [80, 90, 95, 100],
+    qualities: [80, 85, 90, 95, 100],
     remotePatterns: [
       {
         protocol: "https",

@@ -39,7 +39,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   }
 
   // Calculate responsive dimensions based on container constraints
-  const maxDisplayWidth = 400 // Maximum width the image will be displayed at
+  const maxDisplayWidth = 372 // Match the actual display size
   const aspectRatio = photo.width / photo.height
   const responsiveWidth = Math.min(photo.width, maxDisplayWidth)
   const responsiveHeight = Math.round(responsiveWidth / aspectRatio)
@@ -65,6 +65,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={false}
           loading="lazy"
+          quality={85}
         />
       </div>
 
