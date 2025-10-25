@@ -82,7 +82,7 @@ export async function getAllPhotoshootsPackages(): Promise<
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages"], // For tag-based revalidation
+        tags: ["photoshootsPackages", 'photoshoots'], // For tag-based revalidation
       },
     },
   )
@@ -180,7 +180,7 @@ export async function getIndividualPhotoshootsPackage(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages"], // For tag-based revalidation
+        tags: ["photoshootsPackages", `package:${slug}`, 'photoshoots'], // For tag-based revalidation
       },
     },
   )
@@ -267,7 +267,7 @@ export async function getIndividualPhotoshootsPackageSEO(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages"], // For tag-based revalidation
+        tags: ["photoshootsPackages", `package:${slug}`, 'photoshoots'], // For tag-based revalidation
       },
     },
   )
@@ -302,7 +302,7 @@ export async function getIndividualPhotoshootsPackagesStructuredData(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages"], // For tag-based revalidation
+        tags: ["photoshootsPackages", `package:${slug}`, 'photoshoots'], // For tag-based revalidation
       },
     },
   )

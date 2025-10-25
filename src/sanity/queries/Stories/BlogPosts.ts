@@ -116,7 +116,7 @@ export async function getBlogPostStructuredData(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["blog-post-structured-data"], // For tag-based revalidation
+        tags: ['stories','blogPost', `post:${slug}`], // For tag-based revalidation
       },
     },
   )
@@ -187,7 +187,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["blog-post"], // For tag-based revalidation
+        tags: ['stories','blogPost', `post:${slug}`], // For tag-based revalidation
       },
     },
   )
@@ -258,7 +258,7 @@ export async function getBlogPostRecommendationsCard(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["blog-post-recommendations"], // For tag-based revalidation
+        tags: ['stories','blogPost'], // For tag-based revalidation
       },
     },
   )

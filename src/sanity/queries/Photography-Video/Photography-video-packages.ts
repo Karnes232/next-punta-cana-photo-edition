@@ -47,7 +47,7 @@ export async function getAllPhotographyVideoPackages(): Promise<
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photography-video-packages"], // For tag-based revalidation
+        tags: ["photography-video-packages", 'photography-video'], // For tag-based revalidation
       },
     },
   )
@@ -161,7 +161,7 @@ export async function getPhotographyVideoPackageBySlug(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photography-video-packages"], // For tag-based revalidation
+        tags: ["photography-video-packages", `package:${slug}`, 'photography-video'], // For tag-based revalidation
       },
     },
   )
@@ -250,7 +250,7 @@ export async function getPhotographyVideoPackageSEO(
       cache: "force-cache",
       next: {
         revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photography-video-package-seo"], // For tag-based revalidation
+        tags: ["photography-video-packages", `package:${slug}`, 'photography-video'], // For tag-based revalidation
       },
     },
   )
