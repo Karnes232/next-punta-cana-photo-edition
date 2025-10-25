@@ -11,8 +11,8 @@ const LogoComponent = ({ logo }: { logo: Logo }) => {
           <div className="cursor-pointer flex items-center w-20 lg:w-32">
             <Image
               src={logo.companyLogo.asset.url}
-              width={logo.companyLogo.asset.metadata.dimensions.width}
-              height={logo.companyLogo.asset.metadata.dimensions.height}
+              width={150}
+              height={150}
               alt={logo.companyLogo.alt}
               className="w-20 md:w-32"
             />
