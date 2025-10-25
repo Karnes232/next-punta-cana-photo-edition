@@ -61,6 +61,7 @@ const TestimonialCard = ({
               alt={
                 testimonial.photo.alt || `Work example for ${testimonial.name}`
               }
+              loading="lazy"
               width={600}
               height={400}
               className="w-full h-32 object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"

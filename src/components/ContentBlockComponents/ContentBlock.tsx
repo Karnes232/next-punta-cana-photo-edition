@@ -49,6 +49,7 @@ const ContentBlock = async ({
               src={image.asset.url}
               alt={image.alt || "Content image"}
               fill
+              loading="lazy"
               className="object-cover"
               sizes="(max-width: 768px) 320px, (max-width: 1024px) 464px, 592px"
             />
