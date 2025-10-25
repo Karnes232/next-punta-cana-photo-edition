@@ -1,36 +1,36 @@
-import { MetadataRoute } from 'next'
-import { client } from '@/sanity/lib/client'
+import { MetadataRoute } from "next"
+import { client } from "@/sanity/lib/client"
 
 // Base URL for the website
-const baseUrl = 'https://www.puntacanaphotoedition.com'
+const baseUrl = "https://www.puntacanaphotoedition.com"
 
 // Static pages - both English and Spanish
 const staticPages = [
-  '/',
-  '/about',
-  '/contact',
-  '/weddings',
-  '/weddings/photography-video',
-  '/photoshoots',
-  '/proposals',
-  '/corporate-events',
-  '/wedding-planning',
-  '/faq',
-  '/policies',
-  '/stories',
+  "/",
+  "/about",
+  "/contact",
+  "/weddings",
+  "/weddings/photography-video",
+  "/photoshoots",
+  "/proposals",
+  "/corporate-events",
+  "/wedding-planning",
+  "/faq",
+  "/policies",
+  "/stories",
   // Spanish versions
-  '/es',
-  '/es/about',
-  '/es/contact',
-  '/es/weddings',
-  '/es/weddings/photography-video',
-  '/es/photoshoots',
-  '/es/proposals',
-  '/es/corporate-events',
-  '/es/wedding-planning',
-  '/es/faq',
-  '/es/policies',
-  '/es/stories',
+  "/es",
+  "/es/about",
+  "/es/contact",
+  "/es/weddings",
+  "/es/weddings/photography-video",
+  "/es/photoshoots",
+  "/es/proposals",
+  "/es/corporate-events",
+  "/es/wedding-planning",
+  "/es/faq",
+  "/es/policies",
+  "/es/stories",
 ]
 
 // Fetch blog posts from Sanity
@@ -44,13 +44,13 @@ async function getBlogPosts() {
       }`,
       {},
       {
-        cache: 'force-cache',
+        cache: "force-cache",
         next: { revalidate: 259200 },
-      }
+      },
     )
     return posts || []
   } catch (error) {
-    console.error('Error fetching blog posts:', error)
+    console.error("Error fetching blog posts:", error)
     return []
   }
 }
@@ -66,13 +66,13 @@ async function getPhotoshootPackages() {
       }`,
       {},
       {
-        cache: 'force-cache',
+        cache: "force-cache",
         next: { revalidate: 259200 },
-      }
+      },
     )
     return packages || []
   } catch (error) {
-    console.error('Error fetching photoshoot packages:', error)
+    console.error("Error fetching photoshoot packages:", error)
     return []
   }
 }
@@ -88,13 +88,13 @@ async function getProposalPackages() {
       }`,
       {},
       {
-        cache: 'force-cache',
+        cache: "force-cache",
         next: { revalidate: 259200 },
-      }
+      },
     )
     return packages || []
   } catch (error) {
-    console.error('Error fetching proposal packages:', error)
+    console.error("Error fetching proposal packages:", error)
     return []
   }
 }
@@ -110,33 +110,37 @@ async function getPhotographyVideoPackages() {
       }`,
       {},
       {
-        cache: 'force-cache',
+        cache: "force-cache",
         next: { revalidate: 259200 },
-      }
+      },
     )
     return packages || []
   } catch (error) {
-    console.error('Error fetching photography video packages:', error)
+    console.error("Error fetching photography video packages:", error)
     return []
   }
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all dynamic content
-  const [blogPosts, photoshootPackages, proposalPackages, photographyVideoPackages] = 
-    await Promise.all([
-      getBlogPosts(),
-      getPhotoshootPackages(),
-      getProposalPackages(),
-      getPhotographyVideoPackages(),
-    ])
+  const [
+    blogPosts,
+    photoshootPackages,
+    proposalPackages,
+    photographyVideoPackages,
+  ] = await Promise.all([
+    getBlogPosts(),
+    getPhotoshootPackages(),
+    getProposalPackages(),
+    getPhotographyVideoPackages(),
+  ])
 
   // Build sitemap entries for static pages
   const staticEntries: MetadataRoute.Sitemap = staticPages.map(page => ({
     url: `${baseUrl}${page}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: page === '/' ? 1.0 : 0.8,
+    changeFrequency: "monthly",
+    priority: page === "/" ? 1.0 : 0.8,
   }))
 
   // Build sitemap entries for blog posts
@@ -147,15 +151,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         {
           url: `${baseUrl}/stories/${post.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'weekly',
+          changeFrequency: "weekly",
           priority: 0.7,
         },
         {
           url: `${baseUrl}/es/stories/${post.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'weekly',
+          changeFrequency: "weekly",
           priority: 0.7,
-        }
+        },
       )
     }
   }
@@ -168,15 +172,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         {
           url: `${baseUrl}/photoshoots/${pkg.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'monthly',
+          changeFrequency: "monthly",
           priority: 0.6,
         },
         {
           url: `${baseUrl}/es/photoshoots/${pkg.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'monthly',
+          changeFrequency: "monthly",
           priority: 0.6,
-        }
+        },
       )
     }
   }
@@ -189,15 +193,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         {
           url: `${baseUrl}/proposals/${pkg.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'monthly',
+          changeFrequency: "monthly",
           priority: 0.6,
         },
         {
           url: `${baseUrl}/es/proposals/${pkg.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'monthly',
+          changeFrequency: "monthly",
           priority: 0.6,
-        }
+        },
       )
     }
   }
@@ -210,15 +214,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         {
           url: `${baseUrl}/weddings/photography-video/${pkg.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'monthly',
+          changeFrequency: "monthly",
           priority: 0.6,
         },
         {
           url: `${baseUrl}/es/weddings/photography-video/${pkg.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: 'monthly',
+          changeFrequency: "monthly",
           priority: 0.6,
-        }
+        },
       )
     }
   }

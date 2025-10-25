@@ -1,4 +1,5 @@
 import { client } from "@/sanity/lib/client"
+import { createFetchOptions, createCacheTags } from "@/sanity/lib/query-helpers"
 
 export interface BlogSeo {
   seo: {
@@ -111,14 +112,7 @@ export async function getBlogPostStructuredData(
   return await client.fetch(
     blogPostsStructuredDataQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ['stories','blogPost', `post:${slug}`], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["stories", "blogPost", `post:${slug}`]),
   )
 }
 
@@ -182,14 +176,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   return await client.fetch(
     blogPostQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ['stories','blogPost', `post:${slug}`], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["stories", "blogPost", `post:${slug}`]),
   )
 }
 
@@ -253,13 +240,6 @@ export async function getBlogPostRecommendationsCard(
   return await client.fetch(
     blogPostRecommendationsCardQuery,
     { categoryIds },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ['stories','blogPost'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["stories", "blogPost"]),
   )
 }

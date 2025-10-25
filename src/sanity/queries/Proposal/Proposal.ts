@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
 import { Testimonial } from "../HomePage/Testimonials"
+import { createPageFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface Proposal {
   hero: Hero
@@ -113,13 +114,6 @@ export async function getProposal(): Promise<Proposal | null> {
   return await client.fetch(
     proposalQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposal"], // For tag-based revalidation
-      },
-    },
+    createPageFetchOptions("proposal"),
   )
 }

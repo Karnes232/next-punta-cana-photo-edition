@@ -1,5 +1,9 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
+import {
+  createPageFetchOptions,
+  createFetchOptions,
+} from "@/sanity/lib/query-helpers"
 
 export interface Stories {
   hero: Hero
@@ -40,18 +44,7 @@ export const storiesQuery = `*[_type == "stories"][0]  {
 }`
 
 export async function getStories(): Promise<Stories | null> {
-  return await client.fetch(
-    storiesQuery,
-    {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["stories"], // For tag-based revalidation
-      },
-    },
-  )
+  return await client.fetch(storiesQuery, {}, createPageFetchOptions("stories"))
 }
 
 export interface BlogCategory {
@@ -74,14 +67,7 @@ export async function getAllBlogCategories(): Promise<BlogCategory[] | null> {
   return await client.fetch(
     blogCategoriesQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["blogCategory"], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["blogCategory"]),
   )
 }
 
@@ -151,13 +137,6 @@ export async function getAllBlogPosts(): Promise<BlogPostCard[] | null> {
   return await client.fetch(
     blogPostsQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["blogPost"], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["blogPost"]),
   )
 }

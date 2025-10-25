@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
 import { Testimonial } from "../HomePage/Testimonials"
+import { createPageFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface WeddingPlanning {
   hero: Hero
@@ -104,13 +105,6 @@ export async function getWeddingPlanning(): Promise<WeddingPlanning | null> {
   return await client.fetch(
     weddingPlanningQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["wedding-planning"], // For tag-based revalidation
-      },
-    },
+    createPageFetchOptions("wedding-planning"),
   )
 }

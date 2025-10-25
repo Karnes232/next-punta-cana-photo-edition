@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client"
 import { Hero } from "./Hero"
 import { Testimonial } from "./Testimonials"
 import { ContentBlock } from "./ContentBlock"
+import { createPageFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface Homepage {
   hero: Hero
@@ -88,14 +89,7 @@ export async function getHomepage(): Promise<Homepage | null> {
   const homepage = await client.fetch<Homepage>(
     homepageQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["homepage"], // For tag-based revalidation
-      },
-    },
+    createPageFetchOptions("homepage"),
   )
   return homepage
 }

@@ -1,4 +1,5 @@
 import { client } from "@/sanity/lib/client"
+import { createFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface CorporateEventPackages {
   title: {
@@ -56,13 +57,6 @@ export const getCorporateEventPackages = async (): Promise<
   return await client.fetch(
     corporateEventPackagesQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["corporate-event-packages"], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["corporate-event-packages"]),
   )
 }

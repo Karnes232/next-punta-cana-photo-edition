@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { FaqComponent } from "./Photoshoot"
 import { Hero } from "../HomePage/Hero"
+import { createFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface PhotoshootsPackages {
   _id: string
@@ -77,14 +78,7 @@ export async function getAllPhotoshootsPackages(): Promise<
   return await client.fetch(
     photoshootsPackagesQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages", 'photoshoots'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["photoshootsPackages", "photoshoots"]),
   )
 }
 
@@ -175,14 +169,11 @@ export async function getIndividualPhotoshootsPackage(
   return await client.fetch(
     individualPhotoshootsPackageQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages", `package:${slug}`, 'photoshoots'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, [
+      "photoshootsPackages",
+      `package:${slug}`,
+      "photoshoots",
+    ]),
   )
 }
 
@@ -262,14 +253,11 @@ export async function getIndividualPhotoshootsPackageSEO(
   return await client.fetch(
     individualPhotoshootsPackageSEOQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages", `package:${slug}`, 'photoshoots'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, [
+      "photoshootsPackages",
+      `package:${slug}`,
+      "photoshoots",
+    ]),
   )
 }
 
@@ -297,13 +285,10 @@ export async function getIndividualPhotoshootsPackagesStructuredData(
   return await client.fetch(
     individualPhotoshootsPackagesStructuredDataQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshootsPackages", `package:${slug}`, 'photoshoots'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, [
+      "photoshootsPackages",
+      `package:${slug}`,
+      "photoshoots",
+    ]),
   )
 }

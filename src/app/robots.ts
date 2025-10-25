@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: "/"
+      allow: "/",
     },
     sitemap: "https://puntacanaphotoedition.com/sitemap.xml",
   }

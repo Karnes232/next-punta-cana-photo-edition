@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
 import { ContentBlock } from "../HomePage/ContentBlock"
 import { Testimonial } from "../HomePage/Testimonials"
+import { createPageFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface FaqComponent {
   title: {
@@ -166,13 +167,6 @@ export async function getPhotoshoot(): Promise<Photoshoot | null> {
   return await client.fetch(
     photoshootQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["photoshoots"], // For tag-based revalidation
-      },
-    },
+    createPageFetchOptions("photoshoots"),
   )
 }

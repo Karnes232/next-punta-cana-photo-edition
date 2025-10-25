@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
+import { createFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface ProposalPackages {
   _id: string
@@ -65,14 +66,7 @@ export async function getAllProposalPackages(): Promise<
   return await client.fetch(
     getAllProposalPackagesQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposalPackages", 'proposals'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["proposalPackages", "proposals"]),
   )
 }
 
@@ -162,14 +156,7 @@ export async function getProposalPackagesBySlug(
   return await client.fetch(
     proposalPackagesBySlugQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposalPackages", `package:${slug}`, 'proposals'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["proposalPackages", `package:${slug}`, "proposals"]),
   )
 }
 
@@ -249,14 +236,7 @@ export async function getProposalPackagesBySlugSEO(
   return await client.fetch(
     proposalPackagesBySlugSEOQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposalPackages", `package:${slug}`, 'proposals'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["proposalPackages", `package:${slug}`, "proposals"]),
   )
 }
 
@@ -284,13 +264,6 @@ export async function getProposalPackagesBySlugStructuredData(
   return await client.fetch(
     proposalPackagesBySlugStructuredDataQuery,
     { slug },
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["proposalPackages", `package:${slug}`, 'proposals'], // For tag-based revalidation
-      },
-    },
+    createFetchOptions(3, ["proposalPackages", `package:${slug}`, "proposals"]),
   )
 }

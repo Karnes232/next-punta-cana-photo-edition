@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
+import { createPageFetchOptions } from "@/sanity/lib/query-helpers"
 
 export interface Policies {
   hero: Hero
@@ -53,13 +54,6 @@ export async function getPolicies(): Promise<Policies | null> {
   return await client.fetch(
     policiesQuery,
     {},
-    {
-      // Add caching configuration
-      cache: "force-cache",
-      next: {
-        revalidate: 259200, // 3 days (259200 seconds)
-        tags: ["policies"], // For tag-based revalidation
-      },
-    },
+    createPageFetchOptions("policies"),
   )
 }
