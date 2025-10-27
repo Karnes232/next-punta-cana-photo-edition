@@ -13,6 +13,7 @@ export interface Logo {
     }
     alt: string
   }
+  
 }
 
 export const logoQuery = `*[_type == "generalLayout"][0] {
@@ -59,4 +60,22 @@ export interface SocialLinks {
 
 export async function getSocialLinks(): Promise<SocialLinks | null> {
   return await client.fetch(socialLinksQuery)
+}
+
+export interface favicon {
+  favicon: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
+}
+
+export const faviconQuery = `*[_type == "generalLayout"][0] {
+    favicon
+}`
+
+export async function getFavicon(): Promise<favicon | null> {
+  return await client.fetch(faviconQuery)
 }

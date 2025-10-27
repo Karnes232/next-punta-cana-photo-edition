@@ -15,6 +15,7 @@ const LogoComponent = ({ logo }: { logo: Logo }) => {
               height={150}
               alt={logo.companyLogo.alt}
               className="w-20 md:w-32"
+              priority
             />
           </div>
         </Link>

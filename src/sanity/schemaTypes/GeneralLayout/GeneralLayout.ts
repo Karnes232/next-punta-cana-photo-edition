@@ -33,6 +33,13 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "favicon",
+      title: "Favicon",
+      type: "image",
+      description: "Upload your site favicon here",
+      options: { hotspot: false },
+    }),
+    defineField({
       name: "email",
       title: "Email",
       type: "string",
