@@ -21,11 +21,11 @@ interface FormData {
   name: string
   email: string
   telephone: string
-  eventDate: string
-  serviceType: string
-  budget: string
-  location: string
-  duration: string
+//  eventDate: string
+//  serviceType: string
+//  budget: string
+//  location: string
+//  duration: string
   message: string
 }
 
@@ -33,11 +33,11 @@ interface FormErrors {
   name?: string
   email?: string
   telephone?: string
-  eventDate?: string
-  serviceType?: string
-  budget?: string
-  location?: string
-  duration?: string
+//  eventDate?: string
+//  serviceType?: string
+//  budget?: string
+//  location?: string
+//  duration?: string
   message?: string
 }
 
@@ -52,11 +52,11 @@ const ContactForm = ({ locale }: ContactFormProps) => {
     name: "",
     email: "",
     telephone: "",
-    eventDate: "",
-    serviceType: "",
-    budget: "",
-    location: "",
-    duration: "",
+//    eventDate: "",
+//    serviceType: "",
+//    budget: "",
+//    location: "",
+//    duration: "",
     message: "",
   })
 
@@ -88,25 +88,25 @@ const ContactForm = ({ locale }: ContactFormProps) => {
       newErrors.telephone = t("requiredField")
     }
 
-    if (!formData.eventDate) {
-      newErrors.eventDate = t("requiredField")
-    }
+    // if (!formData.eventDate) {
+    //   newErrors.eventDate = t("requiredField")
+    // }
 
-    if (!formData.serviceType) {
-      newErrors.serviceType = t("requiredField")
-    }
+    // if (!formData.serviceType) {
+    //   newErrors.serviceType = t("requiredField")
+    // }
 
-    if (!formData.budget) {
-      newErrors.budget = t("requiredField")
-    }
+    // if (!formData.budget) {
+    //   newErrors.budget = t("requiredField")
+    // }
 
-    if (!formData.location.trim()) {
-      newErrors.location = t("requiredField")
-    }
+    // if (!formData.location.trim()) {
+    //   newErrors.location = t("requiredField")
+    // }
 
-    if (!formData.duration) {
-      newErrors.duration = t("requiredField")
-    }
+    // if (!formData.duration) {
+    //   newErrors.duration = t("requiredField")
+    // }
 
     if (!formData.message.trim()) {
       newErrors.message = t("requiredField")
@@ -145,11 +145,11 @@ const ContactForm = ({ locale }: ContactFormProps) => {
       formDataToSend.append("name", formData.name)
       formDataToSend.append("email", formData.email)
       formDataToSend.append("telephone", formData.telephone)
-      formDataToSend.append("eventDate", formData.eventDate)
-      formDataToSend.append("serviceType", formData.serviceType)
-      formDataToSend.append("budget", formData.budget)
-      formDataToSend.append("location", formData.location)
-      formDataToSend.append("duration", formData.duration)
+     // formDataToSend.append("eventDate", formData.eventDate)
+     // formDataToSend.append("serviceType", formData.serviceType)
+     // formDataToSend.append("budget", formData.budget)
+     // formDataToSend.append("location", formData.location)
+     // formDataToSend.append("duration", formData.duration)
       formDataToSend.append("message", formData.message)
       formDataToSend.append("locale", locale)
 
@@ -168,11 +168,11 @@ const ContactForm = ({ locale }: ContactFormProps) => {
           name: "",
           email: "",
           telephone: "",
-          eventDate: "",
-          serviceType: "",
-          budget: "",
-          location: "",
-          duration: "",
+         // eventDate: "",
+          //serviceType: "",
+         // budget: "",
+         // location: "",
+         // duration: "",
           message: "",
         })
       } else {
@@ -325,8 +325,8 @@ const ContactForm = ({ locale }: ContactFormProps) => {
             </div>
 
             {/* Event Date and Service Type Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Event Date Field */}
+{/*            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              // Event Date Field 
               <div>
                 <label
                   htmlFor="eventDate"
@@ -355,7 +355,7 @@ const ContactForm = ({ locale }: ContactFormProps) => {
                 )}
               </div>
 
-              {/* Service Type Field */}
+              // Service Type Field 
               <div>
                 <label
                   htmlFor="serviceType"
@@ -396,9 +396,9 @@ const ContactForm = ({ locale }: ContactFormProps) => {
               </div>
             </div>
 
-            {/* Budget and Duration Row */}
+            // Budget and Duration Row 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Budget Field */}
+              // Budget Field 
               <div>
                 <label
                   htmlFor="budget"
@@ -431,7 +431,7 @@ const ContactForm = ({ locale }: ContactFormProps) => {
                 )}
               </div>
 
-              {/* Duration Field */}
+              // Duration Field 
               <div>
                 <label
                   htmlFor="duration"
@@ -466,7 +466,7 @@ const ContactForm = ({ locale }: ContactFormProps) => {
               </div>
             </div>
 
-            {/* Location Field */}
+            // Location Field 
             <div>
               <label
                 htmlFor="location"
@@ -491,7 +491,7 @@ const ContactForm = ({ locale }: ContactFormProps) => {
               {errors.location && (
                 <p className="mt-1 text-sm text-red-600">{errors.location}</p>
               )}
-            </div>
+            </div> */}
 
             {/* Message Field */}
             <div>
