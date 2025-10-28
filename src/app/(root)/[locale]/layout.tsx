@@ -4,13 +4,16 @@ import "../../globals.css"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { routing } from "@/i18n/routing"
 import { notFound } from "next/navigation"
-import { getFavicon, getLogo } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import {
+  getFavicon,
+  getLogo,
+} from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import Navbar from "@/components/layout/Navbar/Navbar"
 import Footer from "@/components/layout/Footer/Footer"
 import ImageProtectionScript from "@/components/ImageProtection/ImageProtectionScript"
-import imageUrlBuilder from "@sanity/image-url";
-import { client } from "@/sanity/lib/client";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import imageUrlBuilder from "@sanity/image-url"
+import { client } from "@/sanity/lib/client"
+import { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,11 +30,10 @@ const crimsonPro = Crimson_Pro({
   subsets: ["latin"],
 })
 
-
-const builder = imageUrlBuilder(client);
+const builder = imageUrlBuilder(client)
 
 function urlFor(source: SanityImageSource) {
-  return builder.image(source);
+  return builder.image(source)
 }
 
 // Add caching headers for better performance
@@ -49,7 +51,6 @@ export default async function LocaleLayout({
   const { locale } = await params
   const logo = await getLogo()
 
-  
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
@@ -61,7 +62,7 @@ export default async function LocaleLayout({
     // Fallback to English messages
     messages = (await import(`../../../../messages/en.json`)).default
   }
-  
+
   return (
     <html lang={locale}>
       <body
@@ -87,7 +88,9 @@ export default async function LocaleLayout({
 export async function generateMetadata() {
   const data = await getFavicon()
 
-  const faviconUrl = data?.favicon ? urlFor(data.favicon).width(64).url() : "/favicon.ico";
+  const faviconUrl = data?.favicon
+    ? urlFor(data.favicon).width(64).url()
+    : "/favicon.ico"
 
   return {
     icons: {
@@ -95,5 +98,5 @@ export async function generateMetadata() {
       shortcut: faviconUrl,
       apple: faviconUrl,
     },
-  };
+  }
 }

@@ -9,6 +9,7 @@ import { notFound } from "next/navigation"
 import WeddingPlannerPackages from "@/components/WeddingPlannerComponents/WeddingPlannerPackages"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 import WeddingPlanningInquiryForm from "@/components/Forms/WeddingPlanningInquiryForm"
+import { SelectedPackageProvider } from "@/contexts/SelectedPackageContext"
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
@@ -42,50 +43,52 @@ export default async function WeddingPlanning({
           }}
         />
       )}
-      <main>
-        {weddingPlanning?.hero?.heroVideo ? (
-          <BackgroundVideo
-            heroVideo={weddingPlanning?.hero?.heroVideo}
-            fullSize={weddingPlanning?.hero?.fullSize}
-            title={weddingPlanning?.hero?.title?.[locale]}
-            subtitle={weddingPlanning?.hero?.subtitle?.[locale]}
-          />
-        ) : (
-          <BackgroundImage
-            heroImages={weddingPlanning?.hero?.heroImage || []}
-            fullSize={weddingPlanning?.hero?.fullSize}
-            title={weddingPlanning?.hero?.title?.[locale]}
-            subtitle={weddingPlanning?.hero?.subtitle?.[locale]}
-          />
-        )}
-        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-          <BlockContent
-            content={weddingPlanning?.paragraph1 || { en: [], es: [] }}
+      <SelectedPackageProvider>
+        <main>
+          {weddingPlanning?.hero?.heroVideo ? (
+            <BackgroundVideo
+              heroVideo={weddingPlanning?.hero?.heroVideo}
+              fullSize={weddingPlanning?.hero?.fullSize}
+              title={weddingPlanning?.hero?.title?.[locale]}
+              subtitle={weddingPlanning?.hero?.subtitle?.[locale]}
+            />
+          ) : (
+            <BackgroundImage
+              heroImages={weddingPlanning?.hero?.heroImage || []}
+              fullSize={weddingPlanning?.hero?.fullSize}
+              title={weddingPlanning?.hero?.title?.[locale]}
+              subtitle={weddingPlanning?.hero?.subtitle?.[locale]}
+            />
+          )}
+          <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+            <BlockContent
+              content={weddingPlanning?.paragraph1 || { en: [], es: [] }}
+              locale={locale}
+            />
+            <div className="my-10">
+              <PhotoGrid photos={weddingPlanning?.galleryImages || []} />
+            </div>
+          </section>
+          <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+            <WeddingPlannerPackages
+              packages={weddingPlannerPackages || []}
+              locale={locale}
+            />
+          </section>
+          <TestimonialsComponent
             locale={locale}
+            titleTestimonials={
+              (weddingPlanning?.titleTestimonials?.[
+                locale as keyof typeof weddingPlanning.titleTestimonials
+              ] as string) || ""
+            }
+            testimonials={weddingPlanning?.testimonials || []}
           />
-          <div className="my-10">
-            <PhotoGrid photos={weddingPlanning?.galleryImages || []} />
-          </div>
-        </section>
-        <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-          <WeddingPlannerPackages
-            packages={weddingPlannerPackages || []}
-            locale={locale}
-          />
-        </section>
-        <TestimonialsComponent
-          locale={locale}
-          titleTestimonials={
-            (weddingPlanning?.titleTestimonials?.[
-              locale as keyof typeof weddingPlanning.titleTestimonials
-            ] as string) || ""
-          }
-          testimonials={weddingPlanning?.testimonials || []}
-        />
-        <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-          <WeddingPlanningInquiryForm locale={locale} />
-        </section>
-      </main>
+          <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+            <WeddingPlanningInquiryForm locale={locale} />
+          </section>
+        </main>
+      </SelectedPackageProvider>
     </>
   )
 }

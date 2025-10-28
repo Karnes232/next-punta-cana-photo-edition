@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import {
   Send,
@@ -16,7 +16,9 @@ import {
   MapPin,
   DollarSign,
   Clock,
+  Package,
 } from "lucide-react"
+import { useSelectedPackage } from "@/contexts/SelectedPackageContext"
 
 interface FormData {
   name: string
@@ -27,6 +29,7 @@ interface FormData {
   venue: string
   budget: string
   message: string
+  selectedPackageTitle: string
 }
 
 interface FormErrors {
@@ -48,6 +51,7 @@ const WeddingPlanningInquiryForm = ({
   locale,
 }: WeddingPlanningInquiryFormProps) => {
   const t = useTranslations("WeddingPlanningForm")
+  const { selectedPackageTitle } = useSelectedPackage()
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -58,6 +62,7 @@ const WeddingPlanningInquiryForm = ({
     venue: "",
     budget: "",
     message: "",
+    selectedPackageTitle: selectedPackageTitle || "",
   })
 
   const [errors, setErrors] = useState<FormErrors>({})
@@ -65,6 +70,14 @@ const WeddingPlanningInquiryForm = ({
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle")
+
+  // Update formData when selectedPackageTitle changes
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      selectedPackageTitle: selectedPackageTitle || "",
+    }))
+  }, [selectedPackageTitle])
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -146,6 +159,10 @@ const WeddingPlanningInquiryForm = ({
       formDataToSend.append("venue", formData.venue)
       formDataToSend.append("budget", formData.budget)
       formDataToSend.append("message", formData.message)
+      formDataToSend.append(
+        "selectedPackageTitle",
+        formData.selectedPackageTitle,
+      )
       formDataToSend.append("locale", locale)
 
       const response = await fetch("/__forms.html", {
@@ -168,6 +185,7 @@ const WeddingPlanningInquiryForm = ({
           venue: "",
           budget: "",
           message: "",
+          selectedPackageTitle: selectedPackageTitle || "",
         })
       } else {
         throw new Error(
@@ -195,6 +213,21 @@ const WeddingPlanningInquiryForm = ({
           </h2>
           <p className="text-darkGray/70 text-lg">{t("subtitle")}</p>
         </div>
+
+        {/* Selected Package Display */}
+        {selectedPackageTitle && (
+          <div className="mb-6 p-4 bg-luxuryGold/10 border border-luxuryGold/30 rounded-lg flex items-start sm:items-center gap-3">
+            <Package className="w-5 h-5 text-luxuryGold flex-shrink-0 mt-0.5 sm:mt-0" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-luxuryGold mb-1">
+                Selected Package:
+              </p>
+              <p className="text-darkGray font-medium break-words">
+                {selectedPackageTitle}
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Error Message */}
         {submitStatus === "error" && (

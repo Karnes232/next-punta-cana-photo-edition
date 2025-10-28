@@ -21,11 +21,11 @@ interface FormData {
   name: string
   email: string
   telephone: string
-//  eventDate: string
-//  serviceType: string
-//  budget: string
-//  location: string
-//  duration: string
+  //  eventDate: string
+  //  serviceType: string
+  //  budget: string
+  //  location: string
+  //  duration: string
   message: string
 }
 
@@ -33,11 +33,11 @@ interface FormErrors {
   name?: string
   email?: string
   telephone?: string
-//  eventDate?: string
-//  serviceType?: string
-//  budget?: string
-//  location?: string
-//  duration?: string
+  //  eventDate?: string
+  //  serviceType?: string
+  //  budget?: string
+  //  location?: string
+  //  duration?: string
   message?: string
 }
 
@@ -52,11 +52,11 @@ const ContactForm = ({ locale }: ContactFormProps) => {
     name: "",
     email: "",
     telephone: "",
-//    eventDate: "",
-//    serviceType: "",
-//    budget: "",
-//    location: "",
-//    duration: "",
+    //    eventDate: "",
+    //    serviceType: "",
+    //    budget: "",
+    //    location: "",
+    //    duration: "",
     message: "",
   })
 
@@ -145,11 +145,11 @@ const ContactForm = ({ locale }: ContactFormProps) => {
       formDataToSend.append("name", formData.name)
       formDataToSend.append("email", formData.email)
       formDataToSend.append("telephone", formData.telephone)
-     // formDataToSend.append("eventDate", formData.eventDate)
-     // formDataToSend.append("serviceType", formData.serviceType)
-     // formDataToSend.append("budget", formData.budget)
-     // formDataToSend.append("location", formData.location)
-     // formDataToSend.append("duration", formData.duration)
+      // formDataToSend.append("eventDate", formData.eventDate)
+      // formDataToSend.append("serviceType", formData.serviceType)
+      // formDataToSend.append("budget", formData.budget)
+      // formDataToSend.append("location", formData.location)
+      // formDataToSend.append("duration", formData.duration)
       formDataToSend.append("message", formData.message)
       formDataToSend.append("locale", locale)
 
@@ -168,11 +168,11 @@ const ContactForm = ({ locale }: ContactFormProps) => {
           name: "",
           email: "",
           telephone: "",
-         // eventDate: "",
+          // eventDate: "",
           //serviceType: "",
-         // budget: "",
-         // location: "",
-         // duration: "",
+          // budget: "",
+          // location: "",
+          // duration: "",
           message: "",
         })
       } else {
@@ -325,7 +325,7 @@ const ContactForm = ({ locale }: ContactFormProps) => {
             </div>
 
             {/* Event Date and Service Type Row */}
-{/*            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/*            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               // Event Date Field 
               <div>
                 <label

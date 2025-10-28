@@ -5,6 +5,7 @@ import { WeddingPlannerPackages as WeddingPlannerPackagesType } from "@/sanity/q
 import { useTranslations } from "next-intl"
 import { CheckCircle, Star } from "lucide-react"
 import Link from "next/link"
+import { useSelectedPackage } from "@/contexts/SelectedPackageContext"
 
 interface WeddingPlannerPackageCardProps {
   packageData: WeddingPlannerPackagesType
@@ -16,6 +17,11 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
   locale,
 }) => {
   const t = useTranslations()
+  const { setSelectedPackageTitle } = useSelectedPackage()
+
+  const handlePackageSelection = () => {
+    setSelectedPackageTitle(packageData.title[locale])
+  }
 
   return (
     <div
@@ -75,6 +81,7 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
       <div className="text-center mt-auto">
         <Link
           href={`#wedding-planning-inquiry-form`}
+          onClick={handlePackageSelection}
           className={`w-full py-3 px-6 rounded-lg font-semibold text-pureWhite transition-all duration-300 transform hover:scale-105 active:scale-95 ${
             packageData.mostPopular
               ? "bg-luxuryGold hover:bg-luxuryGold/90 shadow-lg hover:shadow-xl hover:shadow-luxuryGold/25"

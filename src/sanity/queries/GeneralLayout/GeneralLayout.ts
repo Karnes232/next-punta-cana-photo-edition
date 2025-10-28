@@ -13,7 +13,6 @@ export interface Logo {
     }
     alt: string
   }
-  
 }
 
 export const logoQuery = `*[_type == "generalLayout"][0] {
