@@ -267,5 +267,8 @@
     "recommendedForYou": "Recomendado para Ti",
     "recommendationsDescription": "Descubre más historias que podrían interesarte basadas en tu lectura actual.",
     "noDescriptionAvailable": "No hay descripción disponible"
+  },
+  "common": {
+    "contactWhatsApp": "Contáctanos por WhatsApp"
   }
 }

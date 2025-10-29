@@ -7,6 +7,8 @@ import { notFound } from "next/navigation"
 import {
   getFavicon,
   getLogo,
+  getWhatsAppNumber,
+  getSocialLinks,
 } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import Navbar from "@/components/layout/Navbar/Navbar"
 import Footer from "@/components/layout/Footer/Footer"
@@ -14,6 +16,7 @@ import ImageProtectionScript from "@/components/ImageProtection/ImageProtectionS
 import imageUrlBuilder from "@sanity/image-url"
 import { client } from "@/sanity/lib/client"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import FloatingCtaButton from "@/components/FloatingCtaButton/FloatingCtaButton"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,7 +52,12 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }>) {
   const { locale } = await params
-  const logo = await getLogo()
+
+  const [logo, whatsAppNumber, socialLinks] = await Promise.all([
+    getLogo(),
+    getWhatsAppNumber(),
+    getSocialLinks(),
+  ])
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
@@ -78,6 +86,11 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
           </div>
           <Footer />
+          <FloatingCtaButton
+            telephone={whatsAppNumber?.telephone || "18295222900"}
+            email={socialLinks?.email || "info@puntacanaphotoedition.com"}
+            locale={locale as "en" | "es"}
+          />
           <ImageProtectionScript />
         </NextIntlClientProvider>
       </body>

@@ -72,7 +72,10 @@ const CorporateEventPackageCard: React.FC<CorporateEventPackageCardProps> = ({
 
         {/* Contact Button - Always at bottom */}
         <div className="border-t border-gray-200 pt-4 mt-auto flex-shrink-0">
-          <Link href={`#corporate-event-inquiry-form`} className="w-full bg-gradient-to-r from-caribbeanTurquoise to-cyan-400 hover:from-caribbeanTurquoise/90 hover:to-cyan-400/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-caribbeanTurquoise/25 hover:-translate-y-0.5">
+          <Link
+            href={`#corporate-event-inquiry-form`}
+            className="w-full bg-gradient-to-r from-caribbeanTurquoise to-cyan-400 hover:from-caribbeanTurquoise/90 hover:to-cyan-400/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-caribbeanTurquoise/25 hover:-translate-y-0.5"
+          >
             <span className={`${montserrat.className} text-sm`}>
               {t("Contact Us")}
             </span>

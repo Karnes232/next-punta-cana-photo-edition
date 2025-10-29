@@ -31,6 +31,18 @@ export async function getLogo(): Promise<Logo | null> {
   return await client.fetch(logoQuery)
 }
 
+export interface WhatsAppNumber {
+  telephone: string
+}
+
+export const whatsAppNumberQuery = `*[_type == "generalLayout"][0] {
+  telephone
+}`
+
+export async function getWhatsAppNumber(): Promise<WhatsAppNumber | null> {
+  return await client.fetch(whatsAppNumberQuery)
+}
+
 export const socialLinksQuery = `*[_type == "generalLayout"][0] {
     companyName,
     telephone,
