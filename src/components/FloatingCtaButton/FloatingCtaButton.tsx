@@ -80,7 +80,13 @@ const FloatingCtaButton = ({
     if (option.action) {
       option.action()
     } else if (option.external && option.href) {
-      window.open(option.href, "_blank", "noopener,noreferrer")
+      // For phone and email, use window.location for better UX
+      if (option.id === 'phone' || option.id === 'email') {
+        window.location.href = option.href
+      } else {
+        // For other links like WhatsApp, open in new tab
+        window.open(option.href, "_blank", "noopener,noreferrer")
+      }
     }
   }
 
@@ -105,12 +111,19 @@ const FloatingCtaButton = ({
                       : "translate-x-8 opacity-0"
                   }`}
                   style={{ transitionDelay: `${index * 50}ms` }}
-                  onClick={() => !option.disabled && handleCtaClick(option)}
                 >
                   <span className="text-sm font-medium text-white bg-darkGray px-3 py-1 rounded-full whitespace-nowrap shadow-lg">
                     {option.label}
                   </span>
                   <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      if (!option.disabled) {
+                        handleCtaClick(option)
+                      }
+                    }}
                     className={`flex justify-center items-center rounded-full h-12 w-12 ${option.color} ${option.hoverColor} text-white shadow-lg transition-all duration-200 ${
                       option.disabled
                         ? "cursor-not-allowed"
