@@ -37,9 +37,9 @@ const TextComponent = ({
         className="flex flex-col items-center justify-center text-center max-w-5xl  lg:p-2 mx-auto"
       >
         {title && (
-          <h1 className={`${coromantGaramond.className} ${className}`}>
+          <h2 className={`${coromantGaramond.className} ${className}`}>
             {title}
-          </h1>
+          </h2>
         )}
 
         {paragraph && (
