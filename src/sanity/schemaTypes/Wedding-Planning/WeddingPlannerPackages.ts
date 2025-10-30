@@ -27,6 +27,12 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "price",
+      title: "Price",
+      type: "number",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: "ctaText",
       title: "CTA Text",
       type: "localizedString",

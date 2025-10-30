@@ -6,11 +6,22 @@ import { useTranslations } from "next-intl"
 import { CheckCircle, Star } from "lucide-react"
 import Link from "next/link"
 import { useSelectedPackage } from "@/contexts/SelectedPackageContext"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
 
 interface WeddingPlannerPackageCardProps {
   packageData: WeddingPlannerPackagesType
   locale: "en" | "es"
 }
+
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
   packageData,
@@ -22,7 +33,7 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
   const handlePackageSelection = () => {
     setSelectedPackageTitle(packageData.title[locale])
   }
-
+  console.log(packageData)
   return (
     <div
       className={`relative bg-pureWhite rounded-lg shadow-lg p-6 border-2 transition-all duration-300 hover:shadow-xl flex flex-col h-full ${
@@ -34,7 +45,9 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
       {/* Most Popular Badge */}
       {packageData.mostPopular && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-          <div className="bg-luxuryGold text-pureWhite px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+          <div
+            className={`${coromantGaramond.className} bg-luxuryGold text-pureWhite px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1`}
+          >
             <Star className="w-4 h-4 fill-current" />
             Most Popular
           </div>
@@ -44,7 +57,7 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
       {/* Card Header - Fixed height */}
       <div className="text-center mb-6 h-32 flex flex-col justify-center">
         <h3
-          className="text-3xl font-bold text-darkGray mb-2 overflow-hidden"
+          className={`${coromantGaramond.className} text-3xl font-bold text-darkGray mb-2 overflow-hidden`}
           style={{
             display: "-webkit-box",
             WebkitLineClamp: 2,
@@ -54,7 +67,7 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
           {packageData.title[locale]}
         </h3>
         <p
-          className="text-elegantSilver text-base overflow-hidden"
+          className={`${montserrat.className} text-elegantSilver text-base overflow-hidden`}
           style={{
             display: "-webkit-box",
             WebkitLineClamp: 2,
@@ -71,18 +84,31 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
           {packageData.includedItems.map((item, index) => (
             <li key={index} className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-luxuryGold flex-shrink-0 mt-0.5" />
-              <span className="text-darkGray text-sm">{item[locale]}</span>
+              <span className={`${montserrat.className} text-darkGray text-sm`}>
+                {item[locale]}
+              </span>
             </li>
           ))}
         </ul>
       </div>
+
+      {/* Price - Above CTA, consistent styling */}
+      {typeof packageData.price === "number" && (
+        <div className="border-t pt-4 mb-6 text-center">
+          <p
+            className={`${coromantGaramond.className} text-3xl font-bold text-darkGray`}
+          >
+            {`$${packageData.price.toLocaleString()}`}
+          </p>
+        </div>
+      )}
 
       {/* CTA Button - Fixed position from bottom */}
       <div className="text-center mt-auto">
         <Link
           href={`#wedding-planning-inquiry-form`}
           onClick={handlePackageSelection}
-          className={`w-full py-3 px-6 rounded-lg font-semibold text-pureWhite transition-all duration-300 transform hover:scale-105 active:scale-95 ${
+          className={`${montserrat.className} w-full py-3 px-6 rounded-lg font-semibold text-pureWhite transition-all duration-300 transform hover:scale-105 active:scale-95 ${
             packageData.mostPopular
               ? "bg-luxuryGold hover:bg-luxuryGold/90 shadow-lg hover:shadow-xl hover:shadow-luxuryGold/25"
               : "bg-darkGray hover:bg-darkGray/90 hover:shadow-lg hover:shadow-darkGray/25"

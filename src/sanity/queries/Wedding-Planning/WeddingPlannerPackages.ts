@@ -14,6 +14,7 @@ export interface WeddingPlannerPackages {
     en: string
     es: string
   }[]
+  price: number
   ctaText: {
     en: string
     es: string
@@ -35,6 +36,7 @@ export const weddingPlannerPackagesQuery = `*[_type == "wedding-planner-packages
     en,
     es
   },
+  price,
   ctaText {
     en,
     es

@@ -78,12 +78,11 @@ const FloatingCtaButton = ({
 
   const handleCtaClick = (option: (typeof ctaOptions)[0]) => {
     if (option.action) {
-        setIsOpen(false)
+      setIsOpen(false)
       option.action()
-      
     } else if (option.external && option.href) {
       // For phone and email, use window.location for better UX
-      if (option.id === 'phone' || option.id === 'email') {
+      if (option.id === "phone" || option.id === "email") {
         window.location.href = option.href
       } else {
         // For other links like WhatsApp, open in new tab
@@ -119,7 +118,7 @@ const FloatingCtaButton = ({
                   </span>
                   <button
                     type="button"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault()
                       e.stopPropagation()
                       if (!option.disabled) {
