@@ -82,11 +82,12 @@ const ServicesCalculator = ({
   }, [selectedHours, minimumHours, hourlyRate, selectedAdditions, additions])
 
   const handleHoursChange = (hours: number) => {
-    const newHours = Math.max(hours, 0)
+    const intHours = Number.isFinite(hours) ? Math.floor(hours) : 0
+    const clampedHours = Math.min(24, Math.max(intHours, 0))
     if (onHoursChange) {
-      onHoursChange(newHours)
+      onHoursChange(clampedHours)
     } else {
-      setInternalSelectedHours(newHours)
+      setInternalSelectedHours(clampedHours)
     }
   }
 
@@ -136,11 +137,29 @@ const ServicesCalculator = ({
                 type="number"
                 min="0"
                 max="24"
+                step="1"
                 value={selectedHours}
-                onChange={e => handleHoursChange(Number(e.target.value))}
+                inputMode="numeric"
+                onKeyDown={e => {
+                  if ([".", ",", "e", "E", "+", "-"].includes(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+                onInput={e => {
+                  const target = e.target as HTMLInputElement
+                  const numeric = target.value.replace(/[^0-9]/g, "")
+                  if (numeric !== target.value) target.value = numeric
+                }}
+                onChange={e => {
+                  const value = Number.isFinite(e.currentTarget.valueAsNumber)
+                    ? e.currentTarget.valueAsNumber
+                    : 0
+                  handleHoursChange(value)
+                }}
                 className="w-20 px-3 py-2 border border-elegantSilver rounded-md focus:outline-none focus:ring-2 focus:ring-luxuryGold focus:border-luxuryGold transition-all duration-300"
               />
             </div>
+            
             <div
               className={`${montserrat.className} mt-2 text-sm text-elegantSilver`}
             >
