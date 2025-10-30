@@ -112,7 +112,8 @@
     "successMessage": "¡Gracias! Hemos recibido tu consulta de planificación de bodas y te contactaremos pronto para discutir tu día especial.",
     "errorMessage": "¡Ups! Algo salió mal. Por favor, intenta de nuevo.",
     "requiredField": "Este campo es requerido",
-    "invalidEmail": "Por favor ingresa un correo electrónico válido"
+    "invalidEmail": "Por favor ingresa un correo electrónico válido",
+    "selectedPackage": "Paquete Seleccionado"
   },
   "ProposalPackages": {
     "noProposalPackagesAvailable": "No hay paquetes de propuestas disponibles en este momento.",

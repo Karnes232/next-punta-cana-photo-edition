@@ -112,7 +112,8 @@
     "successMessage": "Thank you! We've received your wedding planning inquiry and will contact you soon to discuss your special day.",
     "errorMessage": "Oops! Something went wrong. Please try again.",
     "requiredField": "This field is required",
-    "invalidEmail": "Please enter a valid email address"
+    "invalidEmail": "Please enter a valid email address",
+    "selectedPackage": "Selected Package"
   },
   "ProposalPackages": {
     "noProposalPackagesAvailable": "No proposal packages available at the moment.",

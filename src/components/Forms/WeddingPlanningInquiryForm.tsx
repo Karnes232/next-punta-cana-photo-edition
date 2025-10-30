@@ -19,6 +19,7 @@ import {
   Package,
 } from "lucide-react"
 import { useSelectedPackage } from "@/contexts/SelectedPackageContext"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
 
 interface FormData {
   name: string
@@ -45,10 +46,26 @@ interface FormErrors {
 
 interface WeddingPlanningInquiryFormProps {
   locale: "en" | "es"
+  formTitle: string
+  formSubtitle?: string
+  formSubmitText: string
 }
+
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const WeddingPlanningInquiryForm = ({
   locale,
+  formTitle,
+  formSubtitle,
+  formSubmitText,
 }: WeddingPlanningInquiryFormProps) => {
   const t = useTranslations("WeddingPlanningForm")
   const { selectedPackageTitle } = useSelectedPackage()
@@ -208,10 +225,16 @@ const WeddingPlanningInquiryForm = ({
       <div className="bg-gradient-to-br from-pureWhite to-luxuryGold/5 rounded-2xl shadow-xl p-8 md:p-12 border border-luxuryGold/30">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-darkGray mb-3 font-crimsonPro">
-            {t("title")}
-          </h2>
-          <p className="text-darkGray/70 text-lg">{t("subtitle")}</p>
+          <h4
+            className={`${coromantGaramond.className} text-3xl md:text-4xl font-bold text-darkGray mb-3`}
+          >
+            {formTitle}
+          </h4>
+          {formSubtitle && (
+            <p className={`${montserrat.className} text-darkGray/70 text-lg`}>
+              {formSubtitle}
+            </p>
+          )}
         </div>
 
         {/* Selected Package Display */}
@@ -219,10 +242,14 @@ const WeddingPlanningInquiryForm = ({
           <div className="mb-6 p-4 bg-luxuryGold/10 border border-luxuryGold/30 rounded-lg flex items-start sm:items-center gap-3">
             <Package className="w-5 h-5 text-luxuryGold flex-shrink-0 mt-0.5 sm:mt-0" />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-luxuryGold mb-1">
-                Selected Package:
+              <p
+                className={`${montserrat.className} text-sm font-semibold text-luxuryGold mb-1`}
+              >
+                {t("selectedPackage")}:
               </p>
-              <p className="text-darkGray font-medium break-words">
+              <p
+                className={`${montserrat.className} text-darkGray font-medium break-words`}
+              >
                 {selectedPackageTitle}
               </p>
             </div>
@@ -233,14 +260,18 @@ const WeddingPlanningInquiryForm = ({
         {submitStatus === "error" && (
           <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <p className="text-red-800">{t("errorMessage")}</p>
+            <p className={`${montserrat.className} text-red-800`}>
+              {t("errorMessage")}
+            </p>
           </div>
         )}
 
         {submitStatus === "success" ? (
           <div className="mb-6 p-4 bg-green-50 border border-green-300 rounded-lg flex items-start gap-3">
             <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-            <p className="text-green-800">{t("successMessage")}</p>
+            <p className={`${montserrat.className} text-green-800`}>
+              {t("successMessage")}
+            </p>
           </div>
         ) : (
           <form
@@ -272,7 +303,7 @@ const WeddingPlanningInquiryForm = ({
             <div>
               <label
                 htmlFor="name"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
               >
                 <User className="w-4 h-4 text-darkGray" />
                 {t("name")}
@@ -284,14 +315,18 @@ const WeddingPlanningInquiryForm = ({
                 value={formData.name}
                 onChange={handleChange}
                 placeholder={t("namePlaceholder")}
-                className={`w-full px-4 py-3 rounded-lg border ${
+                className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                   errors.name
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                <p
+                  className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                >
+                  {errors.name}
+                </p>
               )}
             </div>
 
@@ -301,7 +336,7 @@ const WeddingPlanningInquiryForm = ({
               <div>
                 <label
                   htmlFor="email"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Mail className="w-4 h-4 text-darkGray" />
                   {t("email")}
@@ -313,14 +348,18 @@ const WeddingPlanningInquiryForm = ({
                   value={formData.email}
                   onChange={handleChange}
                   placeholder={t("emailPlaceholder")}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.email
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.email}
+                  </p>
                 )}
               </div>
 
@@ -328,7 +367,7 @@ const WeddingPlanningInquiryForm = ({
               <div>
                 <label
                   htmlFor="telephone"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Phone className="w-4 h-4 text-darkGray" />
                   {t("telephone")}
@@ -340,14 +379,16 @@ const WeddingPlanningInquiryForm = ({
                   value={formData.telephone}
                   onChange={handleChange}
                   placeholder={t("telephonePlaceholder")}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.telephone
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.telephone && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
                     {errors.telephone}
                   </p>
                 )}
@@ -360,7 +401,7 @@ const WeddingPlanningInquiryForm = ({
               <div>
                 <label
                   htmlFor="weddingDate"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Heart className="w-4 h-4 text-luxuryGold" />
                   {t("weddingDate")}
@@ -372,14 +413,16 @@ const WeddingPlanningInquiryForm = ({
                   value={formData.weddingDate}
                   onChange={handleChange}
                   min={new Date().toISOString().split("T")[0]}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.weddingDate
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
                   } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.weddingDate && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
                     {errors.weddingDate}
                   </p>
                 )}
@@ -389,7 +432,7 @@ const WeddingPlanningInquiryForm = ({
               <div>
                 <label
                   htmlFor="guestCount"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Users className="w-4 h-4 text-darkGray" />
                   {t("guestCount")}
@@ -399,7 +442,7 @@ const WeddingPlanningInquiryForm = ({
                   name="guestCount"
                   value={formData.guestCount}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.guestCount
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
@@ -414,7 +457,9 @@ const WeddingPlanningInquiryForm = ({
                   <option value="200+">200+ {t("guests")}</option>
                 </select>
                 {errors.guestCount && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
                     {errors.guestCount}
                   </p>
                 )}
@@ -427,7 +472,7 @@ const WeddingPlanningInquiryForm = ({
               <div>
                 <label
                   htmlFor="venue"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <MapPin className="w-4 h-4 text-darkGray" />
                   {t("venue")}
@@ -439,14 +484,18 @@ const WeddingPlanningInquiryForm = ({
                   value={formData.venue}
                   onChange={handleChange}
                   placeholder={t("venuePlaceholder")}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.venue
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.venue && (
-                  <p className="mt-1 text-sm text-red-600">{errors.venue}</p>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.venue}
+                  </p>
                 )}
               </div>
 
@@ -454,7 +503,7 @@ const WeddingPlanningInquiryForm = ({
               <div>
                 <label
                   htmlFor="budget"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <DollarSign className="w-4 h-4 text-luxuryGold" />
                   {t("budget")}
@@ -464,7 +513,7 @@ const WeddingPlanningInquiryForm = ({
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.budget
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
@@ -478,7 +527,11 @@ const WeddingPlanningInquiryForm = ({
                   <option value="100k+">$100,000+</option>
                 </select>
                 {errors.budget && (
-                  <p className="mt-1 text-sm text-red-600">{errors.budget}</p>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.budget}
+                  </p>
                 )}
               </div>
             </div>
@@ -487,7 +540,7 @@ const WeddingPlanningInquiryForm = ({
             <div>
               <label
                 htmlFor="message"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
               >
                 <MessageSquare className="w-4 h-4 text-darkGray" />
                 {t("message")}
@@ -499,14 +552,18 @@ const WeddingPlanningInquiryForm = ({
                 onChange={handleChange}
                 placeholder={t("messagePlaceholder")}
                 rows={5}
-                className={`w-full px-4 py-3 rounded-lg border ${
+                className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                   errors.message
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors resize-none`}
               />
               {errors.message && (
-                <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                <p
+                  className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                >
+                  {errors.message}
+                </p>
               )}
             </div>
 
@@ -514,7 +571,7 @@ const WeddingPlanningInquiryForm = ({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-luxuryGold to-luxuryGold/80 hover:from-luxuryGold/90 hover:to-luxuryGold/70 disabled:from-elegantSilver disabled:to-elegantSilver/80 text-pureWhite font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:transform-none"
+              className={`${montserrat.className} w-full bg-gradient-to-r from-luxuryGold to-luxuryGold/80 hover:from-luxuryGold/90 hover:to-luxuryGold/70 disabled:from-elegantSilver disabled:to-elegantSilver/80 text-pureWhite font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:transform-none`}
             >
               {isSubmitting ? (
                 <>
@@ -524,7 +581,7 @@ const WeddingPlanningInquiryForm = ({
               ) : (
                 <>
                   <Send className="w-5 h-5" />
-                  {t("submit")}
+                  {formSubmitText}
                 </>
               )}
             </button>

@@ -17,6 +17,10 @@ export interface PhotographyVideoPackages {
   }
   minimumHours: number
   hourlyRate: number
+  buttonText: {
+    en: string
+    es: string
+  }
 }
 
 export const photographyVideoPackagesQuery = `*[_type == "photography-video-packages"] {    
@@ -34,6 +38,10 @@ export const photographyVideoPackagesQuery = `*[_type == "photography-video-pack
   },
   minimumHours,
   hourlyRate,
+  buttonText {
+    en,
+    es
+  }
 }`
 
 export async function getAllPhotographyVideoPackages(): Promise<
@@ -73,7 +81,6 @@ export interface PhotographyVideoPackagesBySlug {
     }
     alt: string
   }[]
-  startingPrice: number
   addtions: {
     title: {
       en: string
@@ -133,7 +140,6 @@ export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-vide
     },
     alt
   },
-  startingPrice,
   addtions[] {
     title {
       en,

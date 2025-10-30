@@ -23,6 +23,10 @@ export default defineType({
       name: "Testimonials",
       title: "Testimonials",
     },
+    {
+      name: "Form",
+      title: "Form",
+    },
   ],
   fields: [
     defineField({
@@ -71,6 +75,26 @@ export default defineType({
       type: "array",
       group: "Testimonials",
       of: [{ type: "testimonial" }],
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "formTitle",
+      title: "Form Title",
+      type: "localizedString",
+      group: "Form",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "formSubtitle",
+      title: "Form Subtitle",
+      type: "localizedString",
+      group: "Form",
+    }),
+    defineField({
+      name: "formSubmitText",
+      title: "Form Submit Text",
+      type: "localizedString",
+      group: "Form",
       validation: Rule => Rule.required(),
     }),
   ],

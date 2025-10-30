@@ -33,7 +33,6 @@ const WeddingPlannerPackageCard: React.FC<WeddingPlannerPackageCardProps> = ({
   const handlePackageSelection = () => {
     setSelectedPackageTitle(packageData.title[locale])
   }
-  console.log(packageData)
   return (
     <div
       className={`relative bg-pureWhite rounded-lg shadow-lg p-6 border-2 transition-all duration-300 hover:shadow-xl flex flex-col h-full ${

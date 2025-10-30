@@ -32,7 +32,7 @@ export default async function WeddingPlanning({
   if (!weddingPlanning) {
     notFound()
   }
-
+  console.log(weddingPlanning)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -85,7 +85,12 @@ export default async function WeddingPlanning({
             testimonials={weddingPlanning?.testimonials || []}
           />
           <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-            <WeddingPlanningInquiryForm locale={locale} />
+            <WeddingPlanningInquiryForm
+              locale={locale}
+              formTitle={weddingPlanning?.formTitle?.[locale]}
+              formSubtitle={weddingPlanning?.formSubtitle?.[locale]}
+              formSubmitText={weddingPlanning?.formSubmitText?.[locale]}
+            />
           </section>
         </main>
       </SelectedPackageProvider>

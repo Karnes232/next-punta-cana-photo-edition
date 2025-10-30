@@ -52,6 +52,13 @@ export default async function PhotographyVideo({
         />
       )}
 
+      <PhotographyVideoPackages
+        packages={photographyVideoPackages || []}
+        title={photographyVideo?.packageTitle?.[locale]}
+        subtitle={photographyVideo?.packageSubtitle?.[locale]}
+        locale={locale}
+      />
+
       <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
         <BlockContent
           content={photographyVideo?.paragraph1 || { en: [], es: [] }}
@@ -63,12 +70,7 @@ export default async function PhotographyVideo({
       </section>
 
       {/* Photography & Video Packages Section */}
-      <PhotographyVideoPackages
-        packages={photographyVideoPackages || []}
-        title={photographyVideo?.packageTitle?.[locale]}
-        subtitle={photographyVideo?.packageSubtitle?.[locale]}
-        locale={locale}
-      />
+
       <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
         <BlockContent
           content={photographyVideo?.paragraph2 || { en: [], es: [] }}

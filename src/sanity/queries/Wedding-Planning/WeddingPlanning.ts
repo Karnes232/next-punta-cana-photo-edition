@@ -25,6 +25,18 @@ export interface WeddingPlanning {
   }[]
   titleTestimonials: string
   testimonials: Testimonial[]
+  formTitle: {
+    en: string
+    es: string
+  }
+  formSubtitle: {
+    en: string
+    es: string
+  }
+  formSubmitText: {
+    en: string
+    es: string
+  }
 }
 
 export const weddingPlanningQuery = `*[_type == "wedding-planning"][0] {
@@ -98,7 +110,19 @@ export const weddingPlanningQuery = `*[_type == "wedding-planning"][0] {
             en,
             es
         }
-  }
+      },
+      formTitle {
+        en,
+        es
+      },
+      formSubtitle {
+        en,
+        es
+      },
+      formSubmitText {
+        en,
+        es
+      }
 }`
 
 export async function getWeddingPlanning(): Promise<WeddingPlanning | null> {

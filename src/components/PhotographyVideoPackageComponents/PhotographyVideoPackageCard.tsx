@@ -134,7 +134,8 @@ const PhotographyVideoPackageCard: React.FC<
               className={`inline-block px-6 py-3 rounded-lg font-semibold text-white transition-all duration-500 ease-in-out group-hover:scale-105 bg-gradient-to-r ${tierStyles.badgeColor} ${tierStyles.buttonHover} hover:transition-all hover:duration-300`}
             >
               <span className={`${montserrat.className} text-sm`}>
-                {t("Learn More")}
+                {photoPackage.buttonText[locale as "en" | "es"] ||
+                  photoPackage.buttonText.en}
               </span>
             </div>
           </div>
