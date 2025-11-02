@@ -103,7 +103,7 @@ export async function generateMetadata() {
 
   const faviconUrl = data?.favicon
     ? urlFor(data.favicon).width(64).url()
-    : "/favicon.ico"
+    : "/favicon.png"
 
   return {
     icons: {

@@ -11,6 +11,11 @@ export interface PhotographyVideoPackages {
   slug: {
     current: string
   }
+  includedItems: {
+    en: string
+    es: string
+  }[]
+  startingPrice: number
   description: {
     en: string
     es: string
@@ -32,6 +37,11 @@ export const photographyVideoPackagesQuery = `*[_type == "photography-video-pack
   slug {
     current
   },
+  includedItems[] {
+    en,
+    es
+  },
+  startingPrice,
   description {
     en,
     es

@@ -51,6 +51,21 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "includedItems",
+      title: "Included Items",
+      type: "array",
+      of: [{ type: "localizedString" }],
+      group: "Package Card",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "startingPrice",
+      title: "Starting Price",
+      type: "number",
+      group: "Package Card",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "localizedText",

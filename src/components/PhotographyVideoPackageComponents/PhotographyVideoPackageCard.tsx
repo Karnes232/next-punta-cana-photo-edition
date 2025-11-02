@@ -27,11 +27,8 @@ const PhotographyVideoPackageCard: React.FC<
 
   const title =
     photoPackage.title[locale as "en" | "es"] || photoPackage.title.en
-  const description =
-    photoPackage.description[locale as "en" | "es"] ||
-    photoPackage.description.en
-  const startingPrice = photoPackage.minimumHours * photoPackage.hourlyRate
-
+  // const startingPrice = photoPackage.minimumHours * photoPackage.hourlyRate
+console.log(photoPackage)
   // Determine package tier color scheme using brand colors
   const getPackageTierStyles = (packageTitle: string) => {
     const titleLower = packageTitle.toLowerCase()
@@ -104,11 +101,21 @@ const PhotographyVideoPackageCard: React.FC<
             </h3>
 
             <div className="mb-6">
-              <p
-                className={`${montserrat.className} text-gray-600 text-sm leading-relaxed`}
-              >
-                {description}
-              </p>
+              <ul className="space-y-2">
+                {photoPackage.includedItems.map((item, index) => {
+                  const itemText =
+                    item[locale as "en" | "es"] || item.en
+                  return (
+                    <li
+                      key={index}
+                      className={`${montserrat.className} text-gray-600 text-sm leading-relaxed flex items-start`}
+                    >
+                      <span className="mr-2 text-caribbeanTurquoise">•</span>
+                      <span>{itemText}</span>
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
 
             {/* Price Section */}
@@ -121,8 +128,8 @@ const PhotographyVideoPackageCard: React.FC<
               <p
                 className={`${coromantGaramond.className} text-3xl font-semibold ${tierStyles.textColor}`}
               >
-                {startingPrice
-                  ? `$${startingPrice.toLocaleString()}`
+                {photoPackage.startingPrice
+                  ? `$${photoPackage.startingPrice.toLocaleString()}`
                   : t("Contact Us")}
               </p>
             </div>
