@@ -159,7 +159,7 @@ const ServicesCalculator = ({
                 className="w-20 px-3 py-2 border border-elegantSilver rounded-md focus:outline-none focus:ring-2 focus:ring-luxuryGold focus:border-luxuryGold transition-all duration-300"
               />
             </div>
-            
+
             <div
               className={`${montserrat.className} mt-2 text-sm text-elegantSilver`}
             >

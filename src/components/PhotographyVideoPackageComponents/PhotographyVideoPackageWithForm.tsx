@@ -41,7 +41,10 @@ const PhotographyVideoPackageWithForm = ({
             </h3>
             <ul className="grid gap-3 md:grid-cols-2">
               {includedItems.map((item, index) => (
-                <li key={index} className="flex items-start gap-2 text-darkGray">
+                <li
+                  key={index}
+                  className="flex items-start gap-2 text-darkGray"
+                >
                   <span className="mt-2 mr-3 h-2 w-2 rounded-full bg-caribbeanTurquoise" />
                   <span className="leading-relaxed">{item}</span>
                 </li>

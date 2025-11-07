@@ -19,6 +19,10 @@ export default defineType({
       name: "Gallery",
       title: "Gallery",
     },
+    {
+      name: "Services Calculator",
+      title: "Services Calculator",
+    },
   ],
   fields: [
     defineField({
@@ -73,6 +77,20 @@ export default defineType({
       type: "localizedBlock",
       group: "Paragraphs",
       validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "minimumHours",
+      title: "Minimum Hours",
+      type: "number",
+      group: "Services Calculator",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "addtions",
+      title: "Addtions",
+      type: "array",
+      of: [{ type: "photoPackagesAdditions" }],
+      group: "Services Calculator",
     }),
   ],
   preview: {

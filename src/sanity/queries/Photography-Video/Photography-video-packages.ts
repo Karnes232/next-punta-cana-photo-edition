@@ -93,7 +93,6 @@ export interface PhotographyVideoPackagesBySlug {
     en: string
     es: string
   }[]
-
 }
 
 export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-video-packages" && slug.current == $slug][0] {    

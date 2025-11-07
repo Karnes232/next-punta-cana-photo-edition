@@ -1,4 +1,5 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
+import CustomPhotographyVideoPackageCalculatorForm from "@/components/Forms/CustomPhotographyVideoPackageCalculatorForm"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
@@ -58,6 +59,13 @@ export default async function PhotographyVideo({
         subtitle={photographyVideo?.packageSubtitle?.[locale]}
         locale={locale}
       />
+      <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+        <CustomPhotographyVideoPackageCalculatorForm
+          minimumHours={photographyVideo?.minimumHours || 0}
+          addtions={photographyVideo?.addtions || []}
+          locale={locale}
+        />
+      </section>
 
       <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
         <BlockContent

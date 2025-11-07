@@ -66,7 +66,7 @@ export default async function PhotographyVideoPackagePage({
           packageData={{
             title: packageItem.hero.title,
             startingPrice: packageItem.startingPrice,
-         
+
             includedItems: packageItem.includedItems,
           }}
           locale={locale}

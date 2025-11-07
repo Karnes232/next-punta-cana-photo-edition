@@ -103,8 +103,7 @@ const PhotographyVideoPackageCard: React.FC<
             <div className="mb-6">
               <ul className="space-y-2">
                 {photoPackage.includedItems.map((item, index) => {
-                  const itemText =
-                    item[locale as "en" | "es"] || item.en
+                  const itemText = item[locale as "en" | "es"] || item.en
                   return (
                     <li
                       key={index}

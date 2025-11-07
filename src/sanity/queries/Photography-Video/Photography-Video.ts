@@ -33,6 +33,19 @@ export interface PhotographyVideo {
     en: any[]
     es: any[]
   }
+  minimumHours: number
+  addtions: {
+    title: {
+      en: string
+      es: string
+    }
+    price: number
+    fixedorhourly: string
+  }[]
+  includedItems: {
+    en: string
+    es: string
+  }[]
 }
 
 export const photographyVideoQuery = `*[_type == "photography-video"][0] {
@@ -90,6 +103,15 @@ export const photographyVideoQuery = `*[_type == "photography-video"][0] {
     paragraph2 {
       en,
       es
+    },
+    minimumHours,
+    addtions[] {
+      title {
+        en,
+        es
+      },
+      price,
+      fixedorhourly
     }
 }`
 

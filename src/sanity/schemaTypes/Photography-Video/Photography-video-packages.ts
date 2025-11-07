@@ -112,7 +112,6 @@ export default defineType({
       group: "Gallery",
       validation: Rule => Rule.required(),
     }),
-  
 
     defineField({ name: "seo", type: "seo", group: "SEO" }),
   ],
