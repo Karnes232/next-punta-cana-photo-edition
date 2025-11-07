@@ -32,7 +32,7 @@ const PhotographyVideoPackages: React.FC<PhotographyVideoPackagesProps> = ({
 
   // Sort packages by starting price (lowest to highest)
   const sortedPackages = [...packages].sort(
-    (a, b) => a.minimumHours * a.hourlyRate - b.minimumHours * b.hourlyRate,
+    (a, b) => a.startingPrice - b.startingPrice,
   )
 
   return (
