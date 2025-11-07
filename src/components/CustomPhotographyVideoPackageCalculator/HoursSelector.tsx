@@ -1,4 +1,5 @@
 import { Clock } from "lucide-react"
+import { useEffect, useState } from "react"
 
 import { TranslationFn } from "./types"
 
@@ -18,8 +19,43 @@ const HoursSelector = ({
   onHoursChange,
   hourSuffix,
   t,
-}: HoursSelectorProps) => (
-  <article className="rounded-2xl border border-elegantSilver/60 bg-white/95 p-6 shadow-sm backdrop-blur">
+}: HoursSelectorProps) => {
+  const [inputValue, setInputValue] = useState(String(selectedHours))
+
+  useEffect(() => {
+    setInputValue(String(selectedHours))
+  }, [selectedHours])
+
+  const handleInputChange = (value: string) => {
+    if (value === "") {
+      setInputValue(value)
+      return
+    }
+
+    const parsedValue = Number(value)
+    if (Number.isNaN(parsedValue)) {
+      return
+    }
+
+    const roundedValue = Math.round(parsedValue)
+    const clampedValue = Math.max(
+      normalizedMinimumHours,
+      Math.min(maxHours, roundedValue)
+    )
+
+    setInputValue(String(clampedValue))
+    onHoursChange(clampedValue)
+  }
+
+  const handleInputBlur = () => {
+    if (inputValue === "") {
+      setInputValue(String(normalizedMinimumHours))
+      onHoursChange(normalizedMinimumHours)
+    }
+  }
+
+  return (
+    <article className="rounded-2xl border border-elegantSilver/60 bg-white/95 p-6 shadow-sm backdrop-blur">
     <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
       <div className="space-y-1">
         <h3 className="text-xl font-semibold text-darkGray">
@@ -50,9 +86,11 @@ const HoursSelector = ({
           <input
             type="number"
             min={normalizedMinimumHours}
-            max={24}
-            value={selectedHours}
-            onChange={event => onHoursChange(Number(event.target.value))}
+            max={maxHours}
+            step={1}
+            value={inputValue}
+            onChange={event => handleInputChange(event.target.value)}
+            onBlur={handleInputBlur}
             className="w-24 rounded-xl border border-elegantSilver bg-pureWhite py-2 text-center text-lg font-semibold text-darkGray shadow-inner focus:border-caribbeanTurquoise focus:outline-none focus:ring-2 focus:ring-caribbeanTurquoise/40"
           />
           <button
@@ -60,7 +98,7 @@ const HoursSelector = ({
             aria-label={t("ariaIncreaseHours")}
             onClick={() => onHoursChange(selectedHours + 1)}
             className="flex h-11 w-11 items-center justify-center rounded-xl border border-elegantSilver text-darkGray transition-colors hover:border-caribbeanTurquoise hover:text-caribbeanTurquoise disabled:cursor-not-allowed disabled:opacity-40"
-            disabled={selectedHours >= 24}
+            disabled={selectedHours >= maxHours}
           >
             <PlusIcon className="h-4 w-4" />
           </button>
@@ -89,7 +127,7 @@ const HoursSelector = ({
       <p className="text-xs text-darkGray/45">{t("hourlyServicesInfo")}</p>
     </div>
   </article>
-)
+)}
 
 type IconProps = {
   className?: string

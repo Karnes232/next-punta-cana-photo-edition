@@ -207,10 +207,11 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
     }
   }
 
-  const maxHours = useMemo(() => {
-    const defaultMax = normalizedMinimumHours + 8
-    return Math.max(defaultMax, normalizedMinimumHours + 2)
-  }, [normalizedMinimumHours])
+  // const maxHours = useMemo(() => {
+  //   const defaultMax = normalizedMinimumHours + 9
+  //   return Math.max(defaultMax, normalizedMinimumHours + 2)
+  // }, [normalizedMinimumHours])
+  const maxHours = 12
 
   const handleHoursChange = (value: number) => {
     if (Number.isNaN(value)) {
