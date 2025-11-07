@@ -28,7 +28,7 @@ const PhotographyVideoPackageCard: React.FC<
   const title =
     photoPackage.title[locale as "en" | "es"] || photoPackage.title.en
   // const startingPrice = photoPackage.minimumHours * photoPackage.hourlyRate
-console.log(photoPackage)
+
   // Determine package tier color scheme using brand colors
   const getPackageTierStyles = (packageTitle: string) => {
     const titleLower = packageTitle.toLowerCase()

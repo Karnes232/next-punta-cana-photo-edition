@@ -65,10 +65,9 @@ export default async function PhotographyVideoPackagePage({
         <PhotographyVideoPackageWithForm
           packageData={{
             title: packageItem.hero.title,
-            hourlyRate: packageItem.hourlyRate,
-            minimumHours: packageItem.minimumHours,
-            additions: packageItem.addtions,
-            includedServices: packageItem.includedServices,
+            startingPrice: packageItem.startingPrice,
+         
+            includedItems: packageItem.includedItems,
           }}
           locale={locale}
         />

@@ -32,7 +32,7 @@ export default async function WeddingPlanning({
   if (!weddingPlanning) {
     notFound()
   }
-  console.log(weddingPlanning)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (

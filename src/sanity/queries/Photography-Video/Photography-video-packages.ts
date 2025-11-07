@@ -20,8 +20,6 @@ export interface PhotographyVideoPackages {
     en: string
     es: string
   }
-  minimumHours: number
-  hourlyRate: number
   buttonText: {
     en: string
     es: string
@@ -46,8 +44,6 @@ export const photographyVideoPackagesQuery = `*[_type == "photography-video-pack
     en,
     es
   },
-  minimumHours,
-  hourlyRate,
   buttonText {
     en,
     es
@@ -91,20 +87,13 @@ export interface PhotographyVideoPackagesBySlug {
     }
     alt: string
   }[]
-  addtions: {
-    title: {
-      en: string
-      es: string
-    }
-    fixedorhourly: string
-    price: number
-  }[]
-  hourlyRate: number
-  minimumHours: number
-  includedServices: {
+
+  startingPrice: number
+  includedItems: {
     en: string
     es: string
   }[]
+
 }
 
 export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-video-packages" && slug.current == $slug][0] {    
@@ -150,17 +139,9 @@ export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-vide
     },
     alt
   },
-  addtions[] {
-    title {
-      en,
-      es
-    },
-    fixedorhourly,
-    price
-  },
-  hourlyRate,
-  minimumHours,
-  includedServices[] {
+
+  startingPrice,
+  includedItems[] {
     en,
     es
   }

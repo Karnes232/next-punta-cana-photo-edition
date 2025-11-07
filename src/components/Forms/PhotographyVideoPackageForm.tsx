@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useTranslations } from "next-intl"
 import {
   Send,
@@ -11,7 +11,7 @@ import {
   MessageSquare,
   CheckCircle,
   AlertCircle,
-  Clock,
+  // Clock,
   DollarSign,
   Package,
 } from "lucide-react"
@@ -39,30 +39,18 @@ interface FormErrors {
 interface PhotographyVideoPackageFormProps {
   packageData?: {
     title: { en: string; es: string }
-    hourlyRate: number
-    minimumHours: number
-    additions: Array<{
-      title: { en: string; es: string }
-      price: number
-      fixedorhourly: string
-    }>
-    includedServices: Array<{ en: string; es: string }>
-  }
-  calculatorData?: {
-    selectedHours: number
-    totalCost: number
-    selectedAdditions: Record<string, boolean>
+    startingPrice: number
+
+    includedItems: Array<{ en: string; es: string }>
   }
   locale: "en" | "es"
 }
 
 const PhotographyVideoPackageForm = ({
   packageData,
-  calculatorData,
   locale,
 }: PhotographyVideoPackageFormProps) => {
   const t = useTranslations("BookingForm")
-
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -70,8 +58,8 @@ const PhotographyVideoPackageForm = ({
     date: "",
     message: "",
     packageName: packageData?.title[locale] || "",
-    selectedHours: calculatorData?.selectedHours || 0,
-    totalCost: calculatorData?.totalCost || 0,
+    selectedHours: 0,
+    totalCost: packageData?.startingPrice || 0,
     selectedAdditions: [],
   })
 
@@ -80,26 +68,6 @@ const PhotographyVideoPackageForm = ({
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle")
-
-  // Update form data when calculator data changes
-  useEffect(() => {
-    if (calculatorData && packageData) {
-      // Convert selected additions from index-based object to array of addition names
-      const selectedAdditionNames = Object.keys(
-        calculatorData.selectedAdditions,
-      )
-        .filter(key => calculatorData.selectedAdditions[key])
-        .map(index => packageData.additions[parseInt(index)]?.title[locale])
-        .filter(Boolean) // Remove any undefined values
-
-      setFormData(prev => ({
-        ...prev,
-        selectedHours: calculatorData.selectedHours,
-        totalCost: calculatorData.totalCost,
-        selectedAdditions: selectedAdditionNames,
-      }))
-    }
-  }, [calculatorData, packageData, locale])
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -191,8 +159,8 @@ const PhotographyVideoPackageForm = ({
           date: "",
           message: "",
           packageName: packageData?.title[locale] || "",
-          selectedHours: calculatorData?.selectedHours || 0,
-          totalCost: calculatorData?.totalCost || 0,
+          selectedHours: 0,
+          totalCost: packageData?.startingPrice || 0,
           selectedAdditions: [],
         })
       } else {
@@ -209,7 +177,7 @@ const PhotographyVideoPackageForm = ({
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-8 px-4">
+    <div className="w-full max-w-4xl mx-auto my-8">
       <div className="bg-pureWhite rounded-2xl shadow-xl p-8 md:p-12 border border-elegantSilver/50">
         {/* Header */}
         <div className="text-center mb-8">
@@ -226,24 +194,20 @@ const PhotographyVideoPackageForm = ({
               <Package className="w-5 h-5 text-luxuryGold" />
               {t("packageSummary")}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-caribbeanTurquoise" />
-                <span className="text-darkGray">
-                  <strong>{t("hours")}:</strong> {formData.selectedHours}
-                </span>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              {formData.packageName && (
+                <div className="flex items-center gap-2">
+                  <Package className="w-4 h-4 text-elegantSilver" />
+                  <span className="text-darkGray">
+                    <strong>{t("package")}:</strong> {formData.packageName}
+                  </span>
+                </div>
+              )}
               <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-luxuryGold" />
                 <span className="text-darkGray">
                   <strong>{t("estimatedCost")}:</strong> $
                   {formData.totalCost.toLocaleString()}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Package className="w-4 h-4 text-elegantSilver" />
-                <span className="text-darkGray">
-                  <strong>{t("package")}:</strong> {formData.packageName}
                 </span>
               </div>
             </div>
