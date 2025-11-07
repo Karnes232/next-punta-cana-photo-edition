@@ -18,6 +18,7 @@ interface PhotographyVideoPackagesProps {
   locale: string
   title?: string
   subtitle?: string
+  mostPopularPackage?: string
 }
 
 const PhotographyVideoPackages: React.FC<PhotographyVideoPackagesProps> = ({
@@ -25,6 +26,7 @@ const PhotographyVideoPackages: React.FC<PhotographyVideoPackagesProps> = ({
   locale,
   title,
   subtitle,
+  mostPopularPackage,
 }) => {
   if (!packages || packages.length === 0) {
     return null
@@ -34,7 +36,19 @@ const PhotographyVideoPackages: React.FC<PhotographyVideoPackagesProps> = ({
   const sortedPackages = [...packages].sort(
     (a, b) => a.startingPrice - b.startingPrice,
   )
-
+  const mostPopularPackageData = sortedPackages.find(
+    photographyVideoPackage =>
+      photographyVideoPackage._id === mostPopularPackage,
+  )
+  const prioritizedPackages = mostPopularPackageData
+    ? [
+        mostPopularPackageData,
+        ...sortedPackages.filter(
+          photographyVideoPackage =>
+            photographyVideoPackage._id !== mostPopularPackageData._id,
+        ),
+      ]
+    : sortedPackages
   return (
     <section className="max-w-7xl mx-auto px-5 py-16">
       {/* Header */}
@@ -58,6 +72,7 @@ const PhotographyVideoPackages: React.FC<PhotographyVideoPackagesProps> = ({
             key={packageItem._id}
             package={packageItem}
             locale={locale}
+            isMostPopular={packageItem._id === mostPopularPackage}
           />
         ))}
       </div>

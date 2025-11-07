@@ -58,6 +58,7 @@ export default async function PhotographyVideo({
         title={photographyVideo?.packageTitle?.[locale]}
         subtitle={photographyVideo?.packageSubtitle?.[locale]}
         locale={locale}
+        mostPopularPackage={photographyVideo?.mostPopularPackage?._id}
       />
       <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
         <CustomPhotographyVideoPackageCalculatorForm

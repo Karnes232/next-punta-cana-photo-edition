@@ -60,6 +60,17 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "mostPopularPackage",
+      title: "Most Popular Package",
+      type: "reference",
+      options: {
+        disableNew: true,
+      },
+      to: [{ type: "photography-video-packages" }],
+
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: "packageTitle",
       title: "Package Title",
       type: "localizedString",

@@ -4,6 +4,7 @@ import React from "react"
 import Link from "next/link"
 import { Cormorant_Garamond, Montserrat } from "next/font/google"
 import { useTranslations } from "next-intl"
+import { CheckCircle, Star } from "lucide-react"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -18,12 +19,14 @@ const montserrat = Montserrat({
 interface PhotographyVideoPackageCardProps {
   package: PhotographyVideoPackages
   locale: string
+  isMostPopular?: boolean
 }
 
 const PhotographyVideoPackageCard: React.FC<
   PhotographyVideoPackageCardProps
-> = ({ package: photoPackage, locale }) => {
+> = ({ package: photoPackage, locale, isMostPopular = false }) => {
   const t = useTranslations("PhotographyVideoPackage")
+  const mostPopularLabel = t("Most Popular")
 
   const title =
     photoPackage.title[locale as "en" | "es"] || photoPackage.title.en
@@ -75,76 +78,78 @@ const PhotographyVideoPackageCard: React.FC<
   return (
     <Link
       href={`/weddings/photography-video/${photoPackage.slug.current}`}
-      className="block w-full h-full"
+      className="block h-full w-full"
     >
       <div
-        className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group w-full h-full flex flex-col cursor-pointer border-2 ${tierStyles.borderColor}`}
+        className={`relative flex h-full flex-col rounded-xl border-2 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${tierStyles.borderColor} hover:border-luxuryGold`}
       >
-        {/* Header with package tier badge */}
-        <div className={`${tierStyles.bgGradient} p-4 border-b`}>
-          <div className="flex items-center justify-center">
+        {isMostPopular && (
+          <div className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full bg-luxuryGold px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-lg shadow-luxuryGold/30">
+            <Star className="h-4 w-4 fill-current" />
+            <span>{mostPopularLabel}</span>
+          </div>
+        )}
+
+        {/* Header */}
+        <div className="mb-6 text-center">
+          <div
+            className={`${tierStyles.bgGradient} mx-auto inline-flex items-center justify-center rounded-full px-4 py-1`}
+          >
             <span
-              className={`inline-block px-3 py-1 rounded-full text-white text-sm font-semibold ${tierStyles.badgeColor}`}
+              className={`${montserrat.className} text-xs font-semibold uppercase tracking-wide text-darkGray`}
             >
               {title}
             </span>
           </div>
+          <h3
+            className={`${coromantGaramond.className} mt-4 text-2xl font-semibold text-gray-900`}
+          >
+            {title}
+          </h3>
         </div>
 
-        {/* Content */}
-        <div className="p-6 text-center flex flex-col flex-grow">
-          <div className="flex-grow">
-            <h3
-              className={`${coromantGaramond.className} text-2xl font-semibold text-gray-900 mb-4`}
-            >
-              {title}
-            </h3>
+        {/* Included Items */}
+        <div className="flex-1">
+          <ul className="space-y-3">
+            {photoPackage.includedItems.map((item, index) => {
+              const itemText = item[locale as "en" | "es"] || item.en
+              return (
+                <li
+                  key={index}
+                  className={`${montserrat.className} flex items-start gap-3 text-sm text-gray-600`}
+                >
+                  <CheckCircle className="mt-0.5 h-4 w-4 text-luxuryGold" />
+                  <span>{itemText}</span>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
 
-            <div className="mb-6">
-              <ul className="space-y-2">
-                {photoPackage.includedItems.map((item, index) => {
-                  const itemText = item[locale as "en" | "es"] || item.en
-                  return (
-                    <li
-                      key={index}
-                      className={`${montserrat.className} text-gray-600 text-sm leading-relaxed flex items-start`}
-                    >
-                      <span className="mr-2 text-caribbeanTurquoise">•</span>
-                      <span>{itemText}</span>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
+        {/* Price Section */}
+        <div className="mt-6 border-t pt-4 text-center">
+          <p
+            className={`${montserrat.className} mb-1 text-xs font-semibold uppercase text-gray-500`}
+          >
+            {t("Starting Price")}
+          </p>
+          <p
+            className={`${coromantGaramond.className} text-3xl font-semibold ${tierStyles.textColor}`}
+          >
+            {photoPackage.startingPrice
+              ? `$${photoPackage.startingPrice.toLocaleString()}`
+              : t("Contact Us")}
+          </p>
+        </div>
 
-            {/* Price Section */}
-            <div className="mb-6">
-              <p
-                className={`${montserrat.className} text-sm font-semibold text-gray-800 mb-2`}
-              >
-                {t("Starting Price")}
-              </p>
-              <p
-                className={`${coromantGaramond.className} text-3xl font-semibold ${tierStyles.textColor}`}
-              >
-                {photoPackage.startingPrice
-                  ? `$${photoPackage.startingPrice.toLocaleString()}`
-                  : t("Contact Us")}
-              </p>
-            </div>
-          </div>
-
-          {/* Learn More Button */}
-          <div className="mt-auto flex-shrink-0">
-            <div
-              className={`inline-block px-6 py-3 rounded-lg font-semibold text-white transition-all duration-500 ease-in-out group-hover:scale-105 bg-gradient-to-r ${tierStyles.badgeColor} ${tierStyles.buttonHover} hover:transition-all hover:duration-300`}
-            >
-              <span className={`${montserrat.className} text-sm`}>
-                {photoPackage.buttonText[locale as "en" | "es"] ||
-                  photoPackage.buttonText.en}
-              </span>
-            </div>
-          </div>
+        {/* CTA */}
+        <div className="mt-6 text-center">
+          <span
+            className={`${montserrat.className} inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ${tierStyles.badgeColor} hover:opacity-90 hover:shadow-lg`}
+          >
+            {photoPackage.buttonText[locale as "en" | "es"] ||
+              photoPackage.buttonText.en}
+          </span>
         </div>
       </div>
     </Link>

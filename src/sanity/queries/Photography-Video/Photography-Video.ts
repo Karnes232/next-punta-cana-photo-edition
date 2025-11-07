@@ -46,6 +46,9 @@ export interface PhotographyVideo {
     en: string
     es: string
   }[]
+  mostPopularPackage: {
+    _id: string
+  }
 }
 
 export const photographyVideoQuery = `*[_type == "photography-video"][0] {
@@ -112,6 +115,9 @@ export const photographyVideoQuery = `*[_type == "photography-video"][0] {
       },
       price,
       fixedorhourly
+    },
+    mostPopularPackage -> {
+      _id,
     }
 }`
 
