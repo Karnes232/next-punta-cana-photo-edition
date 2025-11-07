@@ -10,6 +10,7 @@ import WeddingPlannerPackages from "@/components/WeddingPlannerComponents/Weddin
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 import WeddingPlanningInquiryForm from "@/components/Forms/WeddingPlanningInquiryForm"
 import { SelectedPackageProvider } from "@/contexts/SelectedPackageContext"
+import PortfolioImages from "@/components/WeddingPlannerComponents/PortfolioImages"
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
@@ -60,11 +61,19 @@ export default async function WeddingPlanning({
               subtitle={weddingPlanning?.hero?.subtitle?.[locale]}
             />
           )}
-          <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-            <BlockContent
-              content={weddingPlanning?.paragraph1 || { en: [], es: [] }}
-              locale={locale}
-            />
+          <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center md:text-left">
+            <div className="flex flex-col gap-4 md:block md:clearfix">
+              <PortfolioImages
+                portfolioImages={weddingPlanning?.portfolioImages || []}
+                className="order-2 md:order-none md:float-right md:ml-6 md:mb-4"
+              />
+              <div className="order-1 md:order-none">
+                <BlockContent
+                  content={weddingPlanning?.paragraph1 || { en: [], es: [] }}
+                  locale={locale}
+                />
+              </div>
+            </div>
             <div className="my-10">
               <PhotoGrid photos={weddingPlanning?.galleryImages || []} />
             </div>

@@ -206,7 +206,8 @@
   "CorporateEventsPackages": {
     "title": "Corporate Events Packages",
     "description": "Professional photography and videography services for your corporate events, conferences, and business gatherings.",
-    "Contact Us": "Contact Us"
+    "Contact Us": "Contact Us",
+    "Add to Calculator": "Add to Calculator"
   },
   "CorporateEventForm": {
     "title": "Corporate Event Booking Request",

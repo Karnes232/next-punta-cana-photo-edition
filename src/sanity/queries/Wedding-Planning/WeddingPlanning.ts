@@ -9,6 +9,20 @@ export interface WeddingPlanning {
     en: any[]
     es: any[]
   }
+  portfolioImages: {
+    asset: {
+      url: string
+      _type: string
+      _ref: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }[]
   galleryImages: {
     asset: {
       url: string
@@ -68,6 +82,20 @@ export const weddingPlanningQuery = `*[_type == "wedding-planning"][0] {
   paragraph1 {
     en,
     es
+  },
+  portfolioImages[] {
+    asset -> {
+      url,
+      _type,
+      _ref,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt
   },
  galleryImages[] {
     asset -> {

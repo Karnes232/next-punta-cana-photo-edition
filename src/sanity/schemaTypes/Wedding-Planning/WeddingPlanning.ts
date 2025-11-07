@@ -43,6 +43,26 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "portfolioImages",
+      title: "Portfolio Images",
+      type: "array",
+      group: "Gallery",
+      validation: Rule => Rule.required(),
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "string",
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: "galleryImages",
       title: "Gallery Images",
       type: "array",

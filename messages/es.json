@@ -206,7 +206,8 @@
   "CorporateEventsPackages": {
     "title": "Paquetes de Eventos Corporativos",
     "description": "Servicios profesionales de fotografía y videografía para tus eventos corporativos, conferencias y reuniones empresariales.",
-    "Contact Us": "Contactar"
+    "Contact Us": "Contactar",
+    "Add to Calculator": "Agregar al Calculadora"
   },
   "CorporateEventForm": {
     "title": "Solicitud de Reserva de Evento Corporativo",
