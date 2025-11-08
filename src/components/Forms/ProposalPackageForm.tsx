@@ -11,7 +11,6 @@ import {
   MessageSquare,
   CheckCircle,
   AlertCircle,
-  MapPin,
   Heart,
   Clock,
 } from "lucide-react"
@@ -38,9 +37,20 @@ interface FormErrors {
 const ProposalPackageForm = ({
   page,
   locale,
+  additions,
+  startingPrice,
 }: {
   page: string
   locale: "en" | "es"
+  additions: {
+    _id: string
+    additionName: {
+      en: string
+      es: string
+    }
+    additionPrice: number
+  }[]
+  startingPrice: number
 }) => {
   const t = useTranslations("ProposalBookingForm")
 
@@ -53,7 +63,7 @@ const ProposalPackageForm = ({
     specialRequests: "",
     message: "",
   })
-
+  console.log(additions)
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<
@@ -85,7 +95,6 @@ const ProposalPackageForm = ({
     if (!formData.date) {
       newErrors.date = t("requiredField")
     }
-
 
     if (!formData.partnerName.trim()) {
       newErrors.partnerName = t("requiredField")
@@ -371,7 +380,6 @@ const ProposalPackageForm = ({
                 )}
               </div>
             </div>
-
 
             {/* Special Requests Field */}
             <div>

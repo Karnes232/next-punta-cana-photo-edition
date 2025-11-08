@@ -142,6 +142,14 @@ export const structure: StructureResolver = S =>
                     .title("Proposal Packages")
                     .filter("_type == 'proposalPackages'"),
                 ),
+              S.listItem()
+                .title("Proposal Additions")
+                .child(
+                  S.documentList()
+                    .schemaType("proposalAdditions")
+                    .title("Proposal Additions")
+                    .filter("_type == 'proposalAdditions'"),
+                ),
             ]),
         ),
       S.listItem()

@@ -33,6 +33,7 @@ export default async function ProposalPackagePage({ params }: PageProps) {
   if (!proposalPackage) {
     notFound()
   }
+  console.log(proposalPackage)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -74,6 +75,8 @@ export default async function ProposalPackagePage({ params }: PageProps) {
         </section>
         <section className="max-w-7xl my-5 xl:mx-auto flex flex-col gap-4">
           <ProposalPackageForm
+            additions={proposalPackage.additions || []}
+            startingPrice={proposalPackage.packageCardStartingPrice}
             page={proposalPackage.hero.title?.[locale] || ""}
             locale={locale}
           />

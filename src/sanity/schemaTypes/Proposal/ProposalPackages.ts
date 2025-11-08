@@ -24,6 +24,10 @@ export default defineType({
       title: "Gallery",
     },
     {
+      name: "Additions",
+      title: "Additions",
+    },
+    {
       name: "SEO",
       title: "SEO",
     },
@@ -112,6 +116,18 @@ export default defineType({
       type: "localizedBlock",
       group: "Paragraphs",
       validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "additions",
+      title: "Additions",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "proposalAdditions" }],
+        },
+      ],
+      group: "Additions",
     }),
     defineField({
       name: "seo",

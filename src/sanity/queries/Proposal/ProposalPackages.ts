@@ -95,6 +95,15 @@ export interface ProposalPackagesBySlug {
     en: any[]
     es: any[]
   }
+  additions: {
+    _id: string
+    additionName: {
+      en: string
+      es: string
+    }
+    additionPrice: number
+  }[]
+  packageCardStartingPrice: number
 }
 
 export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slug.current == $slug][0] {
@@ -147,7 +156,16 @@ export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slu
   paragraph2 {
     en,
     es
-  }
+  },
+  additions[] -> {
+    _id,
+    additionName {
+      en,
+      es
+    },
+    additionPrice
+  },
+  packageCardStartingPrice
 }`
 
 export async function getProposalPackagesBySlug(
