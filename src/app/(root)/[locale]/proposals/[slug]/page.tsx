@@ -33,7 +33,7 @@ export default async function ProposalPackagePage({ params }: PageProps) {
   if (!proposalPackage) {
     notFound()
   }
-  console.log(proposalPackage)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (

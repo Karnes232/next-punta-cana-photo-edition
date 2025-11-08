@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import { useTranslations } from "next-intl"
 import {
   Send,
@@ -13,6 +13,8 @@ import {
   AlertCircle,
   Heart,
   Clock,
+  DollarSign,
+  Gift,
 } from "lucide-react"
 
 interface FormData {
@@ -63,12 +65,51 @@ const ProposalPackageForm = ({
     specialRequests: "",
     message: "",
   })
-  console.log(additions)
+  const [selectedAdditions, setSelectedAdditions] = useState<string[]>([])
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle")
+
+  const currencyFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat(locale === "es" ? "es-DO" : "en-US", {
+        style: "currency",
+        currency: "USD",
+      }),
+    [locale],
+  )
+
+  const selectedAdditionsDetails = useMemo(
+    () =>
+      additions.filter(addition => selectedAdditions.includes(addition._id)),
+    [additions, selectedAdditions],
+  )
+
+  const selectedAdditionsSummary = useMemo(
+    () =>
+      selectedAdditionsDetails
+        .map(
+          addition =>
+            `${addition.additionName[locale]} (${currencyFormatter.format(
+              addition.additionPrice,
+            )})`,
+        )
+        .join(", "),
+    [currencyFormatter, locale, selectedAdditionsDetails],
+  )
+
+  const totalInvestment = useMemo(() => {
+    const additionsTotal = selectedAdditionsDetails.reduce(
+      (total, addition) => total + (addition.additionPrice || 0),
+      0,
+    )
+    return startingPrice + additionsTotal
+  }, [selectedAdditionsDetails, startingPrice])
+
+  const hasAdditions = additions.length > 0
+  const hasSelectedAdditions = selectedAdditions.length > 0
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -119,6 +160,14 @@ const ProposalPackageForm = ({
     }
   }
 
+  const handleAdditionToggle = (additionId: string) => {
+    setSelectedAdditions(prev =>
+      prev.includes(additionId)
+        ? prev.filter(id => id !== additionId)
+        : [...prev, additionId],
+    )
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -141,6 +190,19 @@ const ProposalPackageForm = ({
       formDataToSend.append("message", formData.message)
       formDataToSend.append("package", page)
       formDataToSend.append("locale", locale)
+      formDataToSend.append(
+        "startingPrice",
+        currencyFormatter.format(startingPrice),
+      )
+      formDataToSend.append(
+        "selectedAdditions",
+        selectedAdditionsSummary || t("noAdditionsSelected"),
+      )
+      formDataToSend.append(
+        "totalInvestment",
+        currencyFormatter.format(totalInvestment),
+      )
+      formDataToSend.append("selectedAdditionIds", selectedAdditions.join(","))
 
       const response = await fetch("/__forms.html", {
         method: "POST",
@@ -162,6 +224,7 @@ const ProposalPackageForm = ({
           specialRequests: "",
           message: "",
         })
+        setSelectedAdditions([])
       } else {
         throw new Error(
           `Form submission failed with status: ${response.status}`,
@@ -188,15 +251,42 @@ const ProposalPackageForm = ({
 
         {/* Package Info */}
         <div className="mb-6 p-6 bg-luxuryGold/5 rounded-xl border border-luxuryGold/30">
-          <h3 className="text-xl font-semibold text-darkGray mb-4 flex items-center gap-2">
-            <Heart className="w-5 h-5 text-luxuryGold" />
-            {t("packageInfo")}
-          </h3>
-          <div className="flex items-center gap-2 text-sm text-darkGray">
-            <Clock className="w-4 h-4 text-caribbeanTurquoise" />
-            <span>
-              <strong>{t("package")}:</strong> {page}
-            </span>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-xl font-semibold text-darkGray flex items-center gap-2">
+              <Heart className="w-5 h-5 text-luxuryGold" />
+              {t("packageInfo")}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-darkGray">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-caribbeanTurquoise" />
+                <span>
+                  <strong>{t("package")}:</strong> {page}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <DollarSign className="w-4 h-4 text-caribbeanTurquoise" />
+                <span>
+                  <strong>{t("startingPriceLabel")}:</strong>{" "}
+                  {currencyFormatter.format(startingPrice)}
+                </span>
+              </div>
+              {hasAdditions && (
+                <div className="flex flex-col md:col-span-2">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-caribbeanTurquoise" />
+                    <span>
+                      <strong>{t("totalInvestment")}:</strong>{" "}
+                      {currencyFormatter.format(totalInvestment)}
+                    </span>
+                  </div>
+                  {hasSelectedAdditions && (
+                    <span className="pl-6 text-xs text-darkGray/70">
+                      {t("selectedAdditionsLabel")}: {selectedAdditionsSummary}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -227,6 +317,26 @@ const ProposalPackageForm = ({
             <input type="hidden" name="form-name" value="proposal-booking" />
             <input type="hidden" name="package" value={page} />
             <input type="hidden" name="locale" value={locale} />
+            <input
+              type="hidden"
+              name="startingPrice"
+              value={currencyFormatter.format(startingPrice)}
+            />
+            <input
+              type="hidden"
+              name="selectedAdditions"
+              value={selectedAdditionsSummary || t("noAdditionsSelected")}
+            />
+            <input
+              type="hidden"
+              name="selectedAdditionIds"
+              value={selectedAdditions.join(",")}
+            />
+            <input
+              type="hidden"
+              name="totalInvestment"
+              value={currencyFormatter.format(totalInvestment)}
+            />
 
             {/* Honeypot field for spam protection */}
             <p style={{ display: "none" }}>
@@ -380,6 +490,55 @@ const ProposalPackageForm = ({
                 )}
               </div>
             </div>
+
+            {/* Optional Additions */}
+            {hasAdditions && (
+              <div className="p-6 bg-pureWhite border border-elegantSilver rounded-xl shadow-sm space-y-4">
+                <div className="flex items-center gap-2">
+                  <Gift className="w-5 h-5 text-caribbeanTurquoise" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-darkGray">
+                      {t("additionsHeading")}
+                    </h3>
+                    <p className="text-sm text-darkGray/70">
+                      {t("additionsHelper")}
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-4 md:space-y-0 md:gap-4! md:grid md:grid-cols-2">
+                  {additions.map(addition => {
+                    const isSelected = selectedAdditions.includes(addition._id)
+                    return (
+                      <label
+                        key={addition._id}
+                        className={`flex items-start gap-3 p-4 rounded-lg border transition-colors ${
+                          isSelected
+                            ? "border-caribbeanTurquoise bg-caribbeanTurquoise/5"
+                            : "border-elegantSilver hover:border-caribbeanTurquoise/60"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          name="additions"
+                          value={addition._id}
+                          checked={isSelected}
+                          onChange={() => handleAdditionToggle(addition._id)}
+                          className="mt-1 h-4 w-4 text-caribbeanTurquoise focus:ring-caribbeanTurquoise border-elegantSilver rounded"
+                        />
+                        <span className="flex-1">
+                          <span className="block font-semibold text-darkGray">
+                            {addition.additionName[locale]}
+                          </span>
+                          <span className="block text-sm font-medium text-caribbeanTurquoise">
+                            {currencyFormatter.format(addition.additionPrice)}
+                          </span>
+                        </span>
+                      </label>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Special Requests Field */}
             <div>
