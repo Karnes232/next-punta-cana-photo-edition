@@ -59,6 +59,7 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
     email: "",
     telephone: "",
     date: "",
+    hotel: "",
     message: "",
   })
 
@@ -173,6 +174,7 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
       formData.append("email", formState.email)
       formData.append("telephone", formState.telephone)
       formData.append("date", formState.date)
+      formData.append("hotel", formState.hotel)
       formData.append("message", formState.message)
       formData.append("locale", locale)
       formData.append("selectedHours", selectedHours.toString())
@@ -197,6 +199,7 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
         email: "",
         telephone: "",
         date: "",
+        hotel: "",
         message: "",
       })
     } catch (error) {

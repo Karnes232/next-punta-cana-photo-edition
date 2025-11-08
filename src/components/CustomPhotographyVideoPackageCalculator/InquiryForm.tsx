@@ -8,6 +8,7 @@ import {
   Send,
   User,
   Calculator,
+  Building2,
 } from "lucide-react"
 
 import {
@@ -104,33 +105,33 @@ const InquiryForm = ({
             </label>
           </p>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <label
-                htmlFor="name"
-                className="mb-2 flex items-center gap-2 text-sm font-semibold text-darkGray"
-              >
-                <User className="h-4 w-4" />
-                {t("name")}
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                value={formState.name}
-                onChange={onFieldChange}
-                placeholder={t("namePlaceholder")}
-                className={`w-full rounded-xl border px-4 py-3 text-darkGray shadow-sm transition focus:outline-none focus:ring-2 ${
-                  formErrors.name
-                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                    : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise/60"
-                } placeholder-darkGray/40`}
-              />
-              {formErrors.name && (
-                <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>
-              )}
-            </div>
+          <div>
+            <label
+              htmlFor="name"
+              className="mb-2 flex items-center gap-2 text-sm font-semibold text-darkGray"
+            >
+              <User className="h-4 w-4" />
+              {t("name")}
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={formState.name}
+              onChange={onFieldChange}
+              placeholder={t("namePlaceholder")}
+              className={`w-full rounded-xl border px-4 py-3 text-darkGray shadow-sm transition focus:outline-none focus:ring-2 ${
+                formErrors.name
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                  : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise/60"
+              } placeholder-darkGray/40`}
+            />
+            {formErrors.name && (
+              <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>
+            )}
+          </div>
 
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label
                 htmlFor="email"
@@ -156,9 +157,7 @@ const InquiryForm = ({
                 <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>
               )}
             </div>
-          </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label
                 htmlFor="telephone"
@@ -186,7 +185,9 @@ const InquiryForm = ({
                 </p>
               )}
             </div>
+          </div>
 
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label
                 htmlFor="date"
@@ -210,6 +211,32 @@ const InquiryForm = ({
               />
               {formErrors.date && (
                 <p className="mt-1 text-sm text-red-600">{formErrors.date}</p>
+              )}
+            </div>
+
+            <div>
+              <label
+                htmlFor="hotel"
+                className="mb-2 flex items-center gap-2 text-sm font-semibold text-darkGray"
+              >
+                <Building2 className="h-4 w-4" />
+                {t("hotel")}
+              </label>
+              <input
+                id="hotel"
+                name="hotel"
+                type="text"
+                value={formState.hotel}
+                onChange={onFieldChange}
+                placeholder={t("hotelPlaceholder")}
+                className={`w-full rounded-xl border px-4 py-3 text-darkGray shadow-sm transition focus:outline-none focus:ring-2 ${
+                  formErrors.hotel
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise/60"
+                } placeholder-darkGray/40`}
+              />
+              {formErrors.hotel && (
+                <p className="mt-1 text-sm text-red-600">{formErrors.hotel}</p>
               )}
             </div>
           </div>

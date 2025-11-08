@@ -14,6 +14,7 @@ import {
   // Clock,
   DollarSign,
   Package,
+  Building2,
 } from "lucide-react"
 
 interface FormData {
@@ -21,6 +22,7 @@ interface FormData {
   email: string
   telephone: string
   date: string
+  hotel: string
   message: string
   packageName: string
   selectedHours: number
@@ -33,6 +35,7 @@ interface FormErrors {
   email?: string
   telephone?: string
   date?: string
+  hotel?: string
   message?: string
 }
 
@@ -56,6 +59,7 @@ const PhotographyVideoPackageForm = ({
     email: "",
     telephone: "",
     date: "",
+    hotel: "",
     message: "",
     packageName: packageData?.title[locale] || "",
     selectedHours: 0,
@@ -89,6 +93,10 @@ const PhotographyVideoPackageForm = ({
 
     if (!formData.telephone.trim()) {
       newErrors.telephone = t("requiredField")
+    }
+
+    if (!formData.hotel.trim()) {
+      newErrors.hotel = t("requiredField")
     }
 
     if (!formData.date) {
@@ -131,6 +139,7 @@ const PhotographyVideoPackageForm = ({
       formDataToSend.append("email", formData.email)
       formDataToSend.append("telephone", formData.telephone)
       formDataToSend.append("date", formData.date)
+      formDataToSend.append("hotel", formData.hotel)
       formDataToSend.append("message", formData.message)
       formDataToSend.append("package", formData.packageName)
       formDataToSend.append("selectedHours", formData.selectedHours.toString())
@@ -157,6 +166,7 @@ const PhotographyVideoPackageForm = ({
           email: "",
           telephone: "",
           date: "",
+          hotel: "",
           message: "",
           packageName: packageData?.title[locale] || "",
           selectedHours: 0,
@@ -266,6 +276,7 @@ const PhotographyVideoPackageForm = ({
               value={formData.selectedAdditions.join(", ")}
             />
             <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="hotel" value={formData.hotel} />
 
             {/* Honeypot field for spam protection */}
             <p style={{ display: "none" }}>
@@ -361,31 +372,59 @@ const PhotographyVideoPackageForm = ({
               </div>
             </div>
 
-            {/* Date Field */}
-            <div>
-              <label
-                htmlFor="date"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
-              >
-                <Calendar className="w-4 h-4 text-darkGray" />
-                {t("date")}
-              </label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                min={new Date().toISOString().split("T")[0]}
-                className={`w-full px-4 py-3 rounded-lg border ${
-                  errors.date
-                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                    : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
-                } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
-              />
-              {errors.date && (
-                <p className="mt-1 text-sm text-red-600">{errors.date}</p>
-              )}
+            {/* Date and Hotel Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  htmlFor="date"
+                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                >
+                  <Calendar className="w-4 h-4 text-darkGray" />
+                  {t("date")}
+                </label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  min={new Date().toISOString().split("T")[0]}
+                  className={`w-full px-4 py-3 rounded-lg border ${
+                    errors.date
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
+                  } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
+                />
+                {errors.date && (
+                  <p className="mt-1 text-sm text-red-600">{errors.date}</p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="hotel"
+                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                >
+                  <Building2 className="w-4 h-4 text-darkGray" />
+                  {t("hotel")}
+                </label>
+                <input
+                  type="text"
+                  id="hotel"
+                  name="hotel"
+                  value={formData.hotel}
+                  onChange={handleChange}
+                  placeholder={t("hotelPlaceholder")}
+                  className={`w-full px-4 py-3 rounded-lg border ${
+                    errors.hotel
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
+                  } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
+                />
+                {errors.hotel && (
+                  <p className="mt-1 text-sm text-red-600">{errors.hotel}</p>
+                )}
+              </div>
             </div>
 
             {/* Message Field */}

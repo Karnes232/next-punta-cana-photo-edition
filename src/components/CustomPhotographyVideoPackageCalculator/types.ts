@@ -28,6 +28,7 @@ export interface ContactFormState {
   email: string
   telephone: string
   date: string
+  hotel: string
   message: string
 }
 
@@ -36,5 +37,6 @@ export interface ContactFormErrors {
   email?: string
   telephone?: string
   date?: string
+  hotel?: string
   message?: string
 }

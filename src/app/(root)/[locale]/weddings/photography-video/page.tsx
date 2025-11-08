@@ -9,8 +9,12 @@ import { getAllPhotographyVideoPackages } from "@/sanity/queries/Photography-Vid
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 // Add revalidation configuration
-export const revalidate = 259200 // Revalidate every 3 days
-export const dynamic = "force-static" // Force static generation
+
+export const revalidate = process.env.NODE_ENV === "production" ? 259200 : 0
+export const dynamic =
+  process.env.NODE_ENV === "production" ? "force-static" : "force-dynamic"
+//export const revalidate = 259200 // Revalidate every 3 days
+//export const dynamic = "force-static" // Force static generation
 
 export default async function PhotographyVideo({
   params,
@@ -104,14 +108,12 @@ export async function generateMetadata({
     return {}
   }
 
-  let canonicalUrl
-  if (locale === "en") {
-    canonicalUrl =
-      "https://www.puntacanaphotoedition.com/weddings/photography-video"
-  } else {
-    canonicalUrl =
-      "https://www.puntacanaphotoedition.com/es/weddings/photography-video"
-  }
+  const canonicalUrl =
+    locale === "en"
+      ? "https://www.puntacanaphotoedition.com/weddings/photography-video"
+      : "https://www.puntacanaphotoedition.com/es/weddings/photography-video"
+
+  const isProd = process.env.NODE_ENV === "production"
 
   return {
     title: pageSeo.seo.meta[locale].title,
@@ -133,10 +135,14 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
     },
-    // Add caching headers to metadata
-    other: {
-      "Cache-Control":
-        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
-    },
+    // Conditional cache control
+    other: isProd
+      ? {
+          "Cache-Control":
+            "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+        }
+      : {
+          "Cache-Control": "no-store, no-cache, must-revalidate",
+        },
   }
 }
