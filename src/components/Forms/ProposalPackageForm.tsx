@@ -21,7 +21,6 @@ interface FormData {
   email: string
   telephone: string
   date: string
-  location: string
   partnerName: string
   specialRequests: string
   message: string
@@ -32,7 +31,6 @@ interface FormErrors {
   email?: string
   telephone?: string
   date?: string
-  location?: string
   partnerName?: string
   message?: string
 }
@@ -51,7 +49,6 @@ const ProposalPackageForm = ({
     email: "",
     telephone: "",
     date: "",
-    location: "",
     partnerName: "",
     specialRequests: "",
     message: "",
@@ -89,9 +86,6 @@ const ProposalPackageForm = ({
       newErrors.date = t("requiredField")
     }
 
-    if (!formData.location.trim()) {
-      newErrors.location = t("requiredField")
-    }
 
     if (!formData.partnerName.trim()) {
       newErrors.partnerName = t("requiredField")
@@ -133,7 +127,6 @@ const ProposalPackageForm = ({
       formDataToSend.append("email", formData.email)
       formDataToSend.append("telephone", formData.telephone)
       formDataToSend.append("date", formData.date)
-      formDataToSend.append("location", formData.location)
       formDataToSend.append("partnerName", formData.partnerName)
       formDataToSend.append("specialRequests", formData.specialRequests)
       formDataToSend.append("message", formData.message)
@@ -156,7 +149,6 @@ const ProposalPackageForm = ({
           email: "",
           telephone: "",
           date: "",
-          location: "",
           partnerName: "",
           specialRequests: "",
           message: "",
@@ -380,32 +372,6 @@ const ProposalPackageForm = ({
               </div>
             </div>
 
-            {/* Location Field */}
-            <div>
-              <label
-                htmlFor="location"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
-              >
-                <MapPin className="w-4 h-4 text-darkGray" />
-                {t("location")}
-              </label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                placeholder={t("locationPlaceholder")}
-                className={`w-full px-4 py-3 rounded-lg border ${
-                  errors.location
-                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                    : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
-                } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
-              />
-              {errors.location && (
-                <p className="mt-1 text-sm text-red-600">{errors.location}</p>
-              )}
-            </div>
 
             {/* Special Requests Field */}
             <div>
