@@ -1,3 +1,4 @@
+"use client"
 import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
@@ -10,6 +11,7 @@ const coromantGaramond = Cormorant_Garamond({
 
 const Sitemap = () => {
   const t = useTranslations("Footer")
+
   return (
     <div className="flex flex-row space-x-4">
       <Link href="/" className={`${coromantGaramond.className} no-underline`}>
@@ -32,7 +34,7 @@ const Sitemap = () => {
         </button>
       </Link>
       <Link
-        href="/weddings"
+        href="/photography-video"
         className={`${coromantGaramond.className} no-underline`}
       >
         <button

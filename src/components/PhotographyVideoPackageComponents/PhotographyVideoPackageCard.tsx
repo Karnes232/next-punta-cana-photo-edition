@@ -77,7 +77,7 @@ const PhotographyVideoPackageCard: React.FC<
 
   return (
     <Link
-      href={`/weddings/photography-video/${photoPackage.slug.current}`}
+      href={`/photography-video/${photoPackage.slug.current}`}
       className="block h-full w-full"
     >
       <div

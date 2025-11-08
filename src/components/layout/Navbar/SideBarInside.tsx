@@ -1,3 +1,5 @@
+"use client"
+import { useTranslations } from "next-intl"
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
 import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
@@ -16,6 +18,7 @@ const SideBarInside = ({
   footer: boolean
   setIsOpen: (isOpen: boolean) => void
 }) => {
+  const t = useTranslations("Footer")
   return (
     <>
       <Menu className="ml-0 h-full w-full flex flex-col justify-center items-center overflow-hidden bg-elegantSilver">
@@ -31,7 +34,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Home
+            {t("Home")}
           </p>
         </MenuItem>
         <MenuItem
@@ -46,7 +49,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Photoshoots
+            {t("Photoshoots")}
           </p>
         </MenuItem>
         <MenuItem
@@ -61,7 +64,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Weddings
+            {t("Weddings")}
           </p>
         </MenuItem>
         <MenuItem
@@ -76,7 +79,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Wedding Planning
+            {t("Wedding Planning")}
           </p>
         </MenuItem>
         <MenuItem
@@ -91,7 +94,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Proposals
+            {t("Proposals")}
           </p>
         </MenuItem>
         <MenuItem
@@ -106,7 +109,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Corporate Events
+            {t("Corporate Events")}
           </p>
         </MenuItem>
         <MenuItem
@@ -121,7 +124,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Stories & Blog
+            {t("Stories & Blog")}
           </p>
         </MenuItem>
         <MenuItem
@@ -136,7 +139,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            About
+            {t("About")}
           </p>
         </MenuItem>
         <MenuItem
@@ -151,7 +154,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Contact
+            {t("Contact")}
           </p>
         </MenuItem>
         <MenuItem
@@ -166,7 +169,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            FAQ
+            {t("FAQ")}
           </p>
         </MenuItem>
         <MenuItem
@@ -181,7 +184,7 @@ const SideBarInside = ({
           <p
             className={`${coromantGaramond.className} ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray hover:text-caribbeanTurquoise" : "uppercase no-underline text-xl space-x-3 text-darkGray hover:text-caribbeanTurquoise"}`}
           >
-            Policies
+            {t("Policies")}
           </p>
         </MenuItem>
         <div className="w-full flex justify-center items-center">

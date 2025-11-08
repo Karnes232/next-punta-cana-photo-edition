@@ -11,9 +11,6 @@ import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 export const revalidate = 259200
 export const dynamic = "force-static"
 
-//export const revalidate = 259200 // Revalidate every 3 days
-//export const dynamic = "force-static" // Force static generation
-
 export default async function PhotographyVideo({
   params,
 }: {
@@ -111,8 +108,6 @@ export async function generateMetadata({
       ? "https://www.puntacanaphotoedition.com/weddings/photography-video"
       : "https://www.puntacanaphotoedition.com/es/weddings/photography-video"
 
-
-
   return {
     title: pageSeo.seo.meta[locale].title,
     description: pageSeo.seo.meta[locale].description,
@@ -137,6 +132,6 @@ export async function generateMetadata({
     other: {
       "Cache-Control":
         "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
-    }
+    },
   }
 }

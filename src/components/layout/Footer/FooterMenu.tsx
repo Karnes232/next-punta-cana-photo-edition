@@ -1,3 +1,5 @@
+"use client"
+import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
 import React from "react"
@@ -8,6 +10,7 @@ const coromantGaramond = Cormorant_Garamond({
 })
 
 const FooterMenu = () => {
+  const t = useTranslations("Footer")
   return (
     <aside className="ml-0 h-full flex flex-col justify-center space-y-3 overflow-hidden">
       <Link
@@ -17,7 +20,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Home
+          {t("Home")}
         </p>
       </Link>
 
@@ -28,18 +31,18 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Photoshoots
+          {t("Photoshoots")}
         </p>
       </Link>
 
       <Link
-        href="/weddings"
+        href="/photography-video"
         className={`${coromantGaramond.className} hover:bg-transparent! no-underline uppercase text-sm space-x-3 text-darkGray`}
       >
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Weddings
+          {t("Weddings")}
         </p>
       </Link>
 
@@ -50,7 +53,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Wedding Planning
+          {t("Wedding Planning")}
         </p>
       </Link>
 
@@ -61,7 +64,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Proposals
+          {t("Proposals")}
         </p>
       </Link>
 
@@ -72,7 +75,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Corporate Events
+          {t("Corporate Events")}
         </p>
       </Link>
 
@@ -83,7 +86,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Stories & Blog
+          {t("Stories & Blog")}
         </p>
       </Link>
 
@@ -94,7 +97,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          About
+          {t("About")}
         </p>
       </Link>
 
@@ -105,7 +108,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Contact
+          {t("Contact")}
         </p>
       </Link>
 
@@ -116,7 +119,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          FAQ
+          {t("FAQ")}
         </p>
       </Link>
 
@@ -127,7 +130,7 @@ const FooterMenu = () => {
         <p
           className={`${coromantGaramond.className} no-underline uppercase text-sm space-x-3 text-darkGray`}
         >
-          Policies
+          {t("Policies")}
         </p>
       </Link>
     </aside>

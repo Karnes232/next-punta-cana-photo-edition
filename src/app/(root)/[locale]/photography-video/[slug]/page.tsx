@@ -21,7 +21,6 @@ interface PhotographyVideoPackagePageProps {
 export const revalidate = 259200
 export const dynamic = "force-static"
 
-
 export default async function PhotographyVideoPackagePage({
   params,
 }: PhotographyVideoPackagePageProps) {
@@ -137,9 +136,9 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     // Add caching headers to metadata
-    other:{
+    other: {
       "Cache-Control":
         "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
-    }
+    },
   }
 }
