@@ -34,7 +34,6 @@ type InquiryFormProps = {
   currencyLabel: string
   summaryLines: string[]
   formatCurrency: (value: number) => string
-  selectedHours: number
 }
 
 const InquiryForm = ({
@@ -50,7 +49,6 @@ const InquiryForm = ({
   currencyLabel,
   summaryLines,
   formatCurrency,
-  selectedHours,
 }: InquiryFormProps) => (
   <section className="rounded-3xl border border-elegantSilver/50 bg-pureWhite shadow-xl">
     <div className="px-6 py-10 sm:px-10">
@@ -94,7 +92,6 @@ const InquiryForm = ({
             value="custom-photography-video-calculator"
           />
           <input type="hidden" name="locale" value={locale} />
-          <input type="hidden" name="selectedHours" value={selectedHours} />
           <input type="hidden" name="estimatedTotal" value={totalEstimate} />
           <input type="hidden" name="addOns" value={summaryLines.join(" | ")} />
 

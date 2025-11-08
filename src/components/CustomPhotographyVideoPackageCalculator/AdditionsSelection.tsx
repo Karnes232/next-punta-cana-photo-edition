@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { KeyboardEvent, useEffect, useMemo, useState } from "react"
 
-import { Check, DollarSign, Search, X } from "lucide-react"
+import { Check, DollarSign, Minus, Plus, Search, X } from "lucide-react"
 
 import { Addition, Locale, TranslationFn } from "./types"
 
@@ -10,8 +10,11 @@ type AdditionsSelectionProps = {
   addtions: Addition[]
   locale: Locale
   selectedAddOns: Record<string, boolean>
-  selectedHours: number
+  additionHours: Record<string, number>
+  normalizedMinimumHours: number
+  maxHourlyHours: number
   onToggle: (key: string) => void
+  onHoursChange: (key: string, value: number) => void
   formatCurrency: (value: number) => string
   hourSuffix: string
   t: TranslationFn
@@ -23,8 +26,11 @@ const AdditionsSelection = ({
   addtions,
   locale,
   selectedAddOns,
-  selectedHours,
+  additionHours,
+  normalizedMinimumHours,
+  maxHourlyHours,
   onToggle,
+  onHoursChange,
   formatCurrency,
   hourSuffix,
   t,
@@ -52,6 +58,19 @@ const AdditionsSelection = ({
     return Math.ceil(filteredAdditions.length / PAGE_SIZE)
   }, [filteredAdditions.length])
 
+  const sortedAdditions = useMemo(() => {
+    return [...filteredAdditions].sort((additionA, additionB) => {
+      const additionAIsHourly = additionA.fixedorhourly === "hourly"
+      const additionBIsHourly = additionB.fixedorhourly === "hourly"
+
+      if (additionAIsHourly === additionBIsHourly) {
+        return 0
+      }
+
+      return additionAIsHourly ? -1 : 1
+    })
+  }, [filteredAdditions])
+
   useEffect(() => {
     if (currentPage > totalPages) {
       setCurrentPage(totalPages)
@@ -60,8 +79,8 @@ const AdditionsSelection = ({
 
   const visibleAdditions = useMemo(() => {
     const startIndex = (currentPage - 1) * PAGE_SIZE
-    return filteredAdditions.slice(startIndex, startIndex + PAGE_SIZE)
-  }, [currentPage, filteredAdditions])
+    return sortedAdditions.slice(startIndex, startIndex + PAGE_SIZE)
+  }, [currentPage, sortedAdditions])
 
   const shouldShowPagination = filteredAdditions.length > PAGE_SIZE
 
@@ -124,27 +143,44 @@ const AdditionsSelection = ({
             </div>
           ) : (
             <>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {visibleAdditions.map(addition => {
                   const additionKey = addition.title.en
                   const localizedTitle =
                     addition.title[locale] ?? addition.title.en
                   const isSelected = selectedAddOns[additionKey] ?? false
                   const isHourly = addition.fixedorhourly === "hourly"
-                  const quantity = isHourly ? selectedHours : 1
+                  const hoursValue =
+                    additionHours[additionKey] ?? normalizedMinimumHours
+                  const quantity = isHourly ? hoursValue : 1
                   const subtotal = addition.price * quantity
 
+                  const handleCardToggle = () => {
+                    onToggle(additionKey)
+                  }
+
+                  const handleCardKeyDown = (
+                    event: KeyboardEvent<HTMLDivElement>,
+                  ) => {
+                    if (event.key === " " || event.key === "Enter") {
+                      event.preventDefault()
+                      handleCardToggle()
+                    }
+                  }
+
                   return (
-                    <button
+                    <div
                       key={additionKey}
-                      type="button"
+                      role="button"
+                      tabIndex={0}
                       aria-pressed={isSelected}
-                      onClick={() => onToggle(additionKey)}
-                      className={`group flex h-full flex-col gap-4 rounded-2xl border p-5 text-left transition-all duration-200 ${
+                      onClick={handleCardToggle}
+                      onKeyDown={handleCardKeyDown}
+                      className={`group flex flex-col gap-4 rounded-2xl border p-5 text-left transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-caribbeanTurquoise/60 ${
                         isSelected
                           ? "border-caribbeanTurquoise bg-caribbeanTurquoise/10 shadow-md"
                           : "border-elegantSilver bg-white hover:-translate-y-0.5 hover:border-caribbeanTurquoise/60 hover:shadow"
-                      }`}
+                      } ${isHourly ? "h-full" : ""}`}
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex items-start gap-3">
@@ -186,13 +222,82 @@ const AdditionsSelection = ({
                         </span>
                       </div>
 
+                      {isHourly && (
+                        <div className="flex flex-col gap-2 rounded-xl border border-elegantSilver/60 bg-white/70 p-3 text-sm text-darkGray">
+                          <div className="flex items-center justify-between">
+                            <span className="font-medium text-darkGray/70">
+                              {t("additionsHoursLabel")}
+                            </span>
+                            <span className="text-xs text-darkGray/50">
+                              {t("additionsHoursRange", {
+                                min: normalizedMinimumHours,
+                                max: maxHourlyHours,
+                              })}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center justify-between gap-3">
+                            <button
+                              type="button"
+                              aria-label={t("ariaDecreaseHours")}
+                              onClick={event => {
+                                event.stopPropagation()
+                                onHoursChange(additionKey, hoursValue - 1)
+                              }}
+                              disabled={
+                                !isSelected ||
+                                hoursValue <= normalizedMinimumHours
+                              }
+                              className="flex h-10 w-10 items-center justify-center rounded-xl border border-elegantSilver text-darkGray transition-colors hover:border-caribbeanTurquoise hover:text-caribbeanTurquoise disabled:cursor-not-allowed disabled:opacity-40"
+                            >
+                              <Minus className="h-4 w-4" />
+                            </button>
+
+                            <input
+                              type="number"
+                              min={normalizedMinimumHours}
+                              max={maxHourlyHours}
+                              step={1}
+                              value={hoursValue}
+                              onClick={event => event.stopPropagation()}
+                              onChange={event => {
+                                event.stopPropagation()
+                                const nextValue = Number(event.target.value)
+                                onHoursChange(additionKey, nextValue)
+                              }}
+                              className="w-24 rounded-xl border border-elegantSilver bg-pureWhite py-2 text-center text-base font-semibold text-darkGray shadow-inner focus:border-caribbeanTurquoise focus:outline-none focus:ring-2 focus:ring-caribbeanTurquoise/40 disabled:cursor-not-allowed"
+                              disabled={!isSelected}
+                            />
+
+                            <button
+                              type="button"
+                              aria-label={t("ariaIncreaseHours")}
+                              onClick={event => {
+                                event.stopPropagation()
+                                onHoursChange(additionKey, hoursValue + 1)
+                              }}
+                              disabled={
+                                !isSelected || hoursValue >= maxHourlyHours
+                              }
+                              className="flex h-10 w-10 items-center justify-center rounded-xl border border-elegantSilver text-darkGray transition-colors hover:border-caribbeanTurquoise hover:text-caribbeanTurquoise disabled:cursor-not-allowed disabled:opacity-40"
+                            >
+                              <Plus className="h-4 w-4" />
+                            </button>
+                          </div>
+
+                          <p className="text-xs text-darkGray/50">
+                            {hoursValue} {hourSuffix}
+                          </p>
+                        </div>
+                      )}
+
                       {isSelected && isHourly && (
                         <p className="text-xs text-darkGray/50">
                           {quantity} {hourSuffix} ×{" "}
                           {formatCurrency(addition.price)}
                         </p>
                       )}
-                    </button>
+                    </div>
                   )
                 })}
               </div>

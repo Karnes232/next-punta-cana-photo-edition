@@ -4,7 +4,6 @@ import React, { useMemo, useState } from "react"
 import { useTranslations } from "next-intl"
 
 import AdditionsSelection from "../CustomPhotographyVideoPackageCalculator/AdditionsSelection"
-import HoursSelector from "../CustomPhotographyVideoPackageCalculator/HoursSelector"
 import InquiryForm from "../CustomPhotographyVideoPackageCalculator/InquiryForm"
 import PackageHeader from "../CustomPhotographyVideoPackageCalculator/PackageHeader"
 import SummarySidebar from "../CustomPhotographyVideoPackageCalculator/SummarySidebar"
@@ -32,6 +31,7 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
   const hourSuffix = t("hourSuffix")
   const currencyLabel = t("currency")
   const formatCurrency = (value: number) => `$${value.toLocaleString()}`
+  const maxHourlyHours = 24
 
   const normalizedMinimumHours = useMemo(() => {
     if (!minimumHours || minimumHours < 1) {
@@ -40,9 +40,6 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
     return Math.floor(minimumHours)
   }, [minimumHours])
 
-  const [selectedHours, setSelectedHours] = useState<number>(
-    normalizedMinimumHours,
-  )
   const [selectedAddOns, setSelectedAddOns] = useState<Record<string, boolean>>(
     () =>
       addtions.reduce(
@@ -51,6 +48,18 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
           return acc
         },
         {} as Record<string, boolean>,
+      ),
+  )
+  const [additionHours, setAdditionHours] = useState<Record<string, number>>(
+    () =>
+      addtions.reduce(
+        (acc, addition) => {
+          if (addition.fixedorhourly === "hourly") {
+            acc[addition.title.en] = normalizedMinimumHours
+          }
+          return acc
+        },
+        {} as Record<string, number>,
       ),
   )
 
@@ -77,12 +86,38 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
     })
   }, [addtions])
 
+  React.useEffect(() => {
+    setAdditionHours(prev => {
+      const next: Record<string, number> = {}
+
+      addtions.forEach(addition => {
+        if (addition.fixedorhourly !== "hourly") {
+          return
+        }
+
+        const additionKey = addition.title.en
+        const previousValue = prev[additionKey] ?? normalizedMinimumHours
+        const rounded = Math.round(previousValue)
+        const clamped = Math.min(
+          Math.max(rounded, normalizedMinimumHours),
+          maxHourlyHours,
+        )
+
+        next[additionKey] = clamped
+      })
+
+      return next
+    })
+  }, [addtions, maxHourlyHours, normalizedMinimumHours])
+
   const selectedItems = useMemo<SelectedItem[]>(() => {
     return addtions
       .filter(addition => selectedAddOns[addition.title.en])
       .map(addition => {
         const isHourly = addition.fixedorhourly === "hourly"
-        const quantity = isHourly ? selectedHours : 1
+        const quantity = isHourly
+          ? (additionHours[addition.title.en] ?? normalizedMinimumHours)
+          : 1
         const lineTotal = addition.price * quantity
         return {
           title: addition.title,
@@ -92,7 +127,7 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
           lineTotal,
         }
       })
-  }, [addtions, selectedAddOns, selectedHours])
+  }, [addtions, additionHours, normalizedMinimumHours, selectedAddOns])
 
   const totalEstimate = useMemo(() => {
     return selectedItems.reduce((sum, item) => sum + item.lineTotal, 0)
@@ -177,7 +212,6 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
       formData.append("hotel", formState.hotel)
       formData.append("message", formState.message)
       formData.append("locale", locale)
-      formData.append("selectedHours", selectedHours.toString())
       formData.append("estimatedTotal", totalEstimate.toString())
       formData.append("addOns", summaryLines.join(" | "))
 
@@ -210,18 +244,22 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
     }
   }
 
-  // const maxHours = useMemo(() => {
-  //   const defaultMax = normalizedMinimumHours + 9
-  //   return Math.max(defaultMax, normalizedMinimumHours + 2)
-  // }, [normalizedMinimumHours])
-  const maxHours = 12
-
-  const handleHoursChange = (value: number) => {
+  const handleAdditionHoursChange = (additionKey: string, value: number) => {
     if (Number.isNaN(value)) {
       return
     }
-    const clamped = Math.min(Math.max(value, normalizedMinimumHours), 24)
-    setSelectedHours(clamped)
+
+    setAdditionHours(prev => {
+      const rounded = Math.round(value)
+      const clamped = Math.min(
+        Math.max(rounded, normalizedMinimumHours),
+        maxHourlyHours,
+      )
+      return {
+        ...prev,
+        [additionKey]: clamped,
+      }
+    })
   }
 
   return (
@@ -236,21 +274,15 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
         <div className="px-6 pb-10 sm:px-10">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr),minmax(0,2fr)]">
             <div className="space-y-8">
-              <HoursSelector
-                selectedHours={selectedHours}
-                normalizedMinimumHours={normalizedMinimumHours}
-                maxHours={maxHours}
-                onHoursChange={handleHoursChange}
-                hourSuffix={hourSuffix}
-                t={t}
-              />
-
               <AdditionsSelection
                 addtions={addtions}
                 locale={locale}
                 selectedAddOns={selectedAddOns}
-                selectedHours={selectedHours}
+                additionHours={additionHours}
+                normalizedMinimumHours={normalizedMinimumHours}
+                maxHourlyHours={maxHourlyHours}
                 onToggle={toggleAddOn}
+                onHoursChange={handleAdditionHoursChange}
                 formatCurrency={formatCurrency}
                 hourSuffix={hourSuffix}
                 t={t}
@@ -258,7 +290,6 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
             </div>
 
             <SummarySidebar
-              selectedHours={selectedHours}
               hourSuffix={hourSuffix}
               selectedItems={selectedItems}
               locale={locale}
@@ -284,7 +315,6 @@ const CustomPhotographyVideoPackageCalculatorForm = ({
         currencyLabel={currencyLabel}
         summaryLines={summaryLines}
         formatCurrency={formatCurrency}
-        selectedHours={selectedHours}
       />
     </div>
   )

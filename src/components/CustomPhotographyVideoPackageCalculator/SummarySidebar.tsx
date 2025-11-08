@@ -3,7 +3,6 @@ import { DollarSign } from "lucide-react"
 import { Locale, SelectedItem, TranslationFn } from "./types"
 
 type SummarySidebarProps = {
-  selectedHours: number
   hourSuffix: string
   selectedItems: SelectedItem[]
   locale: Locale
@@ -14,7 +13,6 @@ type SummarySidebarProps = {
 }
 
 const SummarySidebar = ({
-  selectedHours,
   hourSuffix,
   selectedItems,
   locale,
@@ -37,13 +35,6 @@ const SummarySidebar = ({
     </div>
 
     <dl className="mt-5 space-y-4 text-sm text-darkGray">
-      <div className="flex items-center justify-between">
-        <dt className="text-darkGray/60">{t("summaryHours")}</dt>
-        <dd className="font-semibold text-darkGray">
-          {selectedHours} {hourSuffix}
-        </dd>
-      </div>
-
       <div>
         <dt className="mb-2 text-darkGray/60">{t("summaryAdditions")}</dt>
         {selectedItems.length === 0 ? (
