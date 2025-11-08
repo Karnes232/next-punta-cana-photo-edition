@@ -8,11 +8,9 @@ import { getPhotographyVideo } from "@/sanity/queries/Photography-Video/Photogra
 import { getAllPhotographyVideoPackages } from "@/sanity/queries/Photography-Video/Photography-video-packages"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
-// Add revalidation configuration
+export const revalidate = 259200
+export const dynamic = "force-static"
 
-export const revalidate = process.env.NODE_ENV === "production" ? 259200 : 0
-export const dynamic =
-  process.env.NODE_ENV === "production" ? "force-static" : "force-dynamic"
 //export const revalidate = 259200 // Revalidate every 3 days
 //export const dynamic = "force-static" // Force static generation
 
@@ -113,7 +111,7 @@ export async function generateMetadata({
       ? "https://www.puntacanaphotoedition.com/weddings/photography-video"
       : "https://www.puntacanaphotoedition.com/es/weddings/photography-video"
 
-  const isProd = process.env.NODE_ENV === "production"
+
 
   return {
     title: pageSeo.seo.meta[locale].title,
@@ -136,13 +134,9 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     // Conditional cache control
-    other: isProd
-      ? {
-          "Cache-Control":
-            "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
-        }
-      : {
-          "Cache-Control": "no-store, no-cache, must-revalidate",
-        },
+    other: {
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+    }
   }
 }

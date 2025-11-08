@@ -18,9 +18,9 @@ interface PhotographyVideoPackagePageProps {
 }
 
 // Add revalidation configuration
-export const revalidate = process.env.NODE_ENV === "production" ? 259200 : 0
-export const dynamic =
-  process.env.NODE_ENV === "production" ? "force-static" : "force-dynamic"
+export const revalidate = 259200
+export const dynamic = "force-static"
+
 
 export default async function PhotographyVideoPackagePage({
   params,
@@ -115,7 +115,7 @@ export async function generateMetadata({
   } else {
     canonicalUrl = `https://www.puntacanaphotoedition.com/es/weddings/photography-video/${slug}`
   }
-  const isProd = process.env.NODE_ENV === "production"
+
   return {
     title: pageSeo.seo.meta[locale].title,
     description: pageSeo.seo.meta[locale].description,
@@ -137,13 +137,9 @@ export async function generateMetadata({
       canonical: canonicalUrl,
     },
     // Add caching headers to metadata
-    other: isProd
-      ? {
-          "Cache-Control":
-            "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
-        }
-      : {
-          "Cache-Control": "no-store, no-cache, must-revalidate",
-        },
+    other:{
+      "Cache-Control":
+        "public, max-age=259200, s-maxage=259200, stale-while-revalidate=518400",
+    }
   }
 }
