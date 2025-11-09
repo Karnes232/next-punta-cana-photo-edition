@@ -3,6 +3,7 @@ import ProposalPackageForm from "@/components/Forms/ProposalPackageForm"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
+import NewArrivals from "@/components/ProposalComponents/NewArrivals"
 import {
   getProposalPackagesBySlug,
   getProposalPackagesBySlugSEO,

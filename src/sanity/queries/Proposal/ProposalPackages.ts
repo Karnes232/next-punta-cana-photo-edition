@@ -166,6 +166,8 @@ export const proposalPackagesBySlugQuery = `*[_type == "proposalPackages" && slu
     additionPrice
   },
   packageCardStartingPrice
+ 
+
 }`
 
 export async function getProposalPackagesBySlug(

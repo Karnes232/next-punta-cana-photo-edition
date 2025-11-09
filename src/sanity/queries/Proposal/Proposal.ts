@@ -32,6 +32,33 @@ export interface Proposal {
     es: string
   }
   testimonials: Testimonial[]
+  newArrivalsTitle: {
+    en: string
+    es: string
+  }
+  newArrivalsSubtitle: {
+    en: string
+    es: string
+  }
+  newArrivalsBadge: {
+    en: string
+    es: string
+  }
+  newArrivalImages: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: {
+      en: string
+      es: string
+    }
+  }[]
 }
 
 export const proposalQuery = `*[_type == "proposal"][0] {
@@ -107,6 +134,33 @@ export const proposalQuery = `*[_type == "proposal"][0] {
             en,
             es
         }
+  },
+  newArrivalsTitle {
+    en,
+    es
+  },
+  newArrivalsSubtitle {
+    en,
+    es
+  },
+  newArrivalsBadge {
+    en,
+    es
+  },
+  newArrivalImages[] {
+    asset -> {
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt {
+      en,
+      es
+    }
   }
 }`
 

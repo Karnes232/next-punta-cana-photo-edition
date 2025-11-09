@@ -129,6 +129,7 @@ export default defineType({
       ],
       group: "Additions",
     }),
+
     defineField({
       name: "seo",
       title: "SEO",

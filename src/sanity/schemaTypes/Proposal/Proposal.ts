@@ -23,6 +23,10 @@ export default defineType({
       name: "Testimonials",
       title: "Testimonials",
     },
+    {
+      name: "New Arrivals",
+      title: "New Arrivals",
+    },
   ],
   fields: [
     defineField({
@@ -78,6 +82,48 @@ export default defineType({
       type: "array",
       group: "Testimonials",
       of: [{ type: "testimonial" }],
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "newArrivalsTitle",
+      title: "New Arrivals Title",
+      type: "localizedString",
+      group: "New Arrivals",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "newArrivalsSubtitle",
+      title: "New Arrivals Subtitle",
+      type: "localizedString",
+      group: "New Arrivals",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "newArrivalsBadge",
+      title: "New Arrivals Badge",
+      type: "localizedString",
+      group: "New Arrivals",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "newArrivalImages",
+      title: "New Arrival Images",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative Text",
+              type: "localizedString",
+              validation: Rule => Rule.required(),
+            }),
+          ],
+        },
+      ],
+      group: "New Arrivals",
       validation: Rule => Rule.required(),
     }),
   ],

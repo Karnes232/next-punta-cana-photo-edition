@@ -8,6 +8,7 @@ import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 import { getAllProposalPackages } from "@/sanity/queries/Proposal/ProposalPackages"
 import ProposalComponent from "@/components/ProposalComponents/ProposalComponent"
+import NewArrivals from "@/components/ProposalComponents/NewArrivals"
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
@@ -26,7 +27,7 @@ export default async function Proposals({
     getProposal(),
     getAllProposalPackages(),
   ])
-
+  console.log(proposal)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -72,7 +73,15 @@ export default async function Proposals({
             locale={locale}
           />
         </section>
-
+        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+          <NewArrivals
+            title={proposal?.newArrivalsTitle?.[locale] || ""}
+            subtitle={proposal?.newArrivalsSubtitle?.[locale] || ""}
+            badge={proposal?.newArrivalsBadge?.[locale] || ""}
+            images={proposal?.newArrivalImages || []}
+            locale={locale}
+          />
+        </section>
         <TestimonialsComponent
           locale={locale}
           titleTestimonials={
