@@ -27,7 +27,7 @@ export default async function Proposals({
     getProposal(),
     getAllProposalPackages(),
   ])
-  console.log(proposal)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (

@@ -74,6 +74,14 @@ export default defineType({
       of: [{ type: "CorporateEventTestimonials" }],
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "faqComponent",
+      title: "FAQ Component",
+      type: "array",
+      group: "FAQ Component",
+      of: [{ type: "faqComponent" }],
+      validation: Rule => Rule.required(),
+    }),
   ],
   preview: {
     select: {

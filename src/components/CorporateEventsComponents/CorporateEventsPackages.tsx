@@ -1,11 +1,22 @@
 import { CorporateEventPackages } from "@/sanity/queries/CorporateEvents/CorporateEventPackages"
 import CorporateEventPackageCard from "./CorporateEventPackageCard"
 import { useTranslations } from "next-intl"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
 
 interface CorporateEventsPackagesProps {
   packages: CorporateEventPackages[]
   locale: string
 }
+
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const CorporateEventsPackages: React.FC<CorporateEventsPackagesProps> = ({
   packages,
@@ -16,10 +27,10 @@ const CorporateEventsPackages: React.FC<CorporateEventsPackagesProps> = ({
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className={`${coromantGaramond.className} text-4xl font-bold text-gray-900 mb-4`}>
             {t("title")}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className={`${montserrat.className} text-lg text-gray-600 max-w-3xl mx-auto`}>
             {t("description")}
           </p>
         </div>

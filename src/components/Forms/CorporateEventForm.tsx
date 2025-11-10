@@ -17,6 +17,17 @@ import {
   Clock,
   MapPin,
 } from "lucide-react"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
+
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 interface FormData {
   name: string
@@ -215,24 +226,24 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
       <div className="bg-gradient-to-br from-pureWhite to-caribbeanTurquoise/5 rounded-2xl shadow-xl p-8 md:p-12 border border-caribbeanTurquoise/30">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-darkGray mb-3 font-crimsonPro">
+          <h2 className={`${coromantGaramond.className} text-3xl md:text-4xl font-bold text-darkGray mb-3`}>
             {t("title")}
           </h2>
-          <p className="text-darkGray/70 text-lg">{t("subtitle")}</p>
+          <p className={`${montserrat.className} text-darkGray/70 text-lg`}>{t("subtitle")}</p>
         </div>
 
         {/* Error Message */}
         {submitStatus === "error" && (
           <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <p className="text-red-800">{t("errorMessage")}</p>
+            <p className={`${montserrat.className} text-red-800`}>{t("errorMessage")}</p>
           </div>
         )}
 
         {submitStatus === "success" ? (
           <div className="mb-6 p-4 bg-green-50 border border-green-300 rounded-lg flex items-start gap-3">
             <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-            <p className="text-green-800">{t("successMessage")}</p>
+            <p className={`${montserrat.className} text-green-800`}>{t("successMessage")}</p>
           </div>
         ) : (
           <form
@@ -242,7 +253,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className={`${montserrat.className} space-y-6`}
           >
             {/* Hidden fields for Netlify */}
             <input
@@ -264,7 +275,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
             <div>
               <label
                 htmlFor="name"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
               >
                 <User className="w-4 h-4 text-darkGray" />
                 {t("name")}
@@ -276,14 +287,14 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder={t("namePlaceholder")}
-                className={`w-full px-4 py-3 rounded-lg border ${
+                className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                   errors.name
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.name}</p>
               )}
             </div>
 
@@ -293,7 +304,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="email"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Mail className="w-4 h-4 text-darkGray" />
                   {t("email")}
@@ -305,14 +316,14 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder={t("emailPlaceholder")}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.email
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.email}</p>
                 )}
               </div>
 
@@ -320,7 +331,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="telephone"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Phone className="w-4 h-4 text-darkGray" />
                   {t("telephone")}
@@ -332,14 +343,14 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   value={formData.telephone}
                   onChange={handleChange}
                   placeholder={t("telephonePlaceholder")}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.telephone
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.telephone && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
                     {errors.telephone}
                   </p>
                 )}
@@ -350,7 +361,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
             <div>
               <label
                 htmlFor="company"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
               >
                 <Building className="w-4 h-4 text-darkGray" />
                 {t("company")}
@@ -362,14 +373,14 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                 value={formData.company}
                 onChange={handleChange}
                 placeholder={t("companyPlaceholder")}
-                className={`w-full px-4 py-3 rounded-lg border ${
+                className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                   errors.company
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
               />
               {errors.company && (
-                <p className="mt-1 text-sm text-red-600">{errors.company}</p>
+                <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.company}</p>
               )}
             </div>
 
@@ -379,7 +390,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="eventDate"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Calendar className="w-4 h-4 text-caribbeanTurquoise" />
                   {t("eventDate")}
@@ -391,14 +402,14 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   value={formData.eventDate}
                   onChange={handleChange}
                   min={new Date().toISOString().split("T")[0]}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.eventDate
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
                   } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.eventDate && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
                     {errors.eventDate}
                   </p>
                 )}
@@ -408,7 +419,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="eventType"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Building className="w-4 h-4 text-darkGray" />
                   {t("eventType")}
@@ -418,7 +429,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   name="eventType"
                   value={formData.eventType}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.eventType
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
@@ -435,7 +446,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="other">{t("other")}</option>
                 </select>
                 {errors.eventType && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
                     {errors.eventType}
                   </p>
                 )}
@@ -448,7 +459,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="guestCount"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Users className="w-4 h-4 text-darkGray" />
                   {t("guestCount")}
@@ -458,7 +469,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   name="guestCount"
                   value={formData.guestCount}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.guestCount
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
@@ -473,7 +484,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="500+">500+ {t("guests")}</option>
                 </select>
                 {errors.guestCount && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
                     {errors.guestCount}
                   </p>
                 )}
@@ -483,7 +494,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="budget"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <DollarSign className="w-4 h-4 text-luxuryGold" />
                   {t("budget")}
@@ -493,7 +504,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.budget
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
@@ -508,7 +519,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="100k+">$100,000+</option>
                 </select>
                 {errors.budget && (
-                  <p className="mt-1 text-sm text-red-600">{errors.budget}</p>
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.budget}</p>
                 )}
               </div>
             </div>
@@ -519,7 +530,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="venue"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <MapPin className="w-4 h-4 text-darkGray" />
                   {t("venue")}
@@ -531,14 +542,14 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   value={formData.venue}
                   onChange={handleChange}
                   placeholder={t("venuePlaceholder")}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.venue
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.venue && (
-                  <p className="mt-1 text-sm text-red-600">{errors.venue}</p>
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.venue}</p>
                 )}
               </div>
 
@@ -546,7 +557,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               <div>
                 <label
                   htmlFor="duration"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
                 >
                   <Clock className="w-4 h-4 text-darkGray" />
                   {t("duration")}
@@ -556,7 +567,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   name="duration"
                   value={formData.duration}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.duration
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
@@ -572,7 +583,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="custom">{t("custom")}</option>
                 </select>
                 {errors.duration && (
-                  <p className="mt-1 text-sm text-red-600">{errors.duration}</p>
+                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.duration}</p>
                 )}
               </div>
             </div>
@@ -581,7 +592,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
             <div>
               <label
                 htmlFor="message"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+                className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
               >
                 <MessageSquare className="w-4 h-4 text-darkGray" />
                 {t("message")}
@@ -593,14 +604,14 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                 onChange={handleChange}
                 placeholder={t("messagePlaceholder")}
                 rows={5}
-                className={`w-full px-4 py-3 rounded-lg border ${
+                className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                   errors.message
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors resize-none`}
               />
               {errors.message && (
-                <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.message}</p>
               )}
             </div>
 
@@ -608,7 +619,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-caribbeanTurquoise to-caribbeanTurquoise/80 hover:from-caribbeanTurquoise/90 hover:to-caribbeanTurquoise/70 disabled:from-elegantSilver disabled:to-elegantSilver/80 text-pureWhite font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:transform-none"
+              className={`${montserrat.className} w-full bg-gradient-to-r from-caribbeanTurquoise to-caribbeanTurquoise/80 hover:from-caribbeanTurquoise/90 hover:to-caribbeanTurquoise/70 disabled:from-elegantSilver disabled:to-elegantSilver/80 text-pureWhite font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:transform-none`}
             >
               {isSubmitting ? (
                 <>
