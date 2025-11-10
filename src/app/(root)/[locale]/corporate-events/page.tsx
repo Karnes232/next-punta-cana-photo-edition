@@ -9,6 +9,8 @@ import { getCorporateEventPackages } from "@/sanity/queries/CorporateEvents/Corp
 import CorporateEventsPackages from "@/components/CorporateEventsComponents/CorporateEventsPackages"
 import CorporateEventForm from "@/components/Forms/CorporateEventForm"
 import CorporateEventTestimonialsComponent from "@/components/CorporateEventsComponents/CorporateEventTestimonials"
+import Faqs from "@/components/FaqsComponents/Faqs"
+import CorporateFaqs from "@/components/CorporateEventsComponents/CorporateFaqs"
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
@@ -83,6 +85,9 @@ export default async function CorporateEvents({
             testimonials={corporateEvents?.testimonials || []}
             title={{ en: "Testimonials", es: "Testimonios" }}
           />
+        </section>
+        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+          <CorporateFaqs faqs={corporateEvents?.corporateFaqs || []} locale={locale} />
         </section>
       </main>
     </>

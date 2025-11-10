@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { Hero } from "../HomePage/Hero"
 import { createPageFetchOptions } from "@/sanity/lib/query-helpers"
+import { CategorizedFaqs } from "../Faqs/faqCategory"
 
 export interface CorporateEventTestimonials {
   clientName: string
@@ -52,6 +53,7 @@ export interface CorporateEvents {
     alt: string
   }[]
   testimonials: CorporateEventTestimonials[]
+  corporateFaqs: CategorizedFaqs[]
 }
 
 export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
@@ -122,6 +124,16 @@ export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
           }
         },
         alt
+      }
+    },
+    corporateFaqs[] {
+      question {
+        en,
+        es
+      },
+      answer {
+        en,
+        es
       }
     }
 }`

@@ -1,4 +1,5 @@
-import React from "react"
+"use client"
+import React, { useEffect, useState } from "react"
 import { Sidebar } from "react-pro-sidebar"
 import { X } from "lucide-react"
 import SideBarInside from "./SideBarInside"
@@ -10,6 +11,14 @@ const SideBarMenu = ({
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
 }) => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) return null
+
   return (
     <>
       <div
