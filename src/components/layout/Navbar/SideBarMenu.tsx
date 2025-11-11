@@ -1,8 +1,16 @@
 "use client"
+import dynamic from "next/dynamic"
 import React, { useEffect, useState } from "react"
-import { Sidebar } from "react-pro-sidebar"
 import { X } from "lucide-react"
 import SideBarInside from "./SideBarInside"
+
+const Sidebar = dynamic(
+  () =>
+    import("react-pro-sidebar").then(mod => {
+      return mod.Sidebar
+    }),
+  { ssr: false },
+)
 
 const SideBarMenu = ({
   isOpen,
