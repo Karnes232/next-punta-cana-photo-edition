@@ -53,6 +53,10 @@ export interface CorporateEvents {
     alt: string
   }[]
   testimonials: CorporateEventTestimonials[]
+  faqsTitle: {
+    en: string
+    es: string
+  }
   corporateFaqs: CategorizedFaqs[]
 }
 
@@ -125,6 +129,10 @@ export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
         },
         alt
       }
+    },
+    faqsTitle {
+      en,
+      es
     },
     corporateFaqs[] {
       question {
