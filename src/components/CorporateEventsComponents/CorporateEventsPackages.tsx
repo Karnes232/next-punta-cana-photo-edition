@@ -27,10 +27,14 @@ const CorporateEventsPackages: React.FC<CorporateEventsPackagesProps> = ({
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-            <h2 className={`${coromantGaramond.className} text-4xl font-bold text-gray-900 mb-4`}>
+          <h2
+            className={`${coromantGaramond.className} text-4xl font-bold text-gray-900 mb-4`}
+          >
             {t("title")}
           </h2>
-          <p className={`${montserrat.className} text-lg text-gray-600 max-w-3xl mx-auto`}>
+          <p
+            className={`${montserrat.className} text-lg text-gray-600 max-w-3xl mx-auto`}
+          >
             {t("description")}
           </p>
         </div>

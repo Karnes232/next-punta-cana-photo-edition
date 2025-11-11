@@ -1,4 +1,5 @@
 "use client"
+import { Montserrat } from "next/font/google"
 import React from "react"
 
 interface FaqEmptyStateProps {
@@ -6,13 +7,17 @@ interface FaqEmptyStateProps {
   locale: "en" | "es"
 }
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 const FaqEmptyState: React.FC<FaqEmptyStateProps> = ({
   hasSearchTerm,
   locale,
 }) => {
   return (
     <div className="text-center py-12">
-      <p className="text-elegantSilver text-lg">
+      <p className={`${montserrat.className} text-elegantSilver text-lg`}>
         {hasSearchTerm
           ? locale === "en"
             ? "No FAQs found matching your search."

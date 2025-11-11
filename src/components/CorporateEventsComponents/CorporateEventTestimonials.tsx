@@ -10,12 +10,10 @@ import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 
-
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 })
-
 
 interface CorporateEventTestimonialsComponentProps {
   testimonials: CorporateEventTestimonials[]
@@ -41,7 +39,9 @@ const CorporateEventTestimonialsComponent = ({
         {/* Section Title */}
         {title && (
           <div className="text-center mb-12">
-            <h2 className={`${coromantGaramond.className} text-3xl lg:text-4xl font-bold text-gray-900 mb-4`}>
+            <h2
+              className={`${coromantGaramond.className} text-3xl lg:text-4xl font-bold text-gray-900 mb-4`}
+            >
               {title[locale]}
             </h2>
             <div className="w-24 h-1 bg-caribbeanTurquoise mx-auto rounded-full"></div>

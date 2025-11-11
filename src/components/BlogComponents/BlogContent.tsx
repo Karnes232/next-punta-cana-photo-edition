@@ -5,6 +5,12 @@ import BlogFilters from "./BlogFilters"
 import BlogCard from "./BlogCard"
 import Pagination from "./Pagination"
 import FeaturedPost from "./FeaturedPost"
+import { Montserrat } from "next/font/google"
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const BlogContent = ({
   blogPosts,
@@ -81,7 +87,9 @@ const BlogContent = ({
         {/* No Results */}
         {filteredPosts.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-slate-600 text-lg">No articles found</p>
+            <p className={`${montserrat.className} text-slate-600 text-lg`}>
+              No articles found
+            </p>
           </div>
         )}
       </div>

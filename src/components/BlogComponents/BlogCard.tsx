@@ -1,10 +1,15 @@
 import { ArrowRight, Calendar } from "lucide-react"
-import { Cormorant_Garamond } from "next/font/google"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 import { useTranslations } from "next-intl"
 const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 })
@@ -23,7 +28,9 @@ const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
         />
         {post.categories[0] && (
           <div className="absolute top-4 left-4">
-            <span className="bg-pureWhite/90 backdrop-blur-sm text-darkGray text-xs font-medium px-3 py-1 rounded-full border border-luxuryGold/20">
+            <span
+              className={`${coromantGaramond.className} bg-pureWhite/90 backdrop-blur-sm text-darkGray text-sm font-medium px-3 py-1 rounded-full border border-luxuryGold/20`}
+            >
               {post.categories[0].title[locale]}
             </span>
           </div>
@@ -38,19 +45,23 @@ const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
         </h3>
 
         {post.description && post.description[locale] && (
-          <p className="text-elegantSilver text-sm mb-4 line-clamp-3">
+          <p
+            className={`${montserrat.className} text-elegantSilver text-sm mb-4 line-clamp-3`}
+          >
             {post.description[locale]}
           </p>
         )}
 
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center text-sm text-elegantSilver">
+          <div
+            className={`${coromantGaramond.className} flex items-center text-lg text-elegantSilver`}
+          >
             <Calendar className="h-4 w-4 mr-2" />
             {new Date(post.publishedAt).toLocaleDateString()}
           </div>
           <Link
             href={`/stories/${post.slug.current}`}
-            className="text-luxuryGold hover:text-caribbeanTurquoise font-medium flex items-center transition-colors"
+            className={`${montserrat.className} text-luxuryGold hover:text-caribbeanTurquoise font-medium flex items-center transition-colors`}
           >
             {t("readMore")}
             <ArrowRight className="ml-1 h-4 w-4" />

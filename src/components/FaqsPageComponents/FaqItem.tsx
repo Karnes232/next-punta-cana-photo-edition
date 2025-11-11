@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
 import { ChevronDown } from "lucide-react"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
 
 interface FaqItemProps {
   question: string
@@ -9,6 +10,15 @@ interface FaqItemProps {
   onToggle: () => void
 }
 
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 const FaqItem: React.FC<FaqItemProps> = ({
   question,
   answer,
@@ -21,7 +31,9 @@ const FaqItem: React.FC<FaqItemProps> = ({
         className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-luxuryGold/5 transition-colors duration-200"
         onClick={onToggle}
       >
-        <span className="text-lg font-medium text-darkGray pr-4">
+        <span
+          className={`${coromantGaramond.className} text-xl font-medium text-darkGray pr-4`}
+        >
           {question}
         </span>
         <ChevronDown
@@ -36,7 +48,9 @@ const FaqItem: React.FC<FaqItemProps> = ({
         }`}
       >
         <div className="px-6 pb-4">
-          <div className="text-darkGray/80 leading-relaxed whitespace-pre-line">
+          <div
+            className={`${montserrat.className} text-darkGray/80 leading-relaxed whitespace-pre-line`}
+          >
             {answer}
           </div>
         </div>

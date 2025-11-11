@@ -2,6 +2,7 @@
 import React from "react"
 import { FaqCategory } from "@/sanity/queries/Faqs/faqCategory"
 import { useTranslations } from "next-intl"
+import { Montserrat } from "next/font/google"
 
 interface FaqCategoryFilterProps {
   faqCategories: FaqCategory[]
@@ -10,6 +11,10 @@ interface FaqCategoryFilterProps {
   locale: "en" | "es"
 }
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 const FaqCategoryFilter: React.FC<FaqCategoryFilterProps> = ({
   faqCategories,
   selectedCategory,
@@ -29,7 +34,7 @@ const FaqCategoryFilter: React.FC<FaqCategoryFilterProps> = ({
       <div className="flex flex-wrap gap-2 justify-center">
         <button
           onClick={() => onCategorySelect(null)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+          className={`${montserrat.className} px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
             selectedCategory === null
               ? "bg-luxuryGold text-pureWhite shadow-lg shadow-luxuryGold/25"
               : "bg-elegantSilver/20 text-darkGray hover:bg-luxuryGold/10 hover:text-luxuryGold"
@@ -41,7 +46,7 @@ const FaqCategoryFilter: React.FC<FaqCategoryFilterProps> = ({
           <button
             key={index}
             onClick={() => handleCategoryFilter(category.title[locale])}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            className={`${montserrat.className} px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               selectedCategory === category.title[locale]
                 ? "bg-luxuryGold text-pureWhite shadow-lg shadow-luxuryGold/25"
                 : "bg-elegantSilver/20 text-darkGray hover:bg-luxuryGold/10 hover:text-luxuryGold"

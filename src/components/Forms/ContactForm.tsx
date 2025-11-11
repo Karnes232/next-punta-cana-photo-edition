@@ -7,25 +7,26 @@ import {
   User,
   Mail,
   Phone,
-  Calendar,
   MessageSquare,
   CheckCircle,
   AlertCircle,
-  DollarSign,
-  Clock,
-  MapPin,
-  Camera,
 } from "lucide-react"
+import { Cormorant_Garamond, Montserrat } from "next/font/google"
+
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 interface FormData {
   name: string
   email: string
   telephone: string
-  //  eventDate: string
-  //  serviceType: string
-  //  budget: string
-  //  location: string
-  //  duration: string
   message: string
 }
 
@@ -33,11 +34,6 @@ interface FormErrors {
   name?: string
   email?: string
   telephone?: string
-  //  eventDate?: string
-  //  serviceType?: string
-  //  budget?: string
-  //  location?: string
-  //  duration?: string
   message?: string
 }
 
@@ -52,11 +48,6 @@ const ContactForm = ({ locale }: ContactFormProps) => {
     name: "",
     email: "",
     telephone: "",
-    //    eventDate: "",
-    //    serviceType: "",
-    //    budget: "",
-    //    location: "",
-    //    duration: "",
     message: "",
   })
 
@@ -87,26 +78,6 @@ const ContactForm = ({ locale }: ContactFormProps) => {
     if (!formData.telephone.trim()) {
       newErrors.telephone = t("requiredField")
     }
-
-    // if (!formData.eventDate) {
-    //   newErrors.eventDate = t("requiredField")
-    // }
-
-    // if (!formData.serviceType) {
-    //   newErrors.serviceType = t("requiredField")
-    // }
-
-    // if (!formData.budget) {
-    //   newErrors.budget = t("requiredField")
-    // }
-
-    // if (!formData.location.trim()) {
-    //   newErrors.location = t("requiredField")
-    // }
-
-    // if (!formData.duration) {
-    //   newErrors.duration = t("requiredField")
-    // }
 
     if (!formData.message.trim()) {
       newErrors.message = t("requiredField")
@@ -145,11 +116,6 @@ const ContactForm = ({ locale }: ContactFormProps) => {
       formDataToSend.append("name", formData.name)
       formDataToSend.append("email", formData.email)
       formDataToSend.append("telephone", formData.telephone)
-      // formDataToSend.append("eventDate", formData.eventDate)
-      // formDataToSend.append("serviceType", formData.serviceType)
-      // formDataToSend.append("budget", formData.budget)
-      // formDataToSend.append("location", formData.location)
-      // formDataToSend.append("duration", formData.duration)
       formDataToSend.append("message", formData.message)
       formDataToSend.append("locale", locale)
 
@@ -168,11 +134,6 @@ const ContactForm = ({ locale }: ContactFormProps) => {
           name: "",
           email: "",
           telephone: "",
-          // eventDate: "",
-          //serviceType: "",
-          // budget: "",
-          // location: "",
-          // duration: "",
           message: "",
         })
       } else {
@@ -193,22 +154,30 @@ const ContactForm = ({ locale }: ContactFormProps) => {
       <div className="bg-gradient-to-br from-pureWhite to-luxuryGold/5 rounded-2xl shadow-xl p-8 md:p-12 border border-luxuryGold/30">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-darkGray mb-3 font-crimsonPro">
+          <h2
+            className={`${coromantGaramond.className} text-3xl md:text-4xl font-bold text-darkGray mb-3`}
+          >
             {t("title")}
           </h2>
-          <p className="text-darkGray/70 text-lg">{t("subtitle")}</p>
+          <p className={`${montserrat.className} text-darkGray/70 text-lg`}>
+            {t("subtitle")}
+          </p>
         </div>
 
         {/* Error Message */}
         {submitStatus === "error" && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg flex items-start gap-3">
+          <div
+            className={`${montserrat.className} mb-6 p-4 bg-red-50 border border-red-300 rounded-lg flex items-start gap-3`}
+          >
             <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
             <p className="text-red-800">{t("errorMessage")}</p>
           </div>
         )}
 
         {submitStatus === "success" ? (
-          <div className="mb-6 p-4 bg-green-50 border border-green-300 rounded-lg flex items-start gap-3">
+          <div
+            className={`${montserrat.className} mb-6 p-4 bg-green-50 border border-green-300 rounded-lg flex items-start gap-3`}
+          >
             <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
             <p className="text-green-800">{t("successMessage")}</p>
           </div>
@@ -220,7 +189,7 @@ const ContactForm = ({ locale }: ContactFormProps) => {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className={`${montserrat.className} space-y-6`}
           >
             {/* Hidden fields for Netlify */}
             <input
@@ -323,175 +292,6 @@ const ContactForm = ({ locale }: ContactFormProps) => {
                 )}
               </div>
             </div>
-
-            {/* Event Date and Service Type Row */}
-            {/*            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              // Event Date Field 
-              <div>
-                <label
-                  htmlFor="eventDate"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
-                >
-                  <Calendar className="w-4 h-4 text-luxuryGold" />
-                  {t("eventDate")}
-                </label>
-                <input
-                  type="date"
-                  id="eventDate"
-                  name="eventDate"
-                  value={formData.eventDate}
-                  onChange={handleChange}
-                  min={new Date().toISOString().split("T")[0]}
-                  className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.eventDate
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
-                  } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
-                />
-                {errors.eventDate && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.eventDate}
-                  </p>
-                )}
-              </div>
-
-              // Service Type Field 
-              <div>
-                <label
-                  htmlFor="serviceType"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
-                >
-                  <Camera className="w-4 h-4 text-darkGray" />
-                  {t("serviceType")}
-                </label>
-                <select
-                  id="serviceType"
-                  name="serviceType"
-                  value={formData.serviceType}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.serviceType
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
-                  } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
-                >
-                  <option value="">{t("selectServiceType")}</option>
-                  <option value="wedding">{t("wedding")}</option>
-                  <option value="photoshoot">{t("photoshoot")}</option>
-                  <option value="proposal">{t("proposal")}</option>
-                  <option value="corporate-event">{t("corporateEvent")}</option>
-                  <option value="wedding-planning">
-                    {t("weddingPlanning")}
-                  </option>
-                  <option value="photography-video">
-                    {t("photographyVideo")}
-                  </option>
-                  <option value="other">{t("other")}</option>
-                </select>
-                {errors.serviceType && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.serviceType}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            // Budget and Duration Row 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              // Budget Field 
-              <div>
-                <label
-                  htmlFor="budget"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
-                >
-                  <DollarSign className="w-4 h-4 text-luxuryGold" />
-                  {t("budget")}
-                </label>
-                <select
-                  id="budget"
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.budget
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
-                  } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
-                >
-                  <option value="">{t("selectBudget")}</option>
-                  <option value="under-5k">Under $5,000</option>
-                  <option value="5k-10k">$5,000 - $10,000</option>
-                  <option value="10k-25k">$10,000 - $25,000</option>
-                  <option value="25k-50k">$25,000 - $50,000</option>
-                  <option value="50k-100k">$50,000 - $100,000</option>
-                  <option value="100k+">$100,000+</option>
-                </select>
-                {errors.budget && (
-                  <p className="mt-1 text-sm text-red-600">{errors.budget}</p>
-                )}
-              </div>
-
-              // Duration Field 
-              <div>
-                <label
-                  htmlFor="duration"
-                  className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
-                >
-                  <Clock className="w-4 h-4 text-darkGray" />
-                  {t("duration")}
-                </label>
-                <select
-                  id="duration"
-                  name="duration"
-                  value={formData.duration}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.duration
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
-                  } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
-                >
-                  <option value="">{t("selectDuration")}</option>
-                  <option value="2-hours">{t("twoHours")}</option>
-                  <option value="4-hours">{t("fourHours")}</option>
-                  <option value="6-hours">{t("sixHours")}</option>
-                  <option value="8-hours">{t("eightHours")}</option>
-                  <option value="full-day">{t("fullDay")}</option>
-                  <option value="multiple-days">{t("multipleDays")}</option>
-                  <option value="custom">{t("custom")}</option>
-                </select>
-                {errors.duration && (
-                  <p className="mt-1 text-sm text-red-600">{errors.duration}</p>
-                )}
-              </div>
-            </div>
-
-            // Location Field 
-            <div>
-              <label
-                htmlFor="location"
-                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
-              >
-                <MapPin className="w-4 h-4 text-darkGray" />
-                {t("location")}
-              </label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                placeholder={t("locationPlaceholder")}
-                className={`w-full px-4 py-3 rounded-lg border ${
-                  errors.location
-                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                    : "border-elegantSilver focus:border-luxuryGold focus:ring-luxuryGold"
-                } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
-              />
-              {errors.location && (
-                <p className="mt-1 text-sm text-red-600">{errors.location}</p>
-              )}
-            </div> */}
 
             {/* Message Field */}
             <div>

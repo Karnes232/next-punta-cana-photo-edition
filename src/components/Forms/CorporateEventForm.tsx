@@ -226,24 +226,32 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
       <div className="bg-gradient-to-br from-pureWhite to-caribbeanTurquoise/5 rounded-2xl shadow-xl p-8 md:p-12 border border-caribbeanTurquoise/30">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className={`${coromantGaramond.className} text-3xl md:text-4xl font-bold text-darkGray mb-3`}>
+          <h2
+            className={`${coromantGaramond.className} text-3xl md:text-4xl font-bold text-darkGray mb-3`}
+          >
             {t("title")}
           </h2>
-          <p className={`${montserrat.className} text-darkGray/70 text-lg`}>{t("subtitle")}</p>
+          <p className={`${montserrat.className} text-darkGray/70 text-lg`}>
+            {t("subtitle")}
+          </p>
         </div>
 
         {/* Error Message */}
         {submitStatus === "error" && (
           <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <p className={`${montserrat.className} text-red-800`}>{t("errorMessage")}</p>
+            <p className={`${montserrat.className} text-red-800`}>
+              {t("errorMessage")}
+            </p>
           </div>
         )}
 
         {submitStatus === "success" ? (
           <div className="mb-6 p-4 bg-green-50 border border-green-300 rounded-lg flex items-start gap-3">
             <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-            <p className={`${montserrat.className} text-green-800`}>{t("successMessage")}</p>
+            <p className={`${montserrat.className} text-green-800`}>
+              {t("successMessage")}
+            </p>
           </div>
         ) : (
           <form
@@ -294,7 +302,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
               />
               {errors.name && (
-                <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.name}</p>
+                <p
+                  className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                >
+                  {errors.name}
+                </p>
               )}
             </div>
 
@@ -323,7 +335,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.email && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.email}</p>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.email}
+                  </p>
                 )}
               </div>
 
@@ -350,7 +366,9 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.telephone && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
                     {errors.telephone}
                   </p>
                 )}
@@ -380,7 +398,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
               />
               {errors.company && (
-                <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.company}</p>
+                <p
+                  className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                >
+                  {errors.company}
+                </p>
               )}
             </div>
 
@@ -409,7 +431,9 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   } bg-pureWhite text-darkGray focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.eventDate && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
                     {errors.eventDate}
                   </p>
                 )}
@@ -446,7 +470,9 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="other">{t("other")}</option>
                 </select>
                 {errors.eventType && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
                     {errors.eventType}
                   </p>
                 )}
@@ -484,7 +510,9 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="500+">500+ {t("guests")}</option>
                 </select>
                 {errors.guestCount && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
                     {errors.guestCount}
                   </p>
                 )}
@@ -519,7 +547,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="100k+">$100,000+</option>
                 </select>
                 {errors.budget && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.budget}</p>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.budget}
+                  </p>
                 )}
               </div>
             </div>
@@ -549,7 +581,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
                 />
                 {errors.venue && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.venue}</p>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.venue}
+                  </p>
                 )}
               </div>
 
@@ -583,7 +619,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   <option value="custom">{t("custom")}</option>
                 </select>
                 {errors.duration && (
-                  <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.duration}</p>
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.duration}
+                  </p>
                 )}
               </div>
             </div>
@@ -611,7 +651,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                 } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors resize-none`}
               />
               {errors.message && (
-                <p className={`${montserrat.className} mt-1 text-sm text-red-600`}>{errors.message}</p>
+                <p
+                  className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                >
+                  {errors.message}
+                </p>
               )}
             </div>
 

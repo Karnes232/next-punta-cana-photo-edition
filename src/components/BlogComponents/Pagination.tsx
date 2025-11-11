@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Montserrat } from "next/font/google"
 import React from "react"
 
 interface PaginationProps {
@@ -6,6 +7,11 @@ interface PaginationProps {
   totalPages: number
   onPageChange: (page: number) => void
 }
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const Pagination = ({
   currentPage,
@@ -26,7 +32,7 @@ const Pagination = ({
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
+          className={`${montserrat.className} px-4 py-2 rounded-lg transition-colors duration-200 ${
             currentPage === page
               ? "bg-luxuryGold text-pureWhite shadow-lg shadow-luxuryGold/25"
               : "border border-elegantSilver hover:bg-luxuryGold/10 text-darkGray hover:text-luxuryGold"
