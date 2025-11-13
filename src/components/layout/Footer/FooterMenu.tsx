@@ -36,7 +36,7 @@ const FooterMenu = () => {
       </Link>
 
       <Link
-        href="/photography-video"
+        href="/wedding-photography"
         className={`${coromantGaramond.className} hover:bg-transparent! no-underline uppercase text-sm space-x-3 text-darkGray`}
       >
         <p
