@@ -51,6 +51,7 @@ import ProposalAdditions from "./Proposal/ProposalAdditions"
 import CorporateEvents from "./CorporateEvents/CorporateEvents"
 import CorporateEventPackages from "./CorporateEvents/CorporateEventPackages"
 import CorporateEventTestimonials from "./CorporateEvents/CorporateEventTestimonials"
+import CorporateEventsCalculator from "./CorporateEvents/CorporateEventsCalculator"
 
 //Stories
 import stories from "./stories/stories"
@@ -118,7 +119,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     CorporateEvents,
     CorporateEventPackages,
     CorporateEventTestimonials,
-
+    CorporateEventsCalculator,
+    
     //Stories
     stories,
     BlogCategory,

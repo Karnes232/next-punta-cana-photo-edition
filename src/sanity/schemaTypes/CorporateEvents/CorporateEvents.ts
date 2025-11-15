@@ -27,6 +27,10 @@ export default defineType({
       name: "FAQ Component",
       title: "FAQ Component",
     },
+    {
+      name: "Services Calculator",
+      title: "Services Calculator",
+    },
   ],
   fields: [
     defineField({
@@ -84,6 +88,14 @@ export default defineType({
       type: "array",
       group: "FAQ Component",
       of: [{ type: "categorizedFaqs" }],
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "servicesCalculator",
+      title: "Services Calculator",
+      type: "array",
+      group: "Services Calculator",
+      of: [{ type: "corporateEventsCalculator" }],
       validation: Rule => Rule.required(),
     }),
   ],
