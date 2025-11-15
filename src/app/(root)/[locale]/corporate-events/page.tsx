@@ -88,6 +88,7 @@ export default async function CorporateEvents({
         </section>
         <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
           <CorporateFaqs
+            title={corporateEvents?.faqsTitle || { en: "", es: "" }}
             faqs={corporateEvents?.corporateFaqs || []}
             locale={locale}
           />

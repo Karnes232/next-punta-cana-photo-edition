@@ -34,7 +34,7 @@ const Sitemap = () => {
         </button>
       </Link>
       <Link
-        href="/photography-video"
+        href="/wedding-photography"
         className={`${coromantGaramond.className} no-underline`}
       >
         <button

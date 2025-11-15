@@ -83,6 +83,13 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "faqsTitle",
+      title: "FAQs Title",
+      type: "localizedString",
+      group: "FAQ Component",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: "corporateFaqs",
       title: "FAQ Component",
       type: "array",

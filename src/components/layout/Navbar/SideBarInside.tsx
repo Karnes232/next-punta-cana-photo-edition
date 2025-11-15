@@ -55,7 +55,7 @@ const SideBarInside = ({
         <MenuItem
           component={
             <Link
-              href="/photography-video"
+              href="/wedding-photography"
               className={`${coromantGaramond.className} hover:bg-transparent! ${footer ? "no-underline uppercase text-sm space-x-3 text-darkGray" : "uppercase no-underline text-xl space-x-3 text-darkGray"}`}
               onClick={footer ? undefined : () => setIsOpen(false)}
             />

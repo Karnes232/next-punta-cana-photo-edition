@@ -3,8 +3,18 @@
 import React, { useEffect, useMemo, useState } from "react"
 import FaqItem from "@/components/FaqsPageComponents/FaqItem"
 import { CategorizedFaqs } from "@/sanity/queries/Faqs/faqCategory"
+import { Cormorant_Garamond } from "next/font/google"
+
+const coromantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 
 interface CorporateFaqsProps {
+  title: {
+    en: string
+    es: string
+  }
   faqs: CategorizedFaqs[]
   locale: "en" | "es"
 }
@@ -15,7 +25,11 @@ interface LocalizedFaq {
   answer: string
 }
 
-const CorporateFaqs: React.FC<CorporateFaqsProps> = ({ faqs, locale }) => {
+const CorporateFaqs: React.FC<CorporateFaqsProps> = ({
+  title,
+  faqs,
+  locale,
+}) => {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
 
   const localizedFaqs: LocalizedFaq[] = useMemo(() => {
@@ -48,6 +62,16 @@ const CorporateFaqs: React.FC<CorporateFaqsProps> = ({ faqs, locale }) => {
 
   return (
     <div className="max-w-4xl mx-auto w-full">
+      {title && (
+        <div className="text-center mb-12">
+          <h2
+            className={`${coromantGaramond.className} text-3xl lg:text-4xl font-bold text-gray-900 mb-4`}
+          >
+            {title[locale]}
+          </h2>
+          <div className="w-24 h-1 bg-caribbeanTurquoise mx-auto rounded-full"></div>
+        </div>
+      )}
       <div className="bg-pureWhite rounded-lg shadow-lg border border-elegantSilver/30 overflow-hidden">
         {localizedFaqs.map(faq => (
           <FaqItem
