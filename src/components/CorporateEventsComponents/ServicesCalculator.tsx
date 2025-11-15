@@ -113,8 +113,8 @@ const ServicesCalculator = ({
     value: string,
   ) => {
     setServiceBlocks(prev => {
-      const serviceBlocks = prev[serviceId] || []
-      const updatedBlocks = serviceBlocks.map(block => {
+      const currentBlocks = prev[serviceId] || []
+      const updatedBlocks = currentBlocks.map(block => {
         if (block.id === blockId) {
           const updates: Partial<ServiceBlock> = { [field]: value }
           if (field === "startTime" || field === "endTime") {
@@ -126,7 +126,11 @@ const ServicesCalculator = ({
         }
         return block
       })
-      return { ...prev, [serviceId]: updatedBlocks }
+      // Ensure we create a new object reference
+      return {
+        ...prev,
+        [serviceId]: updatedBlocks,
+      }
     })
   }
 
@@ -413,16 +417,17 @@ const ServicesCalculator = ({
                                 </label>
                                 <input
                                   type="date"
-                                  value={block.date}
+                                  value={block.date || ""}
                                   min={new Date().toISOString().split("T")[0]}
-                                  onChange={e =>
+                                  onChange={e => {
+                                    const newValue = e.target.value
                                     updateBlock(
                                       serviceKey,
                                       block.id,
                                       "date",
-                                      e.target.value,
+                                      newValue,
                                     )
-                                  }
+                                  }}
                                   className="w-full rounded-lg border border-elegantSilver/60 px-3 py-2 text-sm text-darkGray shadow-sm transition focus:border-caribbeanTurquoise focus:outline-none focus:ring-2 focus:ring-caribbeanTurquoise/20"
                                 />
                               </div>
