@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo, useState } from "react"
+import React, { useMemo, useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import {
   Plus,
@@ -13,7 +13,7 @@ import {
   ChevronUp,
 } from "lucide-react"
 
-type ServiceBlock = {
+export type ServiceBlock = {
   id: string
   serviceId: string
   date: string
@@ -33,9 +33,14 @@ type OverlapWarning = {
 const ServicesCalculator = ({
   services,
   locale,
+  onDataChange,
 }: {
   services: { title: { en: string; es: string }; rate: number }[]
   locale: "en" | "es"
+  onDataChange?: (data: {
+    serviceBlocks: Record<string, ServiceBlock[]>
+    totalCost: number
+  }) => void
 }) => {
   const t = useTranslations("ServicesCalculator")
   const formatCurrency = (value: number) => `$${value.toLocaleString()}`
@@ -241,6 +246,13 @@ const ServicesCalculator = ({
 
     return total
   }, [serviceBlocks, services])
+
+  // Notify parent component when data changes
+  useEffect(() => {
+    if (onDataChange) {
+      onDataChange({ serviceBlocks, totalCost })
+    }
+  }, [serviceBlocks, totalCost, onDataChange])
 
   // Get service total
   const getServiceTotal = (serviceId: string) => {

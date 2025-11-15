@@ -18,6 +18,7 @@ import {
   MapPin,
 } from "lucide-react"
 import { Cormorant_Garamond, Montserrat } from "next/font/google"
+import { type ServiceBlock } from "@/components/CorporateEventsComponents/ServicesCalculator"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -57,11 +58,20 @@ interface FormErrors {
   message?: string
 }
 
-interface CorporateEventFormProps {
-  locale: "en" | "es"
+interface ServiceCalculationData {
+  serviceBlocks: Record<string, ServiceBlock[]>
+  totalCost: number
 }
 
-const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
+interface CorporateEventFormProps {
+  locale: "en" | "es"
+  serviceCalculationData?: ServiceCalculationData
+}
+
+const CorporateEventForm = ({
+  locale,
+  serviceCalculationData,
+}: CorporateEventFormProps) => {
   const t = useTranslations("CorporateEventForm")
 
   const [formData, setFormData] = useState<FormData>({
@@ -180,6 +190,18 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
       // formDataToSend.append("duration", formData.duration)
       formDataToSend.append("message", formData.message)
       formDataToSend.append("locale", locale)
+
+      // Include service calculation data if available
+      if (serviceCalculationData) {
+        formDataToSend.append(
+          "serviceBlocks",
+          JSON.stringify(serviceCalculationData.serviceBlocks),
+        )
+        formDataToSend.append(
+          "totalCost",
+          serviceCalculationData.totalCost.toString(),
+        )
+      }
 
       const response = await fetch("/__forms.html", {
         method: "POST",
