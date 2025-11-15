@@ -58,6 +58,7 @@ export interface CorporateEvents {
     es: string
   }
   corporateFaqs: CategorizedFaqs[]
+  servicesCalculator: { title: { en: string; es: string }; rate: number }[]
 }
 
 export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
@@ -143,6 +144,13 @@ export const corporateEventsQuery = `*[_type == "corporate-events"][0] {
         en,
         es
       }
+    },
+    servicesCalculator[] {
+      title {
+        en,
+        es
+      },
+      rate
     }
 }`
 

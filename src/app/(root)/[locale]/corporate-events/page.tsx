@@ -11,6 +11,7 @@ import CorporateEventForm from "@/components/Forms/CorporateEventForm"
 import CorporateEventTestimonialsComponent from "@/components/CorporateEventsComponents/CorporateEventTestimonials"
 import Faqs from "@/components/FaqsComponents/Faqs"
 import CorporateFaqs from "@/components/CorporateEventsComponents/CorporateFaqs"
+import ServicesCalculator from "@/components/CorporateEventsComponents/ServicesCalculator"
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
@@ -30,7 +31,7 @@ export default async function CorporateEvents({
       getCorporateEvents(),
       getCorporateEventPackages(),
     ])
-
+  console.log(corporateEvents?.servicesCalculator)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -77,6 +78,10 @@ export default async function CorporateEvents({
           />
         </section>
         <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+          <ServicesCalculator
+            services={corporateEvents?.servicesCalculator || []}
+            locale={locale}
+          />
           <CorporateEventForm locale={locale} />
         </section>
         <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">

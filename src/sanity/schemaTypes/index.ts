@@ -120,7 +120,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     CorporateEventPackages,
     CorporateEventTestimonials,
     CorporateEventsCalculator,
-    
+
     //Stories
     stories,
     BlogCategory,

@@ -35,11 +35,11 @@ interface FormData {
   telephone: string
   company: string
   eventDate: string
-  eventType: string
-  guestCount: string
-  budget: string
+  // eventType: string
+  // guestCount: string
+  // budget: string
   venue: string
-  duration: string
+  // duration: string
   message: string
 }
 
@@ -49,11 +49,11 @@ interface FormErrors {
   telephone?: string
   company?: string
   eventDate?: string
-  eventType?: string
-  guestCount?: string
-  budget?: string
+  // eventType?: string
+  // guestCount?: string
+  // budget?: string
   venue?: string
-  duration?: string
+  // duration?: string
   message?: string
 }
 
@@ -70,11 +70,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
     telephone: "",
     company: "",
     eventDate: "",
-    eventType: "",
-    guestCount: "",
-    budget: "",
+    // eventType: "",
+    // guestCount: "",
+    // budget: "",
     venue: "",
-    duration: "",
+    // duration: "",
     message: "",
   })
 
@@ -114,25 +114,25 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
       newErrors.eventDate = t("requiredField")
     }
 
-    if (!formData.eventType) {
-      newErrors.eventType = t("requiredField")
-    }
+    // if (!formData.eventType) {
+    //   newErrors.eventType = t("requiredField")
+    // }
 
-    if (!formData.guestCount) {
-      newErrors.guestCount = t("requiredField")
-    }
+    // if (!formData.guestCount) {
+    //   newErrors.guestCount = t("requiredField")
+    // }
 
-    if (!formData.budget) {
-      newErrors.budget = t("requiredField")
-    }
+    // if (!formData.budget) {
+    //   newErrors.budget = t("requiredField")
+    // }
 
     if (!formData.venue.trim()) {
       newErrors.venue = t("requiredField")
     }
 
-    if (!formData.duration) {
-      newErrors.duration = t("requiredField")
-    }
+    // if (!formData.duration) {
+    //   newErrors.duration = t("requiredField")
+    // }
 
     if (!formData.message.trim()) {
       newErrors.message = t("requiredField")
@@ -173,11 +173,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
       formDataToSend.append("telephone", formData.telephone)
       formDataToSend.append("company", formData.company)
       formDataToSend.append("eventDate", formData.eventDate)
-      formDataToSend.append("eventType", formData.eventType)
-      formDataToSend.append("guestCount", formData.guestCount)
-      formDataToSend.append("budget", formData.budget)
+      // formDataToSend.append("eventType", formData.eventType)
+      // formDataToSend.append("guestCount", formData.guestCount)
+      // formDataToSend.append("budget", formData.budget)
       formDataToSend.append("venue", formData.venue)
-      formDataToSend.append("duration", formData.duration)
+      // formDataToSend.append("duration", formData.duration)
       formDataToSend.append("message", formData.message)
       formDataToSend.append("locale", locale)
 
@@ -198,11 +198,11 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
           telephone: "",
           company: "",
           eventDate: "",
-          eventType: "",
-          guestCount: "",
-          budget: "",
+          // eventType: "",
+          // guestCount: "",
+          // budget: "",
           venue: "",
-          duration: "",
+          // duration: "",
           message: "",
         })
       } else {
@@ -221,7 +221,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
   return (
     <div
       id="corporate-event-inquiry-form"
-      className="w-full max-w-4xl mx-auto my-8 px-4"
+      className="w-full space-y-6 px-4 sm:px-6 lg:px-8 my-8"
     >
       <div className="bg-gradient-to-br from-pureWhite to-caribbeanTurquoise/5 rounded-2xl shadow-xl p-8 md:p-12 border border-caribbeanTurquoise/30">
         {/* Header */}
@@ -375,39 +375,38 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               </div>
             </div>
 
-            {/* Company Field */}
-            <div>
-              <label
-                htmlFor="company"
-                className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
-              >
-                <Building className="w-4 h-4 text-darkGray" />
-                {t("company")}
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                placeholder={t("companyPlaceholder")}
-                className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
-                  errors.company
-                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                    : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
-                } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
-              />
-              {errors.company && (
-                <p
-                  className={`${montserrat.className} mt-1 text-sm text-red-600`}
-                >
-                  {errors.company}
-                </p>
-              )}
-            </div>
-
             {/* Event Date and Event Type Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Company Field */}
+              <div>
+                <label
+                  htmlFor="company"
+                  className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
+                >
+                  <Building className="w-4 h-4 text-darkGray" />
+                  {t("company")}
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder={t("companyPlaceholder")}
+                  className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
+                    errors.company
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
+                  } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
+                />
+                {errors.company && (
+                  <p
+                    className={`${montserrat.className} mt-1 text-sm text-red-600`}
+                  >
+                    {errors.company}
+                  </p>
+                )}
+              </div>
               {/* Event Date Field */}
               <div>
                 <label
@@ -440,7 +439,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               </div>
 
               {/* Event Type Field */}
-              <div>
+              {/* <div>
                 <label
                   htmlFor="eventType"
                   className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
@@ -476,12 +475,12 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                     {errors.eventType}
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
 
             {/* Guest Count and Budget Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Guest Count Field */}
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> 
+               Guest Count Field 
               <div>
                 <label
                   htmlFor="guestCount"
@@ -518,7 +517,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                 )}
               </div>
 
-              {/* Budget Field */}
+              Budget Field
               <div>
                 <label
                   htmlFor="budget"
@@ -554,10 +553,10 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                   </p>
                 )}
               </div>
-            </div>
+            </div>*/}
 
             {/* Venue and Duration Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 ">
               {/* Venue Field */}
               <div>
                 <label
@@ -590,7 +589,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
               </div>
 
               {/* Duration Field */}
-              <div>
+              {/* <div>
                 <label
                   htmlFor="duration"
                   className={`${montserrat.className} flex items-center gap-2 text-sm font-semibold text-darkGray mb-2`}
@@ -625,7 +624,7 @@ const CorporateEventForm = ({ locale }: CorporateEventFormProps) => {
                     {errors.duration}
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
 
             {/* Message Field */}
