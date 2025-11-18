@@ -195,7 +195,7 @@ const CorporateEventForm = ({
       if (serviceCalculationData) {
         formDataToSend.append(
           "serviceBlocks",
-          JSON.stringify(serviceCalculationData.serviceBlocks),
+          JSON.stringify(serviceCalculationData.serviceBlocks, null, 2),
         )
         formDataToSend.append(
           "totalCost",
