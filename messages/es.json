@@ -112,7 +112,8 @@
     "overlapSameService": "Se detectaron bloques de tiempo superpuestos",
     "overlapDifferentService": "Servicios simultáneos detectados",
     "parallelTeamsNotice": "Nota: Los bloques del mismo servicio que se superponen requieren equipos paralelos y pueden incurrir en costos adicionales.",
-    "rate": "Tarifa"
+    "rate": "Tarifa",
+    "blockTotal": "Total del Bloque"
   },
   "CustomPhotographyVideoPackageCalculatorForm": {
     "heading": "Crea tu paquete personalizado de foto y video",

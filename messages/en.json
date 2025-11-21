@@ -112,7 +112,8 @@
     "overlapSameService": "Overlapping time blocks detected",
     "overlapDifferentService": "Simultaneous services detected",
     "parallelTeamsNotice": "Note: Overlapping same-service blocks require parallel teams and may incur additional costs.",
-    "rate": "Rate"
+    "rate": "Rate",
+    "blockTotal": "Block Total"
   },
   "CustomPhotographyVideoPackageCalculatorForm": {
     "heading": "Create Your Custom Photo & Video Package",

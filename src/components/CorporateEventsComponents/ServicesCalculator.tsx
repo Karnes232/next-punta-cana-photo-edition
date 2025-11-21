@@ -20,6 +20,8 @@ export type ServiceBlock = {
   startTime: string
   endTime: string
   hours: number
+  rate: number
+  totalCost: number
 }
 
 type OverlapWarning = {
@@ -81,6 +83,12 @@ const ServicesCalculator = ({
     const today = new Date().toISOString().split("T")[0]
     const defaultStartTime = "09:00"
     const defaultEndTime = "10:00"
+    const service = services.find(s => s.title.en === serviceId)
+    if (!service) return
+
+    const hours = calculateHours(defaultStartTime, defaultEndTime)
+    const rate = service.rate
+    const totalCost = hours * rate
 
     const newBlock: ServiceBlock = {
       id: `${serviceId}-${Date.now()}-${Math.random()}`,
@@ -88,7 +96,9 @@ const ServicesCalculator = ({
       date: today,
       startTime: defaultStartTime,
       endTime: defaultEndTime,
-      hours: calculateHours(defaultStartTime, defaultEndTime),
+      hours,
+      rate,
+      totalCost,
     }
 
     setServiceBlocks(prev => ({
@@ -120,7 +130,9 @@ const ServicesCalculator = ({
           if (field === "startTime" || field === "endTime") {
             const startTime = field === "startTime" ? value : block.startTime
             const endTime = field === "endTime" ? value : block.endTime
-            updates.hours = calculateHours(startTime, endTime)
+            const hours = calculateHours(startTime, endTime)
+            updates.hours = hours
+            updates.totalCost = hours * block.rate
           }
           return { ...block, ...updates }
         }
@@ -244,7 +256,7 @@ const ServicesCalculator = ({
       const serviceKey = service.title.en
       const blocks = serviceBlocks[serviceKey] || []
       blocks.forEach(block => {
-        total += block.hours * service.rate
+        total += block.totalCost
       })
     })
 
@@ -260,11 +272,8 @@ const ServicesCalculator = ({
 
   // Get service total
   const getServiceTotal = (serviceId: string) => {
-    const service = services.find(s => s.title.en === serviceId)
-    if (!service) return 0
-
     const blocks = serviceBlocks[serviceId] || []
-    return blocks.reduce((sum, block) => sum + block.hours * service.rate, 0)
+    return blocks.reduce((sum, block) => sum + block.totalCost, 0)
   }
 
   // Get service blocks count
@@ -489,10 +498,10 @@ const ServicesCalculator = ({
                               <span className="text-darkGray/60">
                                 {block.hours}{" "}
                                 {block.hours === 1 ? t("hour") : t("hours")} ×{" "}
-                                {formatCurrency(service.rate)}
+                                {formatCurrency(block.rate)}
                               </span>
                               <span className="font-semibold text-darkGray">
-                                {formatCurrency(block.hours * service.rate)}
+                                {formatCurrency(block.totalCost)}
                               </span>
                             </div>
                           </div>

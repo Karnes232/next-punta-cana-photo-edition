@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
 import { useTranslations } from "next-intl"
 import {
   Send,
@@ -94,6 +94,12 @@ const CorporateEventForm = ({
     "idle" | "success" | "error"
   >("idle")
 
+  // Calculate minimum date (today) once
+  const minDate = useMemo(
+    () => new Date().toISOString().split("T")[0],
+    [],
+  )
+
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
@@ -165,6 +171,15 @@ const CorporateEventForm = ({
     }
   }
 
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setFormData(prev => ({ ...prev, eventDate: value }))
+    // Clear error when user selects a date
+    if (errors.eventDate) {
+      setErrors(prev => ({ ...prev, eventDate: undefined }))
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -193,10 +208,18 @@ const CorporateEventForm = ({
 
       // Include service calculation data if available
       if (serviceCalculationData) {
-        formDataToSend.append(
-          "serviceBlocks",
-          JSON.stringify(serviceCalculationData.serviceBlocks, null, 2),
-        )
+        let serviceBlocks = '';
+        for (const serviceId in serviceCalculationData.serviceBlocks) {
+          const blocks = serviceCalculationData.serviceBlocks[serviceId]
+          for (const block of blocks) {
+            serviceBlocks += `${serviceId}: ${block.date} ${block.startTime} - ${block.endTime} ${block.hours} Hours @ $${block.rate} = $${block.totalCost}\n`
+          }
+        }
+        formDataToSend.append("serviceBlocks", serviceBlocks)
+        // formDataToSend.append(
+        //   "serviceBlocks",
+        //   JSON.stringify(serviceCalculationData.serviceBlocks, null, 2),
+        // )
         formDataToSend.append(
           "totalCost",
           serviceCalculationData.totalCost.toString(),
@@ -443,8 +466,8 @@ const CorporateEventForm = ({
                   id="eventDate"
                   name="eventDate"
                   value={formData.eventDate}
-                  onChange={handleChange}
-                  min={new Date().toISOString().split("T")[0]}
+                  onChange={handleDateChange}
+                  min={minDate}
                   className={`${montserrat.className} w-full px-4 py-3 rounded-lg border ${
                     errors.eventDate
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
