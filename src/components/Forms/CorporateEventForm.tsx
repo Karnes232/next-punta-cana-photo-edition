@@ -212,7 +212,8 @@ const CorporateEventForm = ({
         for (const serviceId in serviceCalculationData.serviceBlocks) {
           const blocks = serviceCalculationData.serviceBlocks[serviceId]
           for (const block of blocks) {
-            serviceBlocks += `${serviceId}: ${block.date} ${block.startTime} - ${block.endTime} ${block.hours} Hours @ $${block.rate} = $${block.totalCost}\n`
+            serviceBlocks += `${serviceId}: ${block.date} ${block.startTime} - ${block.endTime} ${block.hours} Hours @ $${block.rate} = $${block.totalCost} ||\n
+            -----------------------------------------\n`
           }
         }
         formDataToSend.append("serviceBlocks", serviceBlocks)

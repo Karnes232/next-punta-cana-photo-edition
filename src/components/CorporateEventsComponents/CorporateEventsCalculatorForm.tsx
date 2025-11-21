@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import ServicesCalculator, { type ServiceBlock } from "./ServicesCalculator"
 import CorporateEventForm from "@/components/Forms/CorporateEventForm"
 
@@ -21,9 +21,9 @@ const CorporateEventsCalculatorForm = ({
   const [serviceCalculationData, setServiceCalculationData] =
     useState<ServiceCalculationData | undefined>(undefined)
 
-  const handleDataChange = (data: ServiceCalculationData) => {
+  const handleDataChange = useCallback((data: ServiceCalculationData) => {
     setServiceCalculationData(data)
-  }
+  }, [])
 
   return (
     <>
