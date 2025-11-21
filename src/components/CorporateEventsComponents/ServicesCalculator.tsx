@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo, useState, useEffect } from "react"
+import React, { useMemo, useState, useEffect, useRef } from "react"
 import { useTranslations } from "next-intl"
 import {
   Plus,
@@ -263,12 +263,18 @@ const ServicesCalculator = ({
     return total
   }, [serviceBlocks, services])
 
+  // Store callback in ref to avoid dependency issues
+  const onDataChangeRef = useRef(onDataChange)
+  useEffect(() => {
+    onDataChangeRef.current = onDataChange
+  }, [onDataChange])
+
   // Notify parent component when data changes
   useEffect(() => {
-    if (onDataChange) {
-      onDataChange({ serviceBlocks, totalCost })
+    if (onDataChangeRef.current) {
+      onDataChangeRef.current({ serviceBlocks, totalCost })
     }
-  }, [serviceBlocks, totalCost, onDataChange])
+  }, [serviceBlocks, totalCost])
 
   // Get service total
   const getServiceTotal = (serviceId: string) => {

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useRef } from "react"
 import ServicesCalculator, { type ServiceBlock } from "./ServicesCalculator"
 import CorporateEventForm from "@/components/Forms/CorporateEventForm"
 
@@ -21,8 +21,21 @@ const CorporateEventsCalculatorForm = ({
   const [serviceCalculationData, setServiceCalculationData] =
     useState<ServiceCalculationData | undefined>(undefined)
 
+  // Store previous serialized data to prevent unnecessary updates
+  const prevSerializedRef = useRef<string | null>(null)
+
   const handleDataChange = useCallback((data: ServiceCalculationData) => {
-    setServiceCalculationData(data)
+    // Serialize the data for comparison
+    const serialized = JSON.stringify({ 
+      serviceBlocks: data.serviceBlocks, 
+      totalCost: data.totalCost 
+    })
+    
+    // Only update state if data has actually changed
+    if (prevSerializedRef.current !== serialized) {
+      prevSerializedRef.current = serialized
+      setServiceCalculationData(data)
+    }
   }, [])
 
   return (
