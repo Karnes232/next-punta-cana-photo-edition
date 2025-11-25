@@ -51,11 +51,11 @@ const BackgroundImage = ({
   let height = ""
   let blankDivHeight = ""
   if (fullSize) {
-    height = "h-screen"
-    blankDivHeight = "h-[90vh]"
+    height = "h-[57rem]"
+    blankDivHeight = "h-[51rem]"
   } else {
-    height = "h-[65vh]"
-    blankDivHeight = "h-[55vh]"
+    height = "h-[36.5625rem]"
+    blankDivHeight = "h-[30.9375rem]"
   }
 
   // Helper function to get optimized image URL from Sanity

@@ -14,6 +14,8 @@ const config = {
   safelist: [
     // Gradient from classes
     "from-orange-400",
+    // Background opacity classes
+    "bg-black/80",
   ],
   theme: {
     extend: {
