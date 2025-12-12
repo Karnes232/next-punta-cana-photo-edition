@@ -18,19 +18,20 @@ const CorporateEventsCalculatorForm = ({
   services,
   locale,
 }: CorporateEventsCalculatorFormProps) => {
-  const [serviceCalculationData, setServiceCalculationData] =
-    useState<ServiceCalculationData | undefined>(undefined)
+  const [serviceCalculationData, setServiceCalculationData] = useState<
+    ServiceCalculationData | undefined
+  >(undefined)
 
   // Store previous serialized data to prevent unnecessary updates
   const prevSerializedRef = useRef<string | null>(null)
 
   const handleDataChange = useCallback((data: ServiceCalculationData) => {
     // Serialize the data for comparison
-    const serialized = JSON.stringify({ 
-      serviceBlocks: data.serviceBlocks, 
-      totalCost: data.totalCost 
+    const serialized = JSON.stringify({
+      serviceBlocks: data.serviceBlocks,
+      totalCost: data.totalCost,
     })
-    
+
     // Only update state if data has actually changed
     if (prevSerializedRef.current !== serialized) {
       prevSerializedRef.current = serialized
@@ -54,4 +55,3 @@ const CorporateEventsCalculatorForm = ({
 }
 
 export default CorporateEventsCalculatorForm
-

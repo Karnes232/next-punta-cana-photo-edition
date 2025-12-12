@@ -17,7 +17,10 @@ const montserrat = Montserrat({
 const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
   const t = useTranslations("blog")
   return (
-    <article className="bg-pureWhite rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-elegantSilver/20 hover:border-luxuryGold/30">
+    <Link
+      href={`/stories/${post.slug.current}`}
+      className="bg-pureWhite rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-elegantSilver/20 hover:border-luxuryGold/30"
+    >
       <div className="relative">
         <Image
           src={post.mainImage.asset.url}
@@ -68,7 +71,7 @@ const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
           </Link>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
 

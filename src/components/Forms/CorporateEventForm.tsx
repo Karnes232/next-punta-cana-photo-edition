@@ -95,10 +95,7 @@ const CorporateEventForm = ({
   >("idle")
 
   // Calculate minimum date (today) once
-  const minDate = useMemo(
-    () => new Date().toISOString().split("T")[0],
-    [],
-  )
+  const minDate = useMemo(() => new Date().toISOString().split("T")[0], [])
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -208,7 +205,7 @@ const CorporateEventForm = ({
 
       // Include service calculation data if available
       if (serviceCalculationData) {
-        let serviceBlocks = '';
+        let serviceBlocks = ""
         for (const serviceId in serviceCalculationData.serviceBlocks) {
           const blocks = serviceCalculationData.serviceBlocks[serviceId]
           for (const block of blocks) {

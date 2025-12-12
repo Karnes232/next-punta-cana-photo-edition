@@ -108,8 +108,11 @@ export async function generateMetadata({ params }: PageProps) {
     keywords: pageSeo.seo.meta[locale].keywords.join(", "),
     url: canonicalUrl,
     openGraph: {
-      title: pageSeo.seo.openGraph[locale].title || pageSeo.seo.meta[locale].title,
-      description: pageSeo.seo.openGraph[locale].description || pageSeo.seo.meta[locale].description,
+      title:
+        pageSeo.seo.openGraph[locale].title || pageSeo.seo.meta[locale].title,
+      description:
+        pageSeo.seo.openGraph[locale].description ||
+        pageSeo.seo.meta[locale].description,
       images: pageSeo.seo.openGraph.image.url || "",
       type: "website",
       url: canonicalUrl,
