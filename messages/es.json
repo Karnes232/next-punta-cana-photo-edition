@@ -362,5 +362,11 @@
   },
   "common": {
     "contactWhatsApp": "Contáctanos por WhatsApp"
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Página No Encontrada",
+    "description": "Lo sentimos, no pudimos encontrar la página que buscas. La página puede haber sido movida o no existe.",
+    "backToHome": "Volver al Inicio"
   }
 }

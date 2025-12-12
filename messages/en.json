@@ -362,5 +362,11 @@
   },
   "common": {
     "contactWhatsApp": "Contact us on WhatsApp"
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Page Not Found",
+    "description": "Sorry, we couldn't find the page you're looking for. The page may have been moved or doesn't exist.",
+    "backToHome": "Back to Home"
   }
 }
