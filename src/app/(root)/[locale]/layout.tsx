@@ -91,7 +91,7 @@ export default async function LocaleLayout({
             email={socialLinks?.email || "info@puntacanaphotoedition.com"}
             locale={locale as "en" | "es"}
           />
-          <ImageProtectionScript />
+          {/* <ImageProtectionScript /> */}
         </NextIntlClientProvider>
       </body>
     </html>
