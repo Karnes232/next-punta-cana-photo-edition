@@ -24,7 +24,6 @@ export default async function Home({ params }: PageProps) {
     getStructuredData("home"),
     getHomepage(),
   ])
-
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (

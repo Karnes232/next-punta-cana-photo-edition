@@ -57,7 +57,7 @@ const BackgroundImage = ({
     height = "h-[36.5625rem]"
     blankDivHeight = "h-[30.9375rem]"
   }
-
+  console.log(heroImages)
   // Helper function to get optimized image URL from Sanity
   const getImageUrl = (url: string, width: number = 1920) => {
     return url.replace("image-upload", `image-upload/w_${width},q_auto,f_auto`)
@@ -138,6 +138,7 @@ const BackgroundImage = ({
                 <div className="relative w-full h-full">
                   <Image
                     src={getImageUrl(image.asset.url, 1920)}
+                   // src={image.asset.url}
                     alt={image.alt || `Hero background ${index + 1}`}
                     fill
                     className="object-cover object-center"

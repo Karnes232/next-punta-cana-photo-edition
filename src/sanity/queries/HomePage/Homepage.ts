@@ -15,7 +15,30 @@ export interface Homepage {
 }
 
 export const homepageQuery = `*[_type == "homepage"][0] {
-    hero,
+    hero {
+        title {
+            en,
+            es
+        },
+        subtitle {
+            en,
+            es
+        },
+        heroImage[] {
+            asset -> {
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
+            },
+            alt
+        },
+        heroVideo,
+        fullSize
+    },
     titleServicesOffered,
     titleGallery,
     galleryImages[] {
