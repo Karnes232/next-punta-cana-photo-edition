@@ -86,7 +86,10 @@ const BlogPostRecommendationsCard = ({
         >
           {blogPostRecommendationsCard.map(post => (
             <SwiperSlide key={post._id}>
-              <Link href={`/stories/${post.slug.current}`} className="bg-pureWhite rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-elegantSilver/20 hover:border-luxuryGold/30 hover:-translate-y-1 h-full flex flex-col">
+              <Link
+                href={`/stories/${post.slug.current}`}
+                className="bg-pureWhite rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-elegantSilver/20 hover:border-luxuryGold/30 hover:-translate-y-1 h-full flex flex-col"
+              >
                 <div className="relative flex-shrink-0">
                   <Image
                     src={post.mainImage.asset.url}

@@ -11,6 +11,7 @@ import {
   MessageSquare,
   CheckCircle,
   AlertCircle,
+  Building2,
 } from "lucide-react"
 
 interface FormData {
@@ -18,6 +19,7 @@ interface FormData {
   email: string
   telephone: string
   date: string
+  hotel: string
   message: string
 }
 
@@ -26,6 +28,7 @@ interface FormErrors {
   email?: string
   telephone?: string
   date?: string
+  hotel?: string
   message?: string
 }
 
@@ -43,6 +46,7 @@ const PhotoshootPackageForm = ({
     email: "",
     telephone: "",
     date: "",
+    hotel: "",
     message: "",
   })
 
@@ -76,6 +80,10 @@ const PhotoshootPackageForm = ({
 
     if (!formData.date) {
       newErrors.date = t("requiredField")
+    }
+
+    if (!formData.hotel.trim()) {
+      newErrors.hotel = t("requiredField")
     }
 
     if (!formData.message.trim()) {
@@ -114,6 +122,7 @@ const PhotoshootPackageForm = ({
       formDataToSend.append("email", formData.email)
       formDataToSend.append("telephone", formData.telephone)
       formDataToSend.append("date", formData.date)
+      formDataToSend.append("hotel", formData.hotel)
       formDataToSend.append("message", formData.message)
       formDataToSend.append("package", page)
       formDataToSend.append("locale", locale)
@@ -134,6 +143,7 @@ const PhotoshootPackageForm = ({
           email: "",
           telephone: "",
           date: "",
+          hotel: "",
           message: "",
         })
       } else {
@@ -308,6 +318,33 @@ const PhotoshootPackageForm = ({
               />
               {errors.date && (
                 <p className="mt-1 text-sm text-red-600">{errors.date}</p>
+              )}
+            </div>
+
+            {/* Hotel Field */}
+            <div>
+              <label
+                htmlFor="hotel"
+                className="flex items-center gap-2 text-sm font-semibold text-darkGray mb-2"
+              >
+                <Building2 className="w-4 h-4 text-darkGray" />
+                {t("hotel")}
+              </label>
+              <input
+                type="text"
+                id="hotel"
+                name="hotel"
+                value={formData.hotel}
+                onChange={handleChange}
+                placeholder={t("hotelPlaceholder")}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.hotel
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-elegantSilver focus:border-caribbeanTurquoise focus:ring-caribbeanTurquoise"
+                } bg-pureWhite text-darkGray placeholder-darkGray/40 focus:outline-none focus:ring-2 transition-colors`}
+              />
+              {errors.hotel && (
+                <p className="mt-1 text-sm text-red-600">{errors.hotel}</p>
               )}
             </div>
 
