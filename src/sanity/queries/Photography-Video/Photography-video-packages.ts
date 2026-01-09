@@ -87,7 +87,7 @@ export interface PhotographyVideoPackagesBySlug {
     }
     alt: string
   }[]
-
+  vimeoUrl?: string
   startingPrice: number
   includedItems: {
     en: string
@@ -138,7 +138,7 @@ export const photographyVideoPackagesQueryBySlug = `*[_type == "photography-vide
     },
     alt
   },
-
+  vimeoUrl,
   startingPrice,
   includedItems[] {
     en,

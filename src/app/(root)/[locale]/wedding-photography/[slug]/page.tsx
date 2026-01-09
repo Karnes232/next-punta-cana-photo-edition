@@ -9,6 +9,7 @@ import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import PhotoSwiper from "@/components/PhotoSwiper/PhotoSwiper"
 import PhotographyVideoPackageWithForm from "@/components/PhotographyVideoPackageComponents/PhotographyVideoPackageWithForm"
+import VimeoVideo from "@/components/VimeoVideo/VimeoVideo"
 
 interface PhotographyVideoPackagePageProps {
   params: Promise<{
@@ -61,6 +62,11 @@ export default async function PhotographyVideoPackagePage({
           <PhotoSwiper photos={packageItem.gallery || []} />
         </div>
       </section>
+      {packageItem.vimeoUrl && ( 
+        <section className="max-w-7xl my-10 mx-5 xl:mx-auto flex flex-col gap-4">
+          <VimeoVideo vimeoUrl={packageItem.vimeoUrl} />
+        </section>
+       )} 
       <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
         <PhotographyVideoPackageWithForm
           packageData={{

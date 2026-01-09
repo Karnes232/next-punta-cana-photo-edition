@@ -112,6 +112,22 @@ export default defineType({
       group: "Gallery",
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "vimeoUrl",
+      title: "Vimeo Video URL",
+      type: "url",
+      description: "Enter the full Vimeo video URL (e.g., https://vimeo.com/123456789)",
+      group: "Gallery",
+      validation: Rule =>
+        Rule.uri({
+          scheme: ["https"],
+          allowRelative: false,
+        }).custom((url) => {
+          if (!url) return true // Optional field
+          const vimeoRegex = /(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/i
+          return vimeoRegex.test(url) || "Must be a valid Vimeo URL"
+        }),
+    }),
 
     defineField({ name: "seo", type: "seo", group: "SEO" }),
   ],
