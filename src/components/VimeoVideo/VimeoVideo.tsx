@@ -22,15 +22,6 @@ const VimeoVideo: React.FC<VimeoVideoProps> = ({ vimeoUrl }) => {
 
   const videoId = getVimeoId(vimeoUrl)
 
-  if (!videoId) {
-    console.error("Invalid Vimeo URL")
-    return null
-  }
-
-  // Vimeo embed URLs
-  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`
-  const thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`
-
   const handleOpenFullscreen = () => {
     setIsFullscreen(true)
     // Prevent body scroll when modal is open
@@ -57,7 +48,17 @@ const VimeoVideo: React.FC<VimeoVideoProps> = ({ vimeoUrl }) => {
     return () => {
       window.removeEventListener("keydown", handleEscape)
     }
-  }, [isFullscreen])
+  }, [isFullscreen, handleCloseFullscreen])
+
+  // Early return after all hooks
+  if (!videoId) {
+    console.error("Invalid Vimeo URL")
+    return null
+  }
+
+  // Vimeo embed URLs
+  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`
+  const thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`
 
   return (
     <>
