@@ -220,6 +220,8 @@
     "partnerName": "Nombre de tu Pareja",
     "partnerNamePlaceholder": "Ingresa el nombre de tu pareja",
     "date": "Fecha de la Propuesta",
+    "hotel": "Hotel o Resort",
+    "hotelPlaceholder": "¿Dónde se hospedarán?",
     "location": "Ubicación de la Propuesta",
     "locationPlaceholder": "¿Dónde te gustaría que se realice la propuesta?",
     "specialRequests": "Solicitudes Especiales",

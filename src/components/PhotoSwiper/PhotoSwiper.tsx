@@ -121,7 +121,7 @@ const PhotoSwiper: React.FC<PhotoSwiperProps> = ({ photos }) => {
                     placeholder="blur"
                     blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                   />
-                  
+
                   {/* Hover overlay with zoom icon */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -186,4 +186,3 @@ const PhotoSwiper: React.FC<PhotoSwiperProps> = ({ photos }) => {
 }
 
 export default PhotoSwiper
-

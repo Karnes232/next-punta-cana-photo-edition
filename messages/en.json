@@ -220,6 +220,8 @@
     "partnerName": "Partner's Name",
     "partnerNamePlaceholder": "Enter your partner's name",
     "date": "Proposal Date",
+    "hotel": "Hotel or Resort",
+    "hotelPlaceholder": "Where will you be staying?",
     "location": "Proposal Location",
     "locationPlaceholder": "Where would you like the proposal to take place?",
     "specialRequests": "Special Requests",
