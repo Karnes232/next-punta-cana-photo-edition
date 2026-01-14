@@ -110,13 +110,13 @@ const BackgroundImage = ({
       <div className={`absolute top-0 w-full ${height}`}>
         <motion.div
           initial={{ filter: "brightness(0)" }}
-          whileInView={{ filter: "brightness(0.6)" }}
+          whileInView={{ filter: "brightness(0.8)" }}
           viewport={{ once: true }}
           transition={{
             duration: 6,
             delay: 0.5,
           }}
-          className="absolute top-0 left-0 w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.6]"
+          className="absolute top-0 left-0 w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.8]"
         >
           <Swiper
             ref={swiperRef}

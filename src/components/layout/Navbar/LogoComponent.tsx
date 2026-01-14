@@ -6,7 +6,7 @@ import React from "react"
 const LogoComponent = ({ logo }: { logo: Logo }) => {
   return (
     <>
-      <div className="flex justify-center items-center overflow-hidden bg-black/40">
+      <div className="flex justify-center items-center overflow-hidden">
         <Link href="/" className="no-underline" aria-label="Home">
           <div className="cursor-pointer flex items-center w-20 lg:w-32">
             <Image
