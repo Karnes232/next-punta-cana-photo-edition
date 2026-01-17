@@ -66,7 +66,7 @@ const BackgroundImage = ({
   if (!heroImages || heroImages.length === 0) {
     return (
       <div
-        className={`absolute top-0 w-full ${height} bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center`}
+        className={`w-full ${height} bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center`}
       >
         <div className="text-center px-4 max-w-6xl mx-auto">
           {title && (
@@ -107,7 +107,8 @@ const BackgroundImage = ({
 
   return (
     <>
-      <div className={`absolute top-0 w-full ${height}`}>
+      <div className={`relative w-full ${height}`}>
+      {/* <div className={`absolute top-0 w-full ${height}`}> */}
         <motion.div
           initial={{ filter: "brightness(0)" }}
           whileInView={{ filter: "brightness(0.8)" }}
@@ -116,7 +117,8 @@ const BackgroundImage = ({
             duration: 6,
             delay: 0.5,
           }}
-          className="absolute top-0 left-0 w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.8]"
+          className="w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.8]"
+          // className="absolute top-0 left-0 w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.8]"
         >
           <Swiper
             ref={swiperRef}
@@ -150,11 +152,11 @@ const BackgroundImage = ({
           </Swiper>
         </motion.div>
 
+        {/* Background overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none z-[5]"></div>
+
         {/* Centered content overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center px-4">
-          {/* Background overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none"></div>
-
           {/* Text content with enhanced styling */}
           <div className="relative z-10 max-w-6xl mx-auto">
             {title && (
@@ -191,7 +193,7 @@ const BackgroundImage = ({
           </div>
         </div>
       </div>
-      <div className={`${blankDivHeight}`}></div>
+      {/* <div className={`${blankDivHeight}`}></div> */}
     </>
   )
 }

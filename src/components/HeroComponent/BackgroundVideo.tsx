@@ -40,7 +40,8 @@ const BackgroundVideo = ({
 
   return (
     <>
-      <div className={`absolute top-0 w-full ${height}`}>
+      <div className={`w-full ${height}`}>
+      {/* <div className={`absolute top-0 w-full ${height}`}> */}
         <motion.div
           initial={{ filter: "brightness(0)" }}
           whileInView={{ filter: "brightness(0.6)" }}
@@ -49,7 +50,8 @@ const BackgroundVideo = ({
             duration: 6,
             delay: 0.5,
           }}
-          className="absolute top-0 left-0 w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.6]"
+          className="w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.6]"
+          // className="absolute top-0 left-0 w-full h-full z-0 opacity-100 overflow-hidden brightness-[0.6]"
         >
           <video
             className="absolute top-0 left-0 bottom-0 right-0 w-full h-full object-cover object-center scale-[1.5]"
@@ -118,7 +120,7 @@ const BackgroundVideo = ({
           </div>
         </div>
       </div>
-      <div className={`${blankDivHeight}`}></div>
+      {/* <div className={`${blankDivHeight}`}></div> */}
     </>
   )
 }
