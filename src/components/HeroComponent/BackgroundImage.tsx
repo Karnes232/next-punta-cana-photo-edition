@@ -58,8 +58,14 @@ const BackgroundImage = ({
     blankDivHeight = "h-[30.9375rem]"
   }
   // Helper function to get optimized image URL from Sanity
-  const getImageUrl = (url: string, width: number = 1920) => {
-    return url.replace("image-upload", `image-upload/w_${width},q_auto,f_auto`)
+  // Sets max width to 1920px for desktop displays, but Next.js Image will optimize down for mobile
+  const getImageUrl = (url: string) => {
+    // Get base URL without existing query parameters
+    const baseUrl = url.split("?")[0]
+    // Set max width of 1920px for desktop, quality 85 for good balance, auto format for WebP compression
+    // The Next.js Image component with sizes="100vw" will automatically request smaller sizes for mobile
+    // This prevents loading unnecessarily large images on mobile devices
+    return `${baseUrl}?w=1920&q=85&auto=format&fit=max`
   }
 
   // If no images, return a simple div
@@ -138,13 +144,15 @@ const BackgroundImage = ({
               <SwiperSlide key={index}>
                 <div className="relative w-full h-full">
                   <Image
-                    src={getImageUrl(image.asset.url, 1920)}
-                    // src={image.asset.url}
+                    src={getImageUrl(image.asset.url)}
                     alt={image.alt || `Hero background ${index + 1}`}
                     fill
                     className="object-cover object-center"
                     priority={index === 0}
                     sizes="100vw"
+                    quality={85}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    // Optimize for mobile by using responsive srcSet through Next.js
                   />
                 </div>
               </SwiperSlide>
