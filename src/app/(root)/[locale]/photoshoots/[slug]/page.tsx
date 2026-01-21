@@ -87,9 +87,9 @@ export async function generateMetadata({ params }: PageProps) {
 
   let canonicalUrl
   if (locale === "en") {
-    canonicalUrl = `https://www.puntacanaphotoedition.com/photoshoots/${slug}`
+    canonicalUrl = `https://puntacanaphotoedition.com/photoshoots/${slug}`
   } else {
-    canonicalUrl = `https://www.puntacanaphotoedition.com/es/photoshoots/${slug}`
+    canonicalUrl = `https://puntacanaphotoedition.com/es/photoshoots/${slug}`
   }
 
   return {

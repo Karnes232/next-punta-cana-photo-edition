@@ -117,9 +117,9 @@ export async function generateMetadata({
 
   let canonicalUrl
   if (locale === "en") {
-    canonicalUrl = "https://www.puntacanaphotoedition.com/corporate-events"
+    canonicalUrl = "https://puntacanaphotoedition.com/corporate-events"
   } else {
-    canonicalUrl = "https://www.puntacanaphotoedition.com/es/corporate-events"
+    canonicalUrl = "https://puntacanaphotoedition.com/es/corporate-events"
   }
 
   return {

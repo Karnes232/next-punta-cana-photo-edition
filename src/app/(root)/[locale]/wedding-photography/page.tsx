@@ -105,8 +105,8 @@ export async function generateMetadata({
 
   const canonicalUrl =
     locale === "en"
-      ? "https://www.puntacanaphotoedition.com/weddings/photography-video"
-      : "https://www.puntacanaphotoedition.com/es/weddings/photography-video"
+      ? "https://puntacanaphotoedition.com/weddings/photography-video"
+      : "https://puntacanaphotoedition.com/es/weddings/photography-video"
 
   return {
     title: pageSeo.seo.meta[locale].title,

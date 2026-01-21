@@ -123,9 +123,9 @@ export async function generateMetadata({
 
   let canonicalUrl
   if (locale === "en") {
-    canonicalUrl = "https://www.puntacanaphotoedition.com/wedding-planning"
+    canonicalUrl = "https://puntacanaphotoedition.com/wedding-planning"
   } else {
-    canonicalUrl = "https://www.puntacanaphotoedition.com/es/wedding-planning"
+    canonicalUrl = "https://puntacanaphotoedition.com/es/wedding-planning"
   }
 
   return {

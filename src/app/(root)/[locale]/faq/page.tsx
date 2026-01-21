@@ -73,9 +73,9 @@ export async function generateMetadata({
 
   let canonicalUrl
   if (locale === "en") {
-    canonicalUrl = "https://www.puntacanaphotoedition.com/faq"
+    canonicalUrl = "https://puntacanaphotoedition.com/faq"
   } else {
-    canonicalUrl = "https://www.puntacanaphotoedition.com/es/faq"
+    canonicalUrl = "https://puntacanaphotoedition.com/es/faq"
   }
 
   return {
