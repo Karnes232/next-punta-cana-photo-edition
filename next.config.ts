@@ -58,6 +58,13 @@ function createSecurityHeaders() {
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // Optimize CSS output
+  compiler: {
+    // Remove console logs in production
+    removeConsole: process.env.NODE_ENV === "production" ? {
+      exclude: ["error", "warn"],
+    } : false,
+  },
   images: {
     qualities: [65, 70, 75, 80, 85, 90, 95, 100],
     remotePatterns: [
@@ -80,7 +87,7 @@ const nextConfig: NextConfig = {
       static: 259200, // 3 days for static content
     },
   },
-  // Optimize webpack for better code splitting
+  // Optimize webpack for better code splitting and CSS handling
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Better code splitting for large libraries
@@ -88,8 +95,17 @@ const nextConfig: NextConfig = {
         ...config.optimization,
         splitChunks: {
           ...config.optimization.splitChunks,
+          // Optimize CSS chunking - combine smaller CSS files
+          maxInitialRequests: 25,
+          minSize: 20000,
           cacheGroups: {
             ...config.optimization.splitChunks?.cacheGroups,
+            // Default vendor chunk
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
             // Separate heavy libraries into their own chunks
             swiper: {
               test: /[\\/]node_modules[\\/](swiper)[\\/]/,

@@ -21,16 +21,22 @@ import FloatingCtaButton from "@/components/FloatingCtaButton/FloatingCtaButton"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap", // Prevent render blocking
+  preload: true, // Preload critical font
 })
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap", // Prevent render blocking
+  preload: false, // Not critical for initial render
 })
 
 const crimsonPro = Crimson_Pro({
   variable: "--font-crimson-pro",
   subsets: ["latin"],
+  display: "swap", // Prevent render blocking
+  preload: false, // Not critical for initial render
 })
 
 const builder = imageUrlBuilder(client)

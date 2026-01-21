@@ -7,9 +7,8 @@ import type { Swiper as SwiperType } from "swiper"
 import Image from "next/image"
 import { urlFor } from "@/sanity/lib/image"
 import Lightbox from "yet-another-react-lightbox"
+// CSS will be code-split automatically since component is lazy loaded
 import "yet-another-react-lightbox/styles.css"
-
-// Import Swiper styles
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
@@ -31,11 +30,15 @@ interface SwiperGalleryProps {
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap", // Prevent render blocking
+  preload: false, // Not critical for initial render
 })
 
 const MontserratFont = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap", // Prevent render blocking
+  preload: false, // Not critical for initial render
 })
 
 const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
