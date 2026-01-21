@@ -145,7 +145,7 @@ const BackgroundImage = ({
                     className="object-cover object-center"
                     priority={index === 0}
                     sizes="100vw"
-                    quality={85}
+                    quality={75}
                   />
                 </div>
               </SwiperSlide>

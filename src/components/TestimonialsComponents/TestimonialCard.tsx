@@ -56,7 +56,7 @@ const TestimonialCard = ({
               src={urlFor(testimonial.photo)
                 .width(600)
                 .height(400)
-                .quality(90)
+                .quality(70)
                 .url()}
               alt={
                 testimonial.photo.alt || `Work example for ${testimonial.name}`

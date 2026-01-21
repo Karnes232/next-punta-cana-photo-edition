@@ -141,7 +141,7 @@ const SwiperGallery: React.FC<SwiperGalleryProps> = ({ title, images }) => {
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         priority={index < 2} // Priority for first 2 images
                         loading={index < 2 ? "eager" : "lazy"}
-                        quality={85} // Add quality optimization
+                        quality={75} // Add quality optimization
                       />
 
                       {/* Click overlay - only show icon, no background */}

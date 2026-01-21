@@ -52,6 +52,7 @@ const ContentBlock = async ({
               loading="lazy"
               className="object-cover"
               sizes="(max-width: 768px) 320px, (max-width: 1024px) 464px, 592px"
+              quality={70}
             />
           </div>
           <div
