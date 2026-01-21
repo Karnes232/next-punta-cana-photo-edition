@@ -34,6 +34,7 @@ const PhotoshootTestimonialCard = ({
             width={testimonial.photo.asset.metadata.dimensions.width}
             height={testimonial.photo.asset.metadata.dimensions.height}
             className="w-full h-full object-cover"
+            quality={70}
           />
         </div>
         <div className="flex-1 flex flex-col justify-center items-center space-y-4 px-4 py-6">

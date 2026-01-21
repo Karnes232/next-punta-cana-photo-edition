@@ -9,11 +9,15 @@ import { useTranslations } from "next-intl"
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 })
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 })
 
 interface PhotoshootPackageCardProps {
@@ -59,6 +63,7 @@ const PhotoshootPackageCard: React.FC<PhotoshootPackageCardProps> = ({
             className="object-cover hover:scale-110 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={false}
+            quality={70}
           />
         </div>
 

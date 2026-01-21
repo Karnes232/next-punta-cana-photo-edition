@@ -83,7 +83,7 @@ const PackageSwiperGallery = ({ images }: PackageSwiperGalleryProps) => {
                   className={`w-full object-cover object-center ${imageHeight}`}
                   width={image.width}
                   height={image.height}
-                  quality={90}
+                  quality={70}
                   priority={index < 4}
                 />
                 <div

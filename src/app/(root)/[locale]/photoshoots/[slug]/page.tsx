@@ -1,14 +1,44 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
-import Faqs from "@/components/FaqsComponents/Faqs"
-import PhotoshootPackageForm from "@/components/Forms/PhotoshootPackageForm"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
-import PackageSwiperGallery from "@/components/SwiperGallery/PackageSwiperGallery"
 import {
   getIndividualPhotoshootsPackage,
   getIndividualPhotoshootsPackageSEO,
   getIndividualPhotoshootsPackagesStructuredData,
 } from "@/sanity/queries/Photoshoot/PhotoshootsPackages"
+import dynamicImport from "next/dynamic"
+import { Suspense } from "react"
+
+// Dynamically import below-the-fold components for better performance
+const PackageSwiperGallery = dynamicImport(
+  () => import("@/components/SwiperGallery/PackageSwiperGallery"),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-pulse text-gray-400">Loading gallery...</div>
+      </div>
+    ),
+  }
+)
+
+const PhotoshootPackageForm = dynamicImport(
+  () => import("@/components/Forms/PhotoshootPackageForm"),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[300px]">
+        <div className="animate-pulse text-gray-400">Loading form...</div>
+      </div>
+    ),
+  }
+)
+
+const Faqs = dynamicImport(() => import("@/components/FaqsComponents/Faqs"), {
+  loading: () => (
+    <div className="flex items-center justify-center min-h-[200px]">
+      <div className="animate-pulse text-gray-400">Loading FAQs...</div>
+    </div>
+  ),
+})
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
@@ -62,16 +92,44 @@ export default async function PhotoshootsPackage({ params }: PageProps) {
             locale={locale}
           />
         </section>
-        <PackageSwiperGallery images={photoshootsPackage?.photoGallery || []} />
-        <section className="max-w-7xl my-5 xl:mx-auto flex flex-col gap-4">
-          <PhotoshootPackageForm
-            page={photoshootsPackage?.slug?.current || ""}
-            locale={locale}
-          />
-        </section>
-        <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
-          <Faqs faqs={photoshootsPackage?.faqComponent || []} locale={locale} />
-        </section>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center min-h-[400px]">
+              <div className="animate-pulse text-gray-400">Loading gallery...</div>
+            </div>
+          }
+        >
+          <PackageSwiperGallery images={photoshootsPackage?.photoGallery || []} />
+        </Suspense>
+        <Suspense
+          fallback={
+            <section className="max-w-7xl my-5 xl:mx-auto flex flex-col gap-4">
+              <div className="flex items-center justify-center min-h-[300px]">
+                <div className="animate-pulse text-gray-400">Loading form...</div>
+              </div>
+            </section>
+          }
+        >
+          <section className="max-w-7xl my-5 xl:mx-auto flex flex-col gap-4">
+            <PhotoshootPackageForm
+              page={photoshootsPackage?.slug?.current || ""}
+              locale={locale}
+            />
+          </section>
+        </Suspense>
+        <Suspense
+          fallback={
+            <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
+              <div className="flex items-center justify-center min-h-[200px]">
+                <div className="animate-pulse text-gray-400">Loading FAQs...</div>
+              </div>
+            </section>
+          }
+        >
+          <section className="max-w-7xl my-5 mx-5 xl:mx-auto flex flex-col gap-4">
+            <Faqs faqs={photoshootsPackage?.faqComponent || []} locale={locale} />
+          </section>
+        </Suspense>
       </main>
     </>
   )
