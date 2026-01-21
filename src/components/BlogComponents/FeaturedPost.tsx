@@ -26,6 +26,7 @@ const FeaturedPost = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
             width={500}
             height={500}
             className="h-64 md:h-full w-full object-cover"
+            quality={80}
           />
           <div className="absolute top-4 left-4">
             <span

@@ -46,6 +46,7 @@ const BlogPostHeader = ({
               className="object-cover object-center"
               priority={true}
               sizes="100vw"
+              quality={80}
             />
           </div>
         </motion.div>

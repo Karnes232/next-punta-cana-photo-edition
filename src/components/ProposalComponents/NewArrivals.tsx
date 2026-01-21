@@ -198,6 +198,7 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({
                           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 40vw, 22vw"
                           priority={index < 2}
                           loading={index < 2 ? "eager" : "lazy"}
+                          quality={70}
                         />
                       )}
                       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />

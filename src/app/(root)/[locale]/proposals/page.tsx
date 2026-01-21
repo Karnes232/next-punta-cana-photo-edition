@@ -1,14 +1,57 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
-import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import TextComponent from "@/components/TextComponent/TextComponent"
 import { getProposal } from "@/sanity/queries/Proposal/Proposal"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
-import TestimonialsComponent from "@/components/TestimonialsComponents/TestimonialComponent"
 import { getAllProposalPackages } from "@/sanity/queries/Proposal/ProposalPackages"
-import ProposalComponent from "@/components/ProposalComponents/ProposalComponent"
-import NewArrivals from "@/components/ProposalComponents/NewArrivals"
+import dynamicImport from "next/dynamic"
+import { Suspense } from "react"
+
+// Dynamically import below-the-fold components for better performance
+const PhotoGrid = dynamicImport(
+  () => import("@/components/PhotoGrid/PhotoGrid"),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-pulse text-gray-400">Loading gallery...</div>
+      </div>
+    ),
+  }
+)
+
+const ProposalComponent = dynamicImport(
+  () => import("@/components/ProposalComponents/ProposalComponent"),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[300px]">
+        <div className="animate-pulse text-gray-400">Loading packages...</div>
+      </div>
+    ),
+  }
+)
+
+const NewArrivals = dynamicImport(
+  () => import("@/components/ProposalComponents/NewArrivals"),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[300px]">
+        <div className="animate-pulse text-gray-400">Loading new arrivals...</div>
+      </div>
+    ),
+  }
+)
+
+const TestimonialsComponent = dynamicImport(
+  () => import("@/components/TestimonialsComponents/TestimonialComponent"),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[200px]">
+        <div className="animate-pulse text-gray-400">Loading testimonials...</div>
+      </div>
+    ),
+  }
+)
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
@@ -54,43 +97,93 @@ export default async function Proposals({
             subtitle={proposal?.hero?.subtitle?.[locale]}
           />
         )}
-        <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
-          <TextComponent
-            title={proposal?.galleryTitle?.[locale]}
-            className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
-          />
-          <PhotoGrid photos={proposal?.gallery || []} />
-        </section>
+        <Suspense
+          fallback={
+            <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+              <TextComponent
+                title={proposal?.galleryTitle?.[locale]}
+                className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
+              />
+              <div className="flex items-center justify-center min-h-[400px]">
+                <div className="animate-pulse text-gray-400">
+                  Loading gallery...
+                </div>
+              </div>
+            </section>
+          }
+        >
+          <section className="max-w-7xl mx-auto flex flex-col my-5 gap-4">
+            <TextComponent
+              title={proposal?.galleryTitle?.[locale]}
+              className="mb-12 tracking-wide text-3xl lg:text-4xl text-center"
+            />
+            <PhotoGrid photos={proposal?.gallery || []} />
+          </section>
+        </Suspense>
         <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
           <BlockContent
             content={proposal?.paragraph1 || { en: [], es: [] }}
             locale={locale}
           />
         </section>
-        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-          <ProposalComponent
-            proposalPackages={proposalPackages || []}
-            locale={locale}
-          />
-        </section>
-        <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
-          <NewArrivals
-            title={proposal?.newArrivalsTitle?.[locale] || ""}
-            subtitle={proposal?.newArrivalsSubtitle?.[locale] || ""}
-            badge={proposal?.newArrivalsBadge?.[locale] || ""}
-            images={proposal?.newArrivalImages || []}
-            locale={locale}
-          />
-        </section>
-        <TestimonialsComponent
-          locale={locale}
-          titleTestimonials={
-            (proposal?.titleTestimonials?.[
-              locale as keyof typeof proposal.titleTestimonials
-            ] as string) || ""
+        <Suspense
+          fallback={
+            <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+              <div className="flex items-center justify-center min-h-[300px]">
+                <div className="animate-pulse text-gray-400">
+                  Loading packages...
+                </div>
+              </div>
+            </section>
           }
-          testimonials={proposal?.testimonials || []}
-        />
+        >
+          <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+            <ProposalComponent
+              proposalPackages={proposalPackages || []}
+              locale={locale}
+            />
+          </section>
+        </Suspense>
+        <Suspense
+          fallback={
+            <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+              <div className="flex items-center justify-center min-h-[300px]">
+                <div className="animate-pulse text-gray-400">
+                  Loading new arrivals...
+                </div>
+              </div>
+            </section>
+          }
+        >
+          <section className="max-w-7xl my-12 mx-5 xl:mx-auto flex flex-col gap-4 text-center">
+            <NewArrivals
+              title={proposal?.newArrivalsTitle?.[locale] || ""}
+              subtitle={proposal?.newArrivalsSubtitle?.[locale] || ""}
+              badge={proposal?.newArrivalsBadge?.[locale] || ""}
+              images={proposal?.newArrivalImages || []}
+              locale={locale}
+            />
+          </section>
+        </Suspense>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center min-h-[200px]">
+              <div className="animate-pulse text-gray-400">
+                Loading testimonials...
+              </div>
+            </div>
+          }
+        >
+          <TestimonialsComponent
+            locale={locale}
+            titleTestimonials={
+              (proposal?.titleTestimonials?.[
+                locale as keyof typeof proposal.titleTestimonials
+              ] as string) || ""
+            }
+            testimonials={proposal?.testimonials || []}
+          />
+        </Suspense>
       </main>
     </>
   )

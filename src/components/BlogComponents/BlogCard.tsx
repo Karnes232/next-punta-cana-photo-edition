@@ -28,6 +28,7 @@ const BlogCard = ({ post, locale }: { post: any; locale: "en" | "es" }) => {
           width={500}
           height={500}
           className="w-full h-48 object-cover"
+          quality={70}
         />
         {post.categories[0] && (
           <div className="absolute top-4 left-4">

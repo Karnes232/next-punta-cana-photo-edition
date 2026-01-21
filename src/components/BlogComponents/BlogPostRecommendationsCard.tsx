@@ -97,6 +97,7 @@ const BlogPostRecommendationsCard = ({
                     width={400}
                     height={250}
                     className="w-full h-48 object-cover"
+                    quality={70}
                   />
                 </div>
 

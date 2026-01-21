@@ -54,6 +54,7 @@ const ProposalPackageCard: React.FC<ProposalPackageCardProps> = ({
             className="object-cover hover:scale-110 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={false}
+            quality={70}
           />
         </div>
 
