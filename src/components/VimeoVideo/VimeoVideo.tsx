@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useRef, useEffect } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import Image from "next/image"
 import { Play } from "lucide-react"
 
@@ -8,57 +8,66 @@ interface VimeoVideoProps {
   vimeoUrl: string
 }
 
+const getVimeoId = (url: string): string | null => {
+  const regex = /(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/i
+  const match = url.match(regex)
+  return match ? match[1] : null
+}
+
 const VimeoVideo: React.FC<VimeoVideoProps> = ({ vimeoUrl }) => {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Extract Vimeo video ID from URL
-  const getVimeoId = (url: string): string | null => {
-    const regex = /(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/i
-    const match = url.match(regex)
-    return match ? match[1] : null
-  }
+  const videoId = useMemo(() => getVimeoId(vimeoUrl), [vimeoUrl])
 
-  const videoId = getVimeoId(vimeoUrl)
+  // Build URLs only when videoId changes
+  const embedUrl = useMemo(() => {
+    if (!videoId) return ""
+    return `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`
+  }, [videoId])
 
-  const handleOpenFullscreen = () => {
+  const thumbnailUrl = useMemo(() => {
+    if (!videoId) return ""
+    return `https://vumbnail.com/${videoId}.jpg`
+  }, [videoId])
+
+  const handleOpenFullscreen = useCallback(() => {
     setIsFullscreen(true)
-    // Prevent body scroll when modal is open
-    document.body.style.overflow = "hidden"
-  }
+  }, [])
 
-  const handleCloseFullscreen = () => {
+  const handleCloseFullscreen = useCallback(() => {
     setIsFullscreen(false)
-    document.body.style.overflow = "unset"
-  }
+  }, [])
 
-  // Handle escape key
+  // Lock body scroll while fullscreen is open (and restore correctly)
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isFullscreen) {
-        handleCloseFullscreen()
-      }
-    }
+    if (!isFullscreen) return
 
-    if (isFullscreen) {
-      window.addEventListener("keydown", handleEscape)
-    }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
 
     return () => {
-      window.removeEventListener("keydown", handleEscape)
+      document.body.style.overflow = previousOverflow || "unset"
     }
+  }, [isFullscreen])
+
+  // Handle escape key (stable deps now)
+  useEffect(() => {
+    if (!isFullscreen) return
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleCloseFullscreen()
+    }
+
+    window.addEventListener("keydown", handleEscape)
+    return () => window.removeEventListener("keydown", handleEscape)
   }, [isFullscreen, handleCloseFullscreen])
 
-  // Early return after all hooks
   if (!videoId) {
-    console.error("Invalid Vimeo URL")
+    console.error("Invalid Vimeo URL:", vimeoUrl)
     return null
   }
-
-  // Vimeo embed URLs
-  const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`
-  const thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`
 
   return (
     <>
@@ -67,6 +76,12 @@ const VimeoVideo: React.FC<VimeoVideoProps> = ({ vimeoUrl }) => {
         ref={containerRef}
         className="relative w-full max-w-4xl mx-auto aspect-video rounded-lg overflow-hidden cursor-pointer group shadow-lg hover:shadow-xl transition-shadow duration-300"
         onClick={handleOpenFullscreen}
+        role="button"
+        tabIndex={0}
+        onKeyDown={e => {
+          if (e.key === "Enter" || e.key === " ") handleOpenFullscreen()
+        }}
+        aria-label="Play video"
       >
         {/* Thumbnail Image */}
         <div className="absolute inset-0 bg-gray-900">
@@ -97,6 +112,8 @@ const VimeoVideo: React.FC<VimeoVideoProps> = ({ vimeoUrl }) => {
         <div
           className="fixed inset-0 bg-black z-[9999] flex items-center justify-center p-4"
           onClick={handleCloseFullscreen}
+          role="dialog"
+          aria-modal="true"
         >
           {/* Close Button */}
           <button
@@ -128,4 +145,3 @@ const VimeoVideo: React.FC<VimeoVideoProps> = ({ vimeoUrl }) => {
 }
 
 export default VimeoVideo
-
