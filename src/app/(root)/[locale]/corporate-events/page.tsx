@@ -1,16 +1,125 @@
-import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
-import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
+import nextDynamic from "next/dynamic"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getCorporateEvents } from "@/sanity/queries/CorporateEvents/CorporateEvents"
 import BlockContent from "@/components/BlockContent/BlockContent"
 import TextComponent from "@/components/TextComponent/TextComponent"
-import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import { getCorporateEventPackages } from "@/sanity/queries/CorporateEvents/CorporateEventPackages"
-import CorporateEventsPackages from "@/components/CorporateEventsComponents/CorporateEventsPackages"
-import CorporateEventTestimonialsComponent from "@/components/CorporateEventsComponents/CorporateEventTestimonials"
-import Faqs from "@/components/FaqsComponents/Faqs"
-import CorporateFaqs from "@/components/CorporateEventsComponents/CorporateFaqs"
-import CorporateEventsCalculatorForm from "@/components/CorporateEventsComponents/CorporateEventsCalculatorForm"
+
+// Dynamically import hero components - keep SSR for SEO
+const BackgroundImage = nextDynamic(
+  () => import("@/components/HeroComponent/BackgroundImage"),
+  {
+    ssr: true, // Keep SSR for above-the-fold content and SEO
+  }
+)
+
+const BackgroundVideo = nextDynamic(
+  () => import("@/components/HeroComponent/BackgroundVideo"),
+  {
+    ssr: true, // Keep SSR for above-the-fold content and SEO
+  }
+)
+
+// Code-split below-the-fold components for better performance
+const PhotoGrid = nextDynamic(
+  () => import("@/components/PhotoGrid/PhotoGrid"),
+  {
+    loading: () => (
+      <div className="w-full px-2 sm:px-4 md:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map(i => (
+            <div
+              key={i}
+              className="animate-pulse aspect-square bg-gray-200 rounded-lg"
+            />
+          ))}
+        </div>
+      </div>
+    ),
+  }
+)
+
+const CorporateEventsPackages = nextDynamic(
+  () =>
+    import("@/components/CorporateEventsComponents/CorporateEventsPackages"),
+  {
+    loading: () => (
+      <div className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="animate-pulse h-12 bg-gray-200 rounded w-64 mx-auto mb-12"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map(i => (
+              <div
+                key={i}
+                className="animate-pulse h-96 bg-gray-200 rounded-lg"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+  }
+)
+
+const CorporateEventsCalculatorForm = nextDynamic(
+  () =>
+    import(
+      "@/components/CorporateEventsComponents/CorporateEventsCalculatorForm"
+    ),
+  {
+    loading: () => (
+      <div className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="animate-pulse h-12 bg-gray-200 rounded w-64 mx-auto mb-8"></div>
+          <div className="animate-pulse h-64 bg-gray-200 rounded-lg"></div>
+        </div>
+      </div>
+    ),
+  }
+)
+
+const CorporateEventTestimonialsComponent = nextDynamic(
+  () =>
+    import(
+      "@/components/CorporateEventsComponents/CorporateEventTestimonials"
+    ),
+  {
+    loading: () => (
+      <section className="py-16 px-5 md:px-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="animate-pulse h-12 bg-gray-200 rounded w-64 mx-auto mb-12"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map(i => (
+              <div
+                key={i}
+                className="animate-pulse h-64 bg-gray-200 rounded-lg"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    ),
+  }
+)
+
+const CorporateFaqs = nextDynamic(
+  () => import("@/components/CorporateEventsComponents/CorporateFaqs"),
+  {
+    loading: () => (
+      <div className="max-w-4xl mx-auto w-full py-16">
+        <div className="animate-pulse h-12 bg-gray-200 rounded w-64 mx-auto mb-12"></div>
+        <div className="space-y-4">
+          {[1, 2, 3].map(i => (
+            <div
+              key={i}
+              className="animate-pulse h-24 bg-gray-200 rounded-lg"
+            />
+          ))}
+        </div>
+      </div>
+    ),
+  }
+)
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days

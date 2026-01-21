@@ -1,11 +1,13 @@
+import dynamicImport from "next/dynamic"
 import BlockContent from "@/components/BlockContent/BlockContent"
 import BackgroundImage from "@/components/HeroComponent/BackgroundImage"
 import BackgroundVideo from "@/components/HeroComponent/BackgroundVideo"
-import TeamVideo from "@/components/HeroComponent/TeamVideo"
 import PhotoGrid from "@/components/PhotoGrid/PhotoGrid"
 import TextComponent from "@/components/TextComponent/TextComponent"
 import { getAbout } from "@/sanity/queries/About/About"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+
+const TeamVideo = dynamicImport(() => import("@/components/HeroComponent/TeamVideo"))
 
 // Add revalidation configuration
 export const revalidate = 259200 // Revalidate every 3 days
