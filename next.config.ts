@@ -80,6 +80,41 @@ const nextConfig: NextConfig = {
       static: 259200, // 3 days for static content
     },
   },
+  // Optimize webpack for better code splitting
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Better code splitting for large libraries
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          cacheGroups: {
+            ...config.optimization.splitChunks?.cacheGroups,
+            // Separate heavy libraries into their own chunks
+            swiper: {
+              test: /[\\/]node_modules[\\/](swiper)[\\/]/,
+              name: "swiper",
+              chunks: "all",
+              priority: 30,
+            },
+            framerMotion: {
+              test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
+              name: "framer-motion",
+              chunks: "all",
+              priority: 30,
+            },
+            reactIcons: {
+              test: /[\\/]node_modules[\\/](react-icons)[\\/]/,
+              name: "react-icons",
+              chunks: "all",
+              priority: 30,
+            },
+          },
+        },
+      }
+    }
+    return config
+  },
   // Add headers for static assets
   async headers() {
     // Define all routes that need 3-day caching
