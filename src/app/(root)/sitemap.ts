@@ -9,8 +9,7 @@ const staticPages = [
   "/",
   "/about",
   "/contact",
-  "/weddings",
-  "/weddings/photography-video",
+  "/wedding-photography",
   "/photoshoots",
   "/proposals",
   "/corporate-events",
@@ -22,8 +21,7 @@ const staticPages = [
   "/es",
   "/es/about",
   "/es/contact",
-  "/es/weddings",
-  "/es/weddings/photography-video",
+  "/es/wedding-photography",
   "/es/photoshoots",
   "/es/proposals",
   "/es/corporate-events",
@@ -212,13 +210,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (pkg.slug?.current) {
       photographyVideoEntries.push(
         {
-          url: `${baseUrl}/weddings/photography-video/${pkg.slug.current}`,
+          url: `${baseUrl}/wedding-photography/${pkg.slug.current}`,
           lastModified: new Date(),
           changeFrequency: "monthly",
           priority: 0.6,
         },
         {
-          url: `${baseUrl}/es/weddings/photography-video/${pkg.slug.current}`,
+          url: `${baseUrl}/es/wedding-photography/${pkg.slug.current}`,
           lastModified: new Date(),
           changeFrequency: "monthly",
           priority: 0.6,
