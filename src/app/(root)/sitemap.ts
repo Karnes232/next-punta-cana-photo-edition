@@ -2,7 +2,7 @@ import { MetadataRoute } from "next"
 import { client } from "@/sanity/lib/client"
 
 // Base URL for the website
-const baseUrl = "https://www.puntacanaphotoedition.com"
+const baseUrl = "https://puntacanaphotoedition.com"
 
 // Static pages - both English and Spanish
 const staticPages = [
