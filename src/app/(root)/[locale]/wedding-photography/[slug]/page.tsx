@@ -115,10 +115,13 @@ export async function generateMetadata({
   }
 
   let canonicalUrl
+  const enUrl = `https://puntacanaphotoedition.com/wedding-photography/${slug}`
+  const esUrl = `https://puntacanaphotoedition.com/es/wedding-photography/${slug}`
+  
   if (locale === "en") {
-    canonicalUrl = `https://puntacanaphotoedition.com/weddings/photography-video/${slug}`
+    canonicalUrl = enUrl
   } else {
-    canonicalUrl = `https://puntacanaphotoedition.com/es/weddings/photography-video/${slug}`
+    canonicalUrl = esUrl
   }
 
   return {
@@ -143,6 +146,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: enUrl,
+        es: esUrl,
+        "x-default": enUrl,
+      },
     },
     // Add caching headers to metadata
     other: {

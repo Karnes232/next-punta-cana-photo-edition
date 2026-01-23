@@ -71,12 +71,9 @@ export async function generateMetadata({
     return {}
   }
 
-  let canonicalUrl
-  if (locale === "en") {
-    canonicalUrl = "https://puntacanaphotoedition.com/faq"
-  } else {
-    canonicalUrl = "https://puntacanaphotoedition.com/es/faq"
-  }
+  const enUrl = "https://puntacanaphotoedition.com/faq"
+  const esUrl = "https://puntacanaphotoedition.com/es/faq"
+  const canonicalUrl = locale === "en" ? enUrl : esUrl
 
   return {
     title: pageSeo.seo.meta[locale].title,
@@ -100,6 +97,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: enUrl,
+        es: esUrl,
+        "x-default": enUrl,
+      },
     },
     // Add caching headers to metadata
     other: {

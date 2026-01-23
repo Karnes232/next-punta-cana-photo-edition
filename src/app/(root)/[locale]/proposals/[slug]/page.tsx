@@ -95,12 +95,9 @@ export async function generateMetadata({ params }: PageProps) {
     return {}
   }
 
-  let canonicalUrl
-  if (locale === "en") {
-    canonicalUrl = `https://puntacanaphotoedition.com/proposals/${slug}`
-  } else {
-    canonicalUrl = `https://puntacanaphotoedition.com/es/proposals/${slug}`
-  }
+  const enUrl = `https://puntacanaphotoedition.com/proposals/${slug}`
+  const esUrl = `https://puntacanaphotoedition.com/es/proposals/${slug}`
+  const canonicalUrl = locale === "en" ? enUrl : esUrl
 
   return {
     title: pageSeo.seo.meta[locale].title,
@@ -124,6 +121,11 @@ export async function generateMetadata({ params }: PageProps) {
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: enUrl,
+        es: esUrl,
+        "x-default": enUrl,
+      },
     },
     // Add caching headers to metadata
     other: {

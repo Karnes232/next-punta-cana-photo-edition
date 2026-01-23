@@ -103,10 +103,10 @@ export async function generateMetadata({
     return {}
   }
 
+  const enUrl = "https://puntacanaphotoedition.com/wedding-photography"
+  const esUrl = "https://puntacanaphotoedition.com/es/wedding-photography"
   const canonicalUrl =
-    locale === "en"
-      ? "https://puntacanaphotoedition.com/weddings/photography-video"
-      : "https://puntacanaphotoedition.com/es/weddings/photography-video"
+    locale === "en" ? enUrl : esUrl
 
   return {
     title: pageSeo.seo.meta[locale].title,
@@ -130,6 +130,11 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: enUrl,
+        es: esUrl,
+        "x-default": enUrl,
+      },
     },
     // Conditional cache control
     other: {
